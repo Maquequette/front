@@ -1,0 +1,7 @@
+.container {
+  max-width: var(--container);
+
+  &--centered {
+    margin: 0 auto;
+  }
+}

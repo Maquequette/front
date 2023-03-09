@@ -1,0 +1,14 @@
+.burger {
+  background-color: var(--light);
+  border: none;
+  padding: 1rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 10px;
+
+  > .sprites {
+    border: 1px solid var(--primary);
+    border-radius: inherit;
+    padding: 1rem;
+  }
+}

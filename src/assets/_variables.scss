@@ -1,0 +1,58 @@
+$colors: (
+  //Blanc
+  "light": #ffffff,
+  //Noir
+  "dark": #333333,
+  //gris bg
+  "grey": #f5f5f7,
+  //Jaune
+  "primary": #ffde79,
+  //Violet
+  "secondary": #abb4f5,
+  //Rose
+  "accent": #f7dade,
+  //Vert
+  "success": #60caaa,
+  //Jaune clair
+  "warn": #f5ff7d,
+  //Rose flashy
+  "danger": #ee4878,
+  //Bleu foncé
+  "darkBlue": #1a1c33
+);
+
+$fontSizes: (
+  "sm": clamp(1rem, 1.6vw, 1.5rem),
+  "md": clamp(1.5rem, 1.75vw, 2rem),
+  "l": clamp(2rem, 3.25vw, 2.5rem),
+  "xl": clamp(2.5rem, 3.75vw, 4.5rem),
+  "2xl": clamp(4.5rem, 5.75vw, 6.5rem),
+);
+
+$fontFamilies: (
+  "primary": '"Roboto", sans-serif',
+  "secondary": '"Space Grotesk",sans-serif',
+);
+
+$fontWeights: (
+  "light": 400,
+  "bold": 700,
+);
+
+$container: 192em;
+
+$breakpoints: (
+  "sm": 40em,
+  "md": 48em,
+  "l": 64em,
+  "xl": 80em,
+  "2xl": 96em,
+);
+
+$spacings: (
+  "sm": 1rem,
+  "md": 2rem,
+  "l": 4rem,
+  "xl": 5rem,
+  "2xl": 6rem,
+);

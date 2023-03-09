@@ -1,0 +1,10 @@
+.header {
+  padding: 2.5rem;
+  position: sticky;
+  top: 0;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+}

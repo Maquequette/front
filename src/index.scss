@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Space+Grotesk:wght@700&display=swap");
+@import "./assets/variables";
+
+:root {
+  @each $name, $color in $colors {
+    --#{$name}: #{$color};
+  }
+
+  @each $name, $size in $fontSizes {
+    --font-size-#{$name}: #{$size};
+  }
+
+  @each $name, $family in $fontFamilies {
+    --font-family-#{$name}: #{$family};
+  }
+
+  @each $name, $weight in $fontWeights {
+    --font-weight-#{$name}: #{$weight};
+  }
+
+  --container: #{$container};
+
+  @each $name, $breakpoint in $breakpoints {
+    --breakpoint-#{$name}: #{$breakpoint};
+  }
+
+  @each $name, $spacing in $spacings {
+    --spacing-#{$name}: #{$spacing};
+  }
+}
+
+[data-theme="dark"] {
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  background-color: var(--grey);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove all animations and transitions
+for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background-color: var(--primary);
+  color: var(--light);
+}
