@@ -1,5 +1,16 @@
-import { IBtnProps } from "@/interfaces/Button/Props";
+import { BtnTypes } from "@/types/BtnTypes";
+import { Theme } from "@/types/Theme";
+import { MouseEventHandler, CSSProperties, ReactNode } from "react";
 import "./Button.scss";
+
+export interface IButton {
+  type?: BtnTypes;
+  children: ReactNode;
+  handleClick?: MouseEventHandler;
+  theme: Theme;
+  disabled?: boolean;
+  styles?: CSSProperties;
+}
 
 export default function Button({
   type,
@@ -8,7 +19,7 @@ export default function Button({
   theme,
   disabled,
   styles,
-}: IBtnProps) {
+}: IButton) {
   return (
     <div className={`btn btn--${theme}`} style={styles}>
       <button

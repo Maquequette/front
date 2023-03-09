@@ -66,11 +66,14 @@
     }
 
     &--solid {
-      color: var(--light);
-
       @each $name, $color in $colors {
         &--#{$name} {
+          color: var(--light);
           background-color: var(--#{$name});
+
+          &:hover {
+            background-color: transparent;
+          }
         }
       }
     }

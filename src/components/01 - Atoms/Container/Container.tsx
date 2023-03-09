@@ -1,17 +1,20 @@
 import { ReactNode, CSSProperties } from "react";
 import "./Container.scss";
 
+export interface IContainer {
+  children: ReactNode;
+  center?: Boolean;
+  disabled?: boolean;
+  styles?: CSSProperties;
+  classes?: String;
+}
+
 export default function Container({
   children,
   center,
   styles,
   classes,
-}: {
-  children: ReactNode;
-  center?: Boolean;
-  styles?: CSSProperties;
-  classes?: String;
-}) {
+}: IContainer) {
   return (
     <div
       className={`container ${center ? "container--centered" : ""} ${classes}`}

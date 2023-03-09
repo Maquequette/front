@@ -1,13 +1,32 @@
 @import "../../../assets/variables";
 
 .link {
+  display: flex;
+  align-items: center;
   color: var(--dark);
   text-decoration: none;
-  font-size: var(--font-size-md);
-  
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family-secondary);
+  text-transform: uppercase;
+  padding: 1rem 3rem;
+  border-radius: inherit;
+
+  > .sprites {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
   @each $name, $color in $colors {
     &--#{$name} {
-      background-color: var(--#{$name});
+      border: 1px solid var(--#{$name});
+
+      &:hover {
+        background-color: var(--#{$name});
+      }
+
+      &.active {
+        background-color: var(--#{$name});
+      }
     }
   }
 }

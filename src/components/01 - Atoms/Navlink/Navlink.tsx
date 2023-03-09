@@ -1,22 +1,22 @@
 import { NavLink as BaseNavLink } from "react-router-dom";
-import { Theme } from "@/types/Navlink/Theme";
-import "./Navlink.scss";
+import { StyleTypes } from "@/types/StyleTypes";
 import { ReactNode } from "react";
+import "./Navlink.scss";
+import { Theme } from "@/types/Theme";
 
-export default function Navlink({
-  to,
-  theme,
-  children,
-}: {
+export interface INavlink {
   to: string;
-  theme: Theme;
   children: ReactNode;
-}) {
+  theme: Theme;
+  classes?: string;
+}
+
+export default function Navlink({ to, theme, children, classes }: INavlink) {
   return (
     <BaseNavLink
       to={to}
       className={({ isActive }) =>
-        (isActive ? "active" : "") + `link link--${theme}`
+        (isActive ? "active" : "") + ` link link--${theme} ${classes ?? ""}`
       }
     >
       {children}
