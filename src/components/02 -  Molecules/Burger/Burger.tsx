@@ -8,7 +8,7 @@ export default function Burger({
   handleClick: MouseEventHandler;
 }) {
   return (
-    <button className="burger">
+    <button className="burger" onClick={handleClick}>
       <Svg id="burger" />
     </button>
   );

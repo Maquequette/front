@@ -9,14 +9,22 @@ export interface INavlink {
   children: ReactNode;
   theme: Theme;
   classes?: string;
+  icon?: boolean;
 }
 
-export default function Navlink({ to, theme, children, classes }: INavlink) {
+export default function Navlink({
+  to,
+  theme,
+  children,
+  classes,
+  icon,
+}: INavlink) {
   return (
     <BaseNavLink
       to={to}
       className={({ isActive }) =>
-        (isActive ? "active" : "") + ` link link--${theme} ${classes ?? ""}`
+        (isActive ? "active" : "") +
+        ` ${icon ? "link--icon" : ""} link link--${theme} ${classes ?? ""}`
       }
     >
       {children}

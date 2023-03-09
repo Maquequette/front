@@ -9,17 +9,18 @@ export default function Navigation({ classes }: { classes?: String }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
+    console.log("rer");
     setIsOpen((prev) => !prev);
   };
 
   return (
-    <nav className={`nav ${classes}`}>
+    <nav className={`nav ${classes} ${isOpen ? "nav--open" : ""}`}>
       <div className="nav__logo">
         <Logo />
       </div>
       <ul id="menu" className="nav__container">
         <li className="nav__item">
-          <Navlink to="" theme="primary">
+          <Navlink to="" theme="primary" icon={true}>
             <Svg id="home" />
           </Navlink>
         </li>
@@ -39,12 +40,12 @@ export default function Navigation({ classes }: { classes?: String }) {
           </Navlink>
         </li>
         <li className="nav__item">
-          <Navlink to="" theme="primary">
+          <Navlink to="" theme="primary" icon={true}>
             <Svg id="bell" />
           </Navlink>
         </li>
         <li className="nav__item">
-          <Navlink to="" theme="primary">
+          <Navlink to="" theme="primary" icon={true}>
             <Svg id="profile" />
           </Navlink>
         </li>
@@ -52,17 +53,18 @@ export default function Navigation({ classes }: { classes?: String }) {
       <div className="nav__container">
         <ul id="tools">
           <li className="nav__item">
-            <Navlink to="" theme="primary">
-              Theme
+            <Navlink to="" theme="primary" icon={true}>
+              <Svg id="night" />
             </Navlink>
           </li>
           <li className="nav__item">
-            <Navlink to="" theme="primary">
-              Langue
+            <Navlink to="" theme="primary" icon={true}>
+              <Svg id="worldwide" />
             </Navlink>
           </li>
         </ul>
       </div>
+      <Burger handleClick={toggleOpen} />
     </nav>
   );
 }
