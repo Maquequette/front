@@ -12,21 +12,14 @@ export interface INavlink {
   icon?: boolean;
 }
 
-export default function Navlink({
-  to,
-  theme,
-  children,
-  classes,
-  icon,
-}: INavlink) {
+export default function Navlink({ to, theme, children, classes, icon }: INavlink) {
   return (
     <BaseNavLink
       to={to}
       className={({ isActive }) =>
         (isActive ? "active" : "") +
         ` ${icon ? "link--icon" : ""} link link--${theme} ${classes ?? ""}`
-      }
-    >
+      }>
       {children}
     </BaseNavLink>
   );

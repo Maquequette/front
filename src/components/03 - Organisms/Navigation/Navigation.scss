@@ -10,14 +10,6 @@
     justify-content: flex-end;
     flex: 1;
     height: 100%;
-
-    > :first-child {
-      border-radius: 10px 0px 0px 10px;
-    }
-
-    > :last-child {
-      border-radius: 0px 10px 10px 0px;
-    }
   }
 
   #menu,
@@ -26,6 +18,13 @@
     height: 100%;
     padding: 1rem;
     border-radius: 10px;
+    > :first-child {
+      border-radius: 10px 0px 0px 10px;
+    }
+
+    > :last-child {
+      border-radius: 0px 10px 10px 0px;
+    }
   }
 
   &__logo {

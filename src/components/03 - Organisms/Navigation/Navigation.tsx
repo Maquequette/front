@@ -1,6 +1,7 @@
 import Burger from "@/components/02 -  Molecules/Burger/Burger";
 import Navlink from "@/components/01 - Atoms/Navlink/Navlink";
 import Logo from "@/components/01 - Atoms/Logo/Logo";
+import ThemeSwapper from "@/components/01 - Atoms/ThemeSwapper/ThemeSwapper";
 import { useState } from "react";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import "./Navigation.scss";
@@ -53,9 +54,7 @@ export default function Navigation({ classes }: { classes?: String }) {
       <div className="nav__container">
         <ul id="tools">
           <li className="nav__item">
-            <Navlink to="" theme="primary" icon={true}>
-              <Svg id="night" />
-            </Navlink>
+            <ThemeSwapper />
           </li>
           <li className="nav__item">
             <Navlink to="" theme="primary" icon={true}>

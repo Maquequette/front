@@ -9,16 +9,9 @@ export interface IContainer {
   classes?: String;
 }
 
-export default function Container({
-  children,
-  center,
-  styles,
-  classes,
-}: IContainer) {
+export default function Container({ children, center, styles, classes }: IContainer) {
   return (
-    <div
-      className={`container ${center ? "container--centered" : ""} ${classes}`}
-    >
+    <div style={styles} className={`container ${center ? "container--centered" : ""} ${classes}`}>
       {children}
     </div>
   );
