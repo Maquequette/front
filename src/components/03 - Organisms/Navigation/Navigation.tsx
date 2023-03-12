@@ -21,22 +21,22 @@ export default function Navigation({ classes }: { classes?: String }) {
       </div>
       <ul id="menu" className="nav__container">
         <li className="nav__item">
-          <Navlink to="" theme="primary" icon={true}>
+          <Navlink to="/" theme="primary" icon={true}>
             <Svg id="home" />
           </Navlink>
         </li>
         <li className="nav__item">
-          <Navlink to="" theme="primary">
+          <Navlink to="/challenges" theme="primary">
             Challenges
           </Navlink>
         </li>
         <li className="nav__item">
-          <Navlink to="" theme="primary">
+          <Navlink to="/lessons" theme="primary">
             Lessons
           </Navlink>
         </li>
         <li className="nav__item">
-          <Navlink to="" theme="primary">
+          <Navlink to="/classroom" theme="primary">
             Classroom
           </Navlink>
         </li>

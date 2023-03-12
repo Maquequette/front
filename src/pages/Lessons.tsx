@@ -1,3 +1,5 @@
+import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";
+
 export default function Lessons() {
-  return <div>Lessons</div>;
+  return <PageTransition>Lessons</PageTransition>;
 }
