@@ -1,0 +1,15 @@
+.themeSwapper {
+  display: flex;
+  align-items: center;
+  color: var(--dark);
+  padding: 1rem;
+  border-radius: inherit;
+  background-color: var(--light);
+  border: 1px solid var(--primary);
+  position: relative;
+
+  > .sprites {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}

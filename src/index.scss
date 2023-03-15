@@ -36,6 +36,10 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
   background-color: var(--grey);
+
+  &::-webkit-scrollbar-button {
+    background-color: var(--primary);
+  }
 }
 
 * {
@@ -43,7 +47,10 @@ html {
   margin: 0;
   padding: 0;
 }
-
+.app {
+  min-height: 100vh;
+  position: relative;
+}
 /* Remove all animations and transitions
 for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {

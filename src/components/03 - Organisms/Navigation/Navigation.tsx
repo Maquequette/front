@@ -1,49 +1,69 @@
 import Burger from "@/components/02 -  Molecules/Burger/Burger";
 import Navlink from "@/components/01 - Atoms/Navlink/Navlink";
 import Logo from "@/components/01 - Atoms/Logo/Logo";
+import ThemeSwapper from "@/components/01 - Atoms/ThemeSwapper/ThemeSwapper";
 import { useState } from "react";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
 import "./Navigation.scss";
 
 export default function Navigation({ classes }: { classes?: String }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
+    console.log("rer");
     setIsOpen((prev) => !prev);
   };
 
   return (
-    <nav className={`nav ${classes}`}>
+    <nav className={`nav ${classes} ${isOpen ? "nav--open" : ""}`}>
       <div className="nav__logo">
         <Logo />
       </div>
-      <div className="nav__menu">
-        <Navlink to="" theme="primary">
-          Home
-        </Navlink>
-        <Navlink to="" theme="primary">
-          Challenges
-        </Navlink>
-        <Navlink to="" theme="primary">
-          Lessons
-        </Navlink>
-        <Navlink to="" theme="primary">
-          Classroom
-        </Navlink>
-        <Navlink to="" theme="primary">
-          notification
-        </Navlink>
-        <Navlink to="" theme="primary">
-          Profil
-        </Navlink>
+      <ul id="menu" className="nav__container">
+        <li className="nav__item">
+          <Navlink to="/" theme="primary" icon={true}>
+            <Svg id="home" />
+          </Navlink>
+        </li>
+        <li className="nav__item">
+          <Navlink to="/challenges" theme="primary">
+            Challenges
+          </Navlink>
+        </li>
+        <li className="nav__item">
+          <Navlink to="/lessons" theme="primary">
+            Lessons
+          </Navlink>
+        </li>
+        <li className="nav__item">
+          <Navlink to="/classroom" theme="primary">
+            Classroom
+          </Navlink>
+        </li>
+        <li className="nav__item">
+          <Navlink to="" theme="primary" icon={true}>
+            <Svg id="bell" />
+          </Navlink>
+        </li>
+        <li className="nav__item">
+          <Navlink to="" theme="primary" icon={true}>
+            <Svg id="profile" />
+          </Navlink>
+        </li>
+      </ul>
+      <div className="nav__container">
+        <ul id="tools">
+          <li className="nav__item">
+            <ThemeSwapper />
+          </li>
+          <li className="nav__item">
+            <Navlink to="" theme="primary" icon={true}>
+              <Svg id="worldwide" />
+            </Navlink>
+          </li>
+        </ul>
       </div>
-      <div className="nav__tools">
-        <Navlink to="" theme="primary">
-          Theme
-        </Navlink>
-        <Navlink to="" theme="primary">
-          Langue
-        </Navlink>
-      </div>
+      <Burger handleClick={toggleOpen} />
     </nav>
   );
 }

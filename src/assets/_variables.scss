@@ -2,7 +2,7 @@ $colors: (
   //Blanc
   "light": #ffffff,
   //Noir
-  "dark": #333333,
+  "dark": #171717,
   //gris bg
   "grey": #f5f5f7,
   //Jaune
@@ -18,7 +18,16 @@ $colors: (
   //Rose flashy
   "danger": #ee4878,
   //Bleu foncé
-  "darkBlue": #1a1c33
+  "darkBlue": #1a1c33,
+
+  //Text blanc
+  "txtColor": #171717
+);
+
+$colorsDark: (
+  "light": #2d2d2e,
+  "dark": #333333,
+  "grey": #171717,
 );
 
 $fontSizes: (

@@ -1,0 +1,62 @@
+.select {
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-size: var(--font-size-md);
+  padding: 1rem;
+  border: 1px solid var(--dark);
+  box-shadow: 5px 5px 0px var(--dark);
+  width: fit-content;
+  background-color: var(--light);
+  font-family: var(--font-family-secondary);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  &__input {
+    display: flex;
+    align-items: flex-end;
+
+    > .sprites {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &__text {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__options {
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    width: 100%;
+    cursor: pointer;
+    background-color: var(--light);
+    border: 1px solid var(--dark);
+    border-top: 1px solid var(--grey);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 5px 5px 0px var(--dark);
+    box-sizing: content-box;
+  }
+
+  &__option {
+    padding: 2rem;
+
+    &:hover {
+      background-color: var(--grey);
+    }
+  }
+}

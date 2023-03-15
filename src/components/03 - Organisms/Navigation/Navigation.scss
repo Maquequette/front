@@ -4,23 +4,46 @@
   justify-content: space-between;
   width: 100%;
 
-  &__logo,
-  &__tools {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    height: 100%;
+  }
+
+  #menu,
+  #tools {
+    list-style-type: none;
+    height: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    > :first-child {
+      border-radius: 10px 0px 0px 10px;
+    }
+
+    > :last-child {
+      border-radius: 0px 10px 10px 0px;
+    }
+  }
+
+  &__logo {
     flex: 1;
   }
 
-  &__menu,
-  &__tools {
+  #menu,
+  #tools {
     display: flex;
     gap: 1rem;
+    background-color: var(--light);
   }
 
-  &__tools {
+  #tools {
     justify-content: flex-end;
   }
 
-  &__menu {
-    background-color: var(--light);
-    padding: 1rem;
+  &__item {
+    display: flex;
+    height: 100%;
   }
 }
