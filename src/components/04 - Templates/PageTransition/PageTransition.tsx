@@ -17,12 +17,11 @@ export default function PageTransition({ children }: { children: ReactNode }) {
           animate: {
             clipPath: [
               "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
-              "polygon(0 0, 50% 0%, 50% 100%, 0 100%)",
               "polygon(0 0, 100% 0%, 100% 100%, 0 100%)",
               "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"
             ],
             transition: {
-              duration: 1,
+              duration: 0.7,
               ease: "easeInOut"
             }
           }

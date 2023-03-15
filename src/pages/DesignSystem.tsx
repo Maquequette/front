@@ -1,6 +1,7 @@
 import Button from "@/components/01 - Atoms/Button/Button";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Select from "@/components/01 - Atoms/Select/Select";
+import Multiselect from "@/components/02 -  Molecules/Multiselect/Multiselect";
 
 export default function DesignSystem() {
   return (
@@ -25,6 +26,9 @@ export default function DesignSystem() {
           }
         ]}
       />
+      <Multiselect>
+        
+      </Multiselect>
     </div>
   );
 }
