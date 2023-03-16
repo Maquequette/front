@@ -15,6 +15,8 @@
   &__selected {
     display: flex;
     align-items: flex-end;
+    height: 4rem;
+    width: 40rem;
 
     > .sprites {
       width: 1rem;
@@ -24,6 +26,7 @@
 
   &__options {
     position: absolute;
+    z-index: 9999;
     top: 100%;
     left: -1px;
     width: 100%;
@@ -36,13 +39,5 @@
     gap: 1rem;
     box-shadow: 5px 5px 0px var(--dark);
     box-sizing: content-box;
-  }
-
-  &__option {
-    padding: 2rem;
-
-    &:hover {
-      background-color: var(--grey);
-    }
   }
 }

@@ -1,7 +1,7 @@
 import Button from "@/components/01 - Atoms/Button/Button";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Select from "@/components/01 - Atoms/Select/Select";
-import Multiselect from "@/components/02 -  Molecules/Multiselect/Multiselect";
+import Multiselect from "@/components/03 - Organisms/Multiselect/Multiselect";
 
 export default function DesignSystem() {
   return (
@@ -10,25 +10,29 @@ export default function DesignSystem() {
         <Svg id="arrow"></Svg>
         DesignSystem
       </Button>
-      <Select
-        options={[
-          {
-            label: "React",
-            value: "react"
-          },
-          {
-            label: "Vue",
-            value: "vue"
-          },
-          {
-            label: "Angular",
-            value: "angular"
-          }
-        ]}
-      />
-      <Multiselect>
-        
-      </Multiselect>
+      <div style={{ marginTop: "3rem" }}>
+        <Multiselect
+          theme="primary"
+          options={[
+            { label: "Test", value: "value" },
+            { label: "Test2", value: "value2" },
+            { label: "Test3", value: "value3" },
+            { label: "Test3", value: "value3" }
+          ]}
+        />
+        <Select
+          theme="primary"
+          handleClick={(value) => {
+            console.log(value);
+          }}
+          options={[
+            { label: "Test", value: "value" },
+            { label: "Test2", value: "value2" },
+            { label: "Test3", value: "value3" },
+            { label: "Test3", value: "value3" }
+          ]}
+        />
+      </div>
     </div>
   );
 }
