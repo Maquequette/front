@@ -17,7 +17,7 @@ export default function DesignSystem() {
             { label: "Test", value: "value" },
             { label: "Test2", value: "value2" },
             { label: "Test3", value: "value3" },
-            { label: "Test3", value: "value3" }
+            { label: "Test3", value: "value4" }
           ]}
         />
         <Select
@@ -29,7 +29,7 @@ export default function DesignSystem() {
             { label: "Test", value: "value" },
             { label: "Test2", value: "value2" },
             { label: "Test3", value: "value3" },
-            { label: "Test3", value: "value3" }
+            { label: "Test3", value: "value4" }
           ]}
         />
       </div>

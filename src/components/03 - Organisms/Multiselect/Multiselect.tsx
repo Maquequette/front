@@ -42,7 +42,7 @@ export default function Multiselect({ options, theme }: IMultiselect) {
         }}>
         {selected.map((element: ISelectOption) => {
           return (
-            <div className="multiselect__badge" key={element.value + "_badge"}>
+            <div className="multiselect__badge" key={element.value}>
               {element.label}
             </div>
           );

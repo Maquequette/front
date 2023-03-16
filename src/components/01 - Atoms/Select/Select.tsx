@@ -18,7 +18,7 @@ export default function Select({ options, handleClick, theme }: ISelect) {
   const [isActive, setIsActive] = useState<Boolean>(false);
 
   const handleChange = (option: ISelectOption | null) => {
-    setValue(option?.value);
+    setValue(option);
     handleClick(option?.value);
   };
 
@@ -47,11 +47,13 @@ export default function Select({ options, handleClick, theme }: ISelect) {
           {options.map((option) => {
             return (
               <Options
+                key={option.value}
                 hasCheckbox={false}
                 theme={theme}
                 handleClick={() => handleChange(option)}
                 value={option.value}
-                label={option.label}></Options>
+                label={option.label}
+              />
             );
           })}
         </motion.div>
