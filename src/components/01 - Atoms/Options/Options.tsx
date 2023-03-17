@@ -10,9 +10,17 @@ export interface IOptions {
   label: String;
   theme: Theme;
   hasCheckbox: boolean;
+  isChecked?: boolean;
 }
 
-export default function Options({ handleClick, value, label, theme, hasCheckbox }: IOptions) {
+export default function Options({
+  handleClick,
+  value,
+  label,
+  theme,
+  hasCheckbox,
+  isChecked
+}: IOptions) {
   return (
     <motion.div
       onClick={handleClick}
@@ -22,7 +30,7 @@ export default function Options({ handleClick, value, label, theme, hasCheckbox 
         show: { opacity: 1, x: 0 }
       }}
       key={value}>
-      {hasCheckbox && <Checkbox value={value} theme={theme} isChecked={true} />}
+      {hasCheckbox && <Checkbox value={value} theme={theme} isChecked={isChecked ?? false} />}
       {label}
     </motion.div>
   );

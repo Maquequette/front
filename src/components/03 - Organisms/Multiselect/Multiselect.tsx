@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Options from "@/components/01 - Atoms/Options/Options";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
 import { Theme } from "@/types/Theme";
 import "./Multiselect.scss";
 
@@ -16,7 +17,6 @@ export interface ISelectOption {
 
 export default function Multiselect({ options, theme }: IMultiselect) {
   const [selected, setSelected] = useState<Array<ISelectOption>>([]);
-  const [value, setValue] = useState<Array<any>>([]);
   const [isActive, setIsActive] = useState(false);
 
   const handleSelect = (option: ISelectOption) => {
@@ -26,27 +26,39 @@ export default function Multiselect({ options, theme }: IMultiselect) {
 
     if (index === -1) {
       setSelected([...selected, option]);
-      setValue([...value, option.value]);
     } else {
-      setSelected(selected.slice(index, 1));
-      setSelected(value.slice(index, 1));
+      const nValue = [...selected];
+      nValue.splice(index, 1);
+      setSelected(nValue);
     }
   };
 
   return (
     <div className="multiselect">
       <div
-        className="multiselect__selected"
+        className="multiselect__input"
         onClick={() => {
           setIsActive(!isActive);
         }}>
-        {selected.map((element: ISelectOption) => {
-          return (
-            <div className="multiselect__badge" key={element.value}>
-              {element.label}
-            </div>
-          );
-        })}
+        <div className="multiselect__selected">
+          {selected.length === 0
+            ? "Choose"
+            : selected.map((element: ISelectOption) => {
+                return (
+                  <div
+                    className="multiselect__badge"
+                    key={element.value + "_badge"}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelect(element);
+                    }}>
+                    {element.label}
+                    <Svg id="cross" />
+                  </div>
+                );
+              })}
+        </div>
+        <Svg id="dropdown" />
       </div>
       {isActive && (
         <motion.div
@@ -66,6 +78,7 @@ export default function Multiselect({ options, theme }: IMultiselect) {
           {options.map((element: ISelectOption) => {
             return (
               <Options
+                isChecked={selected.includes(element)}
                 hasCheckbox={true}
                 key={element.value}
                 theme={theme}

@@ -1,8 +1,9 @@
 .options {
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+  word-break: break-all;
 
   &:hover {
     background-color: var(--grey);
