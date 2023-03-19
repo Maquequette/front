@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import "./Toast.scss";
 
 export interface IToast {
-  id: string;
+  id?: string;
   title: string;
   desc: string;
   theme: Theme;

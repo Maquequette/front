@@ -11,7 +11,7 @@ export default function DesignSystem() {
       <Button
         theme="primary"
         handleClick={() =>
-          pushToast({ id: 1, title: "oui", desc: "PIOUI", theme: "primary", duration: 10 })
+          pushToast({title: "oui", desc: "PIOUI", theme: "primary", duration: 10 })
         }>
         <Svg id="arrow"></Svg>
         DesignSystem
