@@ -8,12 +8,14 @@ import "./ToastsContainer.scss";
 export default function ToastsContainer() {
   const [toasts, setToasts] = useState<Array<IToast>>([]);
   const { pushToastRef } = useContext(ToastContext);
-  pushToastRef.current = ({ duration, ...props }: IToast) => {
-    const id = Date.now();
+  pushToastRef.current = ({ duration, title, desc, theme }: IToast) => {
+    const id = crypto.randomUUID();
+
     const timer = setTimeout(() => {
       setToasts((v) => v.filter((t) => t.id !== id));
     }, (duration ?? 5) * 1000);
-    const toast = { ...props, id, timer };
+
+    const toast = { title, id, timer, desc, theme, duration };
     setToasts((v) => [...v, toast]);
   };
 

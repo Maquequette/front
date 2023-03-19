@@ -24,4 +24,12 @@
     font-family: var(--font-family-primary);
     font-size: var(--font-size-s);
   }
+
+  &__timer {
+    @each $name, $color in $colors {
+      &--#{$name} {
+        border-bottom: 4px solid var(--#{$name});
+      }
+    }
+  }
 }
