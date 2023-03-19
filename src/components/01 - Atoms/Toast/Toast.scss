@@ -1,0 +1,27 @@
+@import "../../../assets/variables";
+
+.toast {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: var(--light);
+  min-width: 20rem;
+  border-radius: 1rem;
+
+  @each $name, $color in $colors {
+    &--#{$name} {
+      border-left: 4px solid var(--#{$name});
+    }
+  }
+
+  &__heading {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-l);
+    text-transform: uppercase;
+  }
+
+  &__desc {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-s);
+  }
+}

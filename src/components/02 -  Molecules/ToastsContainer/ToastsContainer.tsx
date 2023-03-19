@@ -3,14 +3,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import Toast from "@/components/01 - Atoms/Toast/Toast";
 import { ToastContext } from "@/contexts/ToastContext";
 import { IToast } from "@/components/01 - Atoms/Toast/Toast";
+import "./ToastsContainer.scss";
 
 export default function ToastsContainer() {
   const [toasts, setToasts] = useState<Array<IToast>>([]);
   const { pushToastRef } = useContext(ToastContext);
   pushToastRef.current = ({ duration, ...props }: IToast) => {
-    // On génère un id pour différencier les messages
     const id = Date.now();
-    // On sauvegarde le timer pour pouvoir l'annuler si le message est fermé
     const timer = setTimeout(() => {
       setToasts((v) => v.filter((t) => t.id !== id));
     }, (duration ?? 5) * 1000);
