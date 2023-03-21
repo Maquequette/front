@@ -6,15 +6,42 @@
   padding: 1rem;
   border: 1px solid var(--dark);
   box-shadow: 5px 5px 0px var(--dark);
-  width: fit-content;
   background-color: var(--light);
   font-family: var(--font-family-secondary);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  max-width: 28rem;
+
+  &__input {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+
+    > .sprites {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 
   &__selected {
     display: flex;
+    column-gap: 1rem;
     align-items: flex-end;
+    width: 100%;
+    overflow-x: scroll;
+
+    > .sprites {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &__badge {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+    background-color: var(--grey);
+    padding: 1rem;
 
     > .sprites {
       width: 1rem;
@@ -24,6 +51,7 @@
 
   &__options {
     position: absolute;
+    z-index: 9999;
     top: 100%;
     left: -1px;
     width: 100%;
@@ -36,13 +64,5 @@
     gap: 1rem;
     box-shadow: 5px 5px 0px var(--dark);
     box-sizing: content-box;
-  }
-
-  &__option {
-    padding: 2rem;
-
-    &:hover {
-      background-color: var(--grey);
-    }
   }
 }

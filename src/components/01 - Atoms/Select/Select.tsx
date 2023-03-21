@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { motion } from "framer-motion";
 import Svg from "../Svg/Svg";
+import Options from "../Options/Options";
 import "./Select.scss";
 
+import { ISelectOption } from "@/components/03 - Organisms/Multiselect/Multiselect";
+import { Theme } from "@/types/Theme";
+
 export interface ISelect {
-  options: Array<IOption>;
+  options: Array<ISelectOption>;
+  handleClick: MouseEventHandler;
+  theme: Theme;
 }
 
-export interface IOption {
-  label: string;
-  value: string;
-}
-
-export default function Select({ options }: { options: Array<IOption> }) {
-  const [value, setValue] = useState<IOption | null>(null);
+export default function Select({ options, handleClick, theme }: ISelect) {
+  const [value, setValue] = useState<any>(null);
   const [isActive, setIsActive] = useState<Boolean>(false);
 
-  const handleChange = (option: IOption | null) => {
+  const handleChange = (option: ISelectOption | null) => {
     setValue(option);
+    handleClick(option?.value);
   };
 
   return (
@@ -42,30 +44,16 @@ export default function Select({ options }: { options: Array<IOption> }) {
           className="select__options"
           initial="hidden"
           animate="show">
-          <motion.div
-            onClick={() => {
-              handleChange(null);
-            }}
-            className="select__option"
-            variants={{
-              hidden: { opacity: 0, x: -100 },
-              show: { opacity: 1, x: 0 }
-            }}
-          />
           {options.map((option) => {
             return (
-              <motion.div
-                onClick={() => {
-                  handleChange(option);
-                }}
-                className="select__option"
-                variants={{
-                  hidden: { opacity: 0, x: -100 },
-                  show: { opacity: 1, x: 0 }
-                }}
-                key={option.value}>
-                {option.label}
-              </motion.div>
+              <Options
+                key={option.value}
+                hasCheckbox={false}
+                theme={theme}
+                handleClick={() => handleChange(option)}
+                value={option.value}
+                label={option.label}
+              />
             );
           })}
         </motion.div>

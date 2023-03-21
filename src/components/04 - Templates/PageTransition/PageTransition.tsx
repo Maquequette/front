@@ -8,12 +8,9 @@ export default function PageTransition({ children }: { children: ReactNode }) {
       <motion.div
         className="transition"
         animate="animate"
-        initial="initial"
+        initial={true}
         transition={easeIn}
         variants={{
-          initial: {
-            clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"
-          },
           animate: {
             clipPath: [
               "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
@@ -21,8 +18,8 @@ export default function PageTransition({ children }: { children: ReactNode }) {
               "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"
             ],
             transition: {
-              duration: 0.7,
-              ease: "easeInOut"
+              duration: 0.9,
+              ease: "easeOut"
             }
           }
         }}></motion.div>

@@ -1,0 +1,35 @@
+@import "../../../assets/variables";
+
+.checkbox {
+  &__input {
+    appearance: none;
+    width: 1.15em;
+    height: 1.15em;
+    border: 1px solid var(--dark);
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    font-size: inherit;
+
+    &::before {
+      content: "";
+      width: 0.8em;
+      height: 0.8em;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      border-radius: 2px;
+    }
+
+    @each $name, $color in $colors {
+      &--#{$name} {
+        &::before {
+          box-shadow: inset 1em 1em var(--#{$name});
+        }
+      }
+    }
+
+    &:checked::before {
+      transform: scale(1);
+    }
+  }
+}
