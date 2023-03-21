@@ -8,25 +8,16 @@ export default function DesignSystem() {
   const { pushToast } = useToasts();
   return (
     <div style={{ marginTop: "3rem", marginLeft: "3rem" }}>
-      <Button
+      <Multiselect
         theme="primary"
-        handleClick={() =>
-          pushToast({title: "oui", desc: "PIOUI", theme: "primary", duration: 10 })
-        }>
-        <Svg id="arrow"></Svg>
-        DesignSystem
-      </Button>
-      <div style={{ marginTop: "3rem" }}>
-        {/* <Multiselect
-          theme="primary"
-          options={[
-            { label: "Test", value: "value" },
-            { label: "Test2", value: "value2" },
-            { label: "Test3", value: "value3" },
-            { label: "Test3", value: "value4" }
-          ]}
-        /> */}
-      </div>
+        options={[
+          { label: "Test", value: "value" },
+          { label: "titre", value: null },
+          { label: "Test2", value: "value2" },
+          { label: "Test3", value: "value3" },
+          { label: "Test3", value: "value4" }
+        ]}
+      />
     </div>
   );
 }

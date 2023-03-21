@@ -8,4 +8,9 @@
   &:hover {
     background-color: var(--grey);
   }
+
+  &__title {
+    background-color: var(--grey);
+    cursor: auto;
+  }
 }

@@ -23,14 +23,15 @@ export default function Options({
 }: IOptions) {
   return (
     <motion.div
-      onClick={handleClick}
-      className="options"
+      onClick={value ? handleClick : undefined}
+      className={`options ${!value ? "options__title" : ""}`}
       variants={{
         hidden: { opacity: 0, x: -100 },
         show: { opacity: 1, x: 0 }
       }}
       key={value}>
-      {hasCheckbox && <Checkbox value={value} theme={theme} isChecked={isChecked ?? false} />}
+      {hasCheckbox ||
+        (!value && <Checkbox value={value} theme={theme} isChecked={isChecked ?? false} />)}
       {label}
     </motion.div>
   );
