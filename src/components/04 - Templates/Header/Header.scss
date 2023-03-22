@@ -1,17 +1,3 @@
 .header {
-  padding: 2.5rem;
-  position: sticky;
-  top: 0;
   display: flex;
-
-  &__container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .burger {
-    @media (min-width: 64em) {
-      display: none;
-    }
-  }
 }

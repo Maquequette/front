@@ -30,8 +30,9 @@ export default function Options({
         show: { opacity: 1, x: 0 }
       }}
       key={value}>
-      {hasCheckbox ||
-        (!value && <Checkbox value={value} theme={theme} isChecked={isChecked ?? false} />)}
+      {hasCheckbox && value && (
+        <Checkbox value={value} theme={theme} isChecked={isChecked ?? false} />
+      )}
       {label}
     </motion.div>
   );

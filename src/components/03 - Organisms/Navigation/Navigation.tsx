@@ -9,7 +9,7 @@ import "./Navigation.scss";
 export default function Navigation({ classes }: { classes?: String }) {
   return (
     <nav className="nav">
-      <ul id="menu" className="nav__container">
+      <ul className="nav__container">
         <li className="nav__item">
           <Navlink to="/" theme="primary" icon={true}>
             <Svg id="home" />
