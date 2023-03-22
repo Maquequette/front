@@ -7,18 +7,8 @@ import Svg from "@/components/01 - Atoms/Svg/Svg";
 import "./Navigation.scss";
 
 export default function Navigation({ classes }: { classes?: String }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => {
-    console.log("rer");
-    setIsOpen((prev) => !prev);
-  };
-
   return (
-    <nav className={`nav ${classes} ${isOpen ? "nav--open" : ""}`}>
-      <div className="nav__logo">
-        <Logo />
-      </div>
+    <nav className="nav">
       <ul id="menu" className="nav__container">
         <li className="nav__item">
           <Navlink to="/" theme="primary" icon={true}>
@@ -51,19 +41,6 @@ export default function Navigation({ classes }: { classes?: String }) {
           </Navlink>
         </li>
       </ul>
-      <div className="nav__container">
-        <ul id="tools">
-          <li className="nav__item">
-            <ThemeSwapper />
-          </li>
-          <li className="nav__item">
-            <Navlink to="" theme="primary" icon={true}>
-              <Svg id="worldwide" />
-            </Navlink>
-          </li>
-        </ul>
-      </div>
-      <Burger handleClick={toggleOpen} />
     </nav>
   );
 }
