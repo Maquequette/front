@@ -1,8 +1,8 @@
+import { ReactNode } from "react";
 import { NavLink as BaseNavLink } from "react-router-dom";
 import { StyleTypes } from "@/types/StyleTypes";
-import { ReactNode } from "react";
-import "./Navlink.scss";
 import { Theme } from "@/types/Theme";
+import "./Navlink.scss";
 
 export interface INavlink {
   to: string;
