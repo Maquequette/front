@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { ThemesContext } from "@/contexts/ThemesContext";
 import { motion } from "framer-motion";
-import Svg from "../Svg/Svg";
 import "./ThemeSwapper.scss";
 
 export default function ThemeSwapper() {

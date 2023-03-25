@@ -1,8 +1,9 @@
-import { ReactNode,Children } from "react";
+import { ReactNode, Children } from "react";
 
-export default function Dropdown({children}:{children:ReactNode}) {
-    return
+export default function Dropdown({ children }: { children: ReactNode }) {
+  return (
     <ul className="dropdown">
       <li className="dropdown__title"></li>
-    </ul>;
+    </ul>
+  );
 }

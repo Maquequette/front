@@ -1,3 +1,10 @@
 .nav {
-  
+  background-color: var(--primary);
+  position: absolute;
+  top: 10rem;
+  left: 0;
+
+  &__container {
+    list-style-type: none;
+  }
 }

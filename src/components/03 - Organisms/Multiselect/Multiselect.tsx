@@ -12,7 +12,7 @@ export interface IMultiselect {
 
 export interface ISelectOption {
   value: any;
-  label: String;
+  label: string;
 }
 
 export default function Multiselect({ options, theme }: IMultiselect) {

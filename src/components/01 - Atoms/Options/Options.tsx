@@ -7,7 +7,7 @@ import "./Options.scss";
 export interface IOptions {
   handleClick: MouseEventHandler;
   value: any;
-  label: String;
+  label: string;
   theme: Theme;
   hasCheckbox: boolean;
   isChecked?: boolean;

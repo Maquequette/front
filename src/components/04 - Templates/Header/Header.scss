@@ -1,3 +1,21 @@
 .header {
-  display: flex;
+  position: relative;
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+  }
+
+  &__transition {
+    height: 100vh;
+    width: 100vw;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: var(--primary);
+  }
 }

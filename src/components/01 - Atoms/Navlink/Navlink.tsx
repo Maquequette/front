@@ -17,8 +17,7 @@ export default function Navlink({ to, theme, children, classes, icon }: INavlink
     <BaseNavLink
       to={to}
       className={({ isActive }) =>
-        (isActive ? "active" : "") +
-        ` ${icon ? "link--icon" : ""} link link--${theme} ${classes ?? ""}`
+        (isActive ? "active" : "") + ` link link--${theme} ${classes ?? ""}`
       }>
       {children}
     </BaseNavLink>

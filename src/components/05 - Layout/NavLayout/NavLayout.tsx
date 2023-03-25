@@ -6,6 +6,7 @@ import Footer from "@/components/04 - Templates/Footer/Footer";
 import { AnimatePresence } from "framer-motion";
 
 export default function NavLayout() {
+  
   return (
     <>
       <Header />
