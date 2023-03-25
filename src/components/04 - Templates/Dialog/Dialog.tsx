@@ -5,24 +5,39 @@ import "./Dialog.scss";
 export interface IDialog {
   id: string;
   children: ReactNode;
-  handleClick?: MouseEventHandler;
+  visible: boolean;
+  Dismiss: Function;
   styles?: CSSProperties;
 }
 
 export default function Dialog({
   id,
   children,
-  handleClick,
+  visible = false,
+  Dismiss,
   styles
 }: IDialog) {
+
+  const backdropCloseModal = (e: React.MouseEvent<HTMLDialogElement>) => {
+    Dismiss()
+  }
+
   return (
     <dialog
       className="dialog"
       id={id}
-      open
+      open={visible}
+      onClick={backdropCloseModal}
     >
-      {children}
-      <h1>my fav dialog</h1>
+
+      <div
+        className='dialog__content'
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+      >
+        <h1>dialog</h1>
+        {children}
+      </div>
+
     </dialog>
   )
 }
