@@ -1,13 +1,12 @@
-import React from 'react'
-import { MouseEventHandler, CSSProperties, ReactNode } from "react";
-import "./Dialog.scss";
+import React, { MouseEventHandler, CSSProperties, ReactNode } from 'react'
+import "./Dialog.scss"
 
 export interface IDialog {
-  id: string;
-  children: ReactNode;
-  visible: boolean;
-  Dismiss: Function;
-  styles?: CSSProperties;
+  id: string
+  children: ReactNode
+  visible: boolean
+  Dismiss: Function
+  styles?: CSSProperties
 }
 
 export default function Dialog({
@@ -34,7 +33,6 @@ export default function Dialog({
         className='dialog__content'
         onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
       >
-        <h1>dialog</h1>
         {children}
       </div>
 
