@@ -16,7 +16,7 @@
 
         &__item {
             position: relative;
-            @extend .flex-centered;
+            @extend .flex-centered, .transition;
             width: 100%;
             height: 6rem;
             background-color: transparent;
@@ -50,7 +50,7 @@
                 width: 110%;
                 height: auto;
                 aspect-ratio: 1;
-                transition: all 0.25s ease;
+                @extend .transition;
                 border-radius: 50%;
                 z-index: -1;
             }
