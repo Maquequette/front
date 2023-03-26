@@ -6,9 +6,40 @@
   height: 6rem;
   border-radius: 10px;
 
-  > .sprites {
+  &__icon {
     border: 1px solid var(--primary);
     border-radius: inherit;
-    padding: 1.25rem;
+    padding: 1rem;
+    width: 100%;
+    transition: translate 1s, rotate 1s;
+  }
+
+  &__line {
+    transition: y 0.2s ease-in 0.2s, rotate 0.2s ease-in, opacity 0ms 0.2s;
+    transform-origin: center;
+  }
+
+  &--open {
+    .burger__top,
+    .burger__bottom {
+      y: 45;
+    }
+
+    .burger__top {
+      rotate: 45deg;
+    }
+
+    .burger__middle {
+      opacity: 0;
+    }
+
+    .burger__bottom {
+      rotate: -45deg;
+      x: 11;
+    }
+
+    .burger__line {
+      transition: y 0.2s ease-in, rotate 0.2s ease-in 0.2s, opacity 0ms 0.2s;
+    }
   }
 }

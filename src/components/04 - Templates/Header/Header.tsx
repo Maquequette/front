@@ -29,7 +29,7 @@ export default function Header() {
       <Container center={true} classes="header__container">
         <Logo />
         <Navigation isOpen={isOpen} />
-        <Burger handleClick={toggleOpen} />
+        <Burger isOpen={isOpen} handleClick={toggleOpen} />
       </Container>
     </motion.header>
   );

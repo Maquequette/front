@@ -14,7 +14,6 @@ export default function Navigation({ isOpen }: { isOpen?: boolean }) {
     <motion.nav
       className="nav"
       animate={isOpen ? "open" : "closed"}
-      transition={{ delay: 0.9 }}
       variants={{
         open: { opacity: 1 },
         closed: { opacity: 0 }
@@ -23,7 +22,7 @@ export default function Navigation({ isOpen }: { isOpen?: boolean }) {
         className="nav__container"
         animate={isOpen ? "open" : "closed"}
         initial="closed"
-        transition={{ staggerChildren: 0.1 }}>
+        transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}>
         <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/" theme="primary" icon={true}>
             <Svg id="home" />
