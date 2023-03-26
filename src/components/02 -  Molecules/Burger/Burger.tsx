@@ -14,21 +14,21 @@ export default function Burger({
       <svg fill="var(--dark)" className="burger__icon" viewBox="0 0 100 100" width="250">
         <rect
           className="burger__line burger__top"
-          width="70"
+          width="80"
           height="10"
           x="20"
           y="25"
           rx="5"></rect>
         <rect
           className="burger__line burger__middle"
-          width="80"
+          width="90"
           height="10"
           x="10"
           y="45"
           rx="5"></rect>
         <rect
           className="burger__line burger__bottom"
-          width="70"
+          width="80"
           height="10"
           x="20"
           y="65"

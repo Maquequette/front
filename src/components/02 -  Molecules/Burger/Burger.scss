@@ -23,6 +23,7 @@
     .burger__top,
     .burger__bottom {
       y: 45;
+      x: 10;
     }
 
     .burger__top {
@@ -35,7 +36,6 @@
 
     .burger__bottom {
       rotate: -45deg;
-      x: 11;
     }
 
     .burger__line {
