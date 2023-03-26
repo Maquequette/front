@@ -2,20 +2,29 @@
   position: relative;
   overflow: hidden;
 
+  &::after {
+    content: "";
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--primary);
+    z-index: -1;
+    clip-path: circle(0rem at calc(100% - 6rem) 5rem);
+    transition: clip-path 1s;
+  }
+
+  &--open {
+    &::after {
+      clip-path: circle(200vh at calc(100% - 6rem) 5rem);
+    }
+  }
+
   &__container {
     display: flex;
     justify-content: space-between;
     padding: 2rem 3rem;
-  }
-
-  &__transition {
-    height: 100vh;
-    width: 100vw;
-    pointer-events: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background-color: var(--primary);
   }
 }

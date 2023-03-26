@@ -3,6 +3,7 @@
 .link {
   display: flex;
   align-items: center;
+  gap: 1rem;
   color: var(--dark);
   text-decoration: none;
   font-size: var(--font-size-l);
@@ -14,6 +15,14 @@
   > .sprites {
     width: 2.4rem;
     height: 2.4rem;
+  }
+
+  &--icon {
+    @media (min-width: 64em) {
+      > * {
+        display: non;
+      }
+    }
   }
 
   @each $name, $color in $colors {

@@ -5,54 +5,60 @@ import Svg from "@/components/01 - Atoms/Svg/Svg";
 import "./Navigation.scss";
 
 export default function Navigation({ isOpen }: { isOpen?: boolean }) {
+  const navItem = {
+    closed: { opacity: 0, x: "-100rem", transition: { duration: 0.2 } },
+    open: { opacity: 1, x: 0, transition: { duration: 1.3 } }
+  };
+
   return (
-    <nav className="nav">
+    <motion.nav
+      className="nav"
+      animate={isOpen ? "open" : "closed"}
+      transition={{ delay: 0.9 }}
+      variants={{
+        open: { opacity: 1 },
+        closed: { opacity: 0 }
+      }}>
       <motion.ul
         className="nav__container"
-        initial={true}
         animate={isOpen ? "open" : "closed"}
-        variants={{
-          closed: { opacity: 0, y: -10 },
-          open: {
-            opacity: 1,
-            y: 0,
-            transition: {
-              staggerChildren: 0.1
-            }
-          }
-        }}>
-        <li className="nav__item">
+        initial="closed"
+        transition={{ staggerChildren: 0.1 }}>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/" theme="primary" icon={true}>
             <Svg id="home" />
+            Home
           </Navlink>
-        </li>
-        <li className="nav__item">
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/challenges" theme="primary">
             Challenges
           </Navlink>
-        </li>
-        <li className="nav__item">
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/lessons" theme="primary">
             Lessons
           </Navlink>
-        </li>
-        <li className="nav__item">
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/classroom" theme="primary">
             Classroom
           </Navlink>
-        </li>
-        <li className="nav__item">
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="" theme="primary" icon={true}>
             <Svg id="bell" />
+            Notifications
           </Navlink>
-        </li>
-        <li className="nav__item">
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="" theme="primary" icon={true}>
             <Svg id="profile" />
+            Profile
           </Navlink>
-        </li>
+        </motion.li>
       </motion.ul>
       <Tools />
-    </nav>
+    </motion.nav>
   );
 }

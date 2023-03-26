@@ -1,10 +1,13 @@
 .nav {
-  background-color: var(--primary);
   position: absolute;
   top: 10rem;
   left: 0;
+  width: 100%;
 
   &__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
     list-style-type: none;
   }
 }
