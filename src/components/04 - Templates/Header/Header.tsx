@@ -21,23 +21,12 @@ export default function Header() {
   };
 
   return (
-    <motion.header
-      className={`header ${isOpen ? "header--open" : ""}`}
-      initial={true}
-      animate={isOpen ? "open" : "closed"}
-      variants={{
-        open: {
-          height: "100vh"
-        },
-        closed: {
-          height: "100%"
-        }
-      }}>
+    <header className={`header ${isOpen ? "header--open" : ""}`}>
       <Container center={true} classes="header__container">
         <Logo />
         <Navigation isOpen={isOpen} />
         <Burger isOpen={isOpen} handleClick={toggleOpen} />
       </Container>
-    </motion.header>
+    </header>
   );
 }

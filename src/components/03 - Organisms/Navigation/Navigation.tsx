@@ -11,7 +11,18 @@ export default function Navigation({ isOpen }: { isOpen?: boolean }) {
   };
 
   return (
-    <motion.nav className="nav" animate={isOpen ? "open" : "closed"} initial={true}>
+    <motion.nav
+      className="nav"
+      animate={isOpen ? "open" : "closed"}
+      initial={true}
+      variants={{
+        open: {
+          opacity: 1
+        },
+        closed: {
+          opacity: 0
+        }
+      }}>
       <motion.ul
         className="nav__container"
         animate={isOpen ? "open" : "closed"}

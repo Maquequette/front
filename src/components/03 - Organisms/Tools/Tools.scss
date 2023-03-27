@@ -1,6 +1,24 @@
 .tools {
   list-style-type: none;
   display: flex;
-  width: 100%;
-  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+  background-color: var(--light);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  gap: 1rem;
+  margin-top: var(--spacing-2xl);
+
+  &__item {
+    border: 1px solid var(--primary);
+    padding: 1.25rem;
+
+    &:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    &:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+  }
 }
