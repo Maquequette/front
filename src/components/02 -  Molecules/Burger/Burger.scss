@@ -23,11 +23,13 @@
     .burger__top,
     .burger__bottom {
       y: 45;
-      x: 10;
+      x: 0;
+      width: 100%;
     }
 
     .burger__top {
       rotate: 45deg;
+      width: 100;
     }
 
     .burger__middle {
