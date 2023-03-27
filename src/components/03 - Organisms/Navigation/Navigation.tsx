@@ -3,18 +3,21 @@ import Navlink from "@/components/01 - Atoms/Navlink/Navlink";
 import Tools from "@/components/03 - Organisms/Tools/Tools";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import "./Navigation.scss";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 export default function Navigation({ isOpen }: { isOpen?: boolean }) {
+  const isDesktop = useMediaQuery("(min-width: 80em)");
+
   const navItem = {
-    closed: { opacity: 0, x: "-100rem", transition: { duration: 0.2 } },
-    open: { opacity: 1, x: 0, transition: { duration: 1 } }
+    closed: { opacity: 0, x: "-100rem", transition: { duration: isDesktop ? 0 : 0.2 } },
+    open: { opacity: 1, x: 0, transition: { duration: isDesktop ? 0 : 1 } }
   };
 
   return (
     <motion.nav
       className="nav"
-      animate={isOpen ? "open" : "closed"}
-      initial={true}
+      animate={isOpen || isDesktop ? "open" : "closed"}
+      initial={false}
       variants={{
         open: {
           opacity: 1
@@ -25,12 +28,11 @@ export default function Navigation({ isOpen }: { isOpen?: boolean }) {
       }}>
       <motion.ul
         className="nav__container"
-        animate={isOpen ? "open" : "closed"}
-        initial="closed"
-        transition={{ staggerChildren: 0.1 }}>
+        animate={isOpen || isDesktop ? "open" : "closed"}
+        initial={false}
+        transition={{ staggerChildren: isDesktop ? 0 : 0.1 }}>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink to="/" theme="primary" icon={true}>
-            <Svg id="home" />
+          <Navlink to="/" theme="primary" icon={<Svg id="home" />}>
             Home
           </Navlink>
         </motion.li>
@@ -50,14 +52,12 @@ export default function Navigation({ isOpen }: { isOpen?: boolean }) {
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink to="" theme="primary" icon={true}>
-            <Svg id="bell" />
+          <Navlink to="" theme="primary" icon={<Svg id="bell" />}>
             Notifications
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink to="" theme="primary" icon={true}>
-            <Svg id="profile" />
+          <Navlink to="" theme="primary" icon={<Svg id="profile" />}>
             Profile
           </Navlink>
         </motion.li>

@@ -23,7 +23,9 @@ export default function Header() {
   return (
     <header className={`header ${isOpen ? "header--open" : ""}`}>
       <Container center={true} classes="header__container">
-        <Logo />
+        <div className="header__logo">
+          <Logo />
+        </div>
         <Navigation isOpen={isOpen} />
         <Burger isOpen={isOpen} handleClick={toggleOpen} />
       </Container>

@@ -1,5 +1,5 @@
 import ThemeSwapper from "@/components/01 - Atoms/ThemeSwapper/ThemeSwapper";
-import Svg from "@/components/01 - Atoms/Svg/Svg";
+import LanguageSwapper from "@/components/01 - Atoms/LanguageSwapper/LanguageSwapper";
 import "./Tools.scss";
 
 export default function Tools() {
@@ -9,7 +9,7 @@ export default function Tools() {
         <ThemeSwapper />
       </li>
       <li className="tools__item">
-        <ThemeSwapper />
+        <LanguageSwapper />
       </li>
     </ul>
   );

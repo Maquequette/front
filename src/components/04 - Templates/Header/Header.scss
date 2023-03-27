@@ -23,8 +23,26 @@
   }
 
   &__container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 2rem 3rem;
+    @media (min-width: 80em) {
+      padding: 2rem 7rem;
+    }
+  }
+
+  &__logo {
+    margin-right: auto;
+
+    @media (min-width: 80em) {
+      position: absolute;
+    }
+  }
+
+  .burger {
+    @media (min-width: 80em) {
+      display: none;
+    }
   }
 }

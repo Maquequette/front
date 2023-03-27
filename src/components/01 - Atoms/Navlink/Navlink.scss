@@ -4,23 +4,31 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--dark);
-  text-decoration: none;
-  font-size: var(--font-size-l);
-  font-family: var(--font-family-secondary);
-  text-transform: uppercase;
   padding: 1rem 3rem;
   border-radius: inherit;
+  text-decoration: none;
 
   > .sprites {
     width: 2.4rem;
     height: 2.4rem;
   }
 
+  &__txt {
+    color: var(--dark);
+    font-size: var(--font-size-l);
+    font-family: var(--font-family-secondary);
+    text-transform: uppercase;
+
+    @media (min-width: 80em) {
+      font-size: var(--font-size-md);
+    }
+  }
+
   &--icon {
-    @media (min-width: 64em) {
-      > * {
-        display: non;
+    padding: 1rem;
+    @media (min-width: 80em) {
+      .link__txt {
+        display: none;
       }
     }
   }

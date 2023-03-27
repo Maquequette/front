@@ -1,18 +1,18 @@
-import { ReactNode } from "react";
 import { NavLink as BaseNavLink } from "react-router-dom";
-import { StyleTypes } from "@/types/StyleTypes";
 import { Theme } from "@/types/Theme";
 import "./Navlink.scss";
+import { ReactNode } from "react";
 
 export interface INavlink {
   to: string;
   children: ReactNode;
   theme: Theme;
   classes?: string;
-  icon?: boolean;
+  icon?: JSX.Element;
 }
 
 export default function Navlink({ to, theme, children, classes, icon }: INavlink) {
+  const Icon = icon;
   return (
     <BaseNavLink
       to={to}
@@ -20,7 +20,8 @@ export default function Navlink({ to, theme, children, classes, icon }: INavlink
         (isActive ? "active" : "") +
         ` link link--${theme} ${icon ? "link--icon" : ""} ${classes ?? ""}`
       }>
-      {children}
+      {icon && Icon}
+      <div className="link__txt">{children}</div>
     </BaseNavLink>
   );
 }
