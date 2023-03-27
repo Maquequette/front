@@ -17,9 +17,6 @@
 
   &__item {
     border: 1px solid var(--primary);
-    padding: 1.25rem;
-    position: relative;
-    cursor: pointer;
 
     &:first-child {
       border-radius: 10px 0 0 10px;

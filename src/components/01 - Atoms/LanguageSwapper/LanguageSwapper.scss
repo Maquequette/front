@@ -1,4 +1,8 @@
 .language {
+  padding: 1.25rem;
+  position: relative;
+  cursor: pointer;
+
   &:hover {
     .language__options {
       opacity: 1;
@@ -27,8 +31,10 @@
     padding: 1rem 4rem;
     border: 1px solid var(--primary);
     cursor: pointer;
+    text-transform: uppercase;
 
-    &:hover {
+    &:hover,
+    &.active {
       background-color: var(--primary);
     }
 
