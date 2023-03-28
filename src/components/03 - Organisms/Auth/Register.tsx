@@ -4,11 +4,11 @@ import { useContext, useState } from 'react'
 
 import Heading from "@/components/01 - Atoms/Heading/Heading"
 import MultiStepsForm from "@/components/02 -  Molecules/MultiStepsForm/MultiStepsForm"
-
-import './Register.scss'
 import Label from "@/components/01 - Atoms/Label/Label"
 import Input from "@/components/01 - Atoms/Input/Input"
 import Multiselect from "@/components/03 - Organisms/Multiselect/Multiselect"
+
+import './Register.scss'
 
 
 export default function Register() {

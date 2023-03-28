@@ -6,6 +6,7 @@
     position: fixed;
     @extend .inset-0;
     @extend .full;
+    z-index: 20;
 
     &[open] {
         @extend .flex-centered;
