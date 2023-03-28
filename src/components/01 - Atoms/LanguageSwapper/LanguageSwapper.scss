@@ -1,12 +1,12 @@
 .language {
-  padding: 1.25rem;
+  padding: 1rem;
   position: relative;
   cursor: pointer;
 
   &:hover {
     .language__options {
-      opacity: 1;
       visibility: visible;
+      opacity: 1;
     }
   }
 
@@ -23,21 +23,25 @@
     flex-direction: column;
     row-gap: 0.5rem;
     transition: all 0.2s;
+    margin-top: 0;
   }
 
   &__option {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-md);
     font-family: var(--font-family-secondary);
-    padding: 1rem 4rem;
-    border: 1px solid var(--primary);
     cursor: pointer;
     text-transform: uppercase;
+    padding: 1rem 4rem;
+    border: 1px solid var(--primary);
+
+    @media (min-width: 80em) {
+      font-size: var(--font-size-sm);
+    }
 
     &:hover,
     &.active {
       background-color: var(--primary);
     }
-
     &:first-child {
       border-radius: 10px 10px 0 0;
     }

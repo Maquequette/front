@@ -1,17 +1,22 @@
 @import "../../../assets/variables";
 
 .badge {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  transform: translate(-50%, -50%);
   font-size: var(--font-size-xs);
+  font-family: var(--font-family-secondary);
   padding: 0.35em 0.65em;
   color: var(--dark);
+  border-radius: 100vmax;
 
   @each $name, $color in $colors {
     &--#{$name} {
       background-color: var(--#{$name});
     }
+  }
+
+  @media (min-width: 80em) {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    transform: translate(-50%, -50%);
   }
 }

@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import Navlink from "@/components/01 - Atoms/Navlink/Navlink";
 import Tools from "@/components/03 - Organisms/Tools/Tools";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
-import "./Navigation.scss";
+import Dropdown from "@/components/01 - Atoms/Dropdown/Dropdown";
+import Badge from "@/components/01 - Atoms/Badge/Badge";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import "./Navigation.scss";
 
 export default function Navigation({ isOpen }: { isOpen?: boolean }) {
   const isDesktop = useMediaQuery("(min-width: 80em)");
@@ -52,14 +54,35 @@ export default function Navigation({ isOpen }: { isOpen?: boolean }) {
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink to="" theme="primary" icon={<Svg id="bell" />}>
+          <Navlink
+            to="/notification"
+            theme="primary"
+            icon={<Svg id="bell" />}
+            badge={<Badge theme="primary">1</Badge>}>
             Notifications
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink to="" theme="primary" icon={<Svg id="profile" />}>
-            Profile
-          </Navlink>
+          <Dropdown
+            styles={{ border: "1px solid var(--primary)", borderRadius: "inherit" }}
+            component={<Svg id="profile" />}
+            options={[
+              {
+                component: (
+                  <Navlink to="/profil" theme="primary">
+                    Profile
+                  </Navlink>
+                )
+              },
+              {
+                component: (
+                  <Navlink to="/profil/settings" theme="primary">
+                    Settings
+                  </Navlink>
+                )
+              }
+            ]}
+          />
         </motion.li>
       </motion.ul>
       <Tools />

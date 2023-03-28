@@ -4,9 +4,14 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 3rem;
   border-radius: inherit;
   text-decoration: none;
+  position: relative;
+  padding: 1rem 1rem;
+
+  @media (min-width: 80em) {
+    padding: 1rem 3rem;
+  }
 
   > .sprites {
     width: 2.4rem;
@@ -25,10 +30,20 @@
   }
 
   &--icon {
-    padding: 1rem;
     @media (min-width: 80em) {
+      padding: 1rem;
       .link__txt {
         display: none;
+      }
+    }
+  }
+
+  @media (max-width: 80em) {
+    &--badge {
+      .badge {
+        order: 4;
+        margin-left: auto;
+        background-color: var(--light);
       }
     }
   }

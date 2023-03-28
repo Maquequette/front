@@ -4,20 +4,25 @@
   left: 0;
   width: 100%;
   margin-top: var(--spacing-l);
+  padding: 2rem;
+  height: calc(100vh - 16rem);
+  overflow-y: scroll;
 
   @media (min-width: 80em) {
+    height: 100%;
     position: relative;
     top: 0;
     opacity: 1;
     margin-top: 0;
     display: flex;
     justify-content: center;
+    overflow-y: unset;
   }
 
   &__container {
     display: flex;
     flex-direction: column;
-    row-gap: 2rem;
+    row-gap: 1rem;
     list-style-type: none;
 
     @media (min-width: 80em) {
