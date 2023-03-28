@@ -1,6 +1,6 @@
+import { MouseEventHandler, CSSProperties, ReactNode } from "react";
 import { BtnTypes } from "@/types/BtnTypes";
 import { Theme } from "@/types/Theme";
-import { MouseEventHandler, CSSProperties, ReactNode } from "react";
 import "./Button.scss";
 
 export interface IButton {

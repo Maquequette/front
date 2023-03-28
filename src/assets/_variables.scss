@@ -31,7 +31,7 @@ $colors: (
 $colorsDark: (
   "light": #2d2d2e,
   "dark": #333333,
-  "grey": #171717,
+  "grey": #171717
 );
 
 $fontSizes: (
@@ -39,17 +39,17 @@ $fontSizes: (
   "md":"1.6rem",
   "l": "2rem",
   "xl": clamp(2.5rem, 3.75vw, 4.5rem),
-  "2xl": clamp(4.5rem, 5.75vw, 6.5rem),
+  "2xl": clamp(4.5rem, 5.75vw, 6.5rem)
 );
 
 $fontFamilies: (
   "primary": '"Roboto", sans-serif',
-  "secondary": '"Space Grotesk",sans-serif',
+  "secondary": '"Space Grotesk",sans-serif'
 );
 
 $fontWeights: (
   "light": 400,
-  "bold": 700,
+  "bold": 700
 );
 
 $container: 192em;
@@ -59,7 +59,7 @@ $breakpoints: (
   "md": 48em,
   "l": 64em,
   "xl": 80em,
-  "2xl": 96em,
+  "2xl": 96em
 );
 
 $spacings: (
@@ -67,5 +67,5 @@ $spacings: (
   "md": 2rem,
   "l": 4rem,
   "xl": 5rem,
-  "2xl": 6rem,
+  "2xl": 6rem
 );

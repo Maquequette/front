@@ -1,7 +1,6 @@
 import { ChangeEventHandler, CSSProperties, HTMLInputTypeAttribute, useState } from "react"
 import Svg from "@/components/01 - Atoms/Svg/Svg"
 import "./Input.scss"
-import { read } from "fs"
 
 export interface IInput {
   type: HTMLInputTypeAttribute,

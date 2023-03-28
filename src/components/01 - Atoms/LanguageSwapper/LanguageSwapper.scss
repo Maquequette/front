@@ -1,0 +1,64 @@
+.language {
+  padding: 1rem;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    .language__options {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__options {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    top: 120%;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    background-color: var(--light);
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    transition: all 0.2s;
+    margin-top: 0;
+
+    @media (min-width: 80em) {
+      right: 0;
+      transform: none;
+    }
+  }
+
+  &__option {
+    font-size: var(--font-size-md);
+    font-family: var(--font-family-secondary);
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 1rem 4rem;
+    border: 1px solid var(--primary);
+
+    @media (min-width: 80em) {
+      font-size: var(--font-size-sm);
+    }
+
+    &:hover,
+    &.active {
+      background-color: var(--primary);
+    }
+    &:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 10px 10px;
+    }
+  }
+
+  & > .sprites {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
