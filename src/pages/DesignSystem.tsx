@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import Button from "@/components/01 - Atoms/Button/Button";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Select from "@/components/01 - Atoms/Select/Select";
@@ -96,6 +97,38 @@ export default function DesignSystem() {
         />
       </div> */}
 
+=======
+import Grid from "@/components/02 -  Molecules/Grid/Grid";
+import Card from "@/components/03 - Organisms/Card/Card";
+import Container from "@/components/01 - Atoms/Container/Container";
+export default function DesignSystem() {
+  return (
+    <div style={{ marginTop: "3rem", marginLeft: "3rem" }}>
+      <Container center={true}>
+        <Grid>
+          <Card
+            title="oui"
+            img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
+          />
+          <Card
+            title="oui"
+            img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
+          />
+          <Card
+            title="oui"
+            img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
+          />
+          <Card
+            title="oui"
+            img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
+          />
+          <Card
+            title="oui"
+            img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
+          />
+        </Grid>
+      </Container>
+>>>>>>> Stashed changes
     </div>
   );
 }

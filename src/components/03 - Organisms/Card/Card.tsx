@@ -2,8 +2,8 @@ import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Tags from "@/components/02 -  Molecules/Tags/Tags";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import Price from "@/components/01 - Atoms/Price/Price";
-
 import { ITag } from "@/components/01 - Atoms/Tag/Tag";
+import "./Card.scss";
 
 export interface ICard {
   img: string;
