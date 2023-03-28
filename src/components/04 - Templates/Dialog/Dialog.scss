@@ -23,7 +23,10 @@
     &__content {
         width: 100%;
         max-width: 50rem;
-        aspect-ratio: 1;
+        min-height: 50rem;
+        display: flex;
+        flex-direction: column;
+        //aspect-ratio: 1;
         margin: auto;
         padding: 1rem;
         background-color: var(--light);

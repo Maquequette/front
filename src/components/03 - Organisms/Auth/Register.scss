@@ -1,0 +1,55 @@
+@import "@/assets/utilities";
+@import "@/assets/variables";
+
+.register {
+    @extend .full;
+    padding: 2rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-rows: repeat(2, min-content);
+    gap: 1rem;
+
+    &__subtitle {
+        padding-bottom: 0.5rem;
+        color: var(--dark);
+        font-size: var(--font-size-sm);
+        font-family: var(--font-family-secondary);
+        opacity: 0.6;
+
+        & button {
+            appearance: none;
+            border: none;
+            background: none;
+            outline: none;
+            color: var(--dark);
+            font-size: var(--font-size-sm);
+            font-family: var(--font-family-secondary);
+            cursor: pointer;
+
+            &:hover {
+                opacity: 1;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__form {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        grid-template-rows: repeat(3, min-content);
+        gap: 1rem;
+
+        &__subtitle {
+            @extend .register__subtitle;
+            display: inline;
+        }
+
+        &__cgu {
+            @extend .register__subtitle;
+            padding: 0 0.5rem;
+            opacity: 1;
+            color: var(--danger);
+            text-decoration: underline;
+        }
+    }
+}
