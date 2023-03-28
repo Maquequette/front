@@ -1,5 +1,5 @@
 import ThemeSwapper from "@/components/01 - Atoms/ThemeSwapper/ThemeSwapper";
-import LanguageSwapper from "@/components/01 - Atoms/LanguageSwapper/LanguageSwapper";
+import LanguageSwapper from "@/components/02 -  Molecules/LanguageSwapper/LanguageSwapper";
 import "./Tools.scss";
 
 export default function Tools() {
