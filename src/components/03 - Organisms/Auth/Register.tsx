@@ -8,6 +8,7 @@ import MultiStepsForm from "@/components/02 -  Molecules/MultiStepsForm/MultiSte
 import './Register.scss'
 import Label from "@/components/01 - Atoms/Label/Label"
 import Input from "@/components/01 - Atoms/Input/Input"
+import Multiselect from "@/components/03 - Organisms/Multiselect/Multiselect"
 
 
 export default function Register() {
@@ -17,6 +18,8 @@ export default function Register() {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
+    const [firstName, setFirstName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
 
     return (
         <div className='register transition'>
@@ -99,7 +102,41 @@ export default function Register() {
                     },
                     {
                         btnText: 'Register !',
-                        formContent: <div>pipi</div>
+                        formContent:
+                            <div className="register__form">
+                                <div className="register__form__inline">
+                                    <div>
+                                        <Label name="firstName" required={true}>First Name</Label>
+                                        <Input
+                                            type="text"
+                                            name="firstName"
+                                            placeholder="John"
+                                            required={true}
+                                            value={firstName}
+                                            handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                setFirstName(e.target.value)
+                                            }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Label name="lastName" required={true}>Last Name</Label>
+                                        <Input
+                                            type="text"
+                                            name="lastName"
+                                            placeholder="Doe"
+                                            required={true}
+                                            value={lastName}
+                                            handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                setLastName(e.target.value)
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <Label name="profileType">What type of profile are you ?</Label>
+                                    <Multiselect options={[]} theme={"primary"}></Multiselect>
+                                </div>
+                            </div>
                     }
                 ]}
             />

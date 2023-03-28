@@ -51,5 +51,13 @@
             color: var(--danger);
             text-decoration: underline;
         }
+
+        &__inline {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
     }
 }
