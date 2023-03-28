@@ -9,7 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       devOptions: {
-        enabled: true,
+        enabled: false
       },
       manifest: {
         name: "Maquequette",
@@ -19,18 +19,18 @@ export default defineConfig({
           {
             src: "mqq__logo--192x192.png",
             sizes: "192x192",
-            type: "image/png",
+            type: "image/png"
           },
           {
             src: "mqq__logo--512x512.png",
             sizes: "512x512",
-            type: "image/png",
-          },
-        ],
-      },
-    }),
+            type: "image/png"
+          }
+        ]
+      }
+    })
   ],
   resolve: {
-    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
-  },
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }]
+  }
 });

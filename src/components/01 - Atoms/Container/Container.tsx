@@ -3,10 +3,10 @@ import "./Container.scss";
 
 export interface IContainer {
   children: ReactNode;
-  center?: Boolean;
+  center?: boolean;
   disabled?: boolean;
   styles?: CSSProperties;
-  classes?: String;
+  classes?: string;
 }
 
 export default function Container({ children, center, styles, classes }: IContainer) {

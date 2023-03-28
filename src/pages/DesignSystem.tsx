@@ -13,6 +13,16 @@ export default function DesignSystem() {
 
   return (
     <div style={{ marginTop: "3rem", marginLeft: "3rem" }}>
+      <Multiselect
+        theme="primary"
+        options={[
+          { label: "Test", value: "value" },
+          { label: "titre", value: null },
+          { label: "Test2", value: "value2" },
+          { label: "Test3", value: "value3" },
+          { label: "Test3", value: "value4" }
+        ]}
+      />
 
       <Button
         theme="primary"
@@ -55,19 +65,6 @@ export default function DesignSystem() {
         ]} />
 
       </Dialog>
-
-      <div style={{ marginTop: "3rem" }}>
-        {/* <Multiselect
-          theme="primary"
-          options={[
-            { label: "Test", value: "value" },
-            { label: "Test2", value: "value2" },
-            { label: "Test3", value: "value3" },
-            { label: "Test3", value: "value4" }
-          ]}
-        /> */}
-      </div>
-
     </div>
   );
 }

@@ -3,21 +3,49 @@
 .link {
   display: flex;
   align-items: center;
-  color: var(--dark);
-  text-decoration: none;
-  font-size: var(--font-size-sm);
-  font-family: var(--font-family-secondary);
-  text-transform: uppercase;
-  padding: 1rem 3rem;
+  gap: 1rem;
   border-radius: inherit;
+  text-decoration: none;
+  position: relative;
+  padding: 1rem 1rem;
 
-  &--icon {
-    padding: 1rem;
+  @media (min-width: 80em) {
+    padding: 1rem 3rem;
   }
 
   > .sprites {
     width: 2.4rem;
     height: 2.4rem;
+  }
+
+  &__txt {
+    color: var(--dark);
+    font-size: var(--font-size-l);
+    font-family: var(--font-family-secondary);
+    text-transform: uppercase;
+
+    @media (min-width: 80em) {
+      font-size: var(--font-size-md);
+    }
+  }
+
+  &--icon {
+    @media (min-width: 80em) {
+      padding: 1rem;
+      .link__txt {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 80em) {
+    &--badge {
+      .badge {
+        order: 4;
+        margin-left: auto;
+        background-color: var(--light);
+      }
+    }
   }
 
   @each $name, $color in $colors {

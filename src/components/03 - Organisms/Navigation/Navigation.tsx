@@ -1,69 +1,91 @@
-import Burger from "@/components/02 -  Molecules/Burger/Burger";
+import { motion } from "framer-motion";
 import Navlink from "@/components/01 - Atoms/Navlink/Navlink";
-import Logo from "@/components/01 - Atoms/Logo/Logo";
-import ThemeSwapper from "@/components/01 - Atoms/ThemeSwapper/ThemeSwapper";
-import { useState } from "react";
+import Tools from "@/components/03 - Organisms/Tools/Tools";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
+import Dropdown from "@/components/01 - Atoms/Dropdown/Dropdown";
+import Badge from "@/components/01 - Atoms/Badge/Badge";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import "./Navigation.scss";
 
-export default function Navigation({ classes }: { classes?: String }) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Navigation({ isOpen }: { isOpen?: boolean }) {
+  const isDesktop = useMediaQuery("(min-width: 80em)");
 
-  const toggleOpen = () => {
-    console.log("rer");
-    setIsOpen((prev) => !prev);
+  const navItem = {
+    closed: { opacity: 0, x: "-100rem", transition: { duration: isDesktop ? 0 : 0.2 } },
+    open: { opacity: 1, x: 0, transition: { duration: isDesktop ? 0 : 1 } }
   };
 
   return (
-    <nav className={`nav ${classes} ${isOpen ? "nav--open" : ""}`}>
-      <div className="nav__logo">
-        <Logo />
-      </div>
-      <ul id="menu" className="nav__container">
-        <li className="nav__item">
-          <Navlink to="/" theme="primary" icon={true}>
-            <Svg id="home" />
+    <motion.nav
+      className="nav"
+      animate={isOpen || isDesktop ? "open" : "closed"}
+      initial={false}
+      variants={{
+        open: {
+          opacity: 1
+        },
+        closed: {
+          opacity: 0
+        }
+      }}>
+      <motion.ul
+        className="nav__container"
+        animate={isOpen || isDesktop ? "open" : "closed"}
+        initial={false}
+        transition={{ staggerChildren: isDesktop ? 0 : 0.1 }}>
+        <motion.li className="nav__item" variants={navItem}>
+          <Navlink to="/" theme="primary" icon={<Svg id="home" />}>
+            Home
           </Navlink>
-        </li>
-        <li className="nav__item">
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/challenges" theme="primary">
             Challenges
           </Navlink>
-        </li>
-        <li className="nav__item">
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/lessons" theme="primary">
             Lessons
           </Navlink>
-        </li>
-        <li className="nav__item">
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/classroom" theme="primary">
             Classroom
           </Navlink>
-        </li>
-        <li className="nav__item">
-          <Navlink to="" theme="primary" icon={true}>
-            <Svg id="bell" />
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
+          <Navlink
+            to="/notification"
+            theme="primary"
+            icon={<Svg id="bell" />}
+            badge={<Badge theme="primary">1</Badge>}>
+            Notifications
           </Navlink>
-        </li>
-        <li className="nav__item">
-          <Navlink to="" theme="primary" icon={true}>
-            <Svg id="profile" />
-          </Navlink>
-        </li>
-      </ul>
-      <div className="nav__container">
-        <ul id="tools">
-          <li className="nav__item">
-            <ThemeSwapper />
-          </li>
-          <li className="nav__item">
-            <Navlink to="" theme="primary" icon={true}>
-              <Svg id="worldwide" />
-            </Navlink>
-          </li>
-        </ul>
-      </div>
-      <Burger handleClick={toggleOpen} />
-    </nav>
+        </motion.li>
+        <motion.li className="nav__item" variants={navItem}>
+          <Dropdown
+            styles={{ border: "1px solid var(--primary)", borderRadius: "inherit" }}
+            component={<Svg id="profile" />}
+            options={[
+              {
+                component: (
+                  <Navlink to="/profil" theme="primary">
+                    Profile
+                  </Navlink>
+                )
+              },
+              {
+                component: (
+                  <Navlink to="/profil/settings" theme="primary">
+                    Settings
+                  </Navlink>
+                )
+              }
+            ]}
+          />
+        </motion.li>
+      </motion.ul>
+      <Tools />
+    </motion.nav>
   );
 }
