@@ -1,0 +1,50 @@
+import Heading from "@/components/01 - Atoms/Heading/Heading";
+import Tags from "@/components/02 -  Molecules/Tags/Tags";
+import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
+import Price from "@/components/01 - Atoms/Price/Price";
+
+import { ITag } from "@/components/01 - Atoms/Tag/Tag";
+
+export interface ICard {
+  img: string;
+  title: string;
+  tags?: Array<ITag>;
+  author?: string;
+  price?: number;
+}
+
+export default function Card({ img, title, tags, author, price }: ICard) {
+  return (
+    <div className="card">
+      <div className="card__header">
+        <div className="card__img">
+          <img src={img} alt={title} />
+        </div>
+        <div className="card__title">
+          <Heading tag="h4" type="primary">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </Heading>
+          {tags && (
+            <Tags
+              tags={[
+                { label: "HTML", theme: "primary" },
+                { label: "CSS", theme: "accent" }
+              ]}
+            />
+          )}
+        </div>
+      </div>
+      <div className="card__body">
+        <Paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat [...]
+        </Paragraph>
+      </div>
+      <div className="card__footer">
+        {author && <p className="card__author">{author}</p>}
+        {price && <Price theme="success" type="outline" value={price} />}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,32 @@
+.price {
+  font-size: var(--font-size-md);
+  font-family: var(--font-family-secondary);
+  border: 1px solid transparent;
+
+  &--outline {
+    @each $name, $color in $colors {
+      &--#{$name} {
+        color: var(--#{$name});
+        border-color: var(--#{$name});
+
+        &:hover {
+          color: var(--light);
+          background-color: var(--#{$name});
+        }
+      }
+    }
+  }
+
+  &--solid {
+    @each $name, $color in $colors {
+      &--#{$name} {
+        background-color: var(--#{$name});
+
+        &:hover {
+          color: var(--#{$name});
+          border-color: var(--#{$name});
+        }
+      }
+    }
+  }
+}
