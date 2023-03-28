@@ -1,6 +1,8 @@
-import React, { useState, ReactNode } from 'react'
+import { ReactNode, useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { TabsProvider, TabsContext } from '@/contexts/TabsContext'
 import './Tabs.scss'
+
 
 export interface ITabs {
     tabs: Array<ITabsParameters>
@@ -17,10 +19,10 @@ export default function Tabs({
     id = '',
 }: ITabs) {
 
-    const [lastTab, setLastTab] = useState<number>(0);
-    const [currentTab, setCurrentTab] = useState<number>(0);
+    const { currentTab, updateTabs } = useContext(TabsContext)
 
     return (
+
         <div className='tabs'>
             <div className='tabs__choice'>
 
@@ -29,10 +31,7 @@ export default function Tabs({
                         className={`tabs__choice__item w-${tabs.length} ${currentTab == i ? 'active' : ''}`}
                         type='button'
                         key={`tabBtn-${i}-${id}`}
-                        onClick={() => {
-                            setLastTab(currentTab)
-                            setCurrentTab(i)
-                        }}
+                        onClick={() => updateTabs(i)}
                     >
                         {tab.tabTitle}
                     </button>
@@ -44,11 +43,12 @@ export default function Tabs({
 
                 <AnimatePresence mode='wait'>
                     <motion.div
+                        className='full'
                         key={`tabContent-${currentTab}-${id}`}
-                        initial={{ y: 10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -5, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ y: 10, opacity: 0, height: 0 }}
+                        animate={{ y: 0, opacity: 1, height: 'auto' }}
+                        exit={{ y: -5, opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
                     >
                         {tabs[currentTab].tabContent}
                     </motion.div>

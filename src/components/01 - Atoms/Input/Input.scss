@@ -1,12 +1,44 @@
-.form {
+@import "@/assets/utilities";
+@import "@/assets/variables";
+
+.inputContainer {
+    position: relative;
+    height: 4.5rem;
+
     &__input {
-        font-size: 2rem;
-        padding: 1.2rem 2rem;
+        position: relative;
+        @extend .full;
+        padding: 1.5rem 2rem;
+        background-color: var(--light);
         caret-color: var(--clr-primary);
+        border: 1px solid var(--dark);
+        border-radius: 1rem;
+        box-shadow: 5px 5px 0px var(--dark);
+        color: var(--dark);
+        font-size: var(--font-size-md);
+        font-family: var(--font-family-secondary);
 
         &:focus,
         &:focus-visible {
             outline: 1px solid var(--clr-primary);
         }
+
+        &::placeholder {
+            color: var(--dark);
+            opacity: 0.75;
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        top: 0;
+        right: 1.5rem;
+        width: 2rem;
+        height: 100%;
+        appearance: none;
+        border: none;
+        background: none;
+        outline: none;
+        cursor: pointer;
     }
 }

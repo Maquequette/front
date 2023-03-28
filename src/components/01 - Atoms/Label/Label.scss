@@ -1,0 +1,23 @@
+@import "@/assets/variables";
+
+.labelContainer {
+    position: relative;
+    padding: 1rem 2rem;
+
+    &__label {
+        color: var(--dark);
+        font-size: var(--font-size-md);
+        font-family: var(--font-family-secondary);
+        text-transform: uppercase;
+
+        &__span {
+            padding: 0 0.5rem;
+            color: var(--danger);
+        }
+
+        &.label--checkbox {
+            font-size: var(--font-size-sm);
+            text-transform: none;
+        }
+    }
+}
