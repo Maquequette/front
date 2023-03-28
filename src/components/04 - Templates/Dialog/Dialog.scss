@@ -1,0 +1,35 @@
+@import "@/assets/utilities";
+@import "@/assets/variables";
+@import "@/assets/mixins";
+
+.dialog {
+    position: fixed;
+    @extend .inset-0;
+    @extend .full;
+
+    &[open] {
+        @extend .flex-centered;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        @extend .inset-0;
+        background-color: var(--dark);
+        opacity: 0.5;
+        z-index: 90;
+    }
+
+    &__content {
+        width: 100%;
+        max-width: 50rem;
+        aspect-ratio: 1;
+        margin: auto;
+        padding: 1rem;
+        background-color: var(--light);
+        opacity: 1;
+        border-radius: 2rem;
+        border: none;
+        z-index: 100;
+    }
+}
