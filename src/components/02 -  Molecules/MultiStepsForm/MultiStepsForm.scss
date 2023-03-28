@@ -1,0 +1,70 @@
+@import "@/assets/utilities";
+@import "@/assets/variables";
+
+.multiForm {
+    &__steps {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+
+        @each $name,
+        $color in $colors {
+            .fill--#{$name} {
+                fill: var(--#{$name});
+            }
+
+            .stroke--#{$name} {
+                stroke: var(--#{$name});
+            }
+        }
+
+        svg {
+
+            &.active .clipPath rect {
+                animation: nextStep 1.5s forwards;
+            }
+
+            &.reverse .clipPath rect {
+                animation: lastStep 1.5s forwards;
+            }
+
+            @keyframes nextStep {
+                from {
+                    width: 0;
+                }
+
+                to {
+                    width: 100%;
+                }
+            }
+
+            @keyframes lastStep {
+                from {
+                    width: 100%;
+                }
+
+                to {
+                    width: 0;
+                }
+            }
+
+        }
+
+        &__endline {
+            width: 3rem;
+            height: 2px;
+            background-color: var(--darkGrey);
+        }
+    }
+
+    &__content {
+
+        &__buttons {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
