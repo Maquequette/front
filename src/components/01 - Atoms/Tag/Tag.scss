@@ -1,0 +1,12 @@
+@import "../../../assets/variables";
+
+.tag {
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-md);
+
+  @each $name, $color in $colors {
+    &--#{$name} {
+      color: var(--#{$name});
+    }
+  }
+}
