@@ -59,12 +59,33 @@
     }
 
     &__content {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        grid-template-rows: 1fr min-content;
+        gap: 1rem;
 
         &__buttons {
             display: flex;
-            flex-direction: row-reverse;
+            flex-direction: row;
             justify-content: space-between;
             align-items: center;
+
+            &__back {
+                @extend .btn-none, .transition;
+                padding: 1rem;
+                border: 1px solid var(--light);
+                border-radius: 1rem;
+                cursor: pointer;
+
+                &:hover {
+                    border: 1px solid var(--dark);
+                }
+
+            }
+
+            & .btn {
+                margin-left: auto;
+            }
         }
     }
 }

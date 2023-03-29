@@ -3,7 +3,7 @@
 
 .multiselect {
   position: relative;
-  width: 35rem;
+  width: 100%;
   height: 4.5rem;
   border-radius: 1rem;
   font-size: var(--font-size-md);
@@ -39,6 +39,7 @@
         padding: 0.5rem 1rem;
         background-color: var(--grey);
         border-radius: 0.5rem;
+        white-space: nowrap;
 
         >.sprites {
           width: 1rem;

@@ -1,5 +1,5 @@
 import { ReactNode, useContext } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 import { TabsProvider, TabsContext } from '@/contexts/TabsContext'
 import './Tabs.scss'
 
@@ -20,6 +20,15 @@ export default function Tabs({
 }: ITabs) {
 
     const { currentTab, updateTabs } = useContext(TabsContext)
+
+    const animationControls = useAnimation();
+
+    async function sequence() {
+        await animationControls.start({
+            y: 10,
+            opacity: 0,
+        })
+    }
 
     return (
 
@@ -45,10 +54,11 @@ export default function Tabs({
                     <motion.div
                         className='full'
                         key={`tabContent-${currentTab}-${id}`}
-                        initial={{ y: 10, opacity: 0, height: 0 }}
-                        animate={{ y: 0, opacity: 1, height: 'auto' }}
-                        exit={{ y: -5, opacity: 0, height: 0 }}
+                        initial={{ y: 10, opacity: 0, height: '100px', overflow: 'hidden' }}
+                        animate={{ y: 0, opacity: 1, height: 'auto', transitionEnd: { overflow: 'initial' } }}
+                        exit={{ y: -5, opacity: 0, height: '100px', overflow: 'hidden' }}
                         transition={{ duration: 0.3 }}
+
                     >
                         {tabs[currentTab].tabContent}
                     </motion.div>

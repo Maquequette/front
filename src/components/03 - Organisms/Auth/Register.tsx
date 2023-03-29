@@ -9,6 +9,7 @@ import Input from "@/components/01 - Atoms/Input/Input"
 import Multiselect from "@/components/03 - Organisms/Multiselect/Multiselect"
 
 import './Register.scss'
+import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip"
 
 
 export default function Register() {
@@ -22,7 +23,7 @@ export default function Register() {
     const [lastName, setLastName] = useState<string>('')
 
     return (
-        <div className='register transition'>
+        <div className='register'>
             <div>
                 <Heading
                     tag='h1'
@@ -45,12 +46,13 @@ export default function Register() {
                 steps={[
                     {
                         btnText: 'Continue !',
+                        stepSubmit: () => password === confirmPassword,
                         formContent:
                             <div className="register__form">
                                 <div>
                                     <Label name="email" required={true}>email</Label>
                                     <Input
-                                        type="text"
+                                        type="email"
                                         name="email"
                                         placeholder="example@mail.com..."
                                         required={true}
@@ -61,7 +63,13 @@ export default function Register() {
                                     />
                                 </div>
                                 <div>
-                                    <Label name="password" required={true}>Password</Label>
+                                    <Label
+                                        name="password"
+                                        required={true}
+                                        tooltip={<Tooltip>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Tooltip>}
+                                    >
+                                        Password
+                                    </Label>
                                     <Input
                                         type="password"
                                         name="password"
@@ -102,6 +110,7 @@ export default function Register() {
                     },
                     {
                         btnText: 'Register !',
+                        stepSubmit: () => true,
                         formContent:
                             <div className="register__form">
                                 <div className="register__form__inline">
@@ -134,7 +143,12 @@ export default function Register() {
                                 </div>
                                 <div>
                                     <Label name="profileType">What type of profile are you ?</Label>
-                                    <Multiselect options={[]} theme={"primary"}></Multiselect>
+                                    <Multiselect options={[
+                                        { label: "Student", value: "student" },
+                                        { label: "Developer", value: "developer" },
+                                        { label: "Web Designer", value: "webdesigner" },
+                                        { label: "suceur de biteeeeuuuh MACROOOON ENCUuULEEEE", value: "macron" }
+                                    ]} theme={"primary"}></Multiselect>
                                 </div>
                             </div>
                     }
