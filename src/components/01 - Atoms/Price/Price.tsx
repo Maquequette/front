@@ -1,18 +1,23 @@
 import { Theme } from "@/types/Theme";
 import { StyleTypes } from "@/types/StyleTypes";
 import { useTranslation } from "react-i18next";
+import "./Price.scss";
 
 export interface IPrice {
   theme: Theme;
-  value: number;
   type: StyleTypes;
+  value: PaymentCurrencyAmount;
 }
 
 export default function Price({ theme, value, type }: IPrice) {
-    const {i18n} = useTranslation()
+  const { t } = useTranslation();
   return (
     <p className={`price price--${type}--${theme}`}>
-      {new Intl.NumberFormat(i18n.language, { style: i18n.curr, currency: "EUR" }).format(value)}
+      {t("intlCurrency", {
+        price: value.value,
+        currency: value.currency,
+        currencyDisplay: "symbol"
+      })}
     </p>
   );
 }

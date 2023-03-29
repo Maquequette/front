@@ -2,6 +2,7 @@ import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Tags from "@/components/02 -  Molecules/Tags/Tags";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import Price from "@/components/01 - Atoms/Price/Price";
+import Date from "@/components/01 - Atoms/Date/Date";
 import { ITag } from "@/components/01 - Atoms/Tag/Tag";
 import "./Card.scss";
 
@@ -10,10 +11,11 @@ export interface ICard {
   title: string;
   tags?: Array<ITag>;
   author?: string;
-  price?: number;
+  price?: PaymentCurrencyAmount;
+  date?: number;
 }
 
-export default function Card({ img, title, tags, author, price }: ICard) {
+export default function Card({ img, title, tags, author, price, date }: ICard) {
   return (
     <div className="card">
       <div className="card__header">
@@ -21,19 +23,12 @@ export default function Card({ img, title, tags, author, price }: ICard) {
           <img src={img} alt={title} />
         </div>
         <div className="card__title">
-          <Heading tag="h4" type="primary">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <Heading tag="h4" level="tertiary">
+            {title}
           </Heading>
-          {tags && (
-            <Tags
-              tags={[
-                { label: "HTML", theme: "primary" },
-                { label: "CSS", theme: "accent" }
-              ]}
-            />
-          )}
         </div>
       </div>
+      {tags && <Tags tags={tags} />}
       <div className="card__body">
         <Paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -42,7 +37,10 @@ export default function Card({ img, title, tags, author, price }: ICard) {
         </Paragraph>
       </div>
       <div className="card__footer">
-        {author && <p className="card__author">{author}</p>}
+        <p className="card__info">
+          {author && `${author} -`}
+          {date && <Date date={date} />}
+        </p>
         {price && <Price theme="success" type="outline" value={price} />}
       </div>
     </div>

@@ -6,11 +6,14 @@ export interface IContainer {
   center?: boolean;
   disabled?: boolean;
   styles?: CSSProperties;
+  classes?: string;
 }
 
-export default function Container({ children, center, styles }: IContainer) {
+export default function Container({ children, center, styles, classes }: IContainer) {
   return (
-    <div style={styles} className={`container ${center ? "container--centered" : ""}`}>
+    <div
+      style={styles}
+      className={`container ${center ? "container--centered" : ""} ${classes ?? ""}`}>
       {children}
     </div>
   );

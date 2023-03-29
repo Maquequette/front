@@ -9,9 +9,11 @@ export interface ITags {
 export default function Tags({ tags }: { tags: Array<ITag> }) {
   return (
     <div className="tags">
-      {tags.map((tag) => {
-        return <Tag label={tag.label} theme={tag.theme} />;
-      })}
+      <div className="tags__container">
+        {tags.map((tag) => {
+          return <Tag key={tag.label} label={tag.label} theme={tag.theme} />;
+        })}
+      </div>
     </div>
   );
 }
