@@ -19,7 +19,7 @@ export default function Login() {
     const [stayConnected, setStayConnected] = useState<boolean>(false)
 
     return (
-        <div className='login transition'>
+        <div className='login'>
             <div>
                 <Heading
                     tag='h1'
@@ -42,7 +42,7 @@ export default function Login() {
                 <div>
                     <Label name="email" required={true}>email</Label>
                     <Input
-                        type="text"
+                        type="email"
                         name="email"
                         placeholder="example@mail.com..."
                         required={true}

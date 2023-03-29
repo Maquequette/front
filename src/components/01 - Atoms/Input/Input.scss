@@ -20,7 +20,7 @@
 
         &:focus,
         &:focus-visible {
-            outline: 1px solid var(--clr-primary);
+            outline: 2px solid var(--secondary);
         }
 
         &::placeholder {
@@ -35,10 +35,7 @@
         right: 1.5rem;
         width: 2rem;
         height: 100%;
-        appearance: none;
-        border: none;
-        background: none;
-        outline: none;
+        @extend .btn-none;
         cursor: pointer;
     }
 }
