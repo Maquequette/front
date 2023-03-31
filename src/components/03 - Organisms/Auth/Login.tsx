@@ -23,7 +23,7 @@ export default function Login() {
             <div>
                 <Heading
                     tag='h1'
-                    type="primary"
+                    level="secondary"
                 >
                     Log In to your account
                 </Heading>

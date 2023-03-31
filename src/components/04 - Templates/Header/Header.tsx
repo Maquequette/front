@@ -3,7 +3,7 @@ import { delay, motion } from "framer-motion";
 import Container from "@/components/01 - Atoms/Container/Container";
 import Navigation from "@/components/03 - Organisms/Navigation/Navigation";
 import Logo from "@/components/01 - Atoms/Logo/Logo";
-import Burger from "@/components/02 -  Molecules/Burger/Burger";
+import Burger from "@/components/02 - Molecules/Burger/Burger";
 import useDisableScroll from "@/hooks/useDisableScroll";
 import "./Header.scss";
 
