@@ -1,17 +1,21 @@
 import { useContext, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { useLastLocation } from "react-router-dom-last-location";
 import { AuthContext } from "@/contexts/AuthContext";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-export default function RequiredLayout({ redirectPath = "/" }) {
+export default function RequiredLayout() {
   const { setModalAuth } = useContext(AuthContext);
-  const location = useLocation();
+  const lastlocation = useLastLocation();
+
   let isLoggedIn = false;
 
   useEffect(() => {
+    console.log(lastlocation.lastLocation);
     if (!isLoggedIn) {
       setModalAuth(true);
     }
   }, [isLoggedIn]);
 
-  return isLoggedIn ? <Outlet /> : <Navigate to={redirectPath} replace />;
+  return isLoggedIn ? <Outlet /> : <Navigate to={lastlocation.lastLocation?.pathname ?? ""} />;
 }

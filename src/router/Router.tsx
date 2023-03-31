@@ -31,13 +31,13 @@ export default function Router(): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<NavLayout />}>
-        <Route index element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/challenges" element={<Challenges />} />
         <Route path="/lessons" element={<Lessons />} />
-        <Route path="*" element={<NoMatch />} />
         <Route element={<RequiredLayout />}>
           <Route path="/classRoom" element={<ClassRoom />} />
         </Route>
+        <Route path="*" element={<NoMatch />} />
       </Route>
       <Route path="/dev" element={<DesignSystem />} />
     </Routes>

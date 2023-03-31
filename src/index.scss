@@ -2,41 +2,36 @@
 @import "./assets/variables";
 
 :root {
-
-  @each $name,
-  $color in $colors {
+  @each $name, $color in $colors {
     --#{$name}: #{$color};
   }
 
-  @each $name,
-  $size in $fontSizes {
+  @each $name, $size in $fontSizes {
     --font-size-#{$name}: #{$size};
   }
 
-  @each $name,
-  $family in $fontFamilies {
+  @each $name, $family in $fontFamilies {
     --font-family-#{$name}: #{$family};
   }
 
-  @each $name,
-  $weight in $fontWeights {
+  @each $name, $weight in $fontWeights {
     --font-weight-#{$name}: #{$weight};
   }
 
   --container: #{$container};
+  --container-xl: #{$container-xl};
 
-  @each $name,
-  $breakpoint in $breakpoints {
+  @each $name, $breakpoint in $breakpoints {
     --breakpoint-#{$name}: #{$breakpoint};
   }
 
-  @each $name,
-  $spacing in $spacings {
+  @each $name, $spacing in $spacings {
     --spacing-#{$name}: #{$spacing};
   }
 }
 
-[data-theme="dark"] {}
+[data-theme="dark"] {
+}
 
 html {
   font-size: 62.5%;
@@ -66,7 +61,6 @@ html {
 /* Remove all animations and transitions
 for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
