@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import "./Paragraph.scss";
 
 export interface IParagraph {
   children: ReactNode;

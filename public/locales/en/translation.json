@@ -1,5 +1,5 @@
 {
-  "Welcome": "Bienvenue",
+  "Welcome": "Welcome",
   "intlCurrency": "{{price, currency}}",
   "intlDateTime": "{{val, datetime}}"
 }

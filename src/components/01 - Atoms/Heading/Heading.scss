@@ -1,20 +1,23 @@
 @import "@/assets/variables";
 
-
-
 .heading {
+  font-family: var(--font-family-secondary);
+  color: var(--dark);
+  text-transform: uppercase;
 
-    font-family: var(--font-family-secondary);
+  &--primary {
+    font-size: var(--font-size-xl);
+  }
 
-    @at-root {
-        h1#{&} {
-            font-size: var(--font-size-l);
-            margin-bottom: 1rem;
-        }
-    }
+  &--secondary {
+    font-size: var(--font-size-l);
+  }
 
-    &.heading--primary {
-        color: var(--dark);
-        text-transform: uppercase;
-    }
+  &--tertiary {
+    font-size: var(--font-size-md);
+  }
+
+  &--quaternary {
+    font-size: var(--font-size-xs);
+  }
 }
