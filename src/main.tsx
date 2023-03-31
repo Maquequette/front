@@ -3,15 +3,20 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ThemesProvider } from "@/contexts/ThemesContext";
 import { ToastProvider } from "./contexts/ToastContext";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./i18n";
 import "./index.scss";
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ThemesProvider>
-      <ToastProvider>
-        <App />
-      </ToastProvider>
-    </ThemesProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemesProvider>
+        <ToastProvider>
+          <App />
+        </ToastProvider>
+      </ThemesProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
