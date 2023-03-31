@@ -1,6 +1,6 @@
 .header {
   position: relative;
-  z-index: 9999;
+  z-index: 90;
 
   &::after {
     content: "";
@@ -28,6 +28,11 @@
     position: relative;
     display: flex;
     justify-content: space-between;
+    padding: 2rem 3rem;
+
+    @media (min-width: 80em) {
+      padding: 2rem 7rem;
+    }
   }
 
   &__logo {

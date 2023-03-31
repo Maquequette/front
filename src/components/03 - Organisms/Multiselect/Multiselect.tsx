@@ -42,7 +42,7 @@ export default function Multiselect({ options, theme }: IMultiselect) {
 
   return (
 
-    <div className="multiselect" ref={ref ?? undefined}>
+    <div className="multiselect" ref={ref}>
 
       <div
         className="multiselect__input"

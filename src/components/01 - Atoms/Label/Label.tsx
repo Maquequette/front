@@ -7,6 +7,7 @@ export interface ILabel {
     classes?: string
     required?: boolean
     styles?: CSSProperties
+    tooltip?: ReactNode
 }
 
 export default function Label({
@@ -14,7 +15,8 @@ export default function Label({
     children,
     classes = '',
     required = false,
-    styles
+    styles,
+    tooltip
 }: ILabel) {
 
     return (
@@ -32,6 +34,7 @@ export default function Label({
                 {required && <span className="labelContainer__label__span">*</span>}
             </label>
 
+            {tooltip}
         </ div>
     )
 }

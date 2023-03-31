@@ -13,7 +13,8 @@ export interface IMultiStepsForm {
 
 export interface IOneStepForm {
     formContent: ReactNode,
-    btnText: String
+    btnText: String,
+    stepSubmit: Function
 }
 
 export default function MultiStepsForm({
@@ -28,7 +29,9 @@ export default function MultiStepsForm({
     const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        currentStep < steps.length ? changeStep(1) : handleSubmit()
+        if (steps[currentStep]?.stepSubmit()) {
+            currentStep < steps.length ? changeStep(1) : handleSubmit()
+        }
     }
 
     const changeStep = (i: number) => {
@@ -94,9 +97,9 @@ export default function MultiStepsForm({
                     <motion.div
                         className='full'
                         key={`stepContent-${currentStep}-${id}`}
-                        initial={{ y: 10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -5, opacity: 0 }}
+                        initial={{ y: 10, opacity: 0, height: '30rem' }}
+                        animate={{ y: 0, opacity: 1, height: 'auto' }}
+                        exit={{ y: -5, opacity: 0, height: '30rem' }}
                         transition={{ duration: 0.2 }}
                     >
                         {steps[currentStep].formContent}
@@ -104,6 +107,18 @@ export default function MultiStepsForm({
                 </AnimatePresence>
 
                 <div className="multiForm__content__buttons">
+
+                    {
+                        currentStep > 0 &&
+                        <button
+                            type="button"
+                            className="multiForm__content__buttons__back"
+                            onClick={() => changeStep(-1)}
+                        >
+                            <Svg id="back" styles={{ width: '2rem', height: '2rem' }} />
+                        </button>
+                    }
+
                     <Button type="submit" theme={"primary"}>
                         <Svg id="arrow" styles={{ width: '4.5rem', height: '3.3rem', strokeWidth: 'initial' }} />
                         {steps[currentStep].btnText}

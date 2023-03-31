@@ -1,6 +1,8 @@
-import { Routes, Route } from "react-router-dom";
-import { lazy } from "react";
+import { Routes, Route, Outlet, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { lazy, useContext, useEffect } from "react";
 import NavLayout from "@/components/05 - Layout/NavLayout/NavLayout";
+import { AuthContext } from "@/contexts/AuthContext";
+import { usePreventNavigation } from "@/hooks/usePreventNavigation";
 
 const Home = lazy(() => {
   return import("@/pages/Home");
@@ -26,15 +28,38 @@ const ClassRoom = lazy(() => {
   return import("@/pages/ClassRoom");
 });
 
+const RequiredAuth = ({ redirectPath = '/' }) => {
+
+  const { setModalAuth } = useContext(AuthContext)
+  let isLoggedIn = false
+
+  if (!isLoggedIn) {
+
+    useEffect(() => {
+      setModalAuth(true)
+    }, [])
+
+    return <Navigate to={redirectPath} replace />;
+  }
+
+  return <Outlet />;
+};
+
 export default function Router(): JSX.Element {
+
+
   return (
     <Routes>
       <Route path="/" element={<NavLayout />}>
         <Route index element={<Home />} />
         <Route path="/challenges" element={<Challenges />} />
         <Route path="/lessons" element={<Lessons />} />
-        <Route path="/classRoom" element={<ClassRoom />} />
         <Route path="*" element={<NoMatch />} />
+
+        <Route element={<RequiredAuth />}>
+          <Route path="/classRoom" element={<ClassRoom />} />
+        </Route>
+
       </Route>
       <Route path="/dev" element={<DesignSystem />} />
     </Routes>
