@@ -8,7 +8,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import "./Navigation.scss";
 
 export default function Navigation({ isOpen }: { isOpen?: boolean }) {
-  const isDesktop = useMediaQuery("(min-width: 80em)");
+  const isDesktop = useMediaQuery("(min-width: 64em)");
 
   const navItem = {
     closed: { opacity: 0, x: "-100rem", transition: { duration: isDesktop ? 0 : 0.2 } },
