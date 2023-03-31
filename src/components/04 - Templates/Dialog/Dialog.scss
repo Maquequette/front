@@ -6,7 +6,8 @@
     position: fixed;
     @extend .inset-0;
     @extend .full;
-    z-index: 20;
+    isolation: isolate;
+    z-index: 100;
 
     &[open] {
         @extend .flex-centered;

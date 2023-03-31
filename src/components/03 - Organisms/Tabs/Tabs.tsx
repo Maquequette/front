@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react'
 import { motion, AnimatePresence, useAnimation } from 'framer-motion'
-import { TabsProvider, TabsContext } from '@/contexts/TabsContext'
+import { TabsContext } from '@/contexts/TabsContext'
 import './Tabs.scss'
 
 
