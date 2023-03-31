@@ -63,26 +63,7 @@ export default function DesignSystem() {
       />
 
 
-      <Dialog
-        id="Auth"
-        visible={dialog}
-        Dismiss={() => setDialog(!dialog)}
-      >
 
-        <TabsProvider>
-          <Tabs tabs={[
-            {
-              tabTitle: 'Login',
-              tabContent: <Login />
-            },
-            {
-              tabTitle: 'Register',
-              tabContent: <Register />
-            }
-          ]} />
-        </TabsProvider>
-
-      </Dialog>
 
       {/* <div style={{ marginTop: "3rem" }}>
         <Multiselect
