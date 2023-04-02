@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { lazy } from "react";
 import NavLayout from "@/components/05 - Layout/NavLayout/NavLayout";
 import RequiredLayout from "@/components/05 - Layout/RequiredLayout/RequiredLayout";

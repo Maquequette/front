@@ -5,7 +5,6 @@ import App from "./App";
 import { ThemesProvider } from "./contexts/ThemesContext";
 import { ToastProvider } from "./contexts/ToastContext";
 import { AuthProvider } from "./contexts/AuthContext";
-import { LastLocationProvider } from "react-router-dom-last-location";
 
 import "./i18n";
 import "./index.scss";
@@ -21,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <App />
           </ToastProvider>
         </ThemesProvider>
-       </AuthProvider>
+      </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );
