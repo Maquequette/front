@@ -98,7 +98,7 @@ export default function Register() {
                                             By creating an account, you accept the
                                         </p>
                                         <NavLink
-                                            to={"/cgu"}
+                                            to="/cgu"
                                             className="register__form__cgu"
                                         >
                                             general condition of use
