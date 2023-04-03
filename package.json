@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "^2.1.11",
+    "@codesandbox/sandpack-react": "^2.2.5",
     "@monaco-editor/react": "^4.4.6",
     "@tanstack/react-query": "^4.28.0",
     "autoprefixer": "^10.4.14",
