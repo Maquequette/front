@@ -1,5 +1,5 @@
 import { TabsContext } from '@/contexts/TabsContext'
-import { useContext, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 
 import Heading from '@/components/01 - Atoms/Heading/Heading'
 import Label from '@/components/01 - Atoms/Label/Label'
@@ -9,6 +9,7 @@ import Checkbox from '@/components/01 - Atoms/Checkbox/Checkbox'
 import Svg from '@/components/01 - Atoms/Svg/Svg'
 
 import './Login.scss'
+import useAuth from '@/hooks/useAuth'
 
 export default function Login() {
 
@@ -17,6 +18,12 @@ export default function Login() {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [stayConnected, setStayConnected] = useState<boolean>(false)
+
+    const { onLogin } = useAuth()
+    const submitLogin = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        onLogin({ email, password })
+    }
 
     return (
         <div className='login'>
@@ -38,7 +45,7 @@ export default function Login() {
                 </p>
             </div>
 
-            <form className='login__form'>
+            <form className='login__form' onSubmit={(e) => submitLogin(e)}>
                 <div>
                     <Label name="email" required={true}>email</Label>
                     <Input
