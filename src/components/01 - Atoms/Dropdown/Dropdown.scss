@@ -29,8 +29,8 @@
       visibility: hidden;
       opacity: 0;
       position: absolute;
-      right: 0;
-      top: 120%;
+      right: calc(0% - 0.5rem);
+      top: calc(100% + 1rem);
       border-radius: 1rem;
       padding: 0.5rem;
       background-color: var(--light);
@@ -63,6 +63,7 @@
     &.active {
       background-color: var(--primary);
     }
+
     @media (min-width: 80em) {
       &:first-child {
         border-radius: 10px 10px 0 0;
@@ -74,7 +75,7 @@
     }
   }
 
-  & > .sprites {
+  &>.sprites {
     width: 2.4rem;
     height: 2.4rem;
   }
@@ -82,6 +83,7 @@
   .link {
     border: none;
     padding: 0;
+
     &__txt {
       font-size: inherit;
       font-family: inherit;

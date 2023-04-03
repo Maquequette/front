@@ -1,8 +1,7 @@
-import { Routes, Route, Outlet, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import { lazy, useContext, useEffect } from "react";
 import NavLayout from "@/components/05 - Layout/NavLayout/NavLayout";
 import { AuthContext } from "@/contexts/AuthContext";
-import { usePreventNavigation } from "@/hooks/usePreventNavigation";
 
 const Home = lazy(() => {
   return import("@/pages/Home");
@@ -57,7 +56,7 @@ export default function Router(): JSX.Element {
         <Route path="*" element={<NoMatch />} />
 
         <Route element={<RequiredAuth />}>
-          <Route path="/classRoom" element={<ClassRoom />} />
+          <Route path="/classroom" element={<ClassRoom />} />
         </Route>
 
       </Route>

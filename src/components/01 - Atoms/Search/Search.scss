@@ -1,0 +1,33 @@
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--dark);
+  box-shadow: 5px 5px 0px var(--dark);
+  width: fit-content;
+  background-color: var(--light);
+
+  &__input {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+
+    > .sprites {
+      width: 2rem;
+      height: 2rem;
+      transform: scaleX(-1);
+    }
+  }
+
+  &__text {
+    border: none;
+    font-size: var(--font-size-md);
+    font-family: var(--font-family-secondary);
+    text-transform: capitalize;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}

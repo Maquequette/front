@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom"
 import { useContext, useState } from 'react'
 
 import Heading from "@/components/01 - Atoms/Heading/Heading"
-import MultiStepsForm from "@/components/02 -  Molecules/MultiStepsForm/MultiStepsForm"
+import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm"
 import Label from "@/components/01 - Atoms/Label/Label"
 import Input from "@/components/01 - Atoms/Input/Input"
-import Multiselect from "@/components/03 - Organisms/Multiselect/Multiselect"
+import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect"
 
 import './Register.scss'
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip"
@@ -27,7 +27,7 @@ export default function Register() {
             <div>
                 <Heading
                     tag='h1'
-                    type="primary"
+                    level="secondary"
                 >
                     Create an account
                 </Heading>
@@ -98,7 +98,7 @@ export default function Register() {
                                             By creating an account, you accept the
                                         </p>
                                         <NavLink
-                                            to={"/cgu"}
+                                            to="/cgu"
                                             className="register__form__cgu"
                                         >
                                             general condition of use
