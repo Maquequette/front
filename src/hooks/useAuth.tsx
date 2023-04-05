@@ -1,5 +1,5 @@
 import { AuthContext } from '@/contexts/AuthContext'
-import { login } from '@/services/auth.service'
+import { login, register } from '@/services/auth.service'
 import { useMutation } from '@tanstack/react-query'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -7,11 +7,15 @@ import { useNavigate } from 'react-router-dom'
 export default function useAuth() {
 
     const navigate = useNavigate()
-    const { setModalAuth } = useContext(AuthContext)
+    const { setModalAuth, setUser } = useContext(AuthContext)
 
     // Mutations
     const { mutate: onRegister } = useMutation({
-        mutationFn: login,
+        mutationFn: register,
+        onSuccess: (data) => {
+            console.log(data)
+            setModalAuth(false)
+        }
     })
 
     const { mutate: onLogin } = useMutation({

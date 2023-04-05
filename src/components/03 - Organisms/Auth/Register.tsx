@@ -1,6 +1,6 @@
 import { TabsContext } from "@/contexts/TabsContext"
 import { NavLink } from "react-router-dom"
-import { useContext, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 
 import Heading from "@/components/01 - Atoms/Heading/Heading"
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm"
@@ -10,6 +10,7 @@ import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect"
 
 import './Register.scss'
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip"
+import useAuth from "@/hooks/useAuth"
 
 
 export default function Register() {
@@ -21,6 +22,17 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState<string>('')
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
+
+    const { onRegister } = useAuth()
+    const submitRegister = () => {
+        onRegister({
+            name: `${firstName} ${lastName}`,
+            email,
+            password,
+            password_confirmation: confirmPassword
+        })
+    }
+
 
     return (
         <div className='register'>
@@ -43,6 +55,7 @@ export default function Register() {
             </div>
 
             <MultiStepsForm
+                handleSubmit={submitRegister}
                 steps={[
                     {
                         btnText: 'Continue !',

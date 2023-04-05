@@ -7,7 +7,10 @@ import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { TabsProvider } from "./TabsContext";
 
 export interface IAuthContext {
-    // user: IUser | null,
+    modalAuth: boolean,
+    setModalAuth: Dispatch<SetStateAction<boolean>>,
+    user: IUser,
+    setUser: Dispatch<SetStateAction<IUser>>,
     // isFetchingUser: boolean,
     // userError: any,
     // login: Function,
@@ -16,8 +19,6 @@ export interface IAuthContext {
     // logout: Function,
     // isLoggingOut: boolean,
     // logoutError: any,
-    modalAuth: boolean,
-    setModalAuth: Dispatch<SetStateAction<boolean>>
 }
 
 export interface IUser {
@@ -32,11 +33,17 @@ export const AuthContext = createContext<IAuthContext>(null!);
 export function AuthProvider({ children }: { children: JSX.Element }) {
 
     const [modalAuth, setModalAuth] = useState<boolean>(false);
+    const [user, setUser] = useState<IUser>(null!);
 
     //const { user, isFetchingUser, userError, login, isLoggingIn, loginError, logout, isLoggingOut, logoutError } = useAuth()
 
     return (
-        <AuthContext.Provider value={{ modalAuth, setModalAuth }}
+        <AuthContext.Provider value={{
+            modalAuth,
+            setModalAuth,
+            user,
+            setUser
+        }}
         // user, isFetchingUser, userError, login, isLoggingIn, loginError, logout, isLoggingOut, logoutError 
 
         >
