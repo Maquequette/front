@@ -1,4 +1,3 @@
-//import { useAuth } from '@/hooks/useAuth'
 import Login from "@/components/03 - Organisms/Auth/Login";
 import Register from "@/components/03 - Organisms/Auth/Register";
 import Tabs from "@/components/03 - Organisms/Tabs/Tabs";
@@ -11,6 +10,7 @@ export interface IAuthContext {
     setModalAuth: Dispatch<SetStateAction<boolean>>,
     user: IUser,
     setUser: Dispatch<SetStateAction<IUser>>,
+    isConnected: () => boolean
     // isFetchingUser: boolean,
     // userError: any,
     // login: Function,
@@ -27,13 +27,14 @@ export interface IUser {
     email: string,
 }
 
-// export const AuthContext = createContext<IAuthContext>(null!);
 export const AuthContext = createContext<IAuthContext>(null!);
 
 export function AuthProvider({ children }: { children: JSX.Element }) {
 
     const [modalAuth, setModalAuth] = useState<boolean>(false);
     const [user, setUser] = useState<IUser>(null!);
+
+    const isConnected = (): boolean => user !== null
 
     //const { user, isFetchingUser, userError, login, isLoggingIn, loginError, logout, isLoggingOut, logoutError } = useAuth()
 
@@ -42,32 +43,35 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
             modalAuth,
             setModalAuth,
             user,
-            setUser
+            setUser,
+            isConnected
         }}
         // user, isFetchingUser, userError, login, isLoggingIn, loginError, logout, isLoggingOut, logoutError 
 
         >
             {children}
-            <Dialog
-                id="Auth"
-                visible={modalAuth}
-                Dismiss={() => setModalAuth(!modalAuth)}
-            >
+            {!isConnected() &&
+                <Dialog
+                    id="Auth"
+                    visible={modalAuth}
+                    Dismiss={() => setModalAuth(!modalAuth)}
+                >
 
-                <TabsProvider>
-                    <Tabs tabs={[
-                        {
-                            tabTitle: 'Login',
-                            tabContent: <Login />
-                        },
-                        {
-                            tabTitle: 'Register',
-                            tabContent: <Register />
-                        }
-                    ]} />
-                </TabsProvider>
+                    <TabsProvider>
+                        <Tabs tabs={[
+                            {
+                                tabTitle: 'Login',
+                                tabContent: <Login />
+                            },
+                            {
+                                tabTitle: 'Register',
+                                tabContent: <Register />
+                            }
+                        ]} />
+                    </TabsProvider>
 
-            </Dialog>
+                </Dialog>
+            }
         </AuthContext.Provider>
     )
 }

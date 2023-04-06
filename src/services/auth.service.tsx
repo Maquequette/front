@@ -1,29 +1,8 @@
 import { axios } from "./useful"
 
-const csrf = () => {
-    return axios
-        .get(`/sanctum/csrf-cookie`)
-        .catch(error => {
-            console.log(error)
-        })
-}
-
 export interface ILogin {
     email: string
     password: string
-}
-
-export const login = async (data: ILogin) => {
-
-    await csrf()
-    axios
-        .post('/login', data)
-        .then(() => {
-            console.log('ici')
-        })
-        .catch(error => {
-            throw error
-        })
 }
 
 export interface IRegister {
@@ -33,10 +12,28 @@ export interface IRegister {
     password_confirmation: string
 }
 
+const csrf = () => {
+    return axios
+        .get(`/sanctum/csrf-cookie`)
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export const login = async (data: ILogin) => {
+
+    await csrf()
+    return axios
+        .post('/login', data)
+        .catch(error => {
+            throw error
+        })
+}
+
 export const register = async (data: IRegister) => {
 
     await csrf()
-    axios
+    return axios
         .post('/register', data)
         .catch(error => {
             console.log(error)
@@ -44,12 +41,12 @@ export const register = async (data: IRegister) => {
 
 }
 
-export const logout = () => {
+export const logout = async () => {
 
-    axios
+    return axios
         .post('/logout')
         .catch(error => {
-            throw error
+            console.log(error)
         })
 }
 

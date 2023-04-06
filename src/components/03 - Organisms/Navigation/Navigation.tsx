@@ -9,19 +9,19 @@ import "./Navigation.scss";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
+import useAuth from "@/hooks/useAuth";
 
 export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: boolean, callback?: Function }) {
-  const isDesktop = useMediaQuery("(min-width: 80em)");
+  const isDesktop = useMediaQuery("(min-width: 64em)");
 
   const navItem = {
     closed: { opacity: 0, x: "-100rem", transition: { duration: isDesktop ? 0 : 0.2 } },
     open: { opacity: 1, x: 0, transition: { duration: isDesktop ? 0 : 1 } }
   };
 
-  const isLoggedIn = false
   const location = useLocation()
-
-  const { setModalAuth } = useContext(AuthContext)
+  const { onLogout } = useAuth()
+  const { modalAuth, setModalAuth, isConnected } = useContext(AuthContext)
 
   return (
     <motion.nav
@@ -56,12 +56,13 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
             Lessons
           </Navlink>
         </motion.li>
-        {!isLoggedIn
+        {!isConnected()
           ?
           <motion.li className="nav__item" variants={navItem}>
             <Navlink
-              to={location.pathname}
+              to='#'
               theme="primary"
+              classes={modalAuth ? 'active' : ''}
               clickCallback={() => {
                 callback()
                 setModalAuth(true)
@@ -104,6 +105,20 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
                     component: (
                       <Navlink to="/profil/settings" theme="primary" clickCallback={() => { callback() }}>
                         Settings
+                      </Navlink>
+                    )
+                  },
+                  {
+                    component: (
+                      <Navlink
+                        to="/logout"
+                        theme="primary"
+                        clickCallback={() => {
+                          callback()
+                          onLogout()
+                        }}
+                      >
+                        Log Out
                       </Navlink>
                     )
                   }
