@@ -8,6 +8,7 @@ export interface INavlink {
   children: ReactNode;
   theme: Theme;
   classes?: string;
+  id?: string;
   icon?: JSX.Element;
   badge?: JSX.Element;
   clickCallback?: MouseEventHandler<HTMLAnchorElement>;
@@ -17,7 +18,8 @@ export default function Navlink({
   to,
   children,
   theme,
-  classes,
+  classes = '',
+  id,
   icon,
   badge,
   clickCallback = () => { },
@@ -26,9 +28,10 @@ export default function Navlink({
   return (
     <BaseNavLink
       to={to}
+      id={id}
       className={({ isActive }) =>
-        (isActive ? "active" : "") +
-        ` link link--${theme} ${icon ? "link--icon" : ""} ${badge ? "link--badge" : ""} ${classes}`
+        (isActive && "active") +
+        ` link link--${theme} ${icon ? "link--icon" : ''} ${badge ? "link--badge" : ''} ${classes}`
       }
       onClick={clickCallback}>
       {icon}

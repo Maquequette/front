@@ -62,7 +62,8 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
             <Navlink
               to='#'
               theme="primary"
-              classes={modalAuth ? 'active' : ''}
+              classes={modalAuth ? 'modalActive' : ''}
+              id="connection"
               clickCallback={() => {
                 callback()
                 setModalAuth(true)

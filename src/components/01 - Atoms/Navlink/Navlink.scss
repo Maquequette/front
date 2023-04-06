@@ -13,7 +13,7 @@
     padding: 1rem 3rem;
   }
 
-  > .sprites {
+  >.sprites {
     width: 2.4rem;
     height: 2.4rem;
   }
@@ -32,6 +32,7 @@
   &--icon {
     @media (min-width: 80em) {
       padding: 1rem;
+
       .link__txt {
         display: none;
       }
@@ -48,7 +49,8 @@
     }
   }
 
-  @each $name, $color in $colors {
+  @each $name,
+  $color in $colors {
     &--#{$name} {
       border: 1px solid var(--#{$name});
 
@@ -58,6 +60,21 @@
 
       &.active {
         background-color: var(--#{$name});
+
+      }
+
+      &#connection {
+        &.active {
+          background-color: transparent;
+        }
+
+        &:hover {
+          background-color: var(--#{$name});
+        }
+
+        &.modalActive {
+          background-color: var(--#{$name});
+        }
       }
     }
   }
