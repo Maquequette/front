@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header className={`header ${isOpen ? "header--open" : ""}`}>
-      <Container center={true} classes="header__container">
+      <Container center={true} isLarge={true} classes="header__container">
         <div className="header__logo">
           <Logo />
         </div>
