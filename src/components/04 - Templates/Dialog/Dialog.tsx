@@ -1,4 +1,5 @@
-import React, { MouseEventHandler, CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
+import { motion, transform } from "framer-motion";
 import "./Dialog.scss";
 
 export interface IDialog {
@@ -16,11 +17,24 @@ export default function Dialog({ id, children, visible = false, Dismiss, styles 
 
   return (
     <dialog className="dialog" id={id} open={visible} onClick={backdropCloseModal}>
-      <div
+      <motion.div
+        animate={visible ? "visible" : "hidden"}
         className="dialog__content"
+        transition={{
+          type: "spring",
+          damping: 12
+        }}
+        variants={{
+          visible: {
+            scale: 1
+          },
+          hidden: {
+            scale: 0
+          }
+        }}
         onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
         {children}
-      </div>
+      </motion.div>
     </dialog>
   );
 }
