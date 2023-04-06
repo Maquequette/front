@@ -9,7 +9,7 @@
   position: relative;
   padding: 1rem 1rem;
 
-  @media (min-width: 80em) {
+  @media (min-width: 64em) {
     padding: 1rem 3rem;
   }
 
@@ -24,13 +24,13 @@
     font-family: var(--font-family-secondary);
     text-transform: uppercase;
 
-    @media (min-width: 80em) {
+    @media (min-width: 64em) {
       font-size: var(--font-size-md);
     }
   }
 
   &--icon {
-    @media (min-width: 80em) {
+    @media (min-width: 64em) {
       padding: 1rem;
       .link__txt {
         display: none;
@@ -38,7 +38,7 @@
     }
   }
 
-  @media (max-width: 80em) {
+  @media (max-width: 64em) {
     &--badge {
       .badge {
         order: 4;

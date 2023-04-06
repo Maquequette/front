@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 
 export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: boolean, callback?: Function }) {
-  const isDesktop = useMediaQuery("(min-width: 80em)");
+  const isDesktop = useMediaQuery("(min-width: 64em)");
 
   const navItem = {
     closed: { opacity: 0, x: "-100rem", transition: { duration: isDesktop ? 0 : 0.2 } },
