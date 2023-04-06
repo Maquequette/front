@@ -26,7 +26,7 @@ export default function Header() {
         <div className="header__logo">
           <Logo />
         </div>
-        <Navigation isOpen={isOpen} />
+        <Navigation isOpen={isOpen} callback={toggleOpen} />
         <Burger isOpen={isOpen} handleClick={toggleOpen} />
       </Container>
     </header>

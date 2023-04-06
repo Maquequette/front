@@ -3,6 +3,7 @@ import { lazy } from "react";
 import NavLayout from "@/components/05 - Layout/NavLayout/NavLayout";
 import RequiredLayout from "@/components/05 - Layout/RequiredLayout/RequiredLayout";
 
+
 const Home = lazy(() => {
   return import("@/pages/Home");
 });
@@ -23,8 +24,8 @@ const Lessons = lazy(() => {
   return import("@/pages/Lessons");
 });
 
-const ClassRoom = lazy(() => {
-  return import("@/pages/ClassRoom");
+const Classroom = lazy(() => {
+  return import("@/pages/Classroom");
 });
 
 export default function Router(): JSX.Element {
@@ -35,7 +36,7 @@ export default function Router(): JSX.Element {
         <Route path="/challenges" element={<Challenges />} />
         <Route path="/lessons" element={<Lessons />} />
         <Route element={<RequiredLayout />}>
-          <Route path="/classRoom" element={<ClassRoom />} />
+          <Route path="/classroom" element={<Classroom />} />
         </Route>
         <Route path="*" element={<NoMatch />} />
       </Route>
