@@ -1,5 +1,6 @@
 import { TabsContext } from '@/contexts/TabsContext'
-import { useContext, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
+import useAuth from '@/hooks/useAuth'
 
 import Heading from '@/components/01 - Atoms/Heading/Heading'
 import Label from '@/components/01 - Atoms/Label/Label'
@@ -9,6 +10,7 @@ import Checkbox from '@/components/01 - Atoms/Checkbox/Checkbox'
 import Svg from '@/components/01 - Atoms/Svg/Svg'
 
 import './Login.scss'
+import Error from '@/components/01 - Atoms/Error/Error'
 
 export default function Login() {
 
@@ -17,6 +19,25 @@ export default function Login() {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [stayConnected, setStayConnected] = useState<boolean>(false)
+    const [errors, setErrors] = useState<{ [key: string]: string }>({})
+
+    const { onLogin, onForgotPassword } = useAuth()
+
+    const submitLogin = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        onLogin({ email, password })
+    }
+
+    const forgotPassword = () => {
+        if (!email) {
+            setErrors({
+                ...errors,
+                email: 'you have to fill an email adresse to get a new password'
+            })
+        } else {
+            onForgotPassword({ email })
+        }
+    }
 
     return (
         <div className='login'>
@@ -38,9 +59,15 @@ export default function Login() {
                 </p>
             </div>
 
-            <form className='login__form'>
+            <form className='login__form' onSubmit={(e) => submitLogin(e)}>
                 <div>
-                    <Label name="email" required={true}>email</Label>
+                    <Label
+                        name="email"
+                        required={true}
+                        error={errors.email && <Error>{errors.email}</Error>}
+                    >
+                        email
+                    </Label>
                     <Input
                         type="email"
                         name="email"
@@ -88,7 +115,7 @@ export default function Login() {
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <p className='login__form__subtitle'>
-                        <button onClick={() => updateTabs(1)}>Forgot your password ?</button>
+                        <button type="button" onClick={() => forgotPassword()}>Forgot your password ?</button>
                     </p>
 
                     <Button theme={'primary'} type="submit" btnStyles={{ paddingTop: '1rem', paddingBottom: '1rem' }}>

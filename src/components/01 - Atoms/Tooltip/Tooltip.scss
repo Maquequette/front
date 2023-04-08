@@ -44,6 +44,10 @@
             visibility: visible;
             opacity: 1;
         }
+
+        &__span--success {
+            color: var(--success);
+        }
     }
 
 
