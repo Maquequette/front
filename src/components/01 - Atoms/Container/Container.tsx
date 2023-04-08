@@ -7,13 +7,16 @@ export interface IContainer {
   disabled?: boolean;
   styles?: CSSProperties;
   classes?: string;
+  isLarge?: boolean;
 }
 
-export default function Container({ children, center, styles, classes }: IContainer) {
+export default function Container({ children, center, styles, classes, isLarge }: IContainer) {
   return (
     <div
       style={styles}
-      className={`container ${center ? "container--centered" : ""} ${classes ?? ""}`}>
+      className={`container ${center ? "container--centered" : ""} ${classes ?? ""} ${
+        isLarge ? "container--xl" : ""
+      }`}>
       {children}
     </div>
   );
