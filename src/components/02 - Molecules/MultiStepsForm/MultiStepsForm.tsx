@@ -1,7 +1,7 @@
 import Button from "@/components/01 - Atoms/Button/Button"
 import Svg from "@/components/01 - Atoms/Svg/Svg"
 import { AnimatePresence, motion } from "framer-motion"
-import { ReactNode, useState } from "react"
+import { FormEvent, ReactNode, useState } from "react"
 
 import './MultiStepsForm.scss'
 
@@ -26,11 +26,11 @@ export default function MultiStepsForm({
     const [lastStep, setLastStep] = useState<number>(0);
     const [currentStep, setCurrentStep] = useState<number>(0);
 
-    const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    const submitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         if (steps[currentStep]?.stepSubmit()) {
-            currentStep < steps.length ? changeStep(1) : handleSubmit()
+            currentStep < steps.length - 1 ? changeStep(1) : handleSubmit()
         }
     }
 
@@ -40,7 +40,7 @@ export default function MultiStepsForm({
     }
 
     return (
-        <form className="multiForm" onSubmit={(e) => submitForm(e)}>
+        <form className="multiForm" onSubmit={submitForm}>
 
             <div className="multiForm__steps">
                 {steps.map((step, i) =>
