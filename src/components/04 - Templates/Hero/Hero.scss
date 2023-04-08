@@ -1,12 +1,53 @@
 .hero {
-  display: flex;
-  flex-wrap: wrap;
+  margin-top: 3rem;
+  display: grid;
 
-  &__info {
-    flex: 1;
+  @media (min-width: 64em) {
+    grid-template-columns: 1fr 66rem;
   }
 
-  &__illustration {
-    flex: 0 1 70rem;
+  .block {
+    margin: 3rem 0;
+    line-height: normal;
+    padding: 3rem;
+    border-radius: 2rem;
+    background-color: var(--light);
+    box-shadow: 5px 5px 0 0;
+    display: block;
+    border: 1px solid var(--dark);
+    width: fit-content;
+  }
+
+  .strip {
+    display: flex;
+    gap: 1rem;
+    word-break: keep-all;
+    position: relative;
+
+    &::before {
+      content: "";
+      height: 5rem;
+      border-radius: 2rem;
+      flex: 1;
+      background-color: var(--secondary);
+    }
+
+    &::after {
+      position: absolute;
+      top: 100%;
+      content: "";
+      height: 5rem;
+      border-radius: 2rem;
+      flex: 1;
+      background-color: var(--secondary);
+    }
+
+    .sprites {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 50%;
+      fill: var(--secondary);
+    }
   }
 }
