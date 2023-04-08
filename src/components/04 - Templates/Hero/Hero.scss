@@ -22,5 +22,19 @@
     display: block;
     border: 1px solid var(--dark);
     width: fit-content;
+    position: relative;
+    z-index: 1;
+  }
+
+  .learn {
+    display: flex;
+    align-items: baseline;
+
+    .sprites {
+      position: relative;
+      top: 6rem;
+      width: 10rem;
+      height: 10rem;
+    }
   }
 }

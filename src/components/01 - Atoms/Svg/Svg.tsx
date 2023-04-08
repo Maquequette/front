@@ -1,16 +1,17 @@
 import { CSSProperties } from "react";
+import { motion } from "framer-motion";
 import "./Svg.scss";
 
 export interface ISvg {
   id: string;
   styles?: CSSProperties;
-  preserveAspectRatio?: string;
+  isDragable?: boolean;
 }
 
-export default function Svg({ id, styles, preserveAspectRatio }: ISvg) {
+export default function Svg({ id, styles, isDragable }: ISvg) {
   return (
-    <svg className="sprites" style={styles} preserveAspectRatio={preserveAspectRatio}>
+    <motion.svg drag={isDragable} className="sprites" style={styles} whileDrag={{ zIndex: 999 }}>
       <use xlinkHref={`./sprites.svg#${id}`}></use>
-    </svg>
+    </motion.svg>
   );
 }

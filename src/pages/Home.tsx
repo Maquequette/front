@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { Player } from "@lottiefiles/react-lottie-player";
 import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";
 import Hero from "@/components/04 - Templates/Hero/Hero";
@@ -9,18 +8,19 @@ import Svg from "@/components/01 - Atoms/Svg/Svg";
 import gwen from "../assets/images/gwen.json";
 
 export default function Home(): JSX.Element {
-  const { t } = useTranslation();
-
   return (
     <PageTransition>
       <Container center={true} isLarge={true}>
         <Hero
           title={
             <Heading tag="h1" level="primary">
-              LEARN
+              <span className="learn">
+                LEARN
+                <Svg id="glass" isDragable={true} />
+              </span>
               <span className="block">FRONT-END / WEB DESIGN</span>
               <Stripe theme="secondary">
-                THE COOL WAY <Svg id="waves" preserveAspectRatio="none" />
+                THE COOL WAY <Svg id="waves" />
               </Stripe>
             </Heading>
           }
