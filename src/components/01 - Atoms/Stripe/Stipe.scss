@@ -1,0 +1,39 @@
+@import "@/assets/variables";
+
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 1rem;
+  word-break: keep-all;
+  position: relative;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &::before {
+    content: "";
+    height: 5rem;
+    border-radius: 2rem;
+    flex: 1;
+    background-color: var(--secondary);
+  }
+
+  @each $name, $color in $colors {
+    &--#{$name} {
+      &::before {
+        background-color: var(--#{$name});
+      }
+
+      .sprites {
+        fill: var(--#{$name});
+      }
+    }
+  }
+
+  .sprites {
+    height: 5rem;
+  }
+}

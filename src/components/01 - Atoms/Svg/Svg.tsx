@@ -4,7 +4,7 @@ import "./Svg.scss";
 export interface ISvg {
   id: string;
   styles?: CSSProperties;
-  preserveAspectRatio: string;
+  preserveAspectRatio?: string;
 }
 
 export default function Svg({ id, styles, preserveAspectRatio }: ISvg) {

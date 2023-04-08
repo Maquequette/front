@@ -4,6 +4,7 @@ import PageTransition from "@/components/04 - Templates/PageTransition/PageTrans
 import Hero from "@/components/04 - Templates/Hero/Hero";
 import Container from "@/components/01 - Atoms/Container/Container";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
+import Stripe from "@/components/01 - Atoms/Stripe/Stripe";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import gwen from "../assets/images/gwen.json";
 
@@ -18,9 +19,9 @@ export default function Home(): JSX.Element {
             <Heading tag="h1" level="primary">
               LEARN
               <span className="block">FRONT-END / WEB DESIGN</span>
-              <span className="strip">
+              <Stripe theme="secondary">
                 THE COOL WAY <Svg id="waves" preserveAspectRatio="none" />
-              </span>
+              </Stripe>
             </Heading>
           }
           illustation={<Player src={gwen} autoplay keepLastFrame />}
