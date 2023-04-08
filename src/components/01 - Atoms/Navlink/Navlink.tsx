@@ -2,13 +2,13 @@ import { NavLink as BaseNavLink } from "react-router-dom";
 import { Theme } from "@/types/Theme";
 import "./Navlink.scss";
 import { MouseEventHandler, ReactNode } from "react";
-import Badge from "../Badge/Badge";
 
 export interface INavlink {
   to: string;
   children: ReactNode;
   theme: Theme;
   classes?: string;
+  id?: string;
   icon?: JSX.Element;
   badge?: JSX.Element;
   clickCallback?: MouseEventHandler<HTMLAnchorElement>;
@@ -16,8 +16,10 @@ export interface INavlink {
 
 export default function Navlink({
   to,
-  theme,
   children,
+  theme,
+  classes = '',
+  id,
   icon,
   badge,
   clickCallback = () => { },
@@ -26,9 +28,10 @@ export default function Navlink({
   return (
     <BaseNavLink
       to={to}
+      id={id}
       className={({ isActive }) =>
-        (isActive ? "active" : "") +
-        ` link link--${theme} ${icon ? "link--icon" : ""}  ${badge ? "link--badge" : ""}`
+        (isActive && "active") +
+        ` link link--${theme} ${icon ? "link--icon" : ''} ${badge ? "link--badge" : ''} ${classes}`
       }
       onClick={clickCallback}>
       {icon}

@@ -1,6 +1,6 @@
 import { TabsContext } from "@/contexts/TabsContext"
 import { NavLink } from "react-router-dom"
-import { useContext, useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 
 import Heading from "@/components/01 - Atoms/Heading/Heading"
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm"
@@ -10,6 +10,8 @@ import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect"
 
 import './Register.scss'
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip"
+import useAuth from "@/hooks/useAuth"
+import clsx from "clsx"
 
 
 export default function Register() {
@@ -21,6 +23,17 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState<string>('')
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
+
+    const { onRegister } = useAuth()
+    const submitRegister = () => {
+        onRegister({
+            name: `${firstName} ${lastName}`,
+            email,
+            password,
+            password_confirmation: confirmPassword
+        })
+    }
+
 
     return (
         <div className='register'>
@@ -43,6 +56,7 @@ export default function Register() {
             </div>
 
             <MultiStepsForm
+                handleSubmit={submitRegister}
                 steps={[
                     {
                         btnText: 'Continue !',
@@ -66,7 +80,14 @@ export default function Register() {
                                     <Label
                                         name="password"
                                         required={true}
-                                        tooltip={<Tooltip>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Tooltip>}
+                                        tooltip={
+                                            <Tooltip>
+                                                Your password must contain : <br />
+                                                <span className={clsx(/[A-Z]/.test(password) && 'tooltip__popup__span--success')}>** At least one capital letter </span><br />
+                                                <span className={clsx(/\d/.test(password) && 'tooltip__popup__span--success')}>** At least one number </span><br />
+                                                <span className={clsx(password.length >= 8 && 'tooltip__popup__span--success')}>** At least 8 characters </span><br />
+                                            </Tooltip>
+                                        }
                                     >
                                         Password
                                     </Label>
@@ -76,6 +97,7 @@ export default function Register() {
                                         placeholder="ABC123def456!?#"
                                         required={true}
                                         value={password}
+                                        pattern="^(?=.*[A-Z])(?=.*\d).{8,}$"
                                         handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                             setPassword(e.target.value)
                                         }}
@@ -105,7 +127,7 @@ export default function Register() {
                                         </NavLink>
                                     </div>
                                 </div>
-                            </div>
+                            </div >
 
                     },
                     {
