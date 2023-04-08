@@ -1,0 +1,12 @@
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__info {
+    flex: 1;
+  }
+
+  &__illustration {
+    flex: 0 1 70rem;
+  }
+}
