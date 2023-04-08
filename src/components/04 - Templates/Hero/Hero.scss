@@ -1,0 +1,26 @@
+.hero {
+  margin-top: 3rem;
+  display: grid;
+
+  @media (min-width: 48em) {
+    .lf-player-container {
+      margin-top: -8rem;
+    }
+  }
+
+  @media (min-width: 64em) {
+    grid-template-columns: 1fr 66rem;
+  }
+
+  .block {
+    margin: 3rem 0;
+    line-height: normal;
+    padding: 3rem;
+    border-radius: 2rem;
+    background-color: var(--light);
+    box-shadow: 5px 5px 0 0;
+    display: block;
+    border: 1px solid var(--dark);
+    width: fit-content;
+  }
+}

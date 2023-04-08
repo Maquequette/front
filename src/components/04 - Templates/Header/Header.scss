@@ -1,6 +1,7 @@
 .header {
-  position: relative;
-  z-index: 90;
+  position: sticky;
+  top: 0;
+  z-index: 9;
 
   &::after {
     content: "";
