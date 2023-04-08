@@ -13,40 +13,24 @@ export interface IRegister {
 }
 
 const csrf = () => {
-    return axios
-        .get(`/sanctum/csrf-cookie`)
-        .catch(error => {
-            console.log(error)
-        })
+    return axios.get(`/sanctum/csrf-cookie`)
 }
 
 export const login = async (data: ILogin) => {
-
     await csrf()
-    return axios
-        .post('/login', data)
-        .catch(error => {
-            throw error
-        })
+    return axios.post('/login', data)
 }
 
 export const register = async (data: IRegister) => {
-
     await csrf()
-    return axios
-        .post('/register', data)
-        .catch(error => {
-            console.log(error)
-        })
-
+    return axios.post('/register', data)
 }
 
 export const logout = async () => {
+    return axios.post('/logout')
+}
 
-    return axios
-        .post('/logout')
-        .catch(error => {
-            console.log(error)
-        })
+export const forgotPassword = async (data: { email: string }) => {
+    return axios.post('/forgot-password', data)
 }
 

@@ -1,12 +1,14 @@
 import { AuthContext } from '@/contexts/AuthContext'
-import { login, register, logout } from '@/services/auth.service'
+import { login, register, logout, forgotPassword } from '@/services/auth.service'
 import { useMutation } from '@tanstack/react-query'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useToasts from './useToasts'
 
 export default function useAuth() {
 
     const navigate = useNavigate()
+    const { pushToast } = useToasts()
     const { setModalAuth, setUser } = useContext(AuthContext)
 
     // Mutations
@@ -35,9 +37,21 @@ export default function useAuth() {
         }
     })
 
+    const { mutate: onForgotPassword } = useMutation({
+        mutationFn: forgotPassword,
+        onSuccess: () => {
+            pushToast({
+                title: 'You forgot your password !',
+                desc: 'Don\t worry, an email has been sent to help you reset your password',
+                theme: 'secondary'
+            })
+        }
+    })
+
     return {
         onRegister,
         onLogin,
         onLogout,
+        onForgotPassword
     }
 }

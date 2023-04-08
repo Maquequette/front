@@ -9,6 +9,7 @@ export interface IInput {
   styles?: CSSProperties,
   disabled?: boolean,
   required?: boolean,
+  pattern?: string,
   autoComplete?: string,
   handleOnChange?: ChangeEventHandler<HTMLInputElement>,
   value: string | number
@@ -21,6 +22,7 @@ export default function Input({
   styles,
   disabled = false,
   required = false,
+  pattern,
   autoComplete,
   handleOnChange,
   value
@@ -43,6 +45,7 @@ export default function Input({
         placeholder={placeholder}
         disabled={disabled}
         required={required}
+        pattern={pattern}
         autoComplete={autoComplete}
         value={value ?? undefined}
         onChange={handleOnChange ?? undefined}

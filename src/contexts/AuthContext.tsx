@@ -11,14 +11,6 @@ export interface IAuthContext {
     user: IUser,
     setUser: Dispatch<SetStateAction<IUser>>,
     isConnected: () => boolean
-    // isFetchingUser: boolean,
-    // userError: any,
-    // login: Function,
-    // isLoggingIn: boolean,
-    // loginError: any,
-    // logout: Function,
-    // isLoggingOut: boolean,
-    // logoutError: any,
 }
 
 export interface IUser {
@@ -36,8 +28,6 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
 
     const isConnected = (): boolean => user !== null
 
-    //const { user, isFetchingUser, userError, login, isLoggingIn, loginError, logout, isLoggingOut, logoutError } = useAuth()
-
     return (
         <AuthContext.Provider value={{
             modalAuth,
@@ -46,7 +36,6 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
             setUser,
             isConnected
         }}
-        // user, isFetchingUser, userError, login, isLoggingIn, loginError, logout, isLoggingOut, logoutError 
 
         >
             {children}
@@ -54,7 +43,9 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
                 <Dialog
                     id="Auth"
                     visible={modalAuth}
-                    Dismiss={() => setModalAuth(!modalAuth)}
+                    Dismiss={() => {
+                        setModalAuth(!modalAuth)
+                    }}
                 >
 
                     <TabsProvider>
