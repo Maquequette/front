@@ -1,8 +1,6 @@
 # 🚀 Maquequette - Front
-le devant la façade le visage le front la devanture le visuel du projet
 
-
-**Maquequette** est une plateforme d'apprentissage de développement front-end et de webdesign..
+**Maquequette** est une plateforme d'apprentissage de développement front-end et de webdesign.
 Nous disposons ou allons disposez des features suivantes: [features](#-features)
 
 
@@ -29,13 +27,13 @@ Nous disposons ou allons disposez des features suivantes: [features](#-features)
 
 ### 📦 `Classroom`
 
-- Vous pouvez partager et voir le code de votre class en temps réel
+- Vous pouvez partager et voir le code de votre classe en temps réel
 
 ### 🗃️ `Challenges`
 
-- Affiche une list de challanges
-- Possibilité de repondre a un challenge en envoyant sa réponse
-- Commenté et liker vos réponse et challanges préférer
+- Affiche une liste de challenges
+- Possibilité de répondre à un challenge en envoyant sa réponse
+- Commenter et liker vos réponses et challenges préférés
 
 #
 
