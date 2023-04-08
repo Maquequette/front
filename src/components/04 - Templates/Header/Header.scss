@@ -1,10 +1,49 @@
 .header {
-  padding: 2.5rem;
-  position: sticky;
-  top: 0;
+  position: relative;
+  z-index: 90;
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 200vh;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--primary);
+    z-index: -1;
+    clip-path: circle(0rem at calc(100% - 6rem) 5rem);
+    transition: clip-path 1s;
+  }
+
+  @media (max-width: 64em) {
+    &--open {
+      &::after {
+        clip-path: circle(200vmax at calc(100% - 6rem) 5rem);
+      }
+    }
+  }
 
   &__container {
+    position: relative;
     display: flex;
     justify-content: space-between;
+  }
+
+  &__logo {
+    margin-right: auto;
+
+    @media (min-width: 64em) {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .burger {
+    @media (min-width: 64em) {
+      display: none;
+    }
   }
 }

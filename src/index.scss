@@ -19,6 +19,7 @@
   }
 
   --container: #{$container};
+  --container-xl: #{$container-xl};
 
   @each $name, $breakpoint in $breakpoints {
     --breakpoint-#{$name}: #{$breakpoint};
@@ -36,21 +37,27 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
   background-color: var(--grey);
-
-  &::-webkit-scrollbar-button {
-    background-color: var(--primary);
-  }
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  &::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+  }
 }
+
 .app {
   min-height: 100vh;
   position: relative;
 }
+
 /* Remove all animations and transitions
 for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {

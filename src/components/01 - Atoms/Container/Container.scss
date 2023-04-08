@@ -1,5 +1,10 @@
 .container {
   max-width: var(--container);
+  padding: 2rem 3rem;
+
+  &--xl {
+    max-width: var(--container-xl);
+  }
 
   &--centered {
     margin: 0 auto;

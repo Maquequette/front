@@ -1,14 +1,14 @@
-.themeSwapper {
+.theme {
   display: flex;
+  justify-content: center;
   align-items: center;
   color: var(--dark);
   padding: 1rem;
-  border-radius: inherit;
-  background-color: var(--light);
-  border: 1px solid var(--primary);
+  height: 100%;
   position: relative;
+  cursor: pointer;
 
-  > .sprites {
+  #theme {
     width: 2.4rem;
     height: 2.4rem;
   }

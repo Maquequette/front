@@ -1,11 +1,14 @@
-import "./Svg.scss";
+import { CSSProperties } from "react"
+import "./Svg.scss"
+
 export interface ISvg {
-  id: string;
+  id: string
+  styles?: CSSProperties
 }
 
-export default function Svg({ id }: ISvg) {
+export default function Svg({ id, styles }: ISvg) {
   return (
-    <svg className="sprites">
+    <svg className="sprites" style={styles}>
       <use xlinkHref={`./sprites.svg#${id}`}></use>
     </svg>
   );

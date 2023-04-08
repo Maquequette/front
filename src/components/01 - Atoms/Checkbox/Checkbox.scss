@@ -3,27 +3,35 @@
 .checkbox {
   &__input {
     appearance: none;
-    width: 1.15em;
-    height: 1.15em;
+    width: 2rem;
+    aspect-ratio: 1;
     border: 1px solid var(--dark);
-    transform: translateY(-0.075em);
     display: grid;
     place-content: center;
-    font-size: inherit;
+    position: relative;
+
+    // &:focus,
+    // &:focus-visible {
+    //   outline: 2px solid var(--secondary);
+    // }
 
     &::before {
       content: "";
-      width: 0.8em;
-      height: 0.8em;
+      position: absolute;
+      top: calc(50% - (1.4rem/2));
+      left: calc(50% - (1.4rem/2));
+      width: 1.4rem;
+      aspect-ratio: 1;
       transform: scale(0);
       transition: 120ms transform ease-in-out;
       border-radius: 2px;
     }
 
-    @each $name, $color in $colors {
+    @each $name,
+    $color in $colors {
       &--#{$name} {
         &::before {
-          box-shadow: inset 1em 1em var(--#{$name});
+          background-color: var(--#{$name});
         }
       }
     }

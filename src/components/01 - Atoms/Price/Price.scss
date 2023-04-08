@@ -1,0 +1,26 @@
+@import "../../../assets/variables";
+
+.price {
+  font-size: var(--font-size-md);
+  font-family: var(--font-family-secondary);
+  border: 1px solid transparent;
+  padding: 1rem 2rem;
+  border-radius: 100vmax;
+
+  &--outline {
+    @each $name, $color in $colors {
+      &--#{$name} {
+        color: var(--#{$name});
+        border-color: var(--#{$name});
+      }
+    }
+  }
+
+  &--solid {
+    @each $name, $color in $colors {
+      &--#{$name} {
+        background-color: var(--#{$name});
+      }
+    }
+  }
+}

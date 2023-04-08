@@ -1,0 +1,30 @@
+@import "@/assets/utilities";
+@import "@/assets/variables";
+
+.badge {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-secondary);
+  padding: 0.5rem;
+  min-width: 2rem;
+  min-height: 2rem;
+  aspect-ratio: 1;
+  color: var(--dark);
+  border-radius: 100vmax;
+  @extend .flex-centered;
+  border: 2px solid var(--light);
+  z-index: 10;
+
+  @each $name,
+  $color in $colors {
+    &--#{$name} {
+      background-color: var(--#{$name});
+    }
+  }
+
+  @media (min-width: 64em) {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    transform: translate(-50%, -50%);
+  }
+}

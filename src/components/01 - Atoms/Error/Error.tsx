@@ -6,5 +6,5 @@ export interface IError {
 }
 
 export default function Error({ children }: IError) {
-  return <p className="error">{children}</p>;
+  return <span className="error">{children}</span>;
 }
