@@ -6,7 +6,7 @@ export default function Home(): JSX.Element {
 
   return (
     <PageTransition>
-      <h1 className="text-3xl font-bold underline">{t("Welcome to React")}</h1>
+      <h1>{t("Welcome")}</h1>
     </PageTransition>
   );
 }

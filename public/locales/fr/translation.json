@@ -1,3 +1,5 @@
 {
-  "Welcome to React": "Bienvenue"
+  "Welcome": "Bienvenue",
+  "intlCurrency": "{{price, currency}}",
+  "intlDateTime": "{{val, datetime}}"
 }

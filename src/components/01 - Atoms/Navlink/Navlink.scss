@@ -3,24 +3,54 @@
 .link {
   display: flex;
   align-items: center;
-  color: var(--dark);
-  text-decoration: none;
-  font-size: var(--font-size-sm);
-  font-family: var(--font-family-secondary);
-  text-transform: uppercase;
-  padding: 1rem 3rem;
+  gap: 1rem;
   border-radius: inherit;
+  text-decoration: none;
+  position: relative;
+  padding: 1rem 1rem;
 
-  &--icon {
-    padding: 1rem;
+  @media (min-width: 64em) {
+    padding: 1rem 3rem;
   }
 
-  > .sprites {
+  >.sprites {
     width: 2.4rem;
     height: 2.4rem;
   }
 
-  @each $name, $color in $colors {
+  &__txt {
+    color: var(--dark);
+    font-size: var(--font-size-l);
+    font-family: var(--font-family-secondary);
+    text-transform: uppercase;
+
+    @media (min-width: 64em) {
+      font-size: var(--font-size-md);
+    }
+  }
+
+  &--icon {
+    @media (min-width: 64em) {
+      padding: 1rem;
+
+      .link__txt {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 64em) {
+    &--badge {
+      .badge {
+        order: 4;
+        margin-left: auto;
+        background-color: var(--light);
+      }
+    }
+  }
+
+  @each $name,
+  $color in $colors {
     &--#{$name} {
       border: 1px solid var(--#{$name});
 
@@ -30,6 +60,21 @@
 
       &.active {
         background-color: var(--#{$name});
+
+      }
+
+      &#connection {
+        &.active {
+          background-color: transparent;
+        }
+
+        &:hover {
+          background-color: var(--#{$name});
+        }
+
+        &.modalActive {
+          background-color: var(--#{$name});
+        }
       }
     }
   }
