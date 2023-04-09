@@ -10,7 +10,16 @@ export interface ISvg {
 
 export default function Svg({ id, styles, isDragable }: ISvg) {
   return (
-    <motion.svg drag={isDragable} className="sprites" style={styles} whileDrag={{ zIndex: 999 }}>
+    <motion.svg
+      initial={{ zIndex: 1 }}
+      drag={isDragable}
+      dragSnapToOrigin={isDragable}
+      className="sprites"
+      style={styles}
+      dragElastic={0.2}
+      whileDrag={{
+        zIndex: 999
+      }}>
       <use xlinkHref={`./sprites.svg#${id}`}></use>
     </motion.svg>
   );
