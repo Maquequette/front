@@ -1,0 +1,13 @@
+.block {
+  margin: 3rem 0;
+  line-height: normal;
+  padding: 3rem;
+  border-radius: 2rem;
+  background-color: var(--light);
+  box-shadow: 5px 5px 0 0;
+  display: block;
+  border: 1px solid var(--dark);
+  width: fit-content;
+  position: relative;
+  z-index: 1;
+}

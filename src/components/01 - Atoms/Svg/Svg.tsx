@@ -4,12 +4,11 @@ import "./Svg.scss";
 export interface ISvg {
   id: string;
   styles?: CSSProperties;
-  preserveAspectRatio?: string;
 }
 
-export default function Svg({ id, styles, preserveAspectRatio }: ISvg) {
+export default function Svg({ id, styles }: ISvg) {
   return (
-    <svg className="sprites" style={styles} preserveAspectRatio={preserveAspectRatio}>
+    <svg className="sprites" style={styles}>
       <use xlinkHref={`./sprites.svg#${id}`}></use>
     </svg>
   );

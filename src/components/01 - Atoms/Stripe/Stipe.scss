@@ -3,7 +3,6 @@
 .strip {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
   gap: 1rem;
   word-break: keep-all;
   position: relative;
@@ -16,6 +15,7 @@
   &::before {
     content: "";
     height: 5rem;
+    max-width: 30rem;
     border-radius: 2rem;
     flex: 1;
     background-color: var(--secondary);
