@@ -12,7 +12,7 @@
     "@codesandbox/sandpack-react": "^2.4.3",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@monaco-editor/react": "^4.4.6",
-    "@tanstack/react-query": "^4.28.0",
+    "@tanstack/react-query": "^4.29.1",
     "autoprefixer": "^10.4.14",
     "axios": "^1.3.4",
     "clsx": "^1.2.1",
