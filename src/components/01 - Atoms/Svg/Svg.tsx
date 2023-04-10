@@ -1,26 +1,15 @@
 import { CSSProperties } from "react";
-import { motion } from "framer-motion";
 import "./Svg.scss";
 
 export interface ISvg {
   id: string;
   styles?: CSSProperties;
-  isDragable?: boolean;
 }
 
-export default function Svg({ id, styles, isDragable }: ISvg) {
+export default function Svg({ id, styles }: ISvg) {
   return (
-    <motion.svg
-      initial={{ zIndex: 1 }}
-      drag={isDragable}
-      dragSnapToOrigin={isDragable}
-      className="sprites"
-      style={styles}
-      dragElastic={0.2}
-      whileDrag={{
-        zIndex: 999
-      }}>
+    <svg className="sprites" style={styles}>
       <use xlinkHref={`./sprites.svg#${id}`}></use>
-    </motion.svg>
+    </svg>
   );
 }

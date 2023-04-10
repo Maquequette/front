@@ -6,6 +6,8 @@ import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Stripe from "@/components/01 - Atoms/Stripe/Stripe";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import gwen from "../assets/images/gwen.json";
+import Learn from "@/components/01 - Atoms/Learn/Learn";
+import Block from "@/components/01 - Atoms/Block/Block";
 
 export default function Home(): JSX.Element {
   return (
@@ -14,11 +16,8 @@ export default function Home(): JSX.Element {
         <Hero
           title={
             <Heading tag="h1" level="primary">
-              <span className="learn">
-                LEARN
-                <Svg id="glass" isDragable={true} />
-              </span>
-              <span className="block">FRONT-END / WEB DESIGN</span>
+              <Learn>LEARN</Learn>
+              <Block>FRONT-END / WEB DESIGN</Block>
               <Stripe theme="secondary">
                 THE COOL WAY <Svg id="waves" />
               </Stripe>

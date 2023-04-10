@@ -1,0 +1,17 @@
+.learn {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+
+  .sprites {
+    cursor: grab;
+    position: relative;
+    top: 4rem;
+    width: 10rem;
+    height: 10rem;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
