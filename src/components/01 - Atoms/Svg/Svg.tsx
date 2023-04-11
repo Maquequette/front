@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import Sprites from "../../../assets/images/sprites.svg";
 import "./Svg.scss";
 
 export interface ISvg {
@@ -9,7 +10,7 @@ export interface ISvg {
 export default function Svg({ id, styles }: ISvg) {
   return (
     <svg className="sprites" style={styles}>
-      <use xlinkHref={`./sprites.svg#${id}`}></use>
+      <use xlinkHref={`${Sprites}#${id}`}></use>
     </svg>
   );
 }
