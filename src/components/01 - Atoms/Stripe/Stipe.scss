@@ -2,14 +2,22 @@
 
 .strip {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
   word-break: keep-all;
-  position: relative;
 
   &__container {
     display: flex;
     flex-direction: column;
+    position: relative;
+
+    .sprites {
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      left: 0;
+    }
   }
 
   &::before {
