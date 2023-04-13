@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
+import Sprites from "../../../assets/images/sprites.svg";
 import "./Learn.scss";
 
 export interface ILearn {
@@ -19,7 +20,7 @@ export default function Learn({ children }: ILearn) {
         whileDrag={{
           zIndex: 999
         }}>
-        <use xlinkHref="./sprites.svg#glass"></use>
+        <use xlinkHref={`${Sprites}#glass`}></use>
       </motion.svg>
     </span>
   );

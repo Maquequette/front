@@ -1,0 +1,41 @@
+@import "@/assets/variables";
+
+.folder {
+  padding: 0 1rem;
+  border-radius: 5rem;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  @each $name, $color in $colors {
+    &--#{$name} {
+      background-color: var(--#{$name});
+    }
+  }
+
+  .section {
+    width: 100%;
+    height: 300px;
+    background-color: black; /* Couleur de fond de la section */
+    position: relative;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 90%,
+      calc(50% + 20px) 90%,
+      50% 100%,
+      calc(50% - 20px) 90%,
+      0 90%
+    ); /* Définition du clip-path pour créer l'encoche */
+  }
+
+  .encoche {
+    width: 40px; /* Largeur de l'encoche */
+    height: 40px; /* Hauteur de l'encoche */
+    background-color: red; /* Couleur de fond de l'encoche */
+    border-radius: 50%; /* Arrondi des coins pour créer une encoche ronde */
+    position: absolute;
+    top: -20px; /* Décalage vertical de l'encoche */
+    right: calc(50% - 20px); /* Centrer horizontalement l'encoche */
+  }
+}
