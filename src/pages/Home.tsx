@@ -30,7 +30,17 @@ export default function Home(): JSX.Element {
           illustation={<Player src={gwen} autoplay keepLastFrame />}
         />
         <Folder theme="dark">
-          <Grid>
+          <Grid size="22.5rem">
+            <Collapsible theme="primary">
+              <Svg id="coding" />
+              <Heading tag="h4" level="secondary">
+                CODE THE SKETCH
+              </Heading>
+              <Paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt.
+              </Paragraph>
+            </Collapsible>
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
