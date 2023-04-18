@@ -4,7 +4,6 @@
   border-radius: 5rem;
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -36,7 +35,7 @@
 
   &__body {
     flex: 1;
-    padding: 0 1rem;
+    padding: 0 1rem 5rem 1rem;
   }
 
   @each $name, $color in $colors {

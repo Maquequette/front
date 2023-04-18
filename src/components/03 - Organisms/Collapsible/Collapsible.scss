@@ -5,6 +5,15 @@
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--dark);
+  background-color: var(--light);
+
+  @each $name, $color in $colors {
+    &--#{$name} {
+      .collapsible__header {
+        background-color: var(--#{$name});
+      }
+    }
+  }
 
   &__header {
     border-bottom: 1px solid var(--dark);
@@ -12,12 +21,6 @@
     padding: 1rem;
     justify-content: flex-end;
     column-gap: 1rem;
-
-    @each $name, $color in $colors {
-      &--#{$name} {
-        background-color: var(--#{$name});
-      }
-    }
   }
 
   &__close,

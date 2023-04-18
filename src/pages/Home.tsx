@@ -8,6 +8,10 @@ import Svg from "@/components/01 - Atoms/Svg/Svg";
 import gwen from "../assets/images/gwen.json";
 import Learn from "@/components/01 - Atoms/Learn/Learn";
 import Block from "@/components/01 - Atoms/Block/Block";
+import Folder from "@/components/01 - Atoms/Folder/Folder";
+import Grid from "@/components/02 - Molecules/Grid/Grid";
+import Collapsible from "@/components/03 - Organisms/Collapsible/Collapsible";
+import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 
 export default function Home(): JSX.Element {
   return (
@@ -25,6 +29,40 @@ export default function Home(): JSX.Element {
           }
           illustation={<Player src={gwen} autoplay keepLastFrame />}
         />
+        <Folder theme="dark">
+          <Grid>
+            <Collapsible theme="primary">
+              <Svg id="coding" />
+              <Heading tag="h4" level="secondary">
+                CODE THE SKETCH
+              </Heading>
+              <Paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt.
+              </Paragraph>
+            </Collapsible>
+            <Collapsible theme="primary">
+              <Svg id="coding" />
+              <Heading tag="h4" level="secondary">
+                CODE THE SKETCH
+              </Heading>
+              <Paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt.
+              </Paragraph>
+            </Collapsible>
+            <Collapsible theme="primary">
+              <Svg id="coding" />
+              <Heading tag="h4" level="secondary">
+                CODE THE SKETCH
+              </Heading>
+              <Paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt.
+              </Paragraph>
+            </Collapsible>
+          </Grid>
+        </Folder>
       </Container>
     </PageTransition>
   );
