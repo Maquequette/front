@@ -42,7 +42,7 @@ export default function Navigation({
       variants={{
         open: {
           opacity: 1,
-          height: "100%"
+          height: "auto"
         },
         closed: {
           opacity: 0,

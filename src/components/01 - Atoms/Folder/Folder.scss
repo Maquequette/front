@@ -1,41 +1,55 @@
 @import "@/assets/variables";
 
 .folder {
-  padding: 0 1rem;
   border-radius: 5rem;
-  min-height: 100vh;
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-  @each $name, $color in $colors {
-    &--#{$name} {
-      background-color: var(--#{$name});
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 6rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      mask: url("../../../assets/images/folder.svg") no-repeat 50% 50%;
+      mask-size: cover;
+    }
+
+    .sprites {
+      position: relative;
+      top: 0.5rem;
+      width: 2rem;
+      height: 2rem;
     }
   }
 
-  .section {
-    width: 100%;
-    height: 300px;
-    background-color: black; /* Couleur de fond de la section */
-    position: relative;
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% 90%,
-      calc(50% + 20px) 90%,
-      50% 100%,
-      calc(50% - 20px) 90%,
-      0 90%
-    ); /* Définition du clip-path pour créer l'encoche */
+  &__body {
+    flex: 1;
+    padding: 0 1rem;
   }
 
-  .encoche {
-    width: 40px; /* Largeur de l'encoche */
-    height: 40px; /* Hauteur de l'encoche */
-    background-color: red; /* Couleur de fond de l'encoche */
-    border-radius: 50%; /* Arrondi des coins pour créer une encoche ronde */
-    position: absolute;
-    top: -20px; /* Décalage vertical de l'encoche */
-    right: calc(50% - 20px); /* Centrer horizontalement l'encoche */
+  @each $name, $color in $colors {
+    &--#{$name} {
+      .folder__header {
+        &::after {
+          background-color: var(--#{$name});
+        }
+      }
+
+      .folder__body {
+        background-color: var(--#{$name});
+      }
+    }
   }
 }
