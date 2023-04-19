@@ -18,7 +18,7 @@ export default function Home(): JSX.Element {
     <PageTransition>
       <Container center={true} isLarge={true}>
         <Hero
-          styles={{ zIndex: 1 }}
+          styles={{ zIndex: 1, position: "relative" }}
           title={
             <Heading tag="h1" level="primary">
               <Learn>LEARN</Learn>
