@@ -18,6 +18,7 @@ export default function Home(): JSX.Element {
     <PageTransition>
       <Container center={true} isLarge={true}>
         <Hero
+          styles={{ zIndex: 1 }}
           title={
             <Heading tag="h1" level="primary">
               <Learn>LEARN</Learn>
@@ -29,8 +30,26 @@ export default function Home(): JSX.Element {
           }
           illustation={<Player src={gwen} autoplay keepLastFrame />}
         />
+<<<<<<< Updated upstream
         <Folder theme="dark">
           <Grid>
+=======
+        <Folder theme="dark" styles={{ marginTop: "-12rem", position: "relative" }}>
+          <Heading tag="h2" level="primary" color="light" styles={{ padding: "0 6rem" }}>
+            HOW TO BEGIN PRACTICING ??
+          </Heading>
+          <Grid size="22.5rem" styles={{ padding: "0 6rem" }}>
+            <Collapsible theme="primary">
+              <Svg id="coding" />
+              <Heading tag="h4" level="secondary">
+                CODE THE SKETCH
+              </Heading>
+              <Paragraph>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt.
+              </Paragraph>
+            </Collapsible>
+>>>>>>> Stashed changes
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
@@ -62,6 +81,7 @@ export default function Home(): JSX.Element {
               </Paragraph>
             </Collapsible>
           </Grid>
+          {/* <Folder theme="primary"></Folder> */}
         </Folder>
       </Container>
     </PageTransition>
