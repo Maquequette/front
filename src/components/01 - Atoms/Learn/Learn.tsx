@@ -16,7 +16,6 @@ export default function Learn({ children }: ILearn) {
         dragSnapToOrigin={true}
         className="sprites"
         dragElastic={0.2}
-        onDrag={(event, info) => console.log(document.elementFromPoint(info.point.x, info.point.y))}
         whileDrag={{
           zIndex: 999
         }}>

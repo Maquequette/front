@@ -4,12 +4,11 @@ import "./Grid.scss";
 export interface IGrid {
   children: ReactNode;
   size: string;
-  styles: CSSProperties;
 }
 
-export default function Grid({ children, size, styles }: any) {
+export default function Grid({ children, size }: any) {
   return (
-    <div className="grid" style={{ ...styles, "--size": size } as CSSProperties}>
+    <div className="grid" style={{ "--size": size } as CSSProperties}>
       {children}
     </div>
   );
