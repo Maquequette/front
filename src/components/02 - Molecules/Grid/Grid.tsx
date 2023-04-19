@@ -1,9 +1,6 @@
+import { CSSProperties, ReactNode } from "react";
 import "./Grid.scss";
 
-<<<<<<< Updated upstream
-export default function Grid({ children }: any) {
-  return <div className="grid">{children}</div>;
-=======
 export interface IGrid {
   children: ReactNode;
   size: string;
@@ -16,5 +13,4 @@ export default function Grid({ children, size, styles }: any) {
       {children}
     </div>
   );
->>>>>>> Stashed changes
 }
