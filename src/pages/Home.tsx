@@ -30,10 +30,6 @@ export default function Home(): JSX.Element {
           }
           illustation={<Player src={gwen} autoplay keepLastFrame />}
         />
-<<<<<<< Updated upstream
-        <Folder theme="dark">
-          <Grid>
-=======
         <Folder theme="dark" styles={{ marginTop: "-12rem", position: "relative" }}>
           <Heading tag="h2" level="primary" color="light" styles={{ padding: "0 6rem" }}>
             HOW TO BEGIN PRACTICING ??
@@ -49,7 +45,6 @@ export default function Home(): JSX.Element {
                 incididunt.
               </Paragraph>
             </Collapsible>
->>>>>>> Stashed changes
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
