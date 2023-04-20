@@ -2,6 +2,7 @@ import { CSSProperties } from "react";
 import { HeadingTags } from "@/types/HeadingTags";
 import { ReactNode } from "react";
 import { Levels } from "@/types/Levels";
+import { Theme } from "@/types/Theme";
 import "./Heading.scss";
 
 export interface IHeading {
@@ -9,9 +10,14 @@ export interface IHeading {
   children: ReactNode;
   level: Levels;
   styles?: CSSProperties;
+  color?: Theme;
 }
 
-export default function Heading({ tag, children, level }: IHeading) {
+export default function Heading({ tag, children, level, color, styles }: IHeading) {
   const Tag = tag;
-  return <Tag className={`heading heading--${level}`}>{children}</Tag>;
+  return (
+    <Tag style={styles} className={`heading heading--${level} ${color && `txt--${color}`}`}>
+      {children}
+    </Tag>
+  );
 }

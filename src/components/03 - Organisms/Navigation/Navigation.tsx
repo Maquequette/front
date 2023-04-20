@@ -11,7 +11,13 @@ import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import useAuth from "@/hooks/useAuth";
 
-export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: boolean, callback?: Function }) {
+export default function Navigation({
+  isOpen,
+  callback = () => {}
+}: {
+  isOpen?: boolean;
+  callback?: Function;
+}) {
   const isDesktop = useMediaQuery("(min-width: 64em)");
 
   const navItem = {
@@ -19,21 +25,28 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
     open: { opacity: 1, x: 0, transition: { duration: isDesktop ? 0 : 1 } }
   };
 
-  const location = useLocation()
-  const { onLogout } = useAuth()
-  const { modalAuth, setModalAuth, isConnected } = useContext(AuthContext)
+  const location = useLocation();
+  const { onLogout } = useAuth();
+  const { modalAuth, setModalAuth, isConnected } = useContext(AuthContext);
 
   return (
     <motion.nav
       className="nav"
       animate={isOpen || isDesktop ? "open" : "closed"}
       initial={false}
+      transition={{
+        height: {
+          duration: 0
+        }
+      }}
       variants={{
         open: {
-          opacity: 1
+          opacity: 1,
+          height: "auto"
         },
         closed: {
-          opacity: 0
+          opacity: 0,
+          height: 0
         }
       }}>
       <motion.ul
@@ -42,39 +55,59 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
         initial={false}
         transition={{ staggerChildren: isDesktop ? 0 : 0.1 }}>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink to="/" theme="primary" icon={<Svg id="home" />} clickCallback={() => { callback() }}>
+          <Navlink
+            to="/"
+            theme="primary"
+            icon={<Svg id="home" />}
+            clickCallback={() => {
+              callback();
+            }}>
             Home
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink to="/challenges" theme="primary" clickCallback={() => { callback() }}>
+          <Navlink
+            to="/challenges"
+            theme="primary"
+            clickCallback={() => {
+              callback();
+            }}>
             Challenges
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink to="/lessons" theme="primary" clickCallback={() => { callback() }}>
+          <Navlink
+            to="/lessons"
+            theme="primary"
+            clickCallback={() => {
+              callback();
+            }}>
             Lessons
           </Navlink>
         </motion.li>
-        {!isConnected()
-          ?
+        {!isConnected() ? (
           <motion.li className="nav__item" variants={navItem}>
             <Navlink
-              to='#'
+              to="#"
               theme="primary"
-              classes={modalAuth ? 'modalActive' : ''}
+              classes={modalAuth ? "modalActive" : ""}
               id="connection"
               clickCallback={() => {
-                callback()
-                setModalAuth(true)
+                callback();
+                setModalAuth(true);
               }}>
               Log in /Sign in
             </Navlink>
           </motion.li>
-          :
+        ) : (
           <>
             <motion.li className="nav__item" variants={navItem}>
-              <Navlink to="/classroom" theme="primary" clickCallback={() => { callback() }}>
+              <Navlink
+                to="/classroom"
+                theme="primary"
+                clickCallback={() => {
+                  callback();
+                }}>
                 Classroom
               </Navlink>
             </motion.li>
@@ -85,8 +118,9 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
                 theme="primary"
                 icon={<Svg id="bell" />}
                 badge={<Badge theme="primary">1</Badge>}
-                clickCallback={() => { callback() }}
-              >
+                clickCallback={() => {
+                  callback();
+                }}>
                 Notifications
               </Navlink>
             </motion.li>
@@ -97,14 +131,24 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
                 options={[
                   {
                     component: (
-                      <Navlink to="/profil" theme="primary" clickCallback={() => { callback() }}>
+                      <Navlink
+                        to="/profil"
+                        theme="primary"
+                        clickCallback={() => {
+                          callback();
+                        }}>
                         Profile
                       </Navlink>
                     )
                   },
                   {
                     component: (
-                      <Navlink to="/profil/settings" theme="primary" clickCallback={() => { callback() }}>
+                      <Navlink
+                        to="/profil/settings"
+                        theme="primary"
+                        clickCallback={() => {
+                          callback();
+                        }}>
                         Settings
                       </Navlink>
                     )
@@ -115,10 +159,9 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
                         to="/logout"
                         theme="primary"
                         clickCallback={() => {
-                          callback()
-                          onLogout()
-                        }}
-                      >
+                          callback();
+                          onLogout();
+                        }}>
                         Log Out
                       </Navlink>
                     )
@@ -127,7 +170,7 @@ export default function Navigation({ isOpen, callback = () => { } }: { isOpen?: 
               />
             </motion.li>
           </>
-        }
+        )}
       </motion.ul>
       <Tools />
     </motion.nav>
