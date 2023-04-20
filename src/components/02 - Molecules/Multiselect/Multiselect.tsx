@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Options from "@/components/01 - Atoms/Options/Options";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
@@ -11,11 +11,14 @@ export interface IMultiselect {
   theme: Theme;
   multiple?: boolean;
   searchable?: boolean;
+  defaultText?: string;
+  className?: string;
 }
 
 export interface ISelectOption {
   value: string | number;
   label: string;
+  default?: boolean;
 }
 
 export default function Multiselect({
@@ -23,9 +26,16 @@ export default function Multiselect({
   theme,
   multiple = true,
   searchable = false,
+  defaultText = null!,
+  className = '',
 }: IMultiselect) {
 
-  const [selected, setSelected] = useState<Array<ISelectOption>>([]);
+  const defaultSelection = (): Array<ISelectOption> => {
+    let defaultOption = options.find(option => option.default)
+    return defaultOption ? [defaultOption] : []
+  }
+
+  const [selected, setSelected] = useState<Array<ISelectOption>>(defaultSelection);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -59,7 +69,7 @@ export default function Multiselect({
 
   return (
 
-    <div className="multiselect" ref={ref}>
+    <div className={`multiselect ${className}`} ref={ref}>
 
       <div
         className="multiselect__input"
@@ -74,7 +84,7 @@ export default function Multiselect({
               type={searchWriting ? 'search' : 'text'}
               className="multiselect__input__text"
               readOnly={!searchWriting}
-              value={searchWriting ? searchQuery : (selected[0]?.label ?? "Choose")}
+              value={searchWriting ? searchQuery : (selected[0]?.label ?? (defaultText ?? "Choose"))}
               placeholder="Search something..."
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setSearchQuery(e.target.value)
@@ -82,7 +92,7 @@ export default function Multiselect({
             />
             : (
               selected.length === 0
-                ? "Choose"
+                ? (defaultText ?? "Choose")
                 : selected.map((element: ISelectOption) => {
                   return (
                     <div

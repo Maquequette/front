@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { ThemesContext } from "@/contexts/ThemesContext";
-import { BrowserRouter } from "react-router-dom";
 import Router from "./router/Router";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MutationCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useToasts from "./hooks/useToasts";
+import { MobileProvider } from "./contexts/MobileContext";
 
 export default function App() {
-  const { theme } = useContext(ThemesContext);
+  const { theme } = useContext(ThemesContext)
   const { pushToast } = useToasts()
 
   const queryClient = new QueryClient({
@@ -26,13 +26,13 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div data-theme={theme} className="app">
-        <BrowserRouter>
+      <MobileProvider>
+        <div data-theme={theme} className="app">
           <AuthProvider>
             <Router />
           </AuthProvider>
-        </BrowserRouter>
-      </div>
+        </div>
+      </MobileProvider>
     </QueryClientProvider>
   );
 }

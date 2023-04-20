@@ -1,26 +1,31 @@
-import { ReactNode, useContext } from 'react'
+import { ReactNode, useContext, useEffect } from 'react'
 import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 import { TabsContext } from '@/contexts/TabsContext'
 import './Tabs.scss'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 
 export interface ITabs {
     tabs: Array<ITabsParameters>
     id?: String
+    anchorNavigation?: Boolean
 }
 
 export interface ITabsParameters {
     tabTitle: String
     tabContent: ReactNode
+    anchor?: String
 }
 
 export default function Tabs({
     tabs,
     id = '',
+    anchorNavigation = false
 }: ITabs) {
 
+    const location = useLocation()
+    const navigate = useNavigate()
     const { currentTab, updateTabs } = useContext(TabsContext)
-
     const animationControls = useAnimation();
 
     async function sequence() {
@@ -29,6 +34,14 @@ export default function Tabs({
             opacity: 0,
         })
     }
+
+    useEffect(() => {
+        tabs.forEach((tab, i) => {
+            if (tab.anchor === location.hash) {
+                updateTabs(i)
+            }
+        })
+    }, [location])
 
     return (
 
@@ -40,7 +53,7 @@ export default function Tabs({
                         className={`tabs__choice__item w-${tabs.length} ${currentTab == i ? 'active' : ''}`}
                         type='button'
                         key={`tabBtn-${i}-${id}`}
-                        onClick={() => updateTabs(i)}
+                        onClick={() => anchorNavigation ? navigate(location.pathname + tab.anchor) : updateTabs(i)}
                     >
                         {tab.tabTitle}
                     </button>

@@ -21,7 +21,7 @@
     }
   }
 
-  @media (min-width: 64em) {
+  @media (min-width: #{map-get($breakpoints, "l")}) {
     position: absolute;
     top: 0;
     left: 100%;

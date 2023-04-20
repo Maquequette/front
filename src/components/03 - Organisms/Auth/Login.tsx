@@ -1,5 +1,6 @@
 import { TabsContext } from '@/contexts/TabsContext'
 import { FormEvent, useContext, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import useAuth from '@/hooks/useAuth'
 
 import Heading from '@/components/01 - Atoms/Heading/Heading'
@@ -51,11 +52,10 @@ export default function Login() {
 
                 <p className='login__subtitle'>
                     Don't have account ?
-                    <button
-                        type="button"
+                    <NavLink
+                        to={"#register"}
                         style={{ padding: '0 0.5rem' }}
-                        onClick={() => updateTabs(1)}
-                    > Register here </button>
+                    > Register here </NavLink>
                 </p>
             </div>
 
@@ -113,8 +113,8 @@ export default function Login() {
                     >Stay connected ?</Label>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <p className='login__form__subtitle'>
+                <div className="login__form__btns">
+                    <p className='login__form__btns__subtitle'>
                         <button type="button" onClick={() => forgotPassword()}>Forgot your password ?</button>
                     </p>
 

@@ -5,14 +5,15 @@ import "./Search.scss";
 
 export interface ISearch {
   placeholder: string;
+  className?: string;
 }
 
-export default function Search({ placeholder }: ISearch) {
+export default function Search({ placeholder, className }: ISearch) {
   const [value, setValue] = useState("");
   const { data } = useSearch(value);
 
   return (
-    <div className="search">
+    <div className={`search ${className}`}>
       <div className="search__input">
         <Svg id="glass" />
         <input
