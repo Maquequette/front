@@ -37,13 +37,10 @@
     display: flex;
     flex-direction: column;
     row-gap: 6rem;
+    padding: 0 1rem;
 
     > :not(.folder) {
-      padding: 0 7rem;
-    }
-
-    > .folder {
-      padding: 0 1rem;
+      padding: 0 6rem;
     }
   }
 
