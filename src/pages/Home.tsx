@@ -13,6 +13,7 @@ import Grid from "@/components/02 - Molecules/Grid/Grid";
 import Collapsible from "@/components/03 - Organisms/Collapsible/Collapsible";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import Button from "@/components/01 - Atoms/Button/Button";
+import Card from "@/components/03 - Organisms/Card/Card";
 
 export default function Home(): JSX.Element {
   return (
@@ -31,11 +32,11 @@ export default function Home(): JSX.Element {
           }
           illustation={<Player src={gwen} autoplay keepLastFrame />}
         />
-        <Folder theme="dark" styles={{ marginTop: "-12rem", position: "relative" }}>
+        <Folder down="dark" theme="dark" styles={{ marginTop: "-12rem", position: "relative" }}>
           <Heading tag="h2" level="primary" color="light">
             HOW TO BEGIN PRACTICING ??
           </Heading>
-          <Grid size="22.5rem" styles={{ marginTop: "6rem" }}>
+          <Grid size="22.5rem">
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
@@ -77,11 +78,82 @@ export default function Home(): JSX.Element {
               </Paragraph>
             </Collapsible>
           </Grid>
-          <Button theme="success">
-            <Svg id="arrow" />
-            TRY IT NOW !
-          </Button>
-          {/* <Folder theme="primary"></Folder> */}
+          <div className="d-flex justify-end">
+            <Button theme="success">
+              <Svg id="arrow" />
+              TRY IT NOW !
+            </Button>
+          </div>
+          <Folder theme="primary" down="light">
+            <Heading tag="h2" level="primary" color="dark">
+              AND WE PROVIDE LESSONS TOO !!
+            </Heading>
+            <Grid size="33rem">
+              <Card
+                tags={[
+                  { label: "HTML", theme: "primary" },
+                  { label: "CSS", theme: "secondary" },
+                  { label: "JS", theme: "success" },
+                  { label: "PHP", theme: "danger" },
+                  { label: "JAVA", theme: "warn" },
+                  { label: "HTML", theme: "primary" },
+                  { label: "CSS", theme: "secondary" },
+                  { label: "JS", theme: "success" },
+                  { label: "PHP", theme: "danger" },
+                  { label: "JAVA", theme: "warn" }
+                ]}
+                price={{ value: "10", currency: "EUR" }}
+                author="John Doe Mino"
+                date={Date.now()}
+                title="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi nulla eos magnam harum sapiente aut laboriosam commodi"
+                img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
+              />
+              <Card
+                tags={[
+                  { label: "HTML", theme: "primary" },
+                  { label: "CSS", theme: "secondary" },
+                  { label: "JS", theme: "success" },
+                  { label: "PHP", theme: "danger" },
+                  { label: "JAVA", theme: "warn" },
+                  { label: "HTML", theme: "primary" },
+                  { label: "CSS", theme: "secondary" },
+                  { label: "JS", theme: "success" },
+                  { label: "PHP", theme: "danger" },
+                  { label: "JAVA", theme: "warn" }
+                ]}
+                price={{ value: "10", currency: "EUR" }}
+                author="John Doe Mino"
+                date={Date.now()}
+                title="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi nulla eos magnam harum sapiente aut laboriosam commodi"
+                img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
+              />
+              <Card
+                tags={[
+                  { label: "HTML", theme: "primary" },
+                  { label: "CSS", theme: "secondary" },
+                  { label: "JS", theme: "success" },
+                  { label: "PHP", theme: "danger" },
+                  { label: "JAVA", theme: "warn" },
+                  { label: "HTML", theme: "primary" },
+                  { label: "CSS", theme: "secondary" },
+                  { label: "JS", theme: "success" },
+                  { label: "PHP", theme: "danger" },
+                  { label: "JAVA", theme: "warn" }
+                ]}
+                price={{ value: "10", currency: "EUR" }}
+                author="John Doe Mino"
+                date={Date.now()}
+                title="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi nulla eos magnam harum sapiente aut laboriosam commodi"
+                img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
+              />
+            </Grid>
+            <div className="d-flex justify-end">
+              <Button theme="primary">
+                <Svg id="arrow" />
+                TRY IT NOW !
+              </Button>
+            </div>
+          </Folder>
         </Folder>
       </Container>
     </PageTransition>

@@ -4,13 +4,13 @@ import { Theme } from "@/types/Theme";
 import "./Button.scss";
 
 export interface IButton {
-  type?: BtnTypes
-  children: ReactNode
-  handleClick?: MouseEventHandler
-  theme: Theme
-  disabled?: boolean
-  styles?: CSSProperties
-  btnStyles?: CSSProperties
+  type?: BtnTypes;
+  children: ReactNode;
+  handleClick?: MouseEventHandler;
+  theme: Theme;
+  disabled?: boolean;
+  styles?: CSSProperties;
+  btnStyles?: CSSProperties;
 }
 
 export default function Button({
@@ -29,8 +29,7 @@ export default function Button({
         type={type ?? "button"}
         onClick={handleClick ?? undefined}
         className={`btn__input btn__input--${theme}`}
-        style={btnStyles}
-      >
+        style={btnStyles}>
         {children}
       </button>
     </div>

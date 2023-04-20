@@ -7,12 +7,13 @@ export interface IFolder {
   theme: Theme;
   children: ReactNode;
   styles?: CSSProperties;
+  down: Theme;
 }
 
-export default function Folder({ theme, children, styles }: IFolder) {
+export default function Folder({ theme, children, styles, down }: IFolder) {
   return (
     <div className={`folder folder--${theme}`} style={styles}>
-      <div className="folder__header">
+      <div className={`folder__header down--${down}`}>
         <Svg id="down" />
       </div>
       <div className="folder__body">{children}</div>
