@@ -3,6 +3,7 @@
 .btn {
   position: relative;
   width: fit-content;
+  isolation: isolate;
 
   &::after {
     content: "";

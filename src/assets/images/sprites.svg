@@ -6,10 +6,13 @@
 	c-20.3,0-36.8,16.8-36.8,37.4S205.7,555.9,226.1,555.9L226.1,555.9z"></path>
   </svg>
 
-  <svg version="1.1" id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" fill="none" xml:space="preserve" viewBox="0 0 45 33">
-    <path d="M22.0065 9.35696H22.5065V8.85696V0.974213L44.1424 16.5L22.5065 32.0258V24.143V23.643H22.0065H15.5V9.35696H22.0065Z" fill="#FFDE79" stroke="#171717"/>
-    <path d="M7.5 9.5H11.5V23.5H7.5V9.5Z" fill="#FFDE79" stroke="#171717"/>
-    <path d="M0.5 9.5H2.5V23.5H0.5V9.5Z" fill="#FFDE79" stroke="#171717"/>
+  <svg version="1.1" id="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 624 627" xml:space="preserve">
+    <g>
+      <path d="M596,317L314.1,37v150.3h-85.9v259.4h85.9V597L596,317z"/>
+      <path d="M121.9,187.3h63.5v259.4h-63.5V187.3z"/>
+      <path d="M36,187.3h42.9v259.4H36V187.3z"/>
+    </g>
   </svg>
 
   <svg version="1.1" id="feedback" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve" viewBox="0 0 570 568">

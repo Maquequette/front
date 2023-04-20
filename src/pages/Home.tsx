@@ -12,6 +12,7 @@ import Folder from "@/components/01 - Atoms/Folder/Folder";
 import Grid from "@/components/02 - Molecules/Grid/Grid";
 import Collapsible from "@/components/03 - Organisms/Collapsible/Collapsible";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
+import Button from "@/components/01 - Atoms/Button/Button";
 
 export default function Home(): JSX.Element {
   return (
@@ -31,10 +32,10 @@ export default function Home(): JSX.Element {
           illustation={<Player src={gwen} autoplay keepLastFrame />}
         />
         <Folder theme="dark" styles={{ marginTop: "-12rem", position: "relative" }}>
-          <Heading tag="h2" level="primary" color="light" styles={{ padding: "0 6rem" }}>
+          <Heading tag="h2" level="primary" color="light">
             HOW TO BEGIN PRACTICING ??
           </Heading>
-          <Grid size="22.5rem" styles={{ padding: "0 6rem" }}>
+          <Grid size="22.5rem" styles={{ marginTop: "6rem" }}>
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
@@ -76,6 +77,10 @@ export default function Home(): JSX.Element {
               </Paragraph>
             </Collapsible>
           </Grid>
+          <Button theme="success">
+            <Svg id="arrow" />
+            TRY IT NOW !
+          </Button>
           {/* <Folder theme="primary"></Folder> */}
         </Folder>
       </Container>
