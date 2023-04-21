@@ -3,6 +3,8 @@
   display: grid;
 
   @media (min-width: 48em) {
+    grid-template-columns: 1fr 1fr;
+
     .lf-player-container {
       margin-top: -8rem;
     }

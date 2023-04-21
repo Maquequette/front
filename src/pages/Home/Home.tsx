@@ -5,7 +5,7 @@ import Container from "@/components/01 - Atoms/Container/Container";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Stripe from "@/components/01 - Atoms/Stripe/Stripe";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
-import gwen from "../assets/images/gwen.json";
+import gwen from "../../assets/images/gwen.json";
 import Learn from "@/components/01 - Atoms/Learn/Learn";
 import Block from "@/components/01 - Atoms/Block/Block";
 import Folder from "@/components/01 - Atoms/Folder/Folder";
@@ -14,6 +14,7 @@ import Collapsible from "@/components/03 - Organisms/Collapsible/Collapsible";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import Button from "@/components/01 - Atoms/Button/Button";
 import Card from "@/components/03 - Organisms/Card/Card";
+import "./Home.scss";
 
 export default function Home(): JSX.Element {
   return (
@@ -32,7 +33,7 @@ export default function Home(): JSX.Element {
           }
           illustation={<Player src={gwen} autoplay keepLastFrame />}
         />
-        <Folder down="dark" theme="dark" styles={{ marginTop: "-12rem", position: "relative" }}>
+        <Folder down="dark" theme="dark">
           <Heading tag="h2" level="primary" color="light">
             HOW TO BEGIN PRACTICING ??
           </Heading>
