@@ -1,9 +1,13 @@
 @import "@/assets/variables";
 
 .folder {
-  border-radius: 5rem;
+  border-radius: 2rem;
   position: relative;
   overflow: hidden;
+
+  @media (min-width: 64rem) {
+    border-radius: 5rem;
+  }
 
   &__header {
     width: 100%;
