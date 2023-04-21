@@ -45,7 +45,8 @@ $fontSizes: (
 
 $fontFamilies: (
   "primary": '"Roboto", sans-serif',
-  "secondary": '"Space Grotesk",sans-serif'
+  "secondary": '"Space Grotesk",sans-serif',
+  "tertiary": '"Kanit", sans-serif'
 );
 
 $fontWeights: (
@@ -53,8 +54,8 @@ $fontWeights: (
   "bold": 700
 );
 
-$container: 120em;
-$container-xl: 130em;
+$container: calc(120em + 6rem);
+$container-xl: calc(130em + 6rem);
 
 $breakpoints: (
   "sm": 40em,

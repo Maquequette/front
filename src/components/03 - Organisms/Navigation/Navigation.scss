@@ -8,7 +8,6 @@
   width: 100%;
   margin-top: var(--spacing-l);
   padding: 2rem;
-  height: calc(100vh - 16rem);
   overflow-y: scroll;
 
   @media (min-width: #{map-get($breakpoints, "l")}) {

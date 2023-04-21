@@ -1,0 +1,47 @@
+@import "@/assets/variables";
+
+.strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  word-break: keep-all;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .sprites {
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      left: 0;
+    }
+  }
+
+  &::before {
+    content: "";
+    height: 5rem;
+    max-width: 30rem;
+    border-radius: 2rem;
+    flex: 1;
+    background-color: var(--secondary);
+  }
+
+  @each $name, $color in $colors {
+    &--#{$name} {
+      &::before {
+        background-color: var(--#{$name});
+      }
+
+      .sprites {
+        fill: var(--#{$name});
+      }
+    }
+  }
+
+  .sprites {
+    height: 5rem;
+  }
+}

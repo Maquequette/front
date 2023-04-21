@@ -1,16 +1,18 @@
 .logo {
-  width: 6rem;
-  height: 6rem;
-  display: block;
+  display: flex;
+  text-decoration: none;
+  align-items: flex-end;
+  gap: 0.2rem;
 
   &__img {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 6rem;
+    height: 6rem;
     object-fit: cover;
   }
 
   &__txt {
-    font-family: var(--font-family-secondary);
+    color: var(--dark);
+    font-family: var(--font-family-tertiary);
   }
 }
