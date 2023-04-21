@@ -149,7 +149,7 @@ export default function Home(): JSX.Element {
               />
             </Grid>
             <div className="d-flex justify-end">
-              <Button theme="primary">
+              <Button theme="dark">
                 <Svg id="arrow" />
                 TRY IT NOW !
               </Button>
