@@ -9,6 +9,12 @@
   font-size: var(--font-size-md);
   font-family: var(--font-family-secondary);
 
+  &.active {
+    .multiselect__input__sprite .sprites {
+      rotate: 180deg;
+    }
+  }
+
   &__input {
     position: relative;
     display: grid;
@@ -76,6 +82,7 @@
       >.sprites {
         width: 1rem;
         height: 1rem;
+        @extend .transition;
       }
     }
   }

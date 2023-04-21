@@ -78,6 +78,14 @@
                     & .labelContainer:not(:first-child) {
                         padding-top: 2rem;
                     }
+
+                    @for $i from 1 through 8 {
+                        @for $j from 1 through 8 {
+                            & .gc-#{$i}to#{$j} {
+                                z-index: 10-$i;
+                            }
+                        }
+                    }
                 }
             }
 

@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { memo, forwardRef, useImperativeHandle, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Options from "@/components/01 - Atoms/Options/Options";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import { Theme } from "@/types/Theme";
 import useClickOutside from "@/hooks/useClickOutside";
 import "./Multiselect.scss";
+import clsx from "clsx";
 
 export interface IMultiselect {
   options: ISelectOption[];
@@ -16,19 +17,20 @@ export interface IMultiselect {
 }
 
 export interface ISelectOption {
-  value: string | number;
+  value: string | number | null;
   label: string;
   default?: boolean;
+  children?: Array<ISelectOption>;
 }
 
-export default function Multiselect({
+const Multiselect = forwardRef(({
   options,
   theme,
   multiple = true,
   searchable = false,
   defaultText = null!,
   className = '',
-}: IMultiselect) {
+}: IMultiselect, _ref) => {
 
   const defaultSelection = (): Array<ISelectOption> => {
     let defaultOption = options.find(option => option.default)
@@ -65,11 +67,17 @@ export default function Multiselect({
     setIsActive(false)
   }
 
+  useImperativeHandle(_ref, () => ({
+    getSelected: () => {
+      return selected;
+    }
+  }))
+
   const ref = useClickOutside(closeDropdown);
 
   return (
 
-    <div className={`multiselect ${className}`} ref={ref}>
+    <div className={`multiselect ${className} ${isActive ? 'active' : ''}`} ref={ref}>
 
       <div
         className="multiselect__input"
@@ -100,7 +108,7 @@ export default function Multiselect({
                       key={element.value + "_badge"}
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleSelect(element);
+                        handleMultiselect(element);
                       }}>
                       {element.label}
                       <Svg id="cross" />
@@ -137,20 +145,41 @@ export default function Multiselect({
               animate="show">
               {options.filter((element: ISelectOption) => {
                 return !searchQuery ? true : element.label.toLowerCase().includes(searchQuery.toLowerCase())
-              }).map((element: ISelectOption) => {
+              }).map((element: ISelectOption, index: number) => {
+
                 return (
                   <Options
                     isChecked={selected.includes(element)}
                     hasCheckbox={multiple}
-                    key={element.value}
+                    key={index}
                     theme={theme}
                     label={element.label}
-                    value={element.value}
-                    classes={selected.includes(element) && !multiple ? 'active' : ''}
+                    value={element.value!}
+                    classes={clsx(selected.includes(element) && !multiple ? 'active' : '')}
                     handleClick={() => {
                       multiple ? handleMultiselect(element) : handleSelect(element)
                     }}
-                  />
+                  >
+
+                    {element.children?.filter((option: ISelectOption) => {
+                      return !searchQuery ? true : option.label.toLowerCase().includes(searchQuery.toLowerCase())
+                    }).map((option: ISelectOption, index: number) =>
+
+                      <Options
+                        isChecked={selected.includes(option)}
+                        hasCheckbox={multiple}
+                        key={index}
+                        theme={theme}
+                        label={option.label}
+                        value={option.value!}
+                        classes={clsx(selected.includes(option) && !multiple ? 'active' : '')}
+                        handleClick={() => {
+                          multiple ? handleMultiselect(option) : handleSelect(option)
+                        }}
+                      />
+                    )}
+
+                  </Options>
                 );
               })}
             </motion.div>
@@ -161,4 +190,7 @@ export default function Multiselect({
     </div>
 
   );
-}
+})
+
+
+export default memo(Multiselect)

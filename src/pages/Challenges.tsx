@@ -1,3 +1,5 @@
+import Button from "@/components/01 - Atoms/Button/Button";
+import Container from "@/components/01 - Atoms/Container/Container";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Search from "@/components/01 - Atoms/Search/Search";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
@@ -10,7 +12,7 @@ import { useContext } from "react";
 
 export default function Challenges() {
 
-  const { mainColor } = useContext(ThemesContext)
+  const { mainColor } = useContext(ThemesContext);
 
   return (
     <PageTransition>
@@ -26,16 +28,41 @@ export default function Challenges() {
             <Search placeholder={"Type something here..."} className="gc-2to4 gr-2" />
 
             <Label name="filter" className="gc-4to7 gr-1">Filter by</Label>
-            <Multiselect theme={"primary"} searchable={true} defaultText="Technologies, sketch format, level" className="gc-4to7 gr-2" options={[]} />
+            <Multiselect
+              theme={"primary"}
+              searchable={true}
+              defaultText="Technologies, sketch format, level"
+              className="gc-4to7 gr-2"
+              options={[
+                {
+                  value: null,
+                  label: 'levels',
+                  children: [
+                    {
+                      value: 1,
+                      label: 'Moldu'
+                    },
+                    {
+                      value: 2,
+                      label: 'Apprenti Sorcier'
+                    },
+                  ]
+                },
+              ]}
+            />
 
             <Label name="sort" className="gc-7to8 gr-1">Sort by</Label>
-            <Multiselect theme={"primary"} multiple={false} className="gc-7to8 gr-2" options={[
-              {
-                value: 'ASC',
-                label: 'Latest',
-                default: true
-              }
-            ]} />
+            <Multiselect
+              theme={"primary"}
+              multiple={false}
+              className="gc-7to8 gr-2"
+              options={[
+                {
+                  value: 'ASC',
+                  label: 'Latest',
+                  default: true
+                }
+              ]} />
           </>
         }
       >
@@ -53,6 +80,14 @@ export default function Challenges() {
         </div>
 
       </ColoredLine>
+
+      <Container>
+        <div>
+          <Button theme={"primary"}>
+            Create
+          </Button>
+        </div>
+      </Container>
 
     </PageTransition>
   );

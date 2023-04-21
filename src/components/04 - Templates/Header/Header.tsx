@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { MobileContext } from "@/contexts/MobileContext";
 import useDisableScroll from "@/hooks/useDisableScroll";
 import Container from "@/components/01 - Atoms/Container/Container";
