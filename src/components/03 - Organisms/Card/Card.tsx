@@ -38,7 +38,7 @@ export default function Card({ img, title, tags, author, price, date }: ICard) {
       </div>
       <div className="card__footer">
         <p className="card__info">
-          {author && `${author} -`}
+          {author && `${author} - `}
           {date && <Date date={date} />}
         </p>
         {price && <Price theme="success" type="outline" value={price} />}

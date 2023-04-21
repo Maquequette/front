@@ -1,0 +1,8 @@
+.hero + .folder {
+  margin-top: 10rem;
+
+  @media (min-width: 64rem) {
+    position: relative;
+    margin-top: -12rem;
+  }
+}

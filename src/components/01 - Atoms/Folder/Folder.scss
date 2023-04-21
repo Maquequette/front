@@ -1,11 +1,13 @@
 @import "@/assets/variables";
 
 .folder {
-  border-radius: 5rem;
+  border-radius: 2rem;
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+
+  @media (min-width: 64rem) {
+    border-radius: 5rem;
+  }
 
   &__header {
     width: 100%;
@@ -36,7 +38,24 @@
 
   &__body {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    row-gap: 6rem;
     padding: 0 1rem 5rem 1rem;
+
+    > :not(.folder) {
+      @media (min-width: 64rem) {
+        padding: 0 6rem;
+      }
+    }
+  }
+
+  .down {
+    @each $name, $color in $colors {
+      &--#{$name} {
+        color: var(--#{$name});
+      }
+    }
   }
 
   @each $name, $color in $colors {

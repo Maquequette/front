@@ -5,11 +5,11 @@ import RequiredLayout from "@/components/05 - Layout/RequiredLayout/RequiredLayo
 
 
 const Home = lazy(() => {
-  return import("@/pages/Home");
+  return import("@/pages/Home/Home");
 });
 
 const NoMatch = lazy(() => {
-  return import("@/pages/NoMatch");
+  return import("@/pages/NoMatch/NoMatch");
 });
 
 const DesignSystem = lazy(() => {
@@ -17,15 +17,15 @@ const DesignSystem = lazy(() => {
 });
 
 const Challenges = lazy(() => {
-  return import("@/pages/Challenges");
+  return import("@/pages/Challenges/Challenges");
 });
 
 const Lessons = lazy(() => {
-  return import("@/pages/Lessons");
+  return import("@/pages/Lessons/Lessons");
 });
 
 const Classroom = lazy(() => {
-  return import("@/pages/Classroom");
+  return import("@/pages/ClassRoom/ClassRoom");
 });
 
 export default function Router(): JSX.Element {
