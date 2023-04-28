@@ -3,10 +3,14 @@
 
 .login {
     @extend .full;
-    padding: 2rem 4rem;
+    padding: 2rem 2rem;
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     grid-template-rows: repeat(2, min-content);
+
+    @media (min-width: #{map-get($breakpoints, "sm")}) {
+        padding: 2rem 4rem;
+    }
 
     &__subtitle {
         padding-bottom: 0.5rem;
@@ -15,12 +19,14 @@
         font-family: var(--font-family-secondary);
         opacity: 0.6;
 
-        & button {
+        & button,
+        a {
             @extend .btn-none;
             color: var(--dark);
             font-size: var(--font-size-sm);
             font-family: var(--font-family-secondary);
             cursor: pointer;
+            text-decoration: none;
 
             &:hover {
                 opacity: 1;
@@ -35,9 +41,17 @@
         grid-template-rows: repeat(4, min-content);
         gap: 1rem;
 
-        &__subtitle {
-            @extend .login__subtitle;
-            padding: 0;
+        &__btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            &__subtitle {
+                @extend .login__subtitle;
+                padding: 0;
+            }
         }
     }
 }

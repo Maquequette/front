@@ -3,11 +3,15 @@
 
 .register {
     @extend .full;
-    padding: 2rem 4rem;
+    padding: 2rem 2rem;
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     grid-template-rows: repeat(2, min-content);
     gap: 1rem;
+
+    @media (min-width: #{map-get($breakpoints, "sm")}) {
+        padding: 2rem 4rem;
+    }
 
     &__subtitle {
         padding-bottom: 0.5rem;
@@ -16,11 +20,12 @@
         font-family: var(--font-family-secondary);
         opacity: 0.6;
 
-        & button {
+        & a {
             @extend .btn-none;
             color: var(--dark);
             font-size: var(--font-size-sm);
             font-family: var(--font-family-secondary);
+            text-decoration: none;
             cursor: pointer;
 
             &:hover {

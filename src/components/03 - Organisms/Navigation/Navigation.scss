@@ -1,4 +1,5 @@
 @import "@/assets/utilities";
+@import "@/assets/variables";
 
 .nav {
   position: absolute;
@@ -9,7 +10,8 @@
   padding: 2rem;
   overflow-y: scroll;
 
-  @media (min-width: 64em) {
+  @media (min-width: #{map-get($breakpoints, "l")}) {
+    height: 100%;
     position: relative;
     top: 0;
     opacity: 1;
@@ -25,7 +27,7 @@
     row-gap: 1rem;
     list-style-type: none;
 
-    @media (min-width: 64em) {
+    @media (min-width: #{map-get($breakpoints, "l")}) {
       flex-direction: row;
       align-items: center;
       background-color: var(--light);
@@ -37,7 +39,7 @@
   }
 
   &__item {
-    @media (min-width: 64em) {
+    @media (min-width: #{map-get($breakpoints, "l")}) {
       height: 100%;
 
       &:first-child {

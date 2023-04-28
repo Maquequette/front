@@ -1,4 +1,4 @@
-@import "../../../assets/variables";
+@import "@/assets/variables";
 
 .link {
   display: flex;
@@ -9,7 +9,7 @@
   position: relative;
   padding: 1rem 1rem;
 
-  @media (min-width: 64em) {
+  @media (min-width: #{map-get($breakpoints, "l")}) {
     padding: 1rem 3rem;
   }
 
@@ -24,13 +24,13 @@
     font-family: var(--font-family-secondary);
     text-transform: uppercase;
 
-    @media (min-width: 64em) {
+    @media (min-width: #{map-get($breakpoints, "l")}) {
       font-size: var(--font-size-md);
     }
   }
 
   &--icon {
-    @media (min-width: 64em) {
+    @media (min-width: #{map-get($breakpoints, "l")}) {
       padding: 1rem;
 
       .link__txt {

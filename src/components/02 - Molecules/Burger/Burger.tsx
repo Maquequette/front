@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { MouseEventHandler } from "react";
 import "./Burger.scss";
 

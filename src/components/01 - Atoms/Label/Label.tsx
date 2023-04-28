@@ -4,6 +4,7 @@ import "./Label.scss"
 export interface ILabel {
     name: string
     children: ReactNode
+    className?: string
     classes?: string
     required?: boolean
     styles?: CSSProperties
@@ -14,6 +15,7 @@ export interface ILabel {
 export default function Label({
     name,
     children,
+    className = '',
     classes = '',
     required = false,
     styles,
@@ -23,7 +25,7 @@ export default function Label({
 
     return (
         <div
-            className="labelContainer"
+            className={`labelContainer ${className}`}
             style={styles}
         >
 

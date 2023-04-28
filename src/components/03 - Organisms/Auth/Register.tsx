@@ -16,8 +16,6 @@ import clsx from "clsx"
 
 export default function Register() {
 
-    const { updateTabs } = useContext(TabsContext)
-
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
@@ -47,11 +45,10 @@ export default function Register() {
 
                 <p className='register__subtitle'>
                     Already have account ?
-                    <button
-                        type="button"
+                    <NavLink
+                        to={"#login"}
                         style={{ padding: '0 0.5rem' }}
-                        onClick={() => updateTabs(0)}
-                    > Log in here </button>
+                    > Log in here </NavLink>
                 </p>
             </div>
 

@@ -7,13 +7,13 @@ import Badge from "@/components/01 - Atoms/Badge/Badge";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import "./Navigation.scss";
 import { useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import useAuth from "@/hooks/useAuth";
 
 export default function Navigation({
   isOpen,
-  callback = () => {}
+  callback = () => { }
 }: {
   isOpen?: boolean;
   callback?: Function;
@@ -29,6 +29,12 @@ export default function Navigation({
   const { onLogout } = useAuth();
   const { modalAuth, setModalAuth, isConnected } = useContext(AuthContext);
 
+  useEffect(() => {
+    if (location.hash) {
+      setModalAuth(true)
+    }
+  }, [location]);
+
   return (
     <motion.nav
       className="nav"
@@ -42,11 +48,11 @@ export default function Navigation({
       variants={{
         open: {
           opacity: 1,
-          height: "auto"
+          visibility: 'visible'
         },
         closed: {
           opacity: 0,
-          height: 0
+          visibility: 'hidden'
         }
       }}>
       <motion.ul
@@ -88,14 +94,11 @@ export default function Navigation({
         {!isConnected() ? (
           <motion.li className="nav__item" variants={navItem}>
             <Navlink
-              to="#"
+              to='#login'
               theme="primary"
               classes={modalAuth ? "modalActive" : ""}
               id="connection"
-              clickCallback={() => {
-                callback();
-                setModalAuth(true);
-              }}>
+              clickCallback={() => { callback() }}>
               Log in /Sign in
             </Navlink>
           </motion.li>

@@ -9,6 +9,12 @@
   font-size: var(--font-size-md);
   font-family: var(--font-family-secondary);
 
+  &.active {
+    .multiselect__input__sprite .sprites {
+      rotate: 180deg;
+    }
+  }
+
   &__input {
     position: relative;
     display: grid;
@@ -27,6 +33,7 @@
       justify-content: space-between;
       font-family: inherit;
       font-size: inherit;
+      text-transform: uppercase;
       cursor: inherit;
 
       &:focus,
@@ -41,6 +48,8 @@
       column-gap: 1rem;
       padding: 0.5rem;
       overflow: auto;
+      text-transform: uppercase;
+      white-space: nowrap;
 
       &::-webkit-scrollbar {
         height: 0.2rem;
@@ -73,6 +82,7 @@
       >.sprites {
         width: 1rem;
         height: 1rem;
+        @extend .transition;
       }
     }
   }

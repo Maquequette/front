@@ -8,13 +8,15 @@ import './Tooltip.scss'
 export interface ITooltip {
     interrogative?: boolean
     children: ReactNode
-    id?: string
+    id?: string,
+    theme?: string
 }
 
 export default function Tooltip({
     interrogative = true,
     children,
-    id
+    id,
+    theme = "light",
 }: ITooltip) {
 
     const [visible, setVisibility] = useState<boolean>(false)
@@ -29,7 +31,7 @@ export default function Tooltip({
         >
             <button
                 type="button"
-                className="tooltip__btn"
+                className={`tooltip__btn tooltip__btn--${theme}`}
                 onClick={() => setVisibility(!visible)}
             >
                 {interrogative ? '?' : '!'}
