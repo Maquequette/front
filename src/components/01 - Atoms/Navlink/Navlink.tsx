@@ -11,29 +11,17 @@ export interface INavlink {
   id?: string;
   icon?: JSX.Element;
   badge?: JSX.Element;
-  clickCallback?: MouseEventHandler<HTMLAnchorElement>;
 }
 
-export default function Navlink({
-  to,
-  children,
-  theme,
-  classes = '',
-  id,
-  icon,
-  badge,
-  clickCallback = () => { },
-}: INavlink) {
-
+export default function Navlink({ to, children, theme, classes = "", id, icon, badge }: INavlink) {
   return (
     <BaseNavLink
       to={to}
       id={id}
       className={({ isActive }) =>
         (isActive && "active") +
-        ` link link--${theme} ${icon ? "link--icon" : ''} ${badge ? "link--badge" : ''} ${classes}`
-      }
-      onClick={clickCallback}>
+        ` link link--${theme} ${icon ? "link--icon" : ""} ${badge ? "link--badge" : ""} ${classes}`
+      }>
       {icon}
       {badge}
       <div className="link__txt">{children}</div>

@@ -1,30 +1,33 @@
-import { useContext, useEffect } from "react";
-import { MobileContext } from "@/contexts/MobileContext";
+import { useCallback, useEffect, useState } from "react";
 import useDisableScroll from "@/hooks/useDisableScroll";
-
 import Container from "@/components/01 - Atoms/Container/Container";
 import Navigation from "@/components/03 - Organisms/Navigation/Navigation";
 import Logo from "@/components/01 - Atoms/Logo/Logo";
 import Burger from "@/components/02 - Molecules/Burger/Burger";
+import { useLocation } from "react-router-dom";
 import "./Header.scss";
 
 export default function Header() {
+  const { enable, disable } = useDisableScroll();
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
-  const { iconOpen, mobileOpen, setMobileOpen, toggleMobileOpen, toggleMobileClose } = useContext(MobileContext)
-  const { enable, disable } = useDisableScroll()
+  const toggleMenu = useCallback(() => {
+    setIsOpen(!isOpen);
+  }, [isOpen]);
 
   useEffect(() => {
-    mobileOpen.menu ? disable() : enable()
-  }, [mobileOpen.menu])
+    setIsOpen(false);
+  }, [location]);
 
   return (
-    <header className={`header ${mobileOpen.menu ? "header--open" : ""}`}>
+    <header className={`header ${isOpen ? "header--open" : ""}`}>
       <Container center={true} isLarge={true} classes="header__container">
         <div className="header__logo">
           <Logo />
         </div>
-        <Navigation isOpen={mobileOpen.menu} callback={() => setMobileOpen({ ...mobileOpen, menu: !mobileOpen.menu })} />
-        <Burger isOpen={iconOpen} handleClick={() => !iconOpen ? toggleMobileOpen("menu") : toggleMobileClose()} />
+        <Navigation isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Burger isOpen={isOpen} handleClick={toggleMenu} />
       </Container>
     </header>
   );

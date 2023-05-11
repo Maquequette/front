@@ -15,7 +15,6 @@ import clsx from "clsx"
 
 
 export default function Register() {
-
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
@@ -25,10 +24,11 @@ export default function Register() {
     const { onRegister } = useAuth()
     const submitRegister = () => {
         onRegister({
-            name: `${firstName} ${lastName}`,
+            firstName,
+            lastName,
             email,
             password,
-            password_confirmation: confirmPassword
+            confirm_password: confirmPassword
         })
     }
 

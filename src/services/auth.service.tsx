@@ -1,36 +1,38 @@
-import { axios } from "./useful"
+import { axios } from "./useful";
 
 export interface ILogin {
-    email: string
-    password: string
+  email: string;
+  password: string;
 }
 
 export interface IRegister {
-    name: string
-    email: string
-    password: string,
-    password_confirmation: string
-}
-
-const csrf = () => {
-    return axios.get(`/sanctum/csrf-cookie`)
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirm_password: string;
 }
 
 export const login = async (data: ILogin) => {
-    await csrf()
-    return axios.post('/login', data)
-}
+  return axios.post("/auth/login", data);
+};
 
 export const register = async (data: IRegister) => {
-    await csrf()
-    return axios.post('/register', data)
-}
+  return axios.post("/auth/register", data);
+};
 
 export const logout = async () => {
-    return axios.post('/logout')
-}
+  return axios.post("/auth/logout");
+};
 
 export const forgotPassword = async (data: { email: string }) => {
-    return axios.post('/forgot-password', data)
-}
+  return axios.post("/auth/forgot-password", data);
+};
 
+export const refreshToken = async (data: { token: string }) => {
+  return axios.post("/auth/refresh", data);
+};
+
+export const profil = async () => {
+  return axios.get("/api/user/me");
+};

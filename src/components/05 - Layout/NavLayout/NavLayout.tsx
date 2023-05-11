@@ -8,15 +8,14 @@ import Header from "@/components/04 - Templates/Header/Header";
 import Footer from "@/components/04 - Templates/Footer/Footer";
 import Dialog from "@/components/04 - Templates/Dialog/Dialog";
 import Tabs from "@/components/03 - Organisms/Tabs/Tabs";
-import Login from "@/components/03 - Organisms/Auth/Login";
-import Register from "@/components/03 - Organisms/Auth/Register";
+import Login from "@/components/03 - Organisms/Login/Login";
+import Register from "@/components/03 - Organisms/Register/Register";
 import Loading from "@/components/01 - Atoms/Loading/Loading";
 
 export default function NavLayout() {
-
-  const location = useLocation()
-  const navigate = useNavigate()
-  const { isConnected, modalAuth, setModalAuth } = useContext(AuthContext)
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { isConnected, modalAuth, setModalAuth } = useContext(AuthContext);
 
   return (
     <>
@@ -26,38 +25,35 @@ export default function NavLayout() {
           <Outlet />
         </AnimatePresence>
       </Suspense>
-      {!isConnected() &&
+      {!isConnected() && (
         <>
           <Dialog
             id="Auth"
             visible={modalAuth}
             Dismiss={() => {
-              navigate(location.pathname)
-              setModalAuth(!modalAuth)
-            }}
-          >
-
+              navigate(location.pathname);
+              setModalAuth(!modalAuth);
+            }}>
             <TabsProvider>
               <Tabs
                 tabs={[
                   {
-                    tabTitle: 'Login',
+                    tabTitle: "Login",
                     tabContent: <Login />,
-                    anchor: '#login'
+                    anchor: "#login"
                   },
                   {
-                    tabTitle: 'Register',
+                    tabTitle: "Register",
                     tabContent: <Register />,
-                    anchor: '#register'
+                    anchor: "#register"
                   }
                 ]}
                 anchorNavigation={true}
               />
             </TabsProvider>
-
           </Dialog>
         </>
-      }
+      )}
       <Footer />
     </>
   );

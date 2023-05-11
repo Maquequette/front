@@ -6,8 +6,9 @@ import { IToast } from "@/components/01 - Atoms/Toast/Toast";
 import "./ToastsContainer.scss";
 
 export default function ToastsContainer() {
-  const [toasts, setToasts] = useState<Array<IToast>>([]);
   const { pushToastRef } = useContext(ToastContext);
+  const [toasts, setToasts] = useState<Array<IToast>>([]);
+
   pushToastRef.current = ({ duration, title, desc, theme }: IToast) => {
     const id = crypto.randomUUID();
 
