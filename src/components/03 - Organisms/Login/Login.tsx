@@ -1,19 +1,16 @@
-import { TabsContext } from "@/contexts/TabsContext";
-import { FormEvent, useCallback, useContext, useState } from "react";
+import { FormEvent, useCallback, memo, useState } from "react";
 import { NavLink } from "react-router-dom";
-import useAuth from "@/hooks/useAuth";
-
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Input from "@/components/01 - Atoms/Input/Input";
 import Button from "@/components/01 - Atoms/Button/Button";
 import Checkbox from "@/components/01 - Atoms/Checkbox/Checkbox";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
-
-import "./Login.scss";
 import Error from "@/components/01 - Atoms/Error/Error";
+import useAuth from "@/hooks/useAuth";
+import "./Login.scss";
 
-export default function Login() {
+export default memo(function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [stayConnected, setStayConnected] = useState<boolean>(false);
@@ -127,4 +124,4 @@ export default function Login() {
       </form>
     </div>
   );
-}
+});

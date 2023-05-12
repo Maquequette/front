@@ -1,22 +1,22 @@
-import { Dispatch, SetStateAction, useContext, useEffect } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, memo } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { AuthContext } from "@/contexts/AuthContext";
-import useMediaQuery from "@/hooks/useMediaQuery";
-import useAuth from "@/hooks/useAuth";
 import Navlink from "@/components/01 - Atoms/Navlink/Navlink";
 import Tools from "@/components/03 - Organisms/Tools/Tools";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Dropdown from "@/components/01 - Atoms/Dropdown/Dropdown";
 import Badge from "@/components/01 - Atoms/Badge/Badge";
+import { AuthContext } from "@/contexts/AuthContext";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import useAuth from "@/hooks/useAuth";
 import "./Navigation.scss";
-import { useLocation } from "react-router-dom";
 
 export interface INavigation {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Navigation({ isOpen }: INavigation) {
+export default memo(function Navigation({ isOpen }: INavigation) {
   const isDesktop = useMediaQuery("(min-width: 64em)");
   const location = useLocation();
 
@@ -132,4 +132,4 @@ export default function Navigation({ isOpen }: INavigation) {
       <Tools />
     </motion.nav>
   );
-}
+});

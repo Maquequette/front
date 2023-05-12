@@ -1,10 +1,10 @@
-import { MouseEventHandler, ReactNode, useState } from "react";
+import { MouseEventHandler, ReactNode, useState, memo } from "react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 import Checkbox from "../Checkbox/Checkbox";
+import Svg from "../Svg/Svg";
 import { Theme } from "@/types/Theme";
 import "./Options.scss";
-import clsx from "clsx";
-import Svg from "../Svg/Svg";
 
 export interface IOptions {
   handleClick: MouseEventHandler;
@@ -17,7 +17,7 @@ export interface IOptions {
   children?: ReactNode;
 }
 
-export default function Options({
+export default memo(function Options({
   handleClick,
   value,
   label,
@@ -72,4 +72,4 @@ export default function Options({
       )}
     </motion.div>
   );
-}
+});

@@ -1,8 +1,8 @@
-import { ReactNode, useContext, useEffect } from "react";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { ReactNode, useContext, useEffect, memo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { TabsContext } from "@/contexts/TabsContext";
 import "./Tabs.scss";
-import { useLocation, useNavigate } from "react-router-dom";
 
 export interface ITabs {
   tabs: Array<ITabsParameters>;
@@ -16,18 +16,10 @@ export interface ITabsParameters {
   anchor?: String;
 }
 
-export default function Tabs({ tabs, id = "", anchorNavigation = false }: ITabs) {
+export default memo(function Tabs({ tabs, id = "", anchorNavigation = false }: ITabs) {
   const location = useLocation();
   const navigate = useNavigate();
   const { currentTab, updateTabs } = useContext(TabsContext);
-  //   const animationControls = useAnimation();
-
-  //   async function sequence() {
-  //     await animationControls.start({
-  //       y: 10,
-  //       opacity: 0
-  //     });
-  //   }
 
   useEffect(() => {
     tabs.forEach((tab, i) => {
@@ -68,4 +60,4 @@ export default function Tabs({ tabs, id = "", anchorNavigation = false }: ITabs)
       </div>
     </div>
   );
-}
+});

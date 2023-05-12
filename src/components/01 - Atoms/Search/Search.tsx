@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import Svg from "../Svg/Svg";
 import { useSearch } from "@/hooks/useSearch";
 import "./Search.scss";
@@ -8,7 +8,7 @@ export interface ISearch {
   className?: string;
 }
 
-export default function Search({ placeholder, className }: ISearch) {
+export default memo(function Search({ placeholder, className }: ISearch) {
   const [value, setValue] = useState("");
   const { data } = useSearch(value);
 
@@ -33,4 +33,4 @@ export default function Search({ placeholder, className }: ISearch) {
       )}
     </div>
   );
-}
+});

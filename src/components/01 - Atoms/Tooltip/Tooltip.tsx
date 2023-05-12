@@ -1,7 +1,6 @@
-import { ReactNode, useState } from "react";
-import useClickOutside from "@/hooks/useClickOutside";
+import { ReactNode, useState, memo } from "react";
 import clsx from "clsx";
-
+import useClickOutside from "@/hooks/useClickOutside";
 import "./Tooltip.scss";
 
 export interface ITooltip {
@@ -11,7 +10,12 @@ export interface ITooltip {
   theme?: string;
 }
 
-export default function Tooltip({ interrogative = true, children, id, theme = "light" }: ITooltip) {
+export default memo(function Tooltip({
+  interrogative = true,
+  children,
+  id,
+  theme = "light"
+}: ITooltip) {
   const [visible, setVisibility] = useState<boolean>(false);
   const ref = useClickOutside(() => setVisibility(false));
 
@@ -29,4 +33,4 @@ export default function Tooltip({ interrogative = true, children, id, theme = "l
       </div>
     </div>
   );
-}
+});

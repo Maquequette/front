@@ -1,4 +1,4 @@
-import { createContext, Dispatch, MouseEventHandler, useCallback, useState } from "react";
+import { createContext, Dispatch, MouseEventHandler, useCallback, useState, memo } from "react";
 import { Mode } from "@/types/Mode";
 import { Theme } from "@/types/Theme";
 
@@ -12,7 +12,7 @@ export interface IMode {
 
 export const ThemesContext = createContext<IMode>(null!);
 
-export function ThemesProvider({ children }: { children: JSX.Element }) {
+const ThemesProvider = memo(function ThemesProvider({ children }: { children: JSX.Element }) {
   const [theme, setTheme] = useState<Mode>("light");
   const [mainColor, setMainColor] = useState<Theme>("primary");
 
@@ -29,4 +29,6 @@ export function ThemesProvider({ children }: { children: JSX.Element }) {
       {children}
     </ThemesContext.Provider>
   );
-}
+});
+
+export { ThemesProvider };

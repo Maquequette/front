@@ -1,6 +1,7 @@
+import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Theme } from "@/types/Theme";
 import { StyleTypes } from "@/types/StyleTypes";
-import { useTranslation } from "react-i18next";
 import "./Price.scss";
 
 export interface IPrice {
@@ -9,7 +10,7 @@ export interface IPrice {
   value: PaymentCurrencyAmount;
 }
 
-export default function Price({ theme, value, type }: IPrice) {
+export default memo(function Price({ theme, value, type }: IPrice) {
   const { t } = useTranslation();
   return (
     <p className={`price price--${type}--${theme}`}>
@@ -20,4 +21,4 @@ export default function Price({ theme, value, type }: IPrice) {
       })}
     </p>
   );
-}
+});

@@ -1,7 +1,7 @@
+import { ReactNode, memo } from "react";
 import { NavLink as BaseNavLink } from "react-router-dom";
 import { Theme } from "@/types/Theme";
 import "./Navlink.scss";
-import { MouseEventHandler, ReactNode } from "react";
 
 export interface INavlink {
   to: string;
@@ -13,7 +13,15 @@ export interface INavlink {
   badge?: JSX.Element;
 }
 
-export default function Navlink({ to, children, theme, classes = "", id, icon, badge }: INavlink) {
+export default memo(function Navlink({
+  to,
+  children,
+  theme,
+  classes = "",
+  id,
+  icon,
+  badge
+}: INavlink) {
   return (
     <BaseNavLink
       to={to}
@@ -27,4 +35,4 @@ export default function Navlink({ to, children, theme, classes = "", id, icon, b
       <div className="link__txt">{children}</div>
     </BaseNavLink>
   );
-}
+});

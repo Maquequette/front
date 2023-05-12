@@ -1,5 +1,13 @@
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+  memo
+} from "react";
 import useDisableScroll from "@/hooks/useDisableScroll";
-import { createContext, Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
 
 export interface IAuthContext {
   modalAuth: boolean;
@@ -22,7 +30,7 @@ export interface IUser {
 
 export const AuthContext = createContext<IAuthContext>(null!);
 
-export function AuthProvider({ children }: { children: JSX.Element }) {
+const AuthProvider = memo(function AuthProvider({ children }: { children: JSX.Element }) {
   const { enable, disable } = useDisableScroll();
   const [modalAuth, setModalAuth] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>(null!);
@@ -47,4 +55,6 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
       {children}
     </AuthContext.Provider>
   );
-}
+});
+
+export { AuthProvider };

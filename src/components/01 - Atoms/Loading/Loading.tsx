@@ -1,3 +1,5 @@
-export default function Loading() {
+import { memo } from "react";
+
+export default memo(function Loading() {
   return <div>Loading</div>;
-}
+});

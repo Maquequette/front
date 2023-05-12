@@ -1,4 +1,4 @@
-import { MouseEventHandler, CSSProperties, ReactNode } from "react";
+import { MouseEventHandler, CSSProperties, ReactNode, memo } from "react";
 import { BtnTypes } from "@/types/BtnTypes";
 import { Theme } from "@/types/Theme";
 import "./Button.scss";
@@ -13,7 +13,7 @@ export interface IButton {
   btnStyles?: CSSProperties;
 }
 
-export default function Button({
+export default memo(function Button({
   type,
   children,
   handleClick,
@@ -34,4 +34,4 @@ export default function Button({
       </button>
     </div>
   );
-}
+});

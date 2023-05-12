@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode, memo } from "react";
 import "./Grid.scss";
 
 export interface IGrid {
@@ -7,10 +7,10 @@ export interface IGrid {
   styles: CSSProperties;
 }
 
-export default function Grid({ children, size, styles }: any) {
+export default memo(function Grid({ children, size, styles }: any) {
   return (
     <div className="grid" style={{ ...styles, "--size": size } as CSSProperties}>
       {children}
     </div>
   );
-}
+});

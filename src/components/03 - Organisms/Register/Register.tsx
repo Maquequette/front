@@ -1,6 +1,6 @@
-import { TabsContext } from "@/contexts/TabsContext";
+import { useCallback, useState, memo } from "react";
 import { NavLink } from "react-router-dom";
-import { FormEvent, useCallback, useContext, useState } from "react";
+import clsx from "clsx";
 
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm";
@@ -8,12 +8,11 @@ import Label from "@/components/01 - Atoms/Label/Label";
 import Input from "@/components/01 - Atoms/Input/Input";
 import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
 
-import "./Register.scss";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
 import useAuth from "@/hooks/useAuth";
-import clsx from "clsx";
+import "./Register.scss";
 
-export default function Register() {
+export default memo(function Register() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -192,4 +191,4 @@ export default function Register() {
       />
     </div>
   );
-}
+});

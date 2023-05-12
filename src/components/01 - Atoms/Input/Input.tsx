@@ -1,4 +1,4 @@
-import { ChangeEventHandler, CSSProperties, HTMLInputTypeAttribute, useState } from "react";
+import { ChangeEventHandler, CSSProperties, HTMLInputTypeAttribute, useState, memo } from "react";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import "./Input.scss";
 
@@ -15,7 +15,7 @@ export interface IInput {
   value: string | number;
 }
 
-export default function Input({
+export default memo(function Input({
   type,
   name,
   placeholder,
@@ -55,4 +55,4 @@ export default function Input({
       )}
     </div>
   );
-}
+});

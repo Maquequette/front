@@ -1,5 +1,5 @@
+import { createContext, Dispatch, SetStateAction, memo } from "react";
 import useTabs from "@/hooks/useTabs";
-import { createContext, Dispatch, SetStateAction } from "react";
 
 export interface ITabsContext {
   lastTab: number;
@@ -11,7 +11,7 @@ export interface ITabsContext {
 
 export const TabsContext = createContext<ITabsContext>(null!);
 
-export function TabsProvider({ children }: { children: JSX.Element }) {
+const TabsProvider = memo(function TabsProvider({ children }: { children: JSX.Element }) {
   const { lastTab, setLastTab, currentTab, setCurrentTab, updateTabs } = useTabs();
 
   return (
@@ -19,4 +19,6 @@ export function TabsProvider({ children }: { children: JSX.Element }) {
       {children}
     </TabsContext.Provider>
   );
-}
+});
+
+export { TabsProvider };

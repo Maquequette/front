@@ -1,8 +1,8 @@
+import { CSSProperties, Key, useMemo, memo } from "react";
 import { NavLink, useMatches } from "react-router-dom";
-import { CSSProperties, Key, useMemo } from "react";
 import "./Breadcrumb.scss";
 
-export default function Breadcrumb({ style }: { style?: CSSProperties }) {
+export default memo(function Breadcrumb({ style }: { style?: CSSProperties }) {
   const matches = useMatches();
   const crumbs = useMemo(
     () => matches.filter((match: any) => Boolean(match.handle?.crumb)),
@@ -18,4 +18,4 @@ export default function Breadcrumb({ style }: { style?: CSSProperties }) {
       ))}
     </div>
   );
-}
+});

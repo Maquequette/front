@@ -1,11 +1,11 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useState, memo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Toast from "@/components/01 - Atoms/Toast/Toast";
 import { ToastContext } from "@/contexts/ToastContext";
 import { IToast } from "@/components/01 - Atoms/Toast/Toast";
 import "./ToastsContainer.scss";
 
-export default function ToastsContainer() {
+export default memo(function ToastsContainer() {
   const { pushToastRef } = useContext(ToastContext);
   const [toasts, setToasts] = useState<Array<IToast>>([]);
 
@@ -44,4 +44,4 @@ export default function ToastsContainer() {
       </AnimatePresence>
     </div>
   );
-}
+});

@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode, memo } from "react";
 import "./Label.scss";
 
 export interface ILabel {
@@ -12,7 +12,7 @@ export interface ILabel {
   error?: ReactNode;
 }
 
-export default function Label({
+export default memo(function Label({
   name,
   children,
   className = "",
@@ -40,4 +40,4 @@ export default function Label({
       {tooltip}
     </div>
   );
-}
+});

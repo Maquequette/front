@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useState } from "react";
+import { ReactNode, useCallback, useState, memo } from "react";
 import { motion } from "framer-motion";
 import { Theme } from "@/types/Theme";
 import "./Collapsible.scss";
@@ -8,7 +8,7 @@ export interface ICollapsible {
   children: ReactNode;
 }
 
-export default function Collapsible({ theme, children }: ICollapsible) {
+export default memo(function Collapsible({ theme, children }: ICollapsible) {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleCollapse = useCallback(
@@ -42,4 +42,4 @@ export default function Collapsible({ theme, children }: ICollapsible) {
       </motion.div>
     </motion.div>
   );
-}
+});

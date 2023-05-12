@@ -1,9 +1,8 @@
-import { useContext, useEffect, useLayoutEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useContext, memo, useLayoutEffect } from "react";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import { AuthContext } from "@/contexts/AuthContext";
-import { Outlet, Navigate } from "react-router-dom";
 
-export default function RequiredLayout() {
+export default memo(function RequiredLayout() {
   const { setModalAuth, isConnected } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,4 +15,4 @@ export default function RequiredLayout() {
   }, [isConnected()]);
 
   return <>{isConnected() && <Outlet />}</>;
-}
+});

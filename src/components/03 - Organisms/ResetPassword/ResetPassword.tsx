@@ -1,7 +1,8 @@
+import { memo } from "react";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import "./ResetPassword.scss";
 
-export default function ResetPassword() {
+export default memo(function ResetPassword() {
   return (
     <div className="pswdForgotten">
       <div>
@@ -18,4 +19,4 @@ export default function ResetPassword() {
       </div>
     </div>
   );
-}
+});

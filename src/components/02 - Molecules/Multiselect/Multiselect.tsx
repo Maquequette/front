@@ -1,11 +1,11 @@
-import { memo, forwardRef, useImperativeHandle, useMemo, useState, useCallback } from "react";
+import { memo, forwardRef, useImperativeHandle, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 import Options from "@/components/01 - Atoms/Options/Options";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
-import { Theme } from "@/types/Theme";
 import useClickOutside from "@/hooks/useClickOutside";
+import { Theme } from "@/types/Theme";
 import "./Multiselect.scss";
-import clsx from "clsx";
 
 export interface IMultiselect {
   options: ISelectOption[];
