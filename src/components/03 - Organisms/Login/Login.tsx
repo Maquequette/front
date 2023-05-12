@@ -1,5 +1,5 @@
 import { TabsContext } from "@/contexts/TabsContext";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useCallback, useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 
@@ -14,8 +14,6 @@ import "./Login.scss";
 import Error from "@/components/01 - Atoms/Error/Error";
 
 export default function Login() {
-  const { updateTabs } = useContext(TabsContext);
-
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [stayConnected, setStayConnected] = useState<boolean>(false);
@@ -23,12 +21,15 @@ export default function Login() {
 
   const { onLogin } = useAuth();
 
-  const submitLogin = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onLogin({ email, password });
-  };
+  const submitLogin = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      onLogin({ email, password });
+    },
+    [email, password]
+  );
 
-  const forgotPassword = () => {
+  const forgotPassword = useCallback(() => {
     if (!email) {
       setErrors({
         ...errors,
@@ -37,7 +38,7 @@ export default function Login() {
     } else {
       //onForgotPassword({ email })
     }
-  };
+  }, [errors]);
 
   return (
     <div className="login">
@@ -107,7 +108,7 @@ export default function Login() {
 
         <div className="login__form__btns">
           <p className="login__form__btns__subtitle">
-            <button type="button" onClick={() => forgotPassword()}>
+            <button type="button" onClick={forgotPassword}>
               Forgot your password ?
             </button>
           </p>

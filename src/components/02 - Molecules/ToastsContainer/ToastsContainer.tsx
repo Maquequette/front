@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Toast from "@/components/01 - Atoms/Toast/Toast";
 import { ToastContext } from "@/contexts/ToastContext";
@@ -20,10 +20,13 @@ export default function ToastsContainer() {
     setToasts((v) => [...v, toast]);
   };
 
-  const onRemove = (toast: IToast) => {
-    clearTimeout(toast.timer);
-    setToasts((v) => v.filter((t) => t !== toast));
-  };
+  const onRemove = useCallback(
+    (toast: IToast) => {
+      clearTimeout(toast.timer);
+      setToasts(toasts.filter((t) => t !== toast));
+    },
+    [toasts]
+  );
 
   return (
     <div className="toasts">

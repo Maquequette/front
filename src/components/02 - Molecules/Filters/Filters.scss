@@ -2,18 +2,31 @@
 @import "@/assets/utilities";
 
 .filters {
-  display: grid;
-  grid-template-rows: min-content 1fr;
+  // display: grid;
+  // grid-template-rows: min-content 1fr;
   width: 100%;
 
   @each $name, $color in $colors {
-    &--#{$name} {
+    &--#{$name} > &__header::after {
       background-color: var(--#{$name});
     }
+  }
 
-    // &--#{$name} > .container {
-    //   background-color: var(--#{$name});
-    // }
+  &__header {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      height: 0;
+      z-index: -1;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   //   &__head,

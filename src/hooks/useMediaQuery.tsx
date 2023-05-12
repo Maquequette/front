@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function useMediaQuery(query: string): boolean {
-  const getMatches = (query: string): boolean => {
-    // Prevents SSR issues
-    if (typeof window !== "undefined") {
-      return window.matchMedia(query).matches;
-    }
-    return false;
-  };
+  const getMatches = useCallback(
+    (query: string): boolean => {
+      if (typeof window !== "undefined") {
+        return window.matchMedia(query).matches;
+      }
+      return false;
+    },
+    [query]
+  );
 
   const [matches, setMatches] = useState<boolean>(getMatches(query));
 
-  function handleChange() {
+  const handleChange = useCallback(() => {
     setMatches(getMatches(query));
-  }
+  }, [query]);
 
   useEffect(() => {
     const matchMedia = window.matchMedia(query);

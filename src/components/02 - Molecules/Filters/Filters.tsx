@@ -29,12 +29,13 @@ export default function Filters({ children, theme, headContent }: IColoredLine) 
 
   return (
     <div className={`filters filters--${theme}`}>
-      <Container>
+      <Container center={true}>
         <div className="filters__header">
           <div className="filters__actions">
+            <Breadcrumb />
             <Button theme={"dark"} handleClick={toggleFilter}>
               search & more
-              <Svg id="search" styles={{ width: "2.5rem", height: "2.5rem", stroke: "none" }} />
+              <Svg id="glass" styles={{ width: "2.5rem", height: "2.5rem" }} />
             </Button>
           </div>
           <div className={clsx("filters__header", { active: isOpen })}>{headContent}</div>

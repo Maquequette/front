@@ -3,23 +3,15 @@ import { CSSProperties, MouseEventHandler } from "react";
 import "./Checkbox.scss";
 
 export interface ICheckbox {
-  name: string
-  theme: Theme
-  value: any
-  isChecked: boolean
-  handleClick?: MouseEventHandler
-  style?: CSSProperties
+  name: string;
+  theme: Theme;
+  value: any;
+  isChecked: boolean;
+  handleClick?: MouseEventHandler;
+  style?: CSSProperties;
 }
 
-export default function Checkbox({
-  name,
-  theme,
-  value,
-  handleClick,
-  isChecked,
-  style
-}: ICheckbox) {
-
+export default function Checkbox({ name, theme, value, handleClick, isChecked, style }: ICheckbox) {
   return (
     <div className="checkbox" style={style} onClick={() => handleClick?.(value)}>
       <input
@@ -31,5 +23,5 @@ export default function Checkbox({
         readOnly
       />
     </div>
-  )
+  );
 }

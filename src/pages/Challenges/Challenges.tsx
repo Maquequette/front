@@ -3,7 +3,7 @@ import Container from "@/components/01 - Atoms/Container/Container";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Search from "@/components/01 - Atoms/Search/Search";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
-import ColoredLine from "@/components/02 - Molecules/ColoredLine/Filters";
+import ColoredLine from "@/components/02 - Molecules/Filters/Filters";
 import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
 import Tags from "@/components/02 - Molecules/Tags/Tags";
 import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";

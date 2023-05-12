@@ -1,18 +1,18 @@
-import { ChangeEventHandler, CSSProperties, HTMLInputTypeAttribute, useState } from "react"
-import Svg from "@/components/01 - Atoms/Svg/Svg"
-import "./Input.scss"
+import { ChangeEventHandler, CSSProperties, HTMLInputTypeAttribute, useState } from "react";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
+import "./Input.scss";
 
 export interface IInput {
-  type: HTMLInputTypeAttribute,
-  name: string,
-  placeholder?: string,
-  styles?: CSSProperties,
-  disabled?: boolean,
-  required?: boolean,
-  pattern?: string,
-  autoComplete?: string,
-  handleOnChange?: ChangeEventHandler<HTMLInputElement>,
-  value: string | number
+  type: HTMLInputTypeAttribute;
+  name: string;
+  placeholder?: string;
+  styles?: CSSProperties;
+  disabled?: boolean;
+  required?: boolean;
+  pattern?: string;
+  autoComplete?: string;
+  handleOnChange?: ChangeEventHandler<HTMLInputElement>;
+  value: string | number;
 }
 
 export default function Input({
@@ -27,19 +27,13 @@ export default function Input({
   handleOnChange,
   value
 }: IInput) {
-
-  const [readable, setReadable] = useState<boolean>(false)
+  const [readable, setReadable] = useState<boolean>(false);
 
   return (
-
-    <div
-      className="inputContainer"
-      style={styles}
-    >
-
+    <div className="inputContainer" style={styles}>
       <input
         className={`inputContainer__input inputContainer__input--${type}`}
-        type={type != 'password' ? type : (readable ? 'text' : type)}
+        type={type != "password" ? type : readable ? "text" : type}
         name={name}
         id={name}
         placeholder={placeholder}
@@ -51,17 +45,14 @@ export default function Input({
         onChange={handleOnChange ?? undefined}
       />
 
-      {type === 'password' &&
+      {type === "password" && (
         <button
           type="button"
           className="inputContainer__icon inputContainer__input--password"
-          onClick={() => setReadable(!readable)}
-        >
-          <Svg id={readable ? 'closedEye' : 'eye'} />
+          onClick={() => setReadable(!readable)}>
+          <Svg id={readable ? "closedEye" : "eye"} />
         </button>
-      }
-
+      )}
     </div>
-
-  )
+  );
 }

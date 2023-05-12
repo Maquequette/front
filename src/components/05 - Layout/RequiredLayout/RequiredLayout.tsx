@@ -4,18 +4,16 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { Outlet, Navigate } from "react-router-dom";
 
 export default function RequiredLayout() {
-  const { setModalAuth } = useContext(AuthContext);
+  const { setModalAuth, isConnected } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
-  let isLoggedIn = false;
-
   useLayoutEffect(() => {
-    if (!isLoggedIn) {
+    if (!isConnected()) {
       setModalAuth(true);
       navigate(-1);
     }
-  }, [isLoggedIn]);
+  }, [isConnected()]);
 
-  return <>{isLoggedIn && <Outlet />}</>;
+  return <>{isConnected() && <Outlet />}</>;
 }

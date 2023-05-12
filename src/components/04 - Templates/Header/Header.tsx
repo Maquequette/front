@@ -13,8 +13,11 @@ export default function Header() {
   const location = useLocation();
 
   const toggleMenu = useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen]);
+    setIsOpen((p) => {
+      !p ? enable() : disable();
+      return !p;
+    });
+  }, []);
 
   useEffect(() => {
     setIsOpen(false);

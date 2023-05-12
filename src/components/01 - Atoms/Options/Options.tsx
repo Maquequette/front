@@ -23,24 +23,22 @@ export default function Options({
   label,
   theme,
   hasCheckbox,
-  classes = '',
+  classes = "",
   isChecked,
   children
 }: IOptions) {
-
   const [isClosed, setIsClosed] = useState<boolean>(false);
 
   return (
     <motion.div
       onClick={value ? handleClick : undefined}
-      className={clsx('options', !value && 'options__title', classes, isClosed && 'close')}
+      className={clsx("options", !value && "options__title", classes, isClosed && "close")}
       variants={{
         hidden: { opacity: 0, x: -100 },
         show: { opacity: 1, x: 0 }
       }}
       key={value}>
-
-      <div className={clsx('options__content', !value && '--title')}>
+      <div className={clsx("options__content", !value && "--title")}>
         {hasCheckbox && value && (
           <Checkbox name={label} value={value} theme={theme} isChecked={isChecked ?? false} />
         )}
@@ -49,14 +47,13 @@ export default function Options({
           <button
             type="button"
             className="options__title__dropdown"
-            onClick={() => setIsClosed(!isClosed)}
-          >
+            onClick={() => setIsClosed(!isClosed)}>
             <Svg id="dropdown" />
           </button>
         )}
       </div>
 
-      {children &&
+      {children && (
         <motion.div
           className="options__title__children"
           animate={!isClosed ? "open" : "closed"}
@@ -69,11 +66,10 @@ export default function Options({
           transition={{
             type: "tween",
             duration: 0.3
-          }}
-        >
+          }}>
           {children}
         </motion.div>
-      }
+      )}
     </motion.div>
   );
 }

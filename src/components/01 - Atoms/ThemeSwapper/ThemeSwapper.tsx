@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import "./ThemeSwapper.scss";
 
 export default function ThemeSwapper() {
-  const { theme, setTheme, toggleTheme } = useContext(ThemesContext);
+  const { theme, toggleTheme } = useContext(ThemesContext);
 
   return (
     <div className="theme" onClick={toggleTheme}>

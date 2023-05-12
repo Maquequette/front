@@ -90,7 +90,7 @@ export default function Home(): JSX.Element {
               AND WE PROVIDE LESSONS TOO !!
             </Heading>
             <Grid size="33rem">
-              <Card
+              {/* <Card
                 tags={[
                   { label: "HTML", theme: "primary" },
                   { label: "CSS", theme: "secondary" },
@@ -146,7 +146,7 @@ export default function Home(): JSX.Element {
                 date={Date.now()}
                 title="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi nulla eos magnam harum sapiente aut laboriosam commodi"
                 img="https://media.istockphoto.com/id/1199486942/fr/photo/dr%C3%B4le-merci-carte-baiser-avec-des-animaux.jpg?s=1024x1024&w=is&k=20&c=ew-DCfMHG9cs9qppUkJfc80bRUZ1x278THFeCTNpml4="
-              />
+              /> */}
             </Grid>
             <div className="d-flex justify-end">
               <Button theme="dark">

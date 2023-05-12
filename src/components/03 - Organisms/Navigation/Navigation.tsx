@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import { AuthContext } from "@/contexts/AuthContext";
 import useMediaQuery from "@/hooks/useMediaQuery";
@@ -9,6 +9,7 @@ import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Dropdown from "@/components/01 - Atoms/Dropdown/Dropdown";
 import Badge from "@/components/01 - Atoms/Badge/Badge";
 import "./Navigation.scss";
+import { useLocation } from "react-router-dom";
 
 export interface INavigation {
   isOpen: boolean;
@@ -17,6 +18,7 @@ export interface INavigation {
 
 export default function Navigation({ isOpen }: INavigation) {
   const isDesktop = useMediaQuery("(min-width: 64em)");
+  const location = useLocation();
 
   const navItem = {
     closed: { opacity: 0, x: "-100rem", transition: { duration: isDesktop ? 0 : 0.2 } },
@@ -25,6 +27,12 @@ export default function Navigation({ isOpen }: INavigation) {
 
   const { onLogout } = useAuth();
   const { modalAuth, setModalAuth, isConnected } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (location.hash === "#login" || location.hash === "#register") {
+      setModalAuth(true);
+    }
+  }, [location]);
 
   return (
     <motion.nav
@@ -68,11 +76,7 @@ export default function Navigation({ isOpen }: INavigation) {
         </motion.li>
         {!isConnected() ? (
           <motion.li className="nav__item" variants={navItem}>
-            <Navlink
-              to="#login"
-              theme="primary"
-              classes={modalAuth ? "modalActive" : ""}
-              id="connection">
+            <Navlink to="#login" theme="primary" id="connection">
               Log in /Sign in
             </Navlink>
           </motion.li>
