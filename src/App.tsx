@@ -15,8 +15,8 @@ export default function App() {
     mutationCache: new MutationCache({
       onError: (error: any) => {
         pushToast({
-          title: `Woops ! ${error.name}`,
-          desc: error.message,
+          title: `Woops ! ${error.response.data.title}`,
+          desc: error.response.data.detail,
           theme: "danger"
         });
       }

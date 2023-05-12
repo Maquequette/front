@@ -9,20 +9,6 @@ export const axios = ax.create({
   withCredentials: true
 });
 
-// export const request = ({ ...options }) => {
-//   if (localStorage.getItem("access_token")) {
-//     axios.defaults.headers.common.Authorization = localStorage.getItem("access_token");
-//   }
-
-//   const onSuccess = (response: any) => response;
-//   const onError = (error: any) => {
-//     if (error.code === 401 && error.message === "Invalid credentials.") {
-//       refreshToken({ token: localStorage.getItem("access_token")! });
-//     }
-//   };
-//   return axios(options).then(onSuccess).catch(onError);
-// };
-
 axios.interceptors.request.use(
   (config) => {
     if (!config.headers["Authorization"] && localStorage.getItem("access_token")) {
@@ -40,7 +26,9 @@ axios.interceptors.response.use(
     if (error?.response?.status === 401 && !prevRequest?.sent) {
       prevRequest.sent = true;
       const newAccessToken = await refreshToken({ token: localStorage.getItem("access_token")! });
-      prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+      prevRequest.headers["Authorization"] = `Bearer ${newAccessToken.data.refresh_token}`;
+      localStorage.setItem("refresh_token", newAccessToken.data.refresh_token);
+
       return axios(prevRequest);
     }
     return Promise.reject(error);

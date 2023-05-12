@@ -17,6 +17,7 @@ export default function useAuth() {
     onSuccess: (response) => {
       localStorage.setItem("refresh_token", response.data.refresh_token);
       localStorage.setItem("access_token", response.data.token);
+      setUser({ ...user, token: response.data.token });
       setModalAuth(false);
     }
   });
@@ -25,7 +26,8 @@ export default function useAuth() {
     queryFn: profil,
     enabled: isConnected(),
     onSuccess: () => {
-      setUser((prev) => ({ ...prev, userProfil }));
+      setUser((prev) => ({ ...prev, ...userProfil?.data }));
+      localStorage.setItem("user", JSON.stringify(userProfil?.data));
     }
   });
 
@@ -42,8 +44,7 @@ export default function useAuth() {
     mutationFn: logout,
     onSuccess: () => {
       setUser(null!);
-      localStorage.removeItem("refresh_token");
-      localStorage.removeItem("access_token");
+      localStorage.clear();
       navigate("/");
     }
   });

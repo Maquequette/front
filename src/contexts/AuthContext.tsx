@@ -39,6 +39,12 @@ const AuthProvider = memo(function AuthProvider({ children }: { children: JSX.El
     modalAuth ? disable() : enable();
   }, [modalAuth]);
 
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")!));
+    }
+  }, []);
+
   const isConnected = useCallback(() => {
     return user !== null;
   }, [user]);
