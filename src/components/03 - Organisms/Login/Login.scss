@@ -2,56 +2,56 @@
 @import "@/assets/variables";
 
 .login {
-    @extend .full;
-    padding: 2rem 2rem;
+  @extend .full;
+  padding: 2rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-template-rows: repeat(2, min-content);
+
+  @media (min-width: #{map-get($breakpoints, "sm")}) {
+    padding: 2rem 4rem;
+  }
+
+  &__subtitle {
+    padding-bottom: 0.5rem;
+    color: var(--dark);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-secondary);
+    opacity: 0.6;
+
+    & button,
+    a {
+      @extend .btn-none;
+      color: var(--dark);
+      font-size: var(--font-size-sm);
+      font-family: var(--font-family-secondary);
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__form {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    grid-template-rows: repeat(2, min-content);
+    grid-template-rows: repeat(4, min-content);
+    gap: 1rem;
 
-    @media (min-width: #{map-get($breakpoints, "sm")}) {
-        padding: 2rem 4rem;
+    &__btns {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      &__subtitle {
+        @extend .login__subtitle;
+        padding: 0;
+      }
     }
-
-    &__subtitle {
-        padding-bottom: 0.5rem;
-        color: var(--dark);
-        font-size: var(--font-size-sm);
-        font-family: var(--font-family-secondary);
-        opacity: 0.6;
-
-        & button,
-        a {
-            @extend .btn-none;
-            color: var(--dark);
-            font-size: var(--font-size-sm);
-            font-family: var(--font-family-secondary);
-            cursor: pointer;
-            text-decoration: none;
-
-            &:hover {
-                opacity: 1;
-                text-decoration: underline;
-            }
-        }
-    }
-
-    &__form {
-        display: grid;
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-        grid-template-rows: repeat(4, min-content);
-        gap: 1rem;
-
-        &__btns {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-
-            &__subtitle {
-                @extend .login__subtitle;
-                padding: 0;
-            }
-        }
-    }
+  }
 }

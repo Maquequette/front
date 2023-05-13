@@ -1,10 +1,10 @@
-import Container from "@/components/01 - Atoms/Container/Container";
-import Folder from "@/components/01 - Atoms/Folder/Folder";
-
+import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
+import Spinner from "@/components/01 - Atoms/Spinner/Spinner";
 export default function DesignSystem() {
   return (
-    <Container center={true}>
-      <Folder theme="dark"></Folder>
-    </Container>
+    <>
+      <DotLoader />
+      <Spinner theme="primary" />
+    </>
   );
 }

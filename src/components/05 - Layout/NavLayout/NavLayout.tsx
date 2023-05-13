@@ -7,7 +7,7 @@ import Dialog from "@/components/04 - Templates/Dialog/Dialog";
 import Tabs from "@/components/03 - Organisms/Tabs/Tabs";
 import Login from "@/components/03 - Organisms/Login/Login";
 import Register from "@/components/03 - Organisms/Register/Register";
-import Loading from "@/components/01 - Atoms/Loading/Loading";
+import Spinner from "@/components/01 - Atoms/Spinner/Spinner";
 import { TabsProvider } from "@/contexts/TabsContext";
 import { AuthContext } from "@/contexts/AuthContext";
 
@@ -19,7 +19,18 @@ export default memo(function NavLayout() {
   return (
     <>
       <Header />
-      <Suspense fallback={<Loading />}>
+      <Suspense
+        fallback={
+          <div
+            style={{
+              height: "calc(100vh - 140px)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}>
+            <Spinner theme="primary" />
+          </div>
+        }>
         <AnimatePresence mode="wait">
           <Outlet />
         </AnimatePresence>
