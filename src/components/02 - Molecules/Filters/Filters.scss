@@ -25,8 +25,19 @@
 
   &__actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    display: none;
+  }
+
+  &__header {
+    display: grid;
+    grid-template-rows: repeat(2, min-content);
+    gap: 0 2rem;
+
+    .labelContainer {
+      grid-row: 1/1;
+    }
   }
 
   //   &__head,

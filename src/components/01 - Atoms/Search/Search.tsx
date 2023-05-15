@@ -13,10 +13,11 @@ export default memo(function Search({ placeholder, className }: ISearch) {
   const { data } = useSearch(value);
 
   return (
-    <div className={`search ${className}`}>
+    <div className={`search ${className ?? ""}`}>
       <div className="search__input">
         <Svg id="glass" />
         <input
+          id="search"
           type="search"
           className="search__text"
           placeholder={placeholder}

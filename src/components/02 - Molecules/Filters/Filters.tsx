@@ -19,20 +19,15 @@ export default memo(function Filters({ children, theme, headContent }: IColoredL
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleFilter = useCallback(() => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
     !isOpen ? disable() : enable();
-  }, [isOpen]);
-
-  //   useEffect(() => {
-  //     mobileOpen.challengeSearch ? disable() : enable();
-  //   }, [mobileOpen.challengeSearch]);
+  }, []);
 
   return (
     <div className={`filters filters--${theme}`}>
       <Container center={true}>
         <div className="filters__header">
           <div className="filters__actions">
-            <Breadcrumb />
             <Button theme={"dark"} handleClick={toggleFilter}>
               search & more
               <Svg id="glass" styles={{ width: "2.5rem", height: "2.5rem" }} />

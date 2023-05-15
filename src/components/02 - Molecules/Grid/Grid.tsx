@@ -5,10 +5,9 @@ export interface IGrid {
   children: ReactNode;
   size: string;
   styles: CSSProperties;
-  
 }
 
-export default memo(function Grid({ children, size, styles }: any) {
+export default memo(function Grid({ children, size, styles }: IGrid) {
   return (
     <div className="grid" style={{ ...styles, "--size": size } as CSSProperties}>
       {children}
