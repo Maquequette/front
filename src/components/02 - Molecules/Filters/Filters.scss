@@ -2,25 +2,27 @@
 @import "@/assets/utilities";
 
 .filters {
-  // display: grid;
-  // grid-template-rows: min-content 1fr;
-  width: 100%;
+  position: relative;
+  .container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    width: 100%;
+  }
 
   @each $name, $color in $colors {
-    &--#{$name} > &__header::after {
+    &--#{$name}::after {
       background-color: var(--#{$name});
     }
   }
 
-  &__header {
-    position: relative;
-
-    &::after {
-      position: absolute;
-      content: "";
-      height: 0;
-      z-index: -1;
-    }
+  &::after {
+    position: absolute;
+    content: "";
+    height: 78%;
+    width: 100%;
+    bottom: 0;
+    z-index: -1;
   }
 
   &__actions {
@@ -30,14 +32,31 @@
     display: none;
   }
 
-  &__header {
+  &__inputs {
     display: grid;
     grid-template-rows: repeat(2, min-content);
     gap: 0 2rem;
 
     .labelContainer {
       grid-row: 1/1;
+      justify-content: flex-end;
     }
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .tags {
+      flex: 1;
+    }
+  }
+
+  &__indications {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   //   &__head,

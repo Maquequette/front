@@ -33,7 +33,7 @@ export default memo(function Filters({ children, theme, headContent }: IColoredL
               <Svg id="glass" styles={{ width: "2.5rem", height: "2.5rem" }} />
             </Button>
           </div>
-          <div className={clsx("filters__header", { active: isOpen })}>{headContent}</div>
+          <div className={clsx("filters__inputs", { active: isOpen })}>{headContent}</div>
         </div>
         <div className="filters__body">{children}</div>
       </Container>
