@@ -1,23 +1,28 @@
-import { Route, Link, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import {
+  Route,
+  Link,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider
+} from "react-router-dom";
 import { lazy } from "react";
 import NavLayout from "@/components/05 - Layout/NavLayout/NavLayout";
 import RequiredLayout from "@/components/05 - Layout/RequiredLayout/RequiredLayout";
 
-const Home = lazy(() => import("@/pages/Home"));
-const Challenges = lazy(() => import("@/pages/Challenges"));
-const Lessons = lazy(() => import("@/pages/Lessons"));
-const Classroom = lazy(() => import("@/pages/Classroom"));
-const NoMatch = lazy(() => import("@/pages/NoMatch"));
-{/* DEV PATH @todelete */ }
+const Home = lazy(() => import("@/pages/Home/Home"));
+const Challenges = lazy(() => import("@/pages/Challenges/Challenges"));
+const Lessons = lazy(() => import("@/pages/Lessons/Lessons"));
+const Classroom = lazy(() => import("@/pages/ClassRoom/ClassRoom"));
+const NoMatch = lazy(() => import("@/pages/NoMatch/NoMatch"));
+{
+  /* DEV PATH @todelete */
+}
 const DesignSystem = lazy(() => import("@/pages/DesignSystem"));
 
 export default function Router(): JSX.Element {
-
   const router = createBrowserRouter(
     createRoutesFromElements(
-
       <Route path="/" element={<NavLayout />} handle={{ crumb: ">" }}>
-
         <Route path="/" element={<Home />} />
         <Route path="/challenges" element={<Challenges />} handle={{ crumb: "challenges" }} />
         <Route path="/lessons" element={<Lessons />} handle={{ crumb: "lessons" }} />
@@ -31,9 +36,7 @@ export default function Router(): JSX.Element {
         <Route path="/dev" element={<DesignSystem />} />
       </Route>
     )
-  )
+  );
 
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />;
 }
