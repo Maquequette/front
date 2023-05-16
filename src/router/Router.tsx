@@ -28,11 +28,9 @@ export default function Router(): JSX.Element {
         <Route path="/" element={<Home />} />
         <Route path="/challenges" element={<Challenges />} handle={{ crumb: "challenges" }} />
         <Route path="/lessons" element={<Lessons />} handle={{ crumb: "lessons" }} />
-
         <Route element={<RequiredLayout />}>
           <Route path="/classroom" element={<Classroom />} handle={{ crumb: "classroom" }} />
         </Route>
-
         <Route path="*" element={<NoMatch />} />
         {/* DEV PATH @todelete */}
         <Route path="/dev" element={<DesignSystem />} />
