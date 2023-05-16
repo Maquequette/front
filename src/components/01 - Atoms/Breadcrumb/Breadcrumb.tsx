@@ -11,6 +11,9 @@ export default memo(function Breadcrumb({ style }: { style?: CSSProperties }) {
 
   return (
     <div className="breadcrumb" style={style}>
+      <NavLink to="/" className="breadcrumb__item">
+        Home
+      </NavLink>
       {crumbs.map((match: any, index: Key) => (
         <NavLink key={index} to={match.pathname} className="breadcrumb__item">
           {match.handle.crumb}

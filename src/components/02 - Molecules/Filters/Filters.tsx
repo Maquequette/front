@@ -1,6 +1,6 @@
 import { ReactNode, useCallback, memo, useState } from "react";
 import clsx from "clsx";
-import Breadcrumb from "@/components/01 - Atoms/Breadcrumb/Breadcrumb";
+import Burger from "../Burger/Burger";
 import Button from "@/components/01 - Atoms/Button/Button";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Container from "@/components/01 - Atoms/Container/Container";
@@ -33,7 +33,10 @@ export default memo(function Filters({ children, theme, headContent }: IColoredL
               <Svg id="glass" styles={{ width: "2.5rem", height: "2.5rem" }} />
             </Button>
           </div>
-          <div className={clsx("filters__inputs", { active: isOpen })}>{headContent}</div>
+          <div className={clsx("filters__inputs", { active: isOpen })}>
+            <Burger handleClick={toggleFilter} isOpen={isOpen} />
+            {headContent}
+          </div>
         </div>
         <div className="filters__body">{children}</div>
       </Container>

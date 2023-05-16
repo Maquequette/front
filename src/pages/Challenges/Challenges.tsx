@@ -6,6 +6,7 @@ import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
 import Filters from "@/components/02 - Molecules/Filters/Filters";
 import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
 import Tags from "@/components/02 - Molecules/Tags/Tags";
+import Breadcrumb from "@/components/01 - Atoms/Breadcrumb/Breadcrumb";
 import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";
 import { ThemesContext } from "@/contexts/ThemesContext";
 

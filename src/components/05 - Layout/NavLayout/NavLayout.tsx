@@ -8,6 +8,8 @@ import Tabs from "@/components/03 - Organisms/Tabs/Tabs";
 import Login from "@/components/03 - Organisms/Login/Login";
 import Register from "@/components/03 - Organisms/Register/Register";
 import Spinner from "@/components/01 - Atoms/Spinner/Spinner";
+import Container from "@/components/01 - Atoms/Container/Container";
+import Breadcrumb from "@/components/01 - Atoms/Breadcrumb/Breadcrumb";
 import { TabsProvider } from "@/contexts/TabsContext";
 import { AuthContext } from "@/contexts/AuthContext";
 
@@ -15,7 +17,6 @@ export default memo(function NavLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { isConnected, modalAuth, setModalAuth } = useContext(AuthContext);
-
   return (
     <>
       <Header />
@@ -32,6 +33,12 @@ export default memo(function NavLayout() {
           </div>
         }>
         <AnimatePresence mode="wait">
+          {location.pathname !== "/" && (
+            <Container center={true} isLarge={true}>
+              <Breadcrumb />
+            </Container>
+          )}
+
           <Outlet />
         </AnimatePresence>
       </Suspense>
