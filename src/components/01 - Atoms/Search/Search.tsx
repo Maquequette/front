@@ -10,7 +10,7 @@ export interface ISearch {
 
 export default memo(function Search({ placeholder, className }: ISearch) {
   const [value, setValue] = useState("");
-  const { data } = useSearch(value);
+  // const { data } = useSearch(value);
 
   return (
     <div className={`search ${className ?? ""}`}>
@@ -25,13 +25,13 @@ export default memo(function Search({ placeholder, className }: ISearch) {
           onChange={(e) => setValue(e.target.value)}
         />
       </div>
-      {data?.data && (
+      {/* {data?.data && (
         <div className="search__options">
           {data?.data.map((suggestion: any) => {
             return <div className="option">{suggestion}</div>;
           })}
         </div>
-      )}
+      )} */}
     </div>
   );
 });

@@ -4,7 +4,7 @@ import "./Grid.scss";
 export interface IGrid {
   children: ReactNode;
   size: string;
-  styles: CSSProperties;
+  styles?: CSSProperties;
 }
 
 export default memo(function Grid({ children, size, styles }: IGrid) {

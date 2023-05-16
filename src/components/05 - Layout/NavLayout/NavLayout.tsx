@@ -32,13 +32,12 @@ export default memo(function NavLayout() {
             <Spinner theme="primary" />
           </div>
         }>
+        {location.pathname !== "/" && (
+          <Container center={true} isLarge={true}>
+            <Breadcrumb />
+          </Container>
+        )}
         <AnimatePresence mode="wait">
-          {location.pathname !== "/" && (
-            <Container center={true} isLarge={true}>
-              <Breadcrumb />
-            </Container>
-          )}
-
           <Outlet />
         </AnimatePresence>
       </Suspense>
