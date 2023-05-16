@@ -1,4 +1,4 @@
-@import "../../../assets/variables";
+@import "@/assets/variables";
 
 .checkbox {
   &__input {
@@ -10,16 +10,11 @@
     place-content: center;
     position: relative;
 
-    // &:focus,
-    // &:focus-visible {
-    //   outline: 2px solid var(--secondary);
-    // }
-
     &::before {
       content: "";
       position: absolute;
-      top: calc(50% - (1.4rem/2));
-      left: calc(50% - (1.4rem/2));
+      top: calc(50% - (1.4rem / 2));
+      left: calc(50% - (1.4rem / 2));
       width: 1.4rem;
       aspect-ratio: 1;
       transform: scale(0);
@@ -27,8 +22,7 @@
       border-radius: 2px;
     }
 
-    @each $name,
-    $color in $colors {
+    @each $name, $color in $colors {
       &--#{$name} {
         &::before {
           background-color: var(--#{$name});

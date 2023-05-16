@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function Date({ date }: { date: number }) {
+export default memo(function Date({ date }: { date: number }) {
   const { t } = useTranslation();
   return (
     <span className="date">
@@ -10,4 +11,4 @@ export default function Date({ date }: { date: number }) {
       })}
     </span>
   );
-}
+});

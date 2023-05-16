@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { ThemesContext } from "@/contexts/ThemesContext";
+import { useContext, memo } from "react";
 import { motion } from "framer-motion";
+import { ThemesContext } from "@/contexts/ThemesContext";
 import "./ThemeSwapper.scss";
 
-export default function ThemeSwapper() {
-  const { theme, setTheme, toggleTheme } = useContext(ThemesContext);
+export default memo(function ThemeSwapper() {
+  const { theme, toggleTheme } = useContext(ThemesContext);
 
   return (
     <div className="theme" onClick={toggleTheme}>
@@ -58,4 +58,4 @@ export default function ThemeSwapper() {
       </svg>
     </div>
   );
-}
+});

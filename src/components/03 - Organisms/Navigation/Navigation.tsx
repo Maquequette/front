@@ -1,37 +1,36 @@
+import { Dispatch, SetStateAction, useContext, useEffect, memo } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navlink from "@/components/01 - Atoms/Navlink/Navlink";
 import Tools from "@/components/03 - Organisms/Tools/Tools";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Dropdown from "@/components/01 - Atoms/Dropdown/Dropdown";
 import Badge from "@/components/01 - Atoms/Badge/Badge";
-import useMediaQuery from "@/hooks/useMediaQuery";
-import "./Navigation.scss";
-import { useLocation } from "react-router-dom";
-import { useContext, useEffect } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import useAuth from "@/hooks/useAuth";
+import "./Navigation.scss";
 
-export default function Navigation({
-  isOpen,
-  callback = () => { }
-}: {
-  isOpen?: boolean;
-  callback?: Function;
-}) {
+export interface INavigation {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export default memo(function Navigation({ isOpen }: INavigation) {
   const isDesktop = useMediaQuery("(min-width: 64em)");
+  const location = useLocation();
 
   const navItem = {
     closed: { opacity: 0, x: "-100rem", transition: { duration: isDesktop ? 0 : 0.2 } },
     open: { opacity: 1, x: 0, transition: { duration: isDesktop ? 0 : 1 } }
   };
 
-  const location = useLocation();
   const { onLogout } = useAuth();
   const { modalAuth, setModalAuth, isConnected } = useContext(AuthContext);
 
   useEffect(() => {
-    if (location.hash) {
-      setModalAuth(true)
+    if (location.hash === "#login" || location.hash === "#register") {
+      setModalAuth(true);
     }
   }, [location]);
 
@@ -48,11 +47,11 @@ export default function Navigation({
       variants={{
         open: {
           opacity: 1,
-          visibility: 'visible'
+          visibility: "visible"
         },
         closed: {
           opacity: 0,
-          visibility: 'hidden'
+          visibility: "hidden"
         }
       }}>
       <motion.ul
@@ -61,56 +60,30 @@ export default function Navigation({
         initial={false}
         transition={{ staggerChildren: isDesktop ? 0 : 0.1 }}>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink
-            to="/"
-            theme="primary"
-            icon={<Svg id="home" />}
-            clickCallback={() => {
-              callback();
-            }}>
+          <Navlink to="/" theme="primary" icon={<Svg id="home" />}>
             Home
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink
-            to="/challenges"
-            theme="primary"
-            clickCallback={() => {
-              callback();
-            }}>
+          <Navlink to="/challenges" theme="primary">
             Challenges
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
-          <Navlink
-            to="/lessons"
-            theme="primary"
-            clickCallback={() => {
-              callback();
-            }}>
+          <Navlink to="/lessons" theme="primary">
             Lessons
           </Navlink>
         </motion.li>
         {!isConnected() ? (
           <motion.li className="nav__item" variants={navItem}>
-            <Navlink
-              to='#login'
-              theme="primary"
-              classes={modalAuth ? "modalActive" : ""}
-              id="connection"
-              clickCallback={() => { callback() }}>
+            <Navlink to="#login" theme="primary" id="connection">
               Log in /Sign in
             </Navlink>
           </motion.li>
         ) : (
           <>
             <motion.li className="nav__item" variants={navItem}>
-              <Navlink
-                to="/classroom"
-                theme="primary"
-                clickCallback={() => {
-                  callback();
-                }}>
+              <Navlink to="/classroom" theme="primary">
                 Classroom
               </Navlink>
             </motion.li>
@@ -120,10 +93,7 @@ export default function Navigation({
                 to="/notification"
                 theme="primary"
                 icon={<Svg id="bell" />}
-                badge={<Badge theme="primary">1</Badge>}
-                clickCallback={() => {
-                  callback();
-                }}>
+                badge={<Badge theme="primary">1</Badge>}>
                 Notifications
               </Navlink>
             </motion.li>
@@ -134,37 +104,21 @@ export default function Navigation({
                 options={[
                   {
                     component: (
-                      <Navlink
-                        to="/profil"
-                        theme="primary"
-                        clickCallback={() => {
-                          callback();
-                        }}>
+                      <Navlink to="/profil" theme="primary">
                         Profile
                       </Navlink>
                     )
                   },
                   {
                     component: (
-                      <Navlink
-                        to="/profil/settings"
-                        theme="primary"
-                        clickCallback={() => {
-                          callback();
-                        }}>
+                      <Navlink to="/profil/settings" theme="primary">
                         Settings
                       </Navlink>
                     )
                   },
                   {
                     component: (
-                      <Navlink
-                        to="/logout"
-                        theme="primary"
-                        clickCallback={() => {
-                          callback();
-                          onLogout();
-                        }}>
+                      <Navlink to="/logout" theme="primary">
                         Log Out
                       </Navlink>
                     )
@@ -178,4 +132,4 @@ export default function Navigation({
       <Tools />
     </motion.nav>
   );
-}
+});

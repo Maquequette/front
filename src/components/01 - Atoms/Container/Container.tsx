@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from "react";
+import { ReactNode, CSSProperties, memo } from "react";
 import "./Container.scss";
 
 export interface IContainer {
@@ -10,7 +10,7 @@ export interface IContainer {
   isLarge?: boolean;
 }
 
-export default function Container({ children, center, styles, classes, isLarge }: IContainer) {
+export default memo(function Container({ children, center, styles, classes, isLarge }: IContainer) {
   return (
     <div
       style={styles}
@@ -20,4 +20,4 @@ export default function Container({ children, center, styles, classes, isLarge }
       {children}
     </div>
   );
-}
+});

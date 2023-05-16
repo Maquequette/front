@@ -13,7 +13,7 @@
     padding: 1rem 3rem;
   }
 
-  >.sprites {
+  > .sprites {
     width: 2.4rem;
     height: 2.4rem;
   }
@@ -49,8 +49,7 @@
     }
   }
 
-  @each $name,
-  $color in $colors {
+  @each $name, $color in $colors {
     &--#{$name} {
       border: 1px solid var(--#{$name});
 
@@ -60,7 +59,6 @@
 
       &.active {
         background-color: var(--#{$name});
-
       }
 
       &#connection {

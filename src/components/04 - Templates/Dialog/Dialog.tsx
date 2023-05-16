@@ -1,5 +1,5 @@
-import { CSSProperties, ReactNode } from "react";
-import { motion, transform } from "framer-motion";
+import { CSSProperties, ReactNode, memo } from "react";
+import { motion } from "framer-motion";
 import "./Dialog.scss";
 
 export interface IDialog {
@@ -10,7 +10,7 @@ export interface IDialog {
   styles?: CSSProperties;
 }
 
-export default function Dialog({ id, children, visible = false, Dismiss, styles }: IDialog) {
+export default memo(function Dialog({ id, children, visible = false, Dismiss, styles }: IDialog) {
   const backdropCloseModal = (e: React.MouseEvent<HTMLDialogElement>) => {
     Dismiss();
   };
@@ -37,4 +37,4 @@ export default function Dialog({ id, children, visible = false, Dismiss, styles 
       </motion.div>
     </dialog>
   );
-}
+});

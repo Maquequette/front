@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Tags from "@/components/02 - Molecules/Tags/Tags";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
@@ -15,7 +16,7 @@ export interface ICard {
   date?: number;
 }
 
-export default function Card({ img, title, tags, author, price, date }: ICard) {
+export default memo(function Card({ img, title, tags, author, price, date }: ICard) {
   return (
     <div className="card">
       <div className="card__header">
@@ -45,4 +46,4 @@ export default function Card({ img, title, tags, author, price, date }: ICard) {
       </div>
     </div>
   );
-}
+});

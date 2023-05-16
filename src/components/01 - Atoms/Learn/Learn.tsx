@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, memo } from "react";
 import { motion } from "framer-motion";
 import Sprites from "../../../assets/images/sprites.svg";
 import "./Learn.scss";
@@ -6,7 +6,7 @@ import "./Learn.scss";
 export interface ILearn {
   children: ReactNode;
 }
-export default function Learn({ children }: ILearn) {
+export default memo(function Learn({ children }: ILearn) {
   return (
     <span className="learn">
       {children}
@@ -23,4 +23,4 @@ export default function Learn({ children }: ILearn) {
       </motion.svg>
     </span>
   );
-}
+});

@@ -1,10 +1,11 @@
+import { memo } from "react";
 import Container from "@/components/01 - Atoms/Container/Container";
 import Logo from "@/components/01 - Atoms/Logo/Logo";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import "./Footer.scss";
 
-export default function Footer() {
+export default memo(function Footer() {
   return (
     <footer className="footer">
       <Container center={true} isLarge={true} classes="footer__header">
@@ -32,4 +33,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});

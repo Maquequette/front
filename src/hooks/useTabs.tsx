@@ -1,21 +1,22 @@
-import { useState } from "react"
+import { useCallback, useState } from "react";
 
 export default function useTabs() {
+  const [lastTab, setLastTab] = useState<number>(0);
+  const [currentTab, setCurrentTab] = useState<number>(0);
 
-    const [lastTab, setLastTab] = useState<number>(0);
-    const [currentTab, setCurrentTab] = useState<number>(0);
+  const updateTabs = useCallback(
+    (i: number) => {
+      setLastTab(currentTab);
+      setCurrentTab(i);
+    },
+    [currentTab]
+  );
 
-    const updateTabs = (i: number) => {
-        setLastTab(currentTab)
-        setCurrentTab(i)
-    }
-
-    return {
-        lastTab,
-        setLastTab,
-        currentTab,
-        setCurrentTab,
-        updateTabs
-    }
-
+  return {
+    lastTab,
+    setLastTab,
+    currentTab,
+    setCurrentTab,
+    updateTabs
+  };
 }
