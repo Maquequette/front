@@ -1,16 +1,20 @@
+@import "@/assets/variables";
+
 .hero {
   margin-top: 3rem;
   display: grid;
 
-  @media (min-width: 48em) {
+  @media (min-width: #{map-get($breakpoints, "sm")}) {
     grid-template-columns: 1fr 1fr;
   }
 
-  @media (min-width: 64em) {
-    grid-template-columns: 1fr 66rem;
-
+  @media (min-width: #{map-get($breakpoints, "md")}) {
     .lf-player-container {
       margin-top: -8rem;
     }
+  }
+
+  @media (min-width: #{map-get($breakpoints, "lg")}) {
+    grid-template-columns: 1fr 66rem;
   }
 }

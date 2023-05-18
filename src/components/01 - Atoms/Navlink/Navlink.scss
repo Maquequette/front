@@ -9,7 +9,7 @@
   position: relative;
   padding: 1rem 1rem;
 
-  @media (min-width: #{map-get($breakpoints, "l")}) {
+  @media (min-width: #{map-get($breakpoints, "lg")}) {
     padding: 1rem 3rem;
   }
 
@@ -20,17 +20,17 @@
 
   &__txt {
     color: var(--dark);
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-lg);
     font-family: var(--font-family-secondary);
     text-transform: uppercase;
 
-    @media (min-width: #{map-get($breakpoints, "l")}) {
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
       font-size: var(--font-size-md);
     }
   }
 
   &--icon {
-    @media (min-width: #{map-get($breakpoints, "l")}) {
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
       padding: 1rem;
 
       .link__txt {

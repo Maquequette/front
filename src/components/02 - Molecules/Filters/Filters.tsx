@@ -19,8 +19,10 @@ export default memo(function Filters({ children, theme, headContent }: IColoredL
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleFilter = useCallback(() => {
-    setIsOpen((prev) => !prev);
-    !isOpen ? disable() : enable();
+    setIsOpen((p) => {
+      !p ? enable() : disable();
+      return !p;
+    });
   }, []);
 
   return (
