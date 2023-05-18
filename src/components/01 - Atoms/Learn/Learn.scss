@@ -2,16 +2,36 @@
   display: flex;
   gap: 2rem;
   align-items: flex-end;
+  position: relative;
+  width: fit-content;
 
   .sprites {
     cursor: grab;
-    position: relative;
-    top: 4rem;
+    position: absolute;
+    top: -6rem;
+    left: 0;
     width: 10rem;
     height: 10rem;
 
     &:active {
       cursor: grabbing;
+    }
+  }
+  &__icon {
+    position: relative;
+
+    &::after {
+      display: block;
+      content: "";
+      z-index: -1;
+      position: absolute;
+      width: 5rem;
+      height: 5rem;
+      top: calc(50% + 0.6rem);
+      left: calc(50% - 0.6rem);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      backdrop-filter: blur(2px);
     }
   }
 }

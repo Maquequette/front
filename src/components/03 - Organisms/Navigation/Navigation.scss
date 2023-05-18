@@ -9,9 +9,13 @@
   margin-top: var(--spacing-l);
   padding: 2rem;
   overflow-y: scroll;
+  z-index: 9999;
 
-  @media (min-width: #{map-get($breakpoints, "l")}) {
-    height: 100%;
+  &.active  {
+    height: 100vh;
+  }
+
+  @media (min-width: #{map-get($breakpoints, "lg")}) {
     position: relative;
     top: 0;
     opacity: 1;
@@ -19,6 +23,11 @@
     display: flex;
     justify-content: center;
     overflow-y: unset;
+
+    &,
+    &.active  {
+      height: 100%;
+    }
   }
 
   &__container {
@@ -27,7 +36,7 @@
     row-gap: 1rem;
     list-style-type: none;
 
-    @media (min-width: #{map-get($breakpoints, "l")}) {
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
       flex-direction: row;
       align-items: center;
       background-color: var(--light);
@@ -39,7 +48,7 @@
   }
 
   &__item {
-    @media (min-width: #{map-get($breakpoints, "l")}) {
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
       height: 100%;
 
       &:first-child {

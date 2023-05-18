@@ -1,9 +1,6 @@
 @import "@/assets/variables";
 @import "@/assets/utilities";
 
-@import "@/assets/variables";
-@import "@/assets/utilities";
-
 .filters {
   position: relative;
 
@@ -56,7 +53,7 @@
       height: 100vh;
       top: 0;
       left: 0;
-      z-index: 10;
+      z-index: 99999;
       width: 100%;
       grid-auto-rows: max-content;
       padding: 2rem 3rem;
@@ -72,7 +69,7 @@
         grid-template-rows: repeat(2, min-content);
         position: unset;
         height: auto;
-        background-color: transparent;
+        background-color: transparent !important;
         overflow: initial;
 
         .burger {
@@ -91,6 +88,7 @@
 
   &__body {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
 

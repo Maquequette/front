@@ -31,7 +31,7 @@
     transition: all 0.2s;
     margin-top: 0;
 
-    @media (min-width: #{map-get($breakpoints, "l")}) {
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
       left: auto;
       right: calc(0% - 0.5rem);
       transform: none;
@@ -47,7 +47,7 @@
     padding: 1rem 4rem;
     border: 1px solid var(--primary);
 
-    @media (min-width: #{map-get($breakpoints, "l")}) {
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
       font-size: var(--font-size-sm);
     }
 

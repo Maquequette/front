@@ -2,10 +2,14 @@
 
 .strip {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: column;
   gap: 1rem;
   word-break: keep-all;
+
+  @media (min-width: #{map-get($breakpoints, "md")}) {
+    flex-direction: row;
+  }
 
   &__container {
     display: flex;
@@ -23,10 +27,14 @@
   &::before {
     content: "";
     height: 5rem;
-    max-width: 30rem;
+    width: 100%;
     border-radius: 2rem;
-    flex: 1;
+    width: 100%;
     background-color: var(--secondary);
+
+    @media (min-width: #{map-get($breakpoints, "md")}) {
+      flex: 1;
+    }
   }
 
   @each $name, $color in $colors {

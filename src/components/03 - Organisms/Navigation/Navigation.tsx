@@ -36,7 +36,7 @@ export default memo(function Navigation({ isOpen }: INavigation) {
 
   return (
     <motion.nav
-      className="nav"
+      className={`nav ${isOpen ? "active" : ""}`}
       animate={isOpen || isDesktop ? "open" : "closed"}
       initial={false}
       transition={{
