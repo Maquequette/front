@@ -1,3 +1,5 @@
+@import "@/assets/variables";
+
 .tools {
   list-style-type: none;
   display: flex;
@@ -10,7 +12,7 @@
   margin-top: var(--spacing-2xl);
   min-height: 6rem;
 
-  @media (min-width: 64em) {
+  @media (min-width: #{map-get($breakpoints, "l")}) {
     margin: 0;
     position: absolute;
     right: 0;

@@ -1,13 +1,14 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState, memo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Toast from "@/components/01 - Atoms/Toast/Toast";
 import { ToastContext } from "@/contexts/ToastContext";
 import { IToast } from "@/components/01 - Atoms/Toast/Toast";
 import "./ToastsContainer.scss";
 
-export default function ToastsContainer() {
-  const [toasts, setToasts] = useState<Array<IToast>>([]);
+export default memo(function ToastsContainer() {
   const { pushToastRef } = useContext(ToastContext);
+  const [toasts, setToasts] = useState<Array<IToast>>([]);
+
   pushToastRef.current = ({ duration, title, desc, theme }: IToast) => {
     const id = crypto.randomUUID();
 
@@ -19,10 +20,13 @@ export default function ToastsContainer() {
     setToasts((v) => [...v, toast]);
   };
 
-  const onRemove = (toast: IToast) => {
-    clearTimeout(toast.timer);
-    setToasts((v) => v.filter((t) => t !== toast));
-  };
+  const onRemove = useCallback(
+    (toast: IToast) => {
+      clearTimeout(toast.timer);
+      setToasts(toasts.filter((t) => t !== toast));
+    },
+    [toasts]
+  );
 
   return (
     <div className="toasts">
@@ -40,4 +44,4 @@ export default function ToastsContainer() {
       </AnimatePresence>
     </div>
   );
-}
+});

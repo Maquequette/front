@@ -1,5 +1,6 @@
-import { Theme } from "@/types/Theme";
+import { memo } from "react";
 import { motion } from "framer-motion";
+import { Theme } from "@/types/Theme";
 import "./Toast.scss";
 
 export interface IToast {
@@ -11,16 +12,17 @@ export interface IToast {
   timer?: ReturnType<typeof setTimeout>;
 }
 
-export default function Toast({ title, desc, theme, duration }: IToast) {
+export default memo(function Toast({ title, desc, theme, duration }: IToast) {
   return (
     <div className={`toast toast--${theme}`}>
       <p className="toast__heading">{title}</p>
       <div className="toast__desc">{desc}</div>
       <motion.div
         className={`toast__timer toast__timer--${theme}`}
-        initial={{ width: "100%" }}
+        initial={{ scaleX: 1 }}
         transition={{ duration: duration ?? 5 }}
-        animate={{ width: 0 }}></motion.div>
+        animate={{ scaleX: 0 }}
+      />
     </div>
   );
-}
+});

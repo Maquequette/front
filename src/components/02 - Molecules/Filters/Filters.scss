@@ -1,0 +1,109 @@
+@import "@/assets/variables";
+@import "@/assets/utilities";
+
+@import "@/assets/variables";
+@import "@/assets/utilities";
+
+.filters {
+  position: relative;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    width: 100%;
+  }
+
+  @each $name, $color in $colors {
+    &--#{$name}::after,
+    &--#{$name} &__inputs.active {
+      background-color: var(--#{$name});
+    }
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    height: 78%;
+    width: 100%;
+    bottom: 0;
+    z-index: -1;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    @media (min-width: #{map-get($breakpoints, "md")}) {
+      display: none;
+    }
+  }
+
+  &__inputs {
+    display: grid;
+    gap: 0 2rem;
+    height: 0;
+    overflow: hidden;
+
+    .burger {
+      display: none;
+      justify-self: flex-end;
+    }
+
+    &.active {
+      position: fixed;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      width: 100%;
+      grid-auto-rows: max-content;
+      padding: 2rem 3rem;
+
+      .burger {
+        display: block;
+      }
+    }
+
+    @media (min-width: #{map-get($breakpoints, "md")}) {
+      &,
+      &.active {
+        grid-template-rows: repeat(2, min-content);
+        position: unset;
+        height: auto;
+        background-color: transparent;
+        overflow: initial;
+
+        .burger {
+          display: none;
+        }
+      }
+    }
+
+    .labelContainer {
+      justify-content: flex-end;
+      @media (min-width: #{map-get($breakpoints, "md")}) {
+        grid-row: 1/1;
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .tags {
+      flex: 1;
+    }
+  }
+
+  &__indications {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-smd);
+    font-family: var(--font-family-secondary);
+  }
+}

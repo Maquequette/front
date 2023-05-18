@@ -2,16 +2,18 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
   border: 1px solid var(--dark);
+  border-radius: 1rem;
   box-shadow: 5px 5px 0px var(--dark);
-  width: fit-content;
   background-color: var(--light);
 
   &__input {
     display: flex;
     gap: 1rem;
     align-items: center;
-    padding: 1rem;
+    width: 100%;
+    padding: 0 1rem;
 
     > .sprites {
       width: 2rem;
@@ -24,6 +26,7 @@
     font-size: var(--font-size-md);
     font-family: var(--font-family-secondary);
     text-transform: capitalize;
+    padding: 1rem 0;
 
     &:focus-visible {
       outline: none;

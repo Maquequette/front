@@ -1,17 +1,17 @@
+import { CSSProperties, MouseEventHandler, memo } from "react";
 import { Theme } from "@/types/Theme";
-import { CSSProperties, MouseEventHandler } from "react";
 import "./Checkbox.scss";
 
 export interface ICheckbox {
-  name: string
-  theme: Theme
-  value: any
-  isChecked: boolean
-  handleClick?: MouseEventHandler
-  style?: CSSProperties
+  name: string;
+  theme: Theme;
+  value: any;
+  isChecked: boolean;
+  handleClick?: MouseEventHandler;
+  style?: CSSProperties;
 }
 
-export default function Checkbox({
+export default memo(function Checkbox({
   name,
   theme,
   value,
@@ -19,7 +19,6 @@ export default function Checkbox({
   isChecked,
   style
 }: ICheckbox) {
-
   return (
     <div className="checkbox" style={style} onClick={() => handleClick?.(value)}>
       <input
@@ -31,5 +30,5 @@ export default function Checkbox({
         readOnly
       />
     </div>
-  )
-}
+  );
+});

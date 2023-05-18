@@ -1,3 +1,5 @@
+@import "@/assets/variables";
+
 .language {
   padding: 1rem;
   position: relative;
@@ -29,7 +31,7 @@
     transition: all 0.2s;
     margin-top: 0;
 
-    @media (min-width: 64em) {
+    @media (min-width: #{map-get($breakpoints, "l")}) {
       left: auto;
       right: calc(0% - 0.5rem);
       transform: none;
@@ -41,10 +43,11 @@
     font-family: var(--font-family-secondary);
     cursor: pointer;
     text-transform: uppercase;
+    text-align: center;
     padding: 1rem 4rem;
     border: 1px solid var(--primary);
 
-    @media (min-width: 64em) {
+    @media (min-width: #{map-get($breakpoints, "l")}) {
       font-size: var(--font-size-sm);
     }
 
@@ -62,7 +65,7 @@
     }
   }
 
-  &>.sprites {
+  & > .sprites {
     width: 2.4rem;
     height: 2.4rem;
   }

@@ -11,15 +11,16 @@
     border-radius: inherit;
     padding: 1rem;
     width: 100%;
-    transition: translate 1s, rotate 1s;
+    transition: translate 0.3s, rotate 0.3s;
   }
 
   &__line {
-    transition: y 0.2s ease-in 0.2s, rotate 0.2s ease-in, opacity 0ms 0.2s;
+    transition: y 0.1s ease-in 0.1s, rotate 0.1s ease-in, opacity 0ms 0.1s;
     transform-origin: center;
   }
 
   &--open {
+
     .burger__top,
     .burger__bottom {
       y: 45;
@@ -41,7 +42,7 @@
     }
 
     .burger__line {
-      transition: y 0.2s ease-in, rotate 0.2s ease-in 0.2s, opacity 0ms 0.2s;
+      transition: y 0.1s ease-in, rotate 0.1s ease-in 0.1s, opacity 0ms 0.1s;
     }
   }
 }

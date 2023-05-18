@@ -1,5 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
-
+import { CSSProperties, ReactNode, memo } from "react";
 import "./Hero.scss";
 
 export interface IHero {
@@ -8,11 +7,11 @@ export interface IHero {
   styles?: CSSProperties;
 }
 
-export default function Hero({ title, illustation, styles }: IHero) {
+export default memo(function Hero({ title, illustation, styles }: IHero) {
   return (
     <div className="hero" style={styles}>
       <div className="hero__info">{title}</div>
       <div className="hero__illustration">{illustation}</div>
     </div>
   );
-}
+});

@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode, memo } from "react";
 import Svg from "../Svg/Svg";
 import { Theme } from "@/types/Theme";
 import "./Folder.scss";
@@ -10,7 +10,7 @@ export interface IFolder {
   down: Theme;
 }
 
-export default function Folder({ theme, children, styles, down }: IFolder) {
+export default memo(function Folder({ theme, children, styles, down }: IFolder) {
   return (
     <div className={`folder folder--${theme}`} style={styles}>
       <div className={`folder__header down--${down}`}>
@@ -19,4 +19,4 @@ export default function Folder({ theme, children, styles, down }: IFolder) {
       <div className="folder__body">{children}</div>
     </div>
   );
-}
+});

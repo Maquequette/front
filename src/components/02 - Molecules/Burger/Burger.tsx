@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, memo } from "react";
 import "./Burger.scss";
 
-export default function Burger({
+export default memo(function Burger({
   handleClick,
   isOpen
 }: {
@@ -36,4 +35,4 @@ export default function Burger({
       </svg>
     </button>
   );
-}
+});

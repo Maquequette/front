@@ -1,5 +1,5 @@
+import { createContext, MutableRefObject, useRef, memo } from "react";
 import ToastsContainer from "@/components/02 - Molecules/ToastsContainer/ToastsContainer";
-import { createContext, MutableRefObject, useRef } from "react";
 
 export interface IToastContext {
   pushToastRef: MutableRefObject<Function>;
@@ -7,8 +7,8 @@ export interface IToastContext {
 
 export const ToastContext = createContext<IToastContext>(null!);
 
-export function ToastProvider({ children }: { children: JSX.Element }) {
-  const pushToastRef = useRef(() => { });
+const ToastProvider = memo(function ToastProvider({ children }: { children: JSX.Element }) {
+  const pushToastRef = useRef(() => {});
 
   return (
     <ToastContext.Provider value={{ pushToastRef }}>
@@ -16,4 +16,6 @@ export function ToastProvider({ children }: { children: JSX.Element }) {
       <ToastsContainer />
     </ToastContext.Provider>
   );
-}
+});
+
+export { ToastProvider };

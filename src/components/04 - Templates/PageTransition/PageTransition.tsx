@@ -1,8 +1,8 @@
+import { ReactNode, memo } from "react";
 import { easeIn, motion } from "framer-motion";
-import { ReactNode } from "react";
 import "./PageTransition.scss";
 
-export default function PageTransition({ children }: { children: ReactNode }) {
+export default memo(function PageTransition({ children }: { children: ReactNode }) {
   return (
     <>
       <motion.div
@@ -26,4 +26,4 @@ export default function PageTransition({ children }: { children: ReactNode }) {
       {children}
     </>
   );
-}
+});

@@ -1,5 +1,7 @@
+@import "@/assets/variables";
+@import "@/assets/animations";
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto&family=Space+Grotesk:wght@700&family=Kanit:wght@700&display=swap");
-@import "./assets/variables";
 
 :root {
   @each $name, $color in $colors {
@@ -28,6 +30,9 @@
   @each $name, $spacing in $spacings {
     --spacing-#{$name}: #{$spacing};
   }
+}
+
+[data-theme="dark"] {
 }
 
 html {

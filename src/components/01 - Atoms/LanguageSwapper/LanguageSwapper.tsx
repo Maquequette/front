@@ -1,10 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, memo } from "react";
 import Svg from "../Svg/Svg";
 import { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 import "./LanguageSwapper.scss";
 
-export default function LanguageSwapper() {
+export default memo(function LanguageSwapper() {
   const { i18n } = useTranslation();
 
   const handleChangeLanguage = useCallback((lang: string) => {
@@ -28,4 +28,4 @@ export default function LanguageSwapper() {
       </div>
     </div>
   );
-}
+});

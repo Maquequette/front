@@ -1,68 +1,66 @@
-import Login from "@/components/03 - Organisms/Auth/Login";
-import Register from "@/components/03 - Organisms/Auth/Register";
-import Tabs from "@/components/03 - Organisms/Tabs/Tabs";
-import Dialog from "@/components/04 - Templates/Dialog/Dialog";
-import { createContext, Dispatch, SetStateAction, useState } from "react";
-import { TabsProvider } from "./TabsContext";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+  memo
+} from "react";
+import useDisableScroll from "@/hooks/useDisableScroll";
 
 export interface IAuthContext {
-    modalAuth: boolean,
-    setModalAuth: Dispatch<SetStateAction<boolean>>,
-    user: IUser,
-    setUser: Dispatch<SetStateAction<IUser>>,
-    isConnected: () => boolean
+  modalAuth: boolean;
+  setModalAuth: Dispatch<SetStateAction<boolean>>;
+  user: IUser;
+  setUser: Dispatch<SetStateAction<IUser>>;
+  isConnected: () => boolean;
 }
 
 export interface IUser {
   id: Number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
+  roles: Array<string>;
+  active: boolean;
+  firstConnection: boolean;
+  token: string;
 }
 
 export const AuthContext = createContext<IAuthContext>(null!);
 
-export function AuthProvider({ children }: { children: JSX.Element }) {
+const AuthProvider = memo(function AuthProvider({ children }: { children: JSX.Element }) {
+  const { enable, disable } = useDisableScroll();
+  const [modalAuth, setModalAuth] = useState<boolean>(false);
+  const [user, setUser] = useState<IUser>(null!);
 
-    const [modalAuth, setModalAuth] = useState<boolean>(false);
-    const [user, setUser] = useState<IUser>(null!);
+  useEffect(() => {
+    modalAuth ? disable() : enable();
+  }, [modalAuth]);
 
-    const isConnected = (): boolean => user !== null
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")!));
+    }
+  }, []);
 
-    return (
-        <AuthContext.Provider value={{
-            modalAuth,
-            setModalAuth,
-            user,
-            setUser,
-            isConnected
-        }}
+  const isConnected = useCallback(() => {
+    return user !== null;
+  }, [user]);
 
-        >
-            {children}
-            {!isConnected() &&
-                <Dialog
-                    id="Auth"
-                    visible={modalAuth}
-                    Dismiss={() => {
-                        setModalAuth(!modalAuth)
-                    }}
-                >
+  return (
+    <AuthContext.Provider
+      value={{
+        modalAuth,
+        setModalAuth,
+        user,
+        setUser,
+        isConnected
+      }}>
+      {children}
+    </AuthContext.Provider>
+  );
+});
 
-                    <TabsProvider>
-                        <Tabs tabs={[
-                            {
-                                tabTitle: 'Login',
-                                tabContent: <Login />
-                            },
-                            {
-                                tabTitle: 'Register',
-                                tabContent: <Register />
-                            }
-                        ]} />
-                    </TabsProvider>
-
-                </Dialog>
-            }
-        </AuthContext.Provider>
-    )
-}
+export { AuthProvider };

@@ -14,14 +14,13 @@
   border: 2px solid var(--light);
   z-index: 10;
 
-  @each $name,
-  $color in $colors {
+  @each $name, $color in $colors {
     &--#{$name} {
       background-color: var(--#{$name});
     }
   }
 
-  @media (min-width: 64em) {
+  @media (min-width: #{map-get($breakpoints, "l")}) {
     position: absolute;
     top: 0;
     left: 100%;

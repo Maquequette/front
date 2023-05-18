@@ -1,4 +1,4 @@
-@import "../../../assets/variables";
+@import "@/assets/variables";
 
 .link {
   display: flex;
@@ -9,11 +9,11 @@
   position: relative;
   padding: 1rem 1rem;
 
-  @media (min-width: 64em) {
+  @media (min-width: #{map-get($breakpoints, "l")}) {
     padding: 1rem 3rem;
   }
 
-  >.sprites {
+  > .sprites {
     width: 2.4rem;
     height: 2.4rem;
   }
@@ -24,13 +24,13 @@
     font-family: var(--font-family-secondary);
     text-transform: uppercase;
 
-    @media (min-width: 64em) {
+    @media (min-width: #{map-get($breakpoints, "l")}) {
       font-size: var(--font-size-md);
     }
   }
 
   &--icon {
-    @media (min-width: 64em) {
+    @media (min-width: #{map-get($breakpoints, "l")}) {
       padding: 1rem;
 
       .link__txt {
@@ -49,8 +49,7 @@
     }
   }
 
-  @each $name,
-  $color in $colors {
+  @each $name, $color in $colors {
     &--#{$name} {
       border: 1px solid var(--#{$name});
 
@@ -60,7 +59,6 @@
 
       &.active {
         background-color: var(--#{$name});
-
       }
 
       &#connection {

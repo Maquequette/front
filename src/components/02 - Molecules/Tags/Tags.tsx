@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Tag from "@/components/01 - Atoms/Tag/Tag";
 import { ITag } from "@/components/01 - Atoms/Tag/Tag";
 import "./Tags.scss";
@@ -6,7 +7,7 @@ export interface ITags {
   tags: Array<ITag>;
 }
 
-export default function Tags({ tags }: { tags: Array<ITag> }) {
+export default memo(function Tags({ tags }: { tags: Array<ITag> }) {
   return (
     <div className="tags">
       <div className="tags__container">
@@ -16,4 +17,4 @@ export default function Tags({ tags }: { tags: Array<ITag> }) {
       </div>
     </div>
   );
-}
+});

@@ -1,4 +1,4 @@
-import { CSSProperties, MouseEventHandler } from "react";
+import { CSSProperties, memo } from "react";
 import "./Dropdown.scss";
 
 export interface IDropdown {
@@ -14,7 +14,7 @@ export interface IDropdownOption {
   value?: any;
 }
 
-export default function Dropdown({ options, component, styles }: IDropdown) {
+export default memo(function Dropdown({ options, component, styles }: IDropdown) {
   return (
     <div className="dropdown" style={styles}>
       {component}
@@ -32,4 +32,4 @@ export default function Dropdown({ options, component, styles }: IDropdown) {
       </div>
     </div>
   );
-}
+});
