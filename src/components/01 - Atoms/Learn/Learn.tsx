@@ -10,17 +10,19 @@ export default memo(function Learn({ children }: ILearn) {
   return (
     <span className="learn">
       {children}
-      <motion.svg
+      <motion.div
+        className="learn__icon"
         initial={{ zIndex: 1 }}
         drag={true}
         dragSnapToOrigin={true}
-        className="sprites"
         dragElastic={0.2}
         whileDrag={{
-          zIndex: 999
+          zIndex: 9999
         }}>
-        <use xlinkHref={`${Sprites}#glass`}></use>
-      </motion.svg>
+        <svg className="sprites">
+          <use xlinkHref={`${Sprites}#glass`}></use>
+        </svg>
+      </motion.div>
     </span>
   );
 });

@@ -3,7 +3,7 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 9;
+  z-index: 9999;
 
   &::after {
     content: "";
@@ -18,7 +18,7 @@
     transition: clip-path 1s;
   }
 
-  @media (max-width: #{map-get($breakpoints, "l")}) {
+  @media (max-width: #{map-get($breakpoints, "lg")}) {
     &--open {
       &::after {
         clip-path: circle(200vmax at calc(100% - 6rem) 5rem);
@@ -36,7 +36,7 @@
   &__logo {
     margin-right: auto;
 
-    @media (min-width: #{map-get($breakpoints, "l")}) {
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
       position: absolute;
       z-index: 1;
       top: 50%;
@@ -45,7 +45,7 @@
   }
 
   .burger {
-    @media (min-width: #{map-get($breakpoints, "l")}) {
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
       display: none;
     }
   }
