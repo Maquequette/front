@@ -14,7 +14,7 @@ export default memo(function Header() {
 
   const toggleMenu = useCallback(() => {
     setIsOpen((p) => {
-      !p ? enable() : disable();
+      !p ? disable() : enable();
       return !p;
     });
   }, []);
