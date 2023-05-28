@@ -22,8 +22,8 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const prevRequest = error?.config;
-    if (error?.response?.status === 401 && !prevRequest?.sent) {
+    const prevRequest = error.config;
+    if (error?.response?.status === 401 && error?.response?.data.message !== "Invalid JWT Token") {
       prevRequest.sent = true;
       const newAccessToken = await refreshToken({ token: localStorage.getItem("access_token")! });
       prevRequest.headers["Authorization"] = `Bearer ${newAccessToken.data.refresh_token}`;

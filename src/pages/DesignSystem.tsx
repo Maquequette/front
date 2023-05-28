@@ -1,9 +1,9 @@
 import Container from "@/components/01 - Atoms/Container/Container";
-import Code from "@/components/03 - Organisms/Code/Code";
+import Code from "@/components/03 - Organisms/Editor/Editor";
 export default function DesignSystem() {
   return (
     <Container center={true}>
-      <Code template="react" language="javascript" theme="dark" />
+      <Code roomId="mqq" template="react" theme="dark" />
     </Container>
   );
 }

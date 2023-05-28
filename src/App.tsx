@@ -1,12 +1,8 @@
-import { useContext } from "react";
-import { ThemesContext } from "@/contexts/ThemesContext";
-import Router from "./router/Router";
-import { AuthProvider } from "./contexts/AuthContext";
 import { MutationCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import useToasts from "./hooks/useToasts";
-import { ThemesProvider } from "@/contexts/ThemesContext";
-import { ToastProvider } from "./contexts/ToastContext";
-
+import Router from "@/router/Router";
+import useToasts from "@/hooks/useToasts";
+import ErrorBoundary from "./components/01 - Atoms/ErrorBoundary/ErrorBoundary";
+import Spinner from "./components/01 - Atoms/Spinner/Spinner";
 export default function App() {
   const { pushToast } = useToasts();
 
@@ -25,7 +21,9 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Router />
+      <ErrorBoundary fallback={<Spinner theme="primary" />}>
+        <Router />
+      </ErrorBoundary>
     </QueryClientProvider>
   );
 }
