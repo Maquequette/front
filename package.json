@@ -9,16 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "^2.6.4",
     "@emmetio/codemirror6-plugin": "^0.3.0",
+    "@codesandbox/sandpack-react": "^2.6.6",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@tanstack/react-query": "^4.29.7",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
-    "file-saver": "^2.0.5",
-    "framer-motion": "^10.12.12",
-    "i18next": "^22.4.15",
+        "file-saver": "^2.0.5",
+
+    "framer-motion": "^10.12.16",
+    "i18next": "^22.5.0",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.1",
     "jszip": "^3.10.1",
@@ -26,7 +27,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-i18next": "^12.2.2",
+    "react-i18next": "^12.3.1",
     "react-router-dom": "^6.11.2",
     "y-codemirror.next": "^0.3.2",
     "y-leveldb": "^0.1.2",
@@ -34,13 +35,14 @@
     "yjs": "^13.6.1"
   },
   "devDependencies": {
-    "@types/file-saver": "^2.0.5",
-    "@types/react": "^18.2.6",
+        "@types/file-saver": "^2.0.5",
+
+    "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
-    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@vitejs/plugin-react": "^4.0.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.40.0",
+    "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.27.5",
@@ -51,8 +53,8 @@
     "prettier": "^2.8.8",
     "sass": "^1.62.1",
     "typescript": "^5.0.4",
-    "vite": "^4.3.8",
-    "vite-plugin-pwa": "^0.14.7"
+    "vite": "^4.3.9",
+    "vite-plugin-pwa": "^0.15.1"
   },
   "config": {
     "commitizen": {

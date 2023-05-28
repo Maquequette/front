@@ -20,7 +20,7 @@ export default memo(function Filters({ children, theme, headContent }: IColoredL
 
   const toggleFilter = useCallback(() => {
     setIsOpen((p) => {
-      !p ? enable() : disable();
+      !p ? disable() : enable();
       return !p;
     });
   }, []);
