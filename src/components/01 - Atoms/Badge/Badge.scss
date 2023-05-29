@@ -11,19 +11,10 @@
   color: var(--dark);
   border-radius: 100vmax;
   @extend .flex-centered;
-  border: 2px solid var(--light);
+  border: 1px solid var(--dark);
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translate(-50%, -50%);
   z-index: 10;
-
-  @each $name, $color in $colors {
-    &--#{$name} {
-      background-color: var(--#{$name});
-    }
-  }
-
-  @media (min-width: #{map-get($breakpoints, "lg")}) {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    transform: translate(-50%, -50%);
-  }
 }

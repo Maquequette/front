@@ -1,11 +1,15 @@
 import { memo } from "react";
-import { Theme } from "@/types/Theme";
 import "./Tag.scss";
 
 export interface ITag {
+  id: number;
   label: string;
-  theme: Theme;
+  color: any;
 }
-export default memo(function Tag({ theme, label }: ITag) {
-  return <div className={`tag tag--${theme}`}>{label}</div>;
+export default memo(function Tag({ color, label }: ITag) {
+  return (
+    <div className="tag" style={{ color: `${color?.code}` }}>
+      {label}
+    </div>
+  );
 });

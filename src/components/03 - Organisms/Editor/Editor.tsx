@@ -32,6 +32,7 @@ export default function Editor({ template, theme, roomId = crypto.randomUUID() }
   return (
     <SandpackProvider template={template} theme={theme}>
       <SandpackLayout>
+        <SandpackFileExplorer />
         <CodeEditor
         // ytext={ytext.current}
         // provider={provider.current}

@@ -17,7 +17,7 @@ export interface IMultiselect {
 }
 
 export interface ISelectOption {
-  value: string | number | null;
+  id?: number | string;
   label: string;
   default?: boolean;
   children?: Array<ISelectOption>;
@@ -50,7 +50,7 @@ const Multiselect = forwardRef(
 
     const handleMultiselect = (option: ISelectOption) => {
       const index = selected.findIndex((opt) => {
-        return opt.value === option.value;
+        return opt.label === option.label;
       });
 
       if (index === -1) {
@@ -104,7 +104,7 @@ const Multiselect = forwardRef(
                 return (
                   <div
                     className="multiselect__input__selected__badge"
-                    key={element.value + "_badge"}
+                    key={element.id + "_badge"}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleMultiselect(element);
@@ -153,7 +153,7 @@ const Multiselect = forwardRef(
                         key={index}
                         theme={theme}
                         label={element.label}
-                        value={element.value!}
+                        value={element.id!}
                         classes={clsx(selected.includes(element) && !multiple ? "active" : "")}
                         handleClick={() => {
                           multiple ? handleMultiselect(element) : handleSelect(element);
@@ -171,7 +171,7 @@ const Multiselect = forwardRef(
                               key={index}
                               theme={theme}
                               label={option.label}
-                              value={option.value!}
+                              value={option.id!}
                               classes={clsx(selected.includes(option) && !multiple ? "active" : "")}
                               handleClick={() => {
                                 multiple ? handleMultiselect(option) : handleSelect(option);
