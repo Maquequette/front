@@ -20,8 +20,9 @@ import "./Home.scss";
 
 export default function Home(): JSX.Element {
   const { data: challenges } = useQuery(["challenges"], () =>
-    getChallenges({ page: 1, itemsPerPage: 3 })
+    getChallenges({ pageParam: 1, itemsPerPage: 3 })
   );
+
   return (
     <PageTransition>
       <Container center={true} isLarge={true}>
@@ -95,29 +96,18 @@ export default function Home(): JSX.Element {
               AND WE PROVIDE LESSONS TOO !!
             </Heading>
             <Grid size="33rem">
-              {challenges?.data.map((challenge: any) => {
+              {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
                   <Card
+                    badge={challenge.difficulty}
+                    tags={challenge.tags}
                     id={challenge.id}
                     path={`/challenges/${challenge.id}`}
                     key={challenge.id}
-                    // tags={[
-                    //   { label: "HTML", theme: "primary" },
-                    //   { label: "CSS", theme: "secondary" },
-                    //   { label: "JS", theme: "success" },
-                    //   { label: "PHP", theme: "danger" },
-                    //   { label: "JAVA", theme: "warn" },
-                    //   { label: "HTML", theme: "primary" },
-                    //   { label: "CSS", theme: "secondary" },
-                    //   { label: "JS", theme: "success" },
-                    //   { label: "PHP", theme: "danger" },
-                    //   { label: "JAVA", theme: "warn" }
-                    // ]}
-                    // price={{ value: "10", currency: "EUR" }}
-                    // author="John Doe Mino"
-                    date={challenge.createdAt}
+                    date={new Date(challenge.updatedAt ?? challenge.createdAt)}
                     title={challenge.title}
                     desc={challenge.description}
+                    author={`${challenge.author.firstName} ${challenge.author.lastName}`}
                   />
                 );
               })}

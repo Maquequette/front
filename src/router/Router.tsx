@@ -14,6 +14,8 @@ const Challenges = lazy(() => import("@/pages/Challenges/Challenges"));
 const Lessons = lazy(() => import("@/pages/Lessons/Lessons"));
 const Classroom = lazy(() => import("@/pages/ClassRoom/ClassRoom"));
 const NoMatch = lazy(() => import("@/pages/NoMatch/NoMatch"));
+const Detail = lazy(() => import("@/pages/Detail/Detail"));
+
 {
   /* DEV PATH @todelete */
 }
@@ -28,7 +30,7 @@ export default function Router(): JSX.Element {
         <Route path="/" element={<Home />} />
         <Route path="/challenges">
           <Route index element={<Challenges />} handle={{ crumb: "challenges" }} />
-          <Route path=":id" element={<Challenges />} handle={{ crumb: "challenges" }} />
+          <Route path=":id" element={<Detail />} handle={{ crumb: "challenges" }} />
         </Route>
         <Route path="/lessons">
           <Route index element={<Lessons />} handle={{ crumb: "lessons" }} />

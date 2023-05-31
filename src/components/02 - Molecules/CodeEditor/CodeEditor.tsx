@@ -28,11 +28,9 @@ export default function CodeEditor({ ytext, provider, undoManager }: ICode) {
       showInlineErrors
       wrapContent
       closableTabs
-      extensions={
-        ytext &&
-        provider &&
-        undoManager && [yCollab(ytext, provider.awareness, { undoManager }), abbreviationTracker()]
-      }
+      extensions={[abbreviationTracker()]}
     />
   );
 }
+
+// yCollab(ytext, provider.awareness, { undoManager });

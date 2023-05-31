@@ -12,7 +12,7 @@ export default memo(function Tags({ tags }: { tags: Array<ITag> }) {
     <div className="tags">
       <div className="tags__container">
         {tags.map((tag) => {
-          return <Tag key={tag.label} label={tag.label} theme={tag.theme} />;
+          return <Tag key={tag.id} id={tag.id} label={tag.label} color={tag.color} />;
         })}
       </div>
     </div>

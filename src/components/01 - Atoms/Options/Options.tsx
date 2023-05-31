@@ -38,7 +38,7 @@ export default memo(function Options({
         show: { opacity: 1, x: 0 }
       }}
       key={value}>
-      <div className={clsx("options__content", !value && "--title")}>
+      <div className={clsx("options__content", !value && "options--title")}>
         {hasCheckbox && value && (
           <Checkbox name={label} value={value} theme={theme} isChecked={isChecked ?? false} />
         )}

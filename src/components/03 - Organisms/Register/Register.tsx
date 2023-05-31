@@ -11,6 +11,7 @@ import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
 import useAuth from "@/hooks/useAuth";
 import "./Register.scss";
+import { IOptions } from "@/components/01 - Atoms/Options/Options";
 
 export default memo(function Register() {
   const [email, setEmail] = useState<string>("");
@@ -18,6 +19,7 @@ export default memo(function Register() {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
+  const [profilType, setProfilType] = useState<string>("");
 
   const { onRegister } = useAuth();
 
@@ -176,13 +178,19 @@ export default memo(function Register() {
                 <div>
                   <Label name="profileType">What type of profile are you ?</Label>
                   <Multiselect
+                    callback={(value: any) => {
+                      const selectedId = value.map((item: any) => {
+                        return item.id;
+                      });
+                      setProfilType(value);
+                    }}
                     options={[
-                      { label: "Student", value: "student" },
-                      { label: "Developer", value: "developer" },
-                      { label: "Web Designer", value: "webdesigner" },
-                      { label: "suceur de biteeeeuuuh MACROOOON ENCUuULEEEE", value: "macron" }
+                      { label: "Student", id: "student" },
+                      { label: "Developer", id: "developer" },
+                      { label: "Web Designer", id: "webdesigner" }
                     ]}
-                    theme={"primary"}></Multiselect>
+                    theme={"primary"}
+                  />
                 </div>
               </div>
             )

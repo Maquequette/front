@@ -67,6 +67,7 @@
       &,
       &.active {
         grid-template-rows: repeat(2, min-content);
+        grid-template-columns: 20rem 1fr 20rem 20rem;
         position: unset;
         height: auto;
         background-color: transparent !important;
