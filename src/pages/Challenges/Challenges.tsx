@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useRef } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Search from "@/components/01 - Atoms/Search/Search";
@@ -13,7 +13,7 @@ import Grid from "@/components/02 - Molecules/Grid/Grid";
 import Card from "@/components/03 - Organisms/Card/Card";
 import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
 import {
-  getChallengeTypes,
+  getTagFamilies,
   getCategories,
   getDifficulties,
   getChallenges
@@ -22,12 +22,16 @@ import { useInView } from "framer-motion";
 
 export default function Challenges() {
   const loadRef = useRef(null);
+  const [query, setQuery] = useState({});
   const isInView = useInView(loadRef);
   const { mainColor } = useContext(ThemesContext);
-  const { data: types } = useQuery(["types"], () => getChallengeTypes({ paginate: false }));
   const { data: categories } = useQuery(["categories"], () => getCategories({ paginate: false }));
   const { data: difficulties } = useQuery(["difficulties"], () =>
     getDifficulties({ paginate: false })
+  );
+
+  const { data: tagFamilies } = useQuery(["tagFamilies"], () =>
+    getTagFamilies({ paginate: false })
   );
 
   const {
@@ -36,10 +40,11 @@ export default function Challenges() {
     hasNextPage,
     isFetchingNextPage
   } = useInfiniteQuery({
-    queryKey: ["challenges"],
-    queryFn: getChallenges,
+    queryKey: ["challenges", query],
+    keepPreviousData: true,
+    queryFn: ({ pageParam = 1 }) => getChallenges({ pageParam, ...query }),
     getNextPageParam: (lastPage, pages) => {
-      const urlParams = new URLSearchParams(lastPage.data["hydra:view"]["hydra:next"]);
+      const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
       return urlParams.get("page") ?? null;
     }
   });
@@ -56,52 +61,74 @@ export default function Challenges() {
         theme={mainColor}
         headContent={
           <>
-            <Label name="type">type</Label>
-            <Multiselect theme={"primary"} multiple={true} options={types?.data ?? []} />
-            <Label name="search">search</Label>
-            <Search placeholder={"Type something here..."} />
-            <Label name="filter">Filter by</Label>
+            <Label name="filter">Categories</Label>
             <Multiselect
+              callback={(value: any) => {
+                setQuery({ ...query, categories: value });
+              }}
               theme={"primary"}
               searchable={true}
-              defaultText="Technologies, sketch format, level"
-              options={[
-                {
-                  label: "Categories",
-                  children: categories?.data
-                },
-                {
-                  label: "Levels",
-                  children: difficulties?.data
-                }
-              ]}
+              defaultText="Categories"
+              options={categories?.data ?? []}
             />
-            <Label name="sort">Sort by</Label>
+            <Label name="search">Search</Label>
+            <Search placeholder={"Type something here..."} />
+            <Label name="type">Filter by</Label>
             <Multiselect
+              callback={(value: any) => {
+                setQuery({ ...query, tags: value });
+              }}
+              theme={"primary"}
+              searchable={true}
+              defaultText="Tag"
+              options={
+                tagFamilies?.data.map((family: any) => {
+                  return {
+                    label: family.label,
+                    children: family.tags
+                  };
+                }) ?? []
+              }
+            />
+            <Label name="type">Level</Label>
+            <Multiselect
+              callback={(value: any) => {
+                setQuery({ ...query, difficulties: value });
+              }}
+              theme={"primary"}
+              searchable={true}
+              defaultText="Level"
+              options={difficulties?.data ?? []}
+            />
+            {/* <Label name="sort">Sort by</Label> */}
+            {/* <Multiselect
+              callback={(value: any) => {
+                setQuery({ ...query, order: value[0].id, orderBy: value[0].value });
+              }}
               theme={"primary"}
               multiple={false}
               options={[
                 {
-                  id: "ASC",
+                  id: "desc",
                   label: "Latest",
                   default: true
                 },
                 {
-                  id: "DESC",
+                  id: "asc",
                   label: "Oldest"
                 }
               ]}
-            />
+            /> */}
           </>
         }>
-        <Tags
-          tags={[
-            {
-              label: "HTML",
-              theme: "success"
-            }
-          ]}
-        />
+        {/* <Tags
+          // tags={[
+          //   {
+          //     label: "HTML",
+          //     theme: "success"
+          //   }
+          // ]}
+        /> */}
         <div className="filters__indications">
           <p>About our challenges categories</p>
           <Tooltip theme="primary">test</Tooltip>

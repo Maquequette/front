@@ -22,6 +22,7 @@ export default function Home(): JSX.Element {
   const { data: challenges } = useQuery(["challenges"], () =>
     getChallenges({ pageParam: 1, itemsPerPage: 3 })
   );
+
   return (
     <PageTransition>
       <Container center={true} isLarge={true}>
