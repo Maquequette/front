@@ -1,0 +1,30 @@
+.sorts {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 5rem;
+  column-gap: 1rem;
+
+  &__separator {
+    flex: 1;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      border-top: 1px solid var(--dark);
+    }
+  }
+
+  &__nb {
+    font-family: var(--font-family-secondary);
+    font-size: var(--font-size-smd);
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+}

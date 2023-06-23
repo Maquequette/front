@@ -1,9 +1,11 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInView } from "framer-motion";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Search from "@/components/01 - Atoms/Search/Search";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
 import Filters from "@/components/02 - Molecules/Filters/Filters";
+import Sorts from "@/components/02 - Molecules/Sorts/Sorts";
 import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
 import Tags from "@/components/02 - Molecules/Tags/Tags";
 import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";
@@ -18,7 +20,6 @@ import {
   getDifficulties,
   getChallenges
 } from "@/services/challenges.service";
-import { useInView } from "framer-motion";
 
 export default function Challenges() {
   const loadRef = useRef(null);
@@ -100,41 +101,62 @@ export default function Challenges() {
               defaultText="Level"
               options={difficulties?.data ?? []}
             />
-            {/* <Label name="sort">Sort by</Label> */}
-            {/* <Multiselect
-              callback={(value: any) => {
-                setQuery({ ...query, order: value[0].id, orderBy: value[0].value });
-              }}
-              theme={"primary"}
-              multiple={false}
-              options={[
-                {
-                  id: "desc",
-                  label: "Latest",
-                  default: true
-                },
-                {
-                  id: "asc",
-                  label: "Oldest"
-                }
-              ]}
-            /> */}
           </>
         }>
-        {/* <Tags
-          // tags={[
-          //   {
-          //     label: "HTML",
-          //     theme: "success"
-          //   }
-          // ]}
-        /> */}
+        <Tags tags={query?.tags} />
         <div className="filters__indications">
           <p>About our challenges categories</p>
           <Tooltip theme="primary">test</Tooltip>
         </div>
       </Filters>
       <Container center>
+        <Sorts title="Challenges" nbResult={challenges?.pages[0].data["hydra:totalItems"]}>
+          <Multiselect
+            callback={(value: any) => {
+              setQuery({ ...query, order: value[0]?.order, orderBy: value[0]?.orderBy });
+            }}
+            theme={"primary"}
+            multiple={false}
+            options={[
+              {
+                label: "Created At",
+                children: [
+                  {
+                    id: 1,
+                    label: "Latest",
+                    orderBy: "createdAt",
+                    order: "desc",
+                    default: true
+                  },
+                  {
+                    id: 2,
+                    label: "Oldest",
+                    order: "asc",
+                    orderBy: "createdAt"
+                  }
+                ]
+              },
+              {
+                label: "Level",
+                children: [
+                  {
+                    id: 1,
+                    label: "Most difficult",
+                    orderBy: "difficulty.sortLevel",
+                    order: "desc",
+                    default: true
+                  },
+                  {
+                    id: 2,
+                    label: "Less difficult",
+                    order: "asc",
+                    orderBy: "difficulty.sortLevel"
+                  }
+                ]
+              }
+            ]}
+          />
+        </Sorts>
         <Grid size="33rem">
           {challenges?.pages?.map((group, i) => {
             return (

@@ -20,7 +20,7 @@ export const getChallenges = async ({
   categories?: Array<any>;
 }) => {
   const query = new URLSearchParams();
-  query.append(`order[${orderBy}]`, order);
+  query.append(`order[${orderBy}]`, order.toUpperCase());
   query.append("page", pageParam.toString());
   query.append("itemsPerPage", itemsPerPage.toString());
   query.append("paginate", paginate.toString());

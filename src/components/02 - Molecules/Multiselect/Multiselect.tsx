@@ -30,6 +30,8 @@ export interface ISelectOption {
   label: string;
   default?: boolean;
   children?: Array<ISelectOption>;
+  orderBy?: string;
+  order?: string;
 }
 
 const Multiselect = ({
