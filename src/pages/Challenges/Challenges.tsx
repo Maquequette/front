@@ -30,8 +30,8 @@ export default function Challenges() {
     getDifficulties({ paginate: false })
   );
 
-  const { data: tagFamilies } = useQuery(["tagFamilies"], () =>
-    getTagFamilies({ paginate: false })
+  const { data: tagFamilies } = useQuery(["tagFamilies", query?.categories], () =>
+    getTagFamilies({ paginate: false, categories: query?.categories })
   );
 
   const {
