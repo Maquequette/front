@@ -1,22 +1,21 @@
 @import "@/assets/utilities";
 @import "@/assets/variables";
 
-.inputContainer {
+.input {
   position: relative;
-  height: 4.5rem;
 
   &__input {
     position: relative;
-    @extend .full;
-    padding: 1.5rem 2rem;
+    padding: 1rem 2rem;
     background-color: var(--light);
-    caret-color: var(--clr-primary);
+    caret-color: var(--primary);
     border: 1px solid var(--dark);
     border-radius: 1rem;
     box-shadow: 5px 5px 0px var(--dark);
     color: var(--dark);
     font-size: var(--font-size-md);
     font-family: var(--font-family-secondary);
+    width: 100%;
 
     &:focus,
     &:focus-visible {
@@ -26,6 +25,36 @@
     &::placeholder {
       color: var(--dark);
       opacity: 0.75;
+    }
+
+    &--file {
+      &::file-selector-button {
+        visibility: hidden;
+        display: none;
+        color: transparent;
+      }
+
+      &::-webkit-file-upload-button {
+        visibility: hidden;
+        display: none;
+        color: transparent;
+      }
+    }
+  }
+
+  &__btn {
+    font-size: var(--font-size-md);
+    font-family: var(--font-family-secondary);
+    border: 1px solid var(--dark);
+    border-radius: 1rem;
+    color: var(--dark);
+    background-color: var(--light);
+    box-shadow: 5px 5px 0px var(--dark);
+    padding: 1rem 2rem;
+
+    &:focus,
+    &:focus-visible {
+      outline: 2px solid var(--secondary);
     }
   }
 
@@ -37,5 +66,26 @@
     height: 100%;
     @extend .btn-none;
     cursor: pointer;
+  }
+
+  &__preview {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(7rem, 100%), 1fr));
+    gap: 2rem;
+
+    .preview {
+      border: 1px dotted var(--primary);
+      padding: 1rem;
+
+      .sprites {
+        fill: var(--primary);
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
   }
 }

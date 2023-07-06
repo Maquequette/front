@@ -79,7 +79,7 @@
       }
     }
 
-    .labelContainer {
+    .label {
       justify-content: flex-end;
       @media (min-width: #{map-get($breakpoints, "md")}) {
         grid-row: 1/1;

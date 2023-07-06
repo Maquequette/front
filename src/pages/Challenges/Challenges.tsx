@@ -1,9 +1,11 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInView } from "framer-motion";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Search from "@/components/01 - Atoms/Search/Search";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
 import Filters from "@/components/02 - Molecules/Filters/Filters";
+import Sorts from "@/components/02 - Molecules/Sorts/Sorts";
 import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
 import Tags from "@/components/02 - Molecules/Tags/Tags";
 import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";
@@ -12,26 +14,36 @@ import Container from "@/components/01 - Atoms/Container/Container";
 import Grid from "@/components/02 - Molecules/Grid/Grid";
 import Card from "@/components/03 - Organisms/Card/Card";
 import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
+import Button from "@/components/01 - Atoms/Button/Button";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
+import Dialog from "@/components/04 - Templates/Dialog/Dialog";
+import DefineChallenge from "@/components/03 - Organisms/DefineChallenge/DefineChallenge";
 import {
   getTagFamilies,
   getCategories,
   getDifficulties,
   getChallenges
 } from "@/services/challenges.service";
-import { useInView } from "framer-motion";
 
 export default function Challenges() {
+  const [query, setQuery] = useState({
+    categories: undefined,
+    tags: undefined,
+    type: undefined,
+    difficulties: undefined,
+    order: undefined,
+    orderBy: undefined
+  });
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const loadRef = useRef(null);
-  const [query, setQuery] = useState({});
   const isInView = useInView(loadRef);
   const { mainColor } = useContext(ThemesContext);
   const { data: categories } = useQuery(["categories"], () => getCategories({ paginate: false }));
   const { data: difficulties } = useQuery(["difficulties"], () =>
     getDifficulties({ paginate: false })
   );
-
-  const { data: tagFamilies } = useQuery(["tagFamilies"], () =>
-    getTagFamilies({ paginate: false })
+  const { data: tagFamilies } = useQuery(["tagFamilies", query?.categories], () =>
+    getTagFamilies({ paginate: false, categories: query?.categories })
   );
 
   const {
@@ -100,41 +112,73 @@ export default function Challenges() {
               defaultText="Level"
               options={difficulties?.data ?? []}
             />
-            {/* <Label name="sort">Sort by</Label> */}
-            {/* <Multiselect
-              callback={(value: any) => {
-                setQuery({ ...query, order: value[0].id, orderBy: value[0].value });
-              }}
-              theme={"primary"}
-              multiple={false}
-              options={[
-                {
-                  id: "desc",
-                  label: "Latest",
-                  default: true
-                },
-                {
-                  id: "asc",
-                  label: "Oldest"
-                }
-              ]}
-            /> */}
           </>
         }>
-        {/* <Tags
-          // tags={[
-          //   {
-          //     label: "HTML",
-          //     theme: "success"
-          //   }
-          // ]}
-        /> */}
+        <Tags tags={query?.tags} />
         <div className="filters__indications">
           <p>About our challenges categories</p>
           <Tooltip theme="primary">test</Tooltip>
         </div>
       </Filters>
       <Container center>
+        <Sorts
+          title="Challenges"
+          nbResult={challenges?.pages[0].data["hydra:totalItems"]}
+          actions={
+            <Button
+              theme="success"
+              handleClick={() => {
+                setIsCreateModalOpen(!isCreateModalOpen);
+              }}>
+              Create challenge <Svg id="create" />
+            </Button>
+          }>
+          <Multiselect
+            callback={(value: any) => {
+              setQuery({ ...query, order: value[0]?.order, orderBy: value[0]?.orderBy });
+            }}
+            theme={"primary"}
+            multiple={false}
+            options={[
+              {
+                label: "Created At",
+                children: [
+                  {
+                    id: 1,
+                    label: "Latest",
+                    orderBy: "createdAt",
+                    order: "desc",
+                    default: true
+                  },
+                  {
+                    id: 2,
+                    label: "Oldest",
+                    order: "asc",
+                    orderBy: "createdAt"
+                  }
+                ]
+              },
+              {
+                label: "Level",
+                children: [
+                  {
+                    id: 1,
+                    label: "Most difficult",
+                    orderBy: "difficulty.sortLevel",
+                    order: "desc",
+                    default: true
+                  },
+                  {
+                    id: 2,
+                    label: "Less difficult",
+                    order: "asc",
+                    orderBy: "difficulty.sortLevel"
+                  }
+                ]
+              }
+            ]}
+          />
+        </Sorts>
         <Grid size="33rem">
           {challenges?.pages?.map((group, i) => {
             return (
@@ -165,6 +209,14 @@ export default function Challenges() {
           {isFetchingNextPage && <DotLoader theme="primary" />}
         </div>
       </Container>
+      <Dialog
+        id="Create a challenge"
+        visible={isCreateModalOpen}
+        Dismiss={() => {
+          setIsCreateModalOpen(!isCreateModalOpen);
+        }}>
+        <DefineChallenge />
+      </Dialog>
     </PageTransition>
   );
 }

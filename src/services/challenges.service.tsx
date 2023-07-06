@@ -20,7 +20,7 @@ export const getChallenges = async ({
   categories?: Array<any>;
 }) => {
   const query = new URLSearchParams();
-  query.append(`order[${orderBy}]`, order);
+  query.append(`order[${orderBy}]`, order.toUpperCase());
   query.append("page", pageParam.toString());
   query.append("itemsPerPage", itemsPerPage.toString());
   query.append("paginate", paginate.toString());
@@ -100,14 +100,25 @@ export const getTags = async ({
 
 export const getTagFamilies = async ({
   pageParam = 1,
-  itemsPerPage=16,
-  paginate = true
+  itemsPerPage = 16,
+  paginate = true,
+  categories = []
 }: {
   pageParam?: number;
   itemsPerPage?: number;
   paginate?: boolean;
+  categories?: Array<any>;
 }) => {
+  const query = new URLSearchParams();
+  query.append("itemsPerPage", itemsPerPage.toString());
+  query.append("paginate", paginate.toString());
+  query.append("page", pageParam.toString());
+
+  categories?.map((item) => {
+    query.append("category.id[]", item.id);
+  });
+
   return axios.get(`/api/tag_families`, {
-    params: { page: pageParam, itemsPerPage, paginate }
+    params: query
   });
 };
