@@ -63,7 +63,7 @@ export default memo(function Input({
             const nfiles = e.target.files ? Array.from(e.target.files) : [];
             limite && nfiles?.length < limite
               ? setFiles(nfiles)
-              : nfiles?.length && setFiles(nfiles);
+              : !limite && nfiles?.length && setFiles(nfiles);
           }}
         />
         {type === "file" && <p className="input__btn">Upload file</p>}
@@ -88,7 +88,7 @@ export default memo(function Input({
           })}
           {limite &&
             files.length - limite > 0 &&
-            Array.from({ length: files.length - limite }).map((el) => {
+            Array.from({ length: limite - files.length }).map((el) => {
               return (
                 <div className="preview">
                   <Svg id="img" />

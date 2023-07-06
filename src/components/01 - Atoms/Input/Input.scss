@@ -76,9 +76,11 @@
 
     .preview {
       border: 1px dotted var(--primary);
-      padding: 1rem;
+      padding: 2rem;
 
       .sprites {
+        width: 100%;
+        aspect-ratio: 1/1;
         fill: var(--primary);
       }
 

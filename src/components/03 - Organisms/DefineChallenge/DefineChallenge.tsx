@@ -164,6 +164,8 @@ export default function DefineChallenge() {
                     name="picture"
                     required={true}
                     preview={true}
+                    limite={5}
+                    multiple={true}
                     handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       // const file = Object(e.currentTarget.files)[0];
                       // console.log(file);
