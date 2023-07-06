@@ -20,6 +20,12 @@
     &:hover {
       box-shadow: 0 0 0 calc(2px) var(--dark);
     }
+
+    @each $name, $color in $colors {
+      &--#{$name} {
+        background-color: var(--#{$name});
+      }
+    }
   }
 
   &__popup {
