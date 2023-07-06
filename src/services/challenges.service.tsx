@@ -107,7 +107,7 @@ export const getTagFamilies = async ({
   pageParam?: number;
   itemsPerPage?: number;
   paginate?: boolean;
-  categories: Array<any>;
+  categories?: Array<any>;
 }) => {
   const query = new URLSearchParams();
   query.append("itemsPerPage", itemsPerPage.toString());
@@ -118,7 +118,6 @@ export const getTagFamilies = async ({
     query.append("category.id[]", item.id);
   });
 
-  console.log(categories);
   return axios.get(`/api/tag_families`, {
     params: query
   });

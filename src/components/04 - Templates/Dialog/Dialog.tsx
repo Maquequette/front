@@ -11,12 +11,16 @@ export interface IDialog {
 }
 
 export default memo(function Dialog({ id, children, visible = false, Dismiss, styles }: IDialog) {
-  const backdropCloseModal = (e: React.MouseEvent<HTMLDialogElement>) => {
+  const backdropCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     Dismiss();
   };
 
   return (
-    <dialog className="dialog" id={id} open={visible} onClick={backdropCloseModal}>
+    <div
+      className={`dialog ${visible ? "dialog--visible" : ""}`}
+      id={id}
+      onClick={backdropCloseModal}>
       <motion.div
         animate={visible ? "visible" : "hidden"}
         className="dialog__content"
@@ -35,6 +39,6 @@ export default memo(function Dialog({ id, children, visible = false, Dismiss, st
         onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
         {children}
       </motion.div>
-    </dialog>
+    </div>
   );
 });

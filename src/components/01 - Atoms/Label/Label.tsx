@@ -23,11 +23,11 @@ export default memo(function Label({
   error
 }: ILabel) {
   return (
-    <div className={`labelContainer ${className}`} style={styles}>
-      <label className={`labelContainer__label ${classes}`} htmlFor={name}>
+    <div className={`label ${className}`} style={styles}>
+      <label className={`label__label ${classes}`} htmlFor={name}>
         {children}
 
-        {required && <span className="labelContainer__label__span">*</span>}
+        {required && <span className="label__label__span">*</span>}
 
         {error && (
           <>

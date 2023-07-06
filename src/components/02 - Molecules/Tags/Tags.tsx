@@ -4,10 +4,10 @@ import { ITag } from "@/components/01 - Atoms/Tag/Tag";
 import "./Tags.scss";
 
 export interface ITags {
-  tags: Array<ITag>;
+  tags?: Array<ITag>;
 }
 
-export default memo(function Tags({ tags }: { tags: Array<ITag> }) {
+export default memo(function Tags({ tags }: ITags) {
   return (
     <div className="tags">
       <div className="tags__container">

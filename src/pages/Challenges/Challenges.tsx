@@ -14,6 +14,10 @@ import Container from "@/components/01 - Atoms/Container/Container";
 import Grid from "@/components/02 - Molecules/Grid/Grid";
 import Card from "@/components/03 - Organisms/Card/Card";
 import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
+import Button from "@/components/01 - Atoms/Button/Button";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
+import Dialog from "@/components/04 - Templates/Dialog/Dialog";
+import DefineChallenge from "@/components/03 - Organisms/DefineChallenge/DefineChallenge";
 import {
   getTagFamilies,
   getCategories,
@@ -22,15 +26,22 @@ import {
 } from "@/services/challenges.service";
 
 export default function Challenges() {
+  const [query, setQuery] = useState({
+    categories: undefined,
+    tags: undefined,
+    type: undefined,
+    difficulties: undefined,
+    order: undefined,
+    orderBy: undefined
+  });
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const loadRef = useRef(null);
-  const [query, setQuery] = useState({});
   const isInView = useInView(loadRef);
   const { mainColor } = useContext(ThemesContext);
   const { data: categories } = useQuery(["categories"], () => getCategories({ paginate: false }));
   const { data: difficulties } = useQuery(["difficulties"], () =>
     getDifficulties({ paginate: false })
   );
-
   const { data: tagFamilies } = useQuery(["tagFamilies", query?.categories], () =>
     getTagFamilies({ paginate: false, categories: query?.categories })
   );
@@ -110,7 +121,18 @@ export default function Challenges() {
         </div>
       </Filters>
       <Container center>
-        <Sorts title="Challenges" nbResult={challenges?.pages[0].data["hydra:totalItems"]}>
+        <Sorts
+          title="Challenges"
+          nbResult={challenges?.pages[0].data["hydra:totalItems"]}
+          actions={
+            <Button
+              theme="success"
+              handleClick={() => {
+                setIsCreateModalOpen(!isCreateModalOpen);
+              }}>
+              Create challenge <Svg id="create" />
+            </Button>
+          }>
           <Multiselect
             callback={(value: any) => {
               setQuery({ ...query, order: value[0]?.order, orderBy: value[0]?.orderBy });
@@ -187,6 +209,14 @@ export default function Challenges() {
           {isFetchingNextPage && <DotLoader theme="primary" />}
         </div>
       </Container>
+      <Dialog
+        id="Create a challenge"
+        visible={isCreateModalOpen}
+        Dismiss={() => {
+          setIsCreateModalOpen(!isCreateModalOpen);
+        }}>
+        <DefineChallenge />
+      </Dialog>
     </PageTransition>
   );
 }
