@@ -32,7 +32,7 @@
     "y-codemirror.next": "^0.3.2",
     "y-leveldb": "^0.1.2",
     "y-websocket": "^1.5.0",
-    "yjs": "^13.6.1"
+    "yjs": "^13.6.6"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
