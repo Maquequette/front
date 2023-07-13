@@ -122,3 +122,9 @@ export const getTagFamilies = async ({
     params: query
   });
 };
+
+export const postChallenge = async (challenge: FormData) => {
+  return axios.post("/api/challenges", challenge, {
+    headers: { "Content-Type": "'multipart/form-data" }
+  });
+};
