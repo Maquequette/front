@@ -128,3 +128,11 @@ export const postChallenge = async (challenge: FormData) => {
     headers: { "Content-Type": "'multipart/form-data" }
   });
 };
+
+export const likeChallenge = async (challengeId: number) => {
+  return axios.post(`/api/challenges/${challengeId}/like`);
+};
+
+export const unlikeChallenge = async (challengeId: number) => {
+  return axios.delete(`/api/challenges/${challengeId}/like`);
+};

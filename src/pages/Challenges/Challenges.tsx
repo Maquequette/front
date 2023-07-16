@@ -24,6 +24,7 @@ import {
   getDifficulties,
   getChallenges
 } from "@/services/challenges.service";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export default function Challenges() {
   const [query, setQuery] = useState({
@@ -60,6 +61,8 @@ export default function Challenges() {
       return urlParams.get("page") ?? null;
     }
   });
+
+  const { isConnected } = useContext(AuthContext);
 
   useEffect(() => {
     if (isInView && hasNextPage) {
@@ -125,13 +128,15 @@ export default function Challenges() {
           title="Challenges"
           nbResult={challenges?.pages[0].data["hydra:totalItems"]}
           actions={
-            <Button
-              theme="success"
-              handleClick={() => {
-                setIsCreateModalOpen(!isCreateModalOpen);
-              }}>
-              Create challenge <Svg id="create" />
-            </Button>
+            isConnected() && (
+              <Button
+                theme="success"
+                handleClick={() => {
+                  setIsCreateModalOpen(!isCreateModalOpen);
+                }}>
+                Create challenge <Svg id="create" />
+              </Button>
+            )
           }>
           <Multiselect
             callback={(value: any) => {
@@ -186,9 +191,10 @@ export default function Challenges() {
                 {group?.data?.["hydra:member"].map((challenge: any) => {
                   return (
                     <Card
+                      id={challenge.id}
+                      isLiked={challenge.isLiked}
                       badge={challenge.difficulty}
                       tags={challenge.tags}
-                      id={challenge.id}
                       path={`/challenges/${challenge.id}`}
                       key={challenge.id}
                       date={new Date(challenge.updatedAt ?? challenge.createdAt)}

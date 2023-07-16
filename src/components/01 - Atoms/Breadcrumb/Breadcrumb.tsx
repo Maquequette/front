@@ -4,10 +4,9 @@ import "./Breadcrumb.scss";
 
 export default memo(function Breadcrumb({ style }: { style?: CSSProperties }) {
   const matches = useMatches();
-  const crumbs = useMemo(
-    () => matches.filter((match: any) => Boolean(match.handle?.crumb)),
-    [matches]
-  );
+  const crumbs = useMemo(() => {
+    return matches.filter((match: any) => Boolean(match.handle?.crumb));
+  }, [matches]);
 
   return (
     <div className="breadcrumb" style={style}>

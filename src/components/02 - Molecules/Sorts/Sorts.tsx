@@ -7,14 +7,13 @@ export interface ISorts {
   title: string;
   nbResult: number;
   children: ReactNode;
-  actions: ReactNode;
+  actions?: ReactNode;
 }
 
 export default function ({ title, nbResult, children, actions }: ISorts) {
-  const { isConnected } = useContext(AuthContext);
   return (
     <div className="sorts">
-      {!isConnected() ? (
+      {actions ? (
         actions
       ) : (
         <Heading tag="h2" level="secondary">

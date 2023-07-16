@@ -46,7 +46,7 @@ export default memo(function Input({
 
   return (
     <>
-      <label className="input--container" style={styles}>
+      <label className="input__container" style={styles}>
         {leftIcon && <Svg id={leftIcon} />}
         <input
           className={`input__input input__input--${type}`}

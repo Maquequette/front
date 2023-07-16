@@ -28,9 +28,9 @@ export default function Router(): JSX.Element {
     createRoutesFromElements(
       <Route path="/" element={<NavLayout />} handle={{ crumb: ">" }}>
         <Route path="/" element={<Home />} />
-        <Route path="/challenges">
-          <Route index element={<Challenges />} handle={{ crumb: "challenges" }} />
-          <Route path=":id" element={<Detail />} handle={{ crumb: "challenges" }} />
+        <Route path="/challenges" handle={{ crumb: "challenges" }}>
+          <Route index element={<Challenges />} />
+          <Route path=":id" element={<Detail />} />
         </Route>
         <Route path="/lessons">
           <Route index element={<Lessons />} handle={{ crumb: "lessons" }} />

@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Editor } from "@tinymce/tinymce-react";
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
@@ -15,17 +14,19 @@ import {
 } from "@/services/challenges.service";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import "./DefineChallenge.scss";
+import Wysiwyg from "@/components/01 - Atoms/Wysiwyg/Wysiwyg";
 
 export default function DefineChallenge() {
-  const [query, setQuery] = useState({
+  const [query, setQuery] = useState<any>({
     categories: undefined,
     tags: undefined,
     type: undefined,
     difficulty: undefined,
     title: "",
-    files: undefined,
+    files: null,
     url: "",
-    description: ""
+    description: "",
+    additional: null
   });
   const { data: categories } = useQuery(["categories__all"], () =>
     getCategories({ paginate: false })
@@ -145,26 +146,9 @@ export default function DefineChallenge() {
                   <Label name="firstName" required={true}>
                     Description
                   </Label>
-                  <Editor
-                    onEditorChange={(description) => {
-                      setQuery({ ...query, description });
-                    }}
-                    apiKey={import.meta.env.VITE_TINY}
-                    init={{
-                      max_height: 400,
-                      menubar: false,
-                      plugins: [
-                        "advlist autolink lists link image charmap print preview anchor",
-                        "searchreplace visualblocks code fullscreen",
-                        "insertdatetime media table paste code help wordcount"
-                      ],
-                      toolbar:
-                        "undo redo | formatselect | " +
-                        "bold italic backcolor | alignleft aligncenter " +
-                        "alignright alignjustify | bullist numlist outdent indent | " +
-                        "removeformat | help",
-                      content_style:
-                        "body { font-family:Helvetica,Arial,sans-serif; font-size:1.4rem }"
+                  <Wysiwyg
+                    callback={(value: any) => {
+                      setQuery({ ...query, description: value });
                     }}
                   />
                 </div>
@@ -181,8 +165,10 @@ export default function DefineChallenge() {
                     limite={5}
                     multiple={true}
                     handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const files = e.currentTarget.files?.[0] ?? [];
-                      setQuery({ ...query, files });
+                      const files = e.currentTarget.files?.[0];
+                      if (files) {
+                        setQuery({ ...query, files });
+                      }
                     }}
                   />
                 </div>
@@ -207,8 +193,10 @@ export default function DefineChallenge() {
                     limite={5}
                     multiple={true}
                     handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const additional = e.currentTarget.files?.[0] ?? [];
-                      setQuery({ ...query, additional });
+                      const additional = e.currentTarget.files?.[0];
+                      if (additional) {
+                        setQuery({ ...query, additional });
+                      }
                     }}
                   />
                 </div>

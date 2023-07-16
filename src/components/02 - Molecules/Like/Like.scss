@@ -1,0 +1,20 @@
+.like {
+  cursor: pointer;
+
+  &--true {
+    .sprites {
+      fill: var(--danger);
+    }
+  }
+
+  &--false {
+    .sprites {
+      fill: none;
+    }
+  }
+
+  .sprites {
+    width: 2rem;
+    height: 2rem;
+  }
+}

@@ -2,7 +2,9 @@
 @import "@/assets/variables";
 
 .input {
-  position: relative;
+  &__container {
+    position: relative;
+  }
 
   &__input {
     position: relative;
