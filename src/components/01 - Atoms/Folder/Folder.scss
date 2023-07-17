@@ -72,3 +72,23 @@
     }
   }
 }
+
+[data-theme="dark"] {
+  .folder {
+    &--dark {
+      .down--dark {
+        color: var(--secondary);
+      }
+
+      > .folder__header {
+        &::after {
+          background-color: var(--secondary);
+        }
+      }
+
+      > .folder__body {
+        background-color: var(--secondary);
+      }
+    }
+  }
+}

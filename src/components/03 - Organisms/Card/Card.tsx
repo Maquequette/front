@@ -24,6 +24,7 @@ export interface ICard {
   desc?: string;
   badge?: any;
   isLiked: boolean;
+  likesCount?: number;
 }
 
 export default memo(function Card({
@@ -37,7 +38,8 @@ export default memo(function Card({
   desc,
   path,
   badge,
-  isLiked
+  isLiked,
+  likesCount
 }: ICard) {
   const { isConnected } = useContext(AuthContext);
 
@@ -59,7 +61,7 @@ export default memo(function Card({
               </Badge>
             )}
             <div className="card__socials">
-              {isConnected() && <Like id={id} isAlreadyLiked={isLiked}></Like>}
+              {!isConnected() && <Like showNumber={true} id={id} isAlreadyLiked={isLiked}></Like>}
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@
 
 .filters {
   position: relative;
+  isolation: isolate;
 
   .container {
     display: flex;
@@ -21,7 +22,7 @@
   &::after {
     position: absolute;
     content: "";
-    height: 82%;
+    height: 78%;
     width: 100%;
     bottom: 0;
     z-index: -1;
@@ -108,5 +109,17 @@
     gap: 0.5rem;
     font-size: var(--font-size-smd);
     font-family: var(--font-family-secondary);
+  }
+}
+
+[data-theme="dark"] {
+  .filters {
+    .label__label {
+      color: var(--light);
+    }
+    &::after {
+      background-color: var(--grey);
+      opacity: 0.5;
+    }
   }
 }

@@ -191,6 +191,7 @@ export default function Challenges() {
                 {group?.data?.["hydra:member"].map((challenge: any) => {
                   return (
                     <Card
+                      likesCount={challenge.challengeLikesCount}
                       id={challenge.id}
                       isLiked={challenge.isLiked}
                       badge={challenge.difficulty}

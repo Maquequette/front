@@ -53,3 +53,9 @@
     height: 5rem;
   }
 }
+
+[data-theme="dark"] {
+  .strip {
+    color: var(--light);
+  }
+}
