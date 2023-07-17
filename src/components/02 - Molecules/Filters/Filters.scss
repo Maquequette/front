@@ -3,6 +3,7 @@
 
 .filters {
   position: relative;
+  isolation: isolate;
 
   .container {
     display: flex;
@@ -89,9 +90,13 @@
 
   &__body {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
     gap: 1rem;
+
+    @media (min-width: 48rem) {
+      flex-direction: row;
+    }
 
     .tags {
       flex: 1;
@@ -104,5 +109,17 @@
     gap: 0.5rem;
     font-size: var(--font-size-smd);
     font-family: var(--font-family-secondary);
+  }
+}
+
+[data-theme="dark"] {
+  .filters {
+    .label__label {
+      color: var(--light);
+    }
+    &::after {
+      background-color: var(--grey);
+      opacity: 0.5;
+    }
   }
 }

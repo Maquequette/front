@@ -35,3 +35,13 @@
     }
   }
 }
+
+[data-theme="dark"] {
+  .learn {
+    color: var(--light);
+
+    .sprites {
+      fill: var(--light);
+    }
+  }
+}

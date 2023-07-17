@@ -6,8 +6,10 @@
   border-radius: 10px;
   gap: 1.5rem;
   background-color: var(--light);
+  isolation: isolate;
 
   &__header {
+    position: relative;
     padding: 1rem 1rem 0 1rem;
     display: flex;
     flex-direction: column;
@@ -15,20 +17,41 @@
     margin-bottom: 1rem;
   }
 
+  &__icons {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__socials {
+    display: flex;
+    column-gap: 0.2rem;
+  }
+
+  &__media {
+    padding: 1rem;
+    position: relative;
+    height: 17.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   &__img {
     &,
     &--placeholder {
-      position: relative;
-      height: 17.5rem;
+      position: absolute;
+      display: block;
+      width: 100%;
       background-color: var(--secondary);
       border-radius: 1rem;
-      isolation: isolate;
       overflow: hidden;
-
-      .badge {
-        top: 1rem;
-        left: calc(100% - 3rem);
-      }
+      height: 100%;
+      top: 0;
+      left: 0;
 
       img {
         display: block;

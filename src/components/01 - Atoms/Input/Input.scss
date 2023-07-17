@@ -2,7 +2,9 @@
 @import "@/assets/variables";
 
 .input {
-  position: relative;
+  &__container {
+    position: relative;
+  }
 
   &__input {
     position: relative;
@@ -51,6 +53,7 @@
     background-color: var(--light);
     box-shadow: 5px 5px 0px var(--dark);
     padding: 1rem 2rem;
+    cursor: pointer;
 
     &:focus,
     &:focus-visible {
@@ -76,9 +79,11 @@
 
     .preview {
       border: 1px dotted var(--primary);
-      padding: 1rem;
+      padding: 2rem;
 
       .sprites {
+        width: 100%;
+        aspect-ratio: 1/1;
         fill: var(--primary);
       }
 

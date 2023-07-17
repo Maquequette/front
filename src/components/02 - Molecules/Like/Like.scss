@@ -1,0 +1,29 @@
+.like {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+
+  &__count {
+    font-family: var(--font-family-secondary);
+    font-size: 1.6rem;
+  }
+
+  &--true,
+  &:hover {
+    .sprites {
+      fill: var(--danger);
+    }
+  }
+
+  &--false {
+    .sprites {
+      fill: none;
+    }
+  }
+
+  .sprites {
+    width: 2rem;
+    height: 2rem;
+  }
+}

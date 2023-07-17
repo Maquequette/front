@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Editor } from "@tinymce/tinymce-react";
+import { useCallback, useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
@@ -10,18 +9,24 @@ import {
   getTagFamilies,
   getCategories,
   getDifficulties,
-  getChallengeTypes
+  getChallengeTypes,
+  postChallenge
 } from "@/services/challenges.service";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import "./DefineChallenge.scss";
+import Wysiwyg from "@/components/01 - Atoms/Wysiwyg/Wysiwyg";
 
 export default function DefineChallenge() {
-  const [query, setQuery] = useState({
+  const [query, setQuery] = useState<any>({
     categories: undefined,
     tags: undefined,
     type: undefined,
-    difficulties: undefined,
-    title: ""
+    difficulty: undefined,
+    title: "",
+    files: null,
+    url: "",
+    description: "",
+    additional: null
   });
   const { data: categories } = useQuery(["categories__all"], () =>
     getCategories({ paginate: false })
@@ -35,17 +40,25 @@ export default function DefineChallenge() {
 
   const { data: type } = useQuery(["type__all"], () => getChallengeTypes({ paginate: false }));
 
+  const { mutate: addChallenge } = useMutation(postChallenge);
+
+  const handleSubmit = useCallback(() => {
+    const form = new FormData();
+    Object.entries(query).map(([key, val]: any) => form.append(key, val));
+    addChallenge(form);
+  }, [query]);
+
   return (
     <div className="defineChallenge">
       <Heading level="tertiary" tag="h4">
         Create a challenge
       </Heading>
       <MultiStepsForm
-        handleSubmit={() => {}}
+        handleSubmit={handleSubmit}
         steps={[
           {
             btnText: "Continue !",
-            stepSubmit: () => query.categories && query.difficulties && query.type,
+            stepSubmit: () => query.categories && query.difficulty && query.type,
             formContent: (
               <div className="defineChallenge__form">
                 <div>
@@ -110,7 +123,7 @@ export default function DefineChallenge() {
                   <Label name="level">Difficulties</Label>
                   <Multiselect
                     callback={(value: any) => {
-                      setQuery({ ...query, difficulties: value });
+                      setQuery({ ...query, difficulty: value });
                     }}
                     theme={"primary"}
                     searchable={true}
@@ -125,32 +138,17 @@ export default function DefineChallenge() {
             )
           },
           {
-            btnText: "Create challenge !",
-            stepSubmit: () => true,
+            btnText: "You close to make something awesome",
+            stepSubmit: () => query.description && query.files,
             formContent: (
               <div className="defineChallenge__form">
                 <div className="defineChallenge__full">
                   <Label name="firstName" required={true}>
                     Description
                   </Label>
-                  <Editor
-                    onEditorChange={() => {}}
-                    apiKey={import.meta.env.VITE_TINY}
-                    init={{
-                      height: 500,
-                      menubar: false,
-                      plugins: [
-                        "advlist autolink lists link image charmap print preview anchor",
-                        "searchreplace visualblocks code fullscreen",
-                        "insertdatetime media table paste code help wordcount"
-                      ],
-                      toolbar:
-                        "undo redo | formatselect | " +
-                        "bold italic backcolor | alignleft aligncenter " +
-                        "alignright alignjustify | bullist numlist outdent indent | " +
-                        "removeformat | help",
-                      content_style:
-                        "body { font-family:Helvetica,Arial,sans-serif; font-size:1.4rem }"
+                  <Wysiwyg
+                    callback={(value: any) => {
+                      setQuery({ ...query, description: value });
                     }}
                   />
                 </div>
@@ -164,10 +162,55 @@ export default function DefineChallenge() {
                     name="picture"
                     required={true}
                     preview={true}
+                    limite={5}
+                    multiple={true}
                     handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      // const file = Object(e.currentTarget.files)[0];
-                      // console.log(file);
-                      //setLastName(e.target.value);
+                      const files = e.currentTarget.files?.[0];
+                      if (files) {
+                        setQuery({ ...query, files });
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+            )
+          },
+          {
+            btnText: "Finito",
+            stepSubmit: () => true,
+            formContent: (
+              <div className="defineChallenge__form">
+                <div className="defineChallenge__full">
+                  <Label name="picture" required={true}>
+                    Additionnal Ressource
+                  </Label>
+                  <Input
+                    accept=".png, .jpg, .jpeg"
+                    type="file"
+                    name="picture"
+                    required={true}
+                    preview={true}
+                    limite={5}
+                    multiple={true}
+                    handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const additional = e.currentTarget.files?.[0];
+                      if (additional) {
+                        setQuery({ ...query, additional });
+                      }
+                    }}
+                  />
+                </div>
+                <div className="defineChallenge__full">
+                  <Label name="picture" required={true}>
+                    Additionnal Ressource
+                  </Label>
+                  <Input
+                    type="url"
+                    name="figma"
+                    required={true}
+                    handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const url = e.target.value;
+                      setQuery({ ...query, url });
                     }}
                   />
                 </div>
