@@ -1,0 +1,25 @@
+.file {
+  appearance: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  border-radius: 0px;
+  width: 100%;
+  padding: 0px;
+  align-items: center;
+  color: var(--grey);
+  opacity: 0.8;
+
+  &:hover {
+    color: var(--light);
+    opacity: 1;
+  }
+
+  .sprites {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--light);
+  }
+}

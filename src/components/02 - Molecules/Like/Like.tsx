@@ -6,7 +6,7 @@ import "./Like.scss";
 
 export interface ILike {
   id: number;
-  isAlreadyLiked: boolean;
+  isAlreadyLiked?: boolean;
   likesCount?: number;
   showNumber: boolean;
 }

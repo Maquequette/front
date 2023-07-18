@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   SandpackProvider,
   SandpackLayout,
@@ -5,16 +6,16 @@ import {
   SandpackPredefinedTemplate
 } from "@codesandbox/sandpack-react";
 import * as Y from "yjs";
-import { WebsocketProvider } from "y-websocket";
+// import { WebsocketProvider } from "y-websocket";
 import { Mode } from "@/types/Mode";
 import CodeEditor from "@/components/02 - Molecules/CodeEditor/CodeEditor";
 import CodePreview from "@/components/02 - Molecules/CodePreview/CodePreview";
-import { useRef } from "react";
+import FileExplorer from "@/components/03 - Organisms/FileExplorer/FileExplorer";
 
 export interface ICode {
   template: SandpackPredefinedTemplate;
   theme: Mode;
-  roomId: string;
+  roomId?: string;
 }
 
 export default function Editor({ template, theme, roomId = crypto.randomUUID() }: ICode) {
@@ -32,7 +33,7 @@ export default function Editor({ template, theme, roomId = crypto.randomUUID() }
   return (
     <SandpackProvider template={template} theme={theme}>
       <SandpackLayout>
-        <SandpackFileExplorer />
+        <FileExplorer />
         <CodeEditor
         // ytext={ytext.current}
         // provider={provider.current}

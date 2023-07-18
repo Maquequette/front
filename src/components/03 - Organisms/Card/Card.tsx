@@ -23,7 +23,7 @@ export interface ICard {
   path?: string;
   desc?: string;
   badge?: any;
-  isLiked: boolean;
+  isLiked?: boolean;
   likesCount?: number;
 }
 
@@ -61,7 +61,13 @@ export default memo(function Card({
               </Badge>
             )}
             <div className="card__socials">
-              {!isConnected() && <Like showNumber={true} id={id} isAlreadyLiked={isLiked}></Like>}
+              {!isConnected() && (
+                <Like
+                  showNumber={true}
+                  id={id}
+                  likesCount={likesCount}
+                  isAlreadyLiked={isLiked}></Like>
+              )}
             </div>
           </div>
         </div>
