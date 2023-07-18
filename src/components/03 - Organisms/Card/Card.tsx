@@ -8,7 +8,6 @@ import Date from "@/components/01 - Atoms/Date/Date";
 import Badge from "@/components/01 - Atoms/Badge/Badge";
 import Image from "@/components/01 - Atoms/Image/Image";
 import Like from "@/components/02 - Molecules/Like/Like";
-import { AuthContext } from "@/contexts/AuthContext";
 import { ITag } from "@/components/01 - Atoms/Tag/Tag";
 import "./Card.scss";
 
@@ -61,7 +60,7 @@ export default memo(function Card({
               </Badge>
             )}
             <div className="card__socials">
-              {!isConnected() && <Like showNumber={true} id={id} isAlreadyLiked={isLiked}></Like>}
+             <Like showNumber={true} id={id} isAlreadyLiked={isLiked}></Like>
             </div>
           </div>
         </div>
