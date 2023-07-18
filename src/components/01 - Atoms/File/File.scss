@@ -1,16 +1,26 @@
 .file {
-  appearance: none;
-  outline: none;
-  background-color: transparent;
-  cursor: pointer;
-  border: none;
   display: flex;
-  border-radius: 0px;
-  width: 100%;
-  padding: 0px;
   align-items: center;
-  color: var(--grey);
-  opacity: 0.8;
+  &:hover {
+    .file__delete {
+      display: block;
+    }
+  }
+
+  &__btn {
+    appearance: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    border-radius: 0px;
+    width: 100%;
+    padding: 0px;
+    align-items: center;
+    color: var(--grey);
+    opacity: 0.8;
+  }
 
   &:hover {
     color: var(--light);
@@ -21,5 +31,16 @@
     width: 2rem;
     height: 2rem;
     fill: var(--light);
+  }
+
+  &__delete {
+    display: none;
+    cursor: pointer;
+
+    .sprites {
+      width: 1rem;
+      height: 1rem;
+      fill: var(--light);
+    }
   }
 }

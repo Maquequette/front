@@ -19,7 +19,13 @@ export const Directory: React.FC<any> = ({
 
   return (
     <div className="directory">
-      <File depth={depth} isDirOpen={open} onClick={toggle} path={prefixedPath + "/"} />
+      <File
+        depth={depth}
+        isDir={true}
+        isDirOpen={open}
+        onClick={toggle}
+        path={prefixedPath + "/"}
+      />
 
       {open && (
         <ModuleList
