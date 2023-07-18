@@ -2,6 +2,7 @@ import { useSandpack } from "@codesandbox/sandpack-react";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import "./File.scss";
 import { useState } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 export interface IFile {
   path: string;
@@ -24,6 +25,7 @@ export const File: React.FC<IFile> = ({
 }) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [currentPath, setCurrentPath] = useState(path);
+  const ref = useClickOutside(() => setIsUpdating(false));
   const { sandpack } = useSandpack();
   const { deleteFile, updateFile, files, activeFile } = sandpack;
 
@@ -60,18 +62,20 @@ export const File: React.FC<IFile> = ({
           <span>{fileName}</span>
         </button>
       ) : (
-        <input
-          type="text"
-          value={currentPath}
-          onInput={(e) => setCurrentPath(e.currentTarget.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              updateFile(currentPath, files[activeFile].code, true);
-              deleteFile(path);
-              handleEditing();
-            }
-          }}
-        />
+        <div className="file__input" ref={ref}>
+          <input
+            type="text"
+            value={currentPath}
+            onInput={(e) => setCurrentPath(e.currentTarget.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                updateFile(currentPath, files[activeFile].code, true);
+                deleteFile(path);
+                handleEditing();
+              }
+            }}
+          />
+        </div>
       )}
 
       {!isDir && (
