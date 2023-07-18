@@ -62,6 +62,7 @@ export default function FileExplorer({
           visibleFiles={visibleFilesFromProps}
         />
       </div>
+      
     </div>
   );
 }
