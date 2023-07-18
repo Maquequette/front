@@ -2,6 +2,8 @@ import { useCallback } from "react";
 import { SandpackPreview, useSandpack } from "@codesandbox/sandpack-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
+import "./CodePreview.scss";
 
 export default function CodePreview() {
   const { sandpack } = useSandpack();
@@ -27,7 +29,11 @@ export default function CodePreview() {
       showOpenInCodeSandbox={false}
       showOpenNewtab={true}
       showRestartButton={true}
-      actionsChildren={<button onClick={() => downloadProjectAsZip()}>🫨</button>}
+      actionsChildren={
+        <button className="preview__dl" onClick={() => downloadProjectAsZip()}>
+          <Svg id="upload" />
+        </button>
+      }
     />
   );
 }

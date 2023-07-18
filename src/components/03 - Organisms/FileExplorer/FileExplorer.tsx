@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { SandpackFileExplorerProp, useSandpack } from "@codesandbox/sandpack-react";
 import { ModuleList } from "@/components/02 - Molecules/ModuleList/ModuleList";
 import "./FileExplorer.scss";
+import useClickOutside from "@/hooks/useClickOutside";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
 
 export default function FileExplorer({
   className,
@@ -10,18 +12,21 @@ export default function FileExplorer({
   initialCollapsedFolder = [],
   ...props
 }: SandpackFileExplorerProp & React.HTMLAttributes<HTMLDivElement>) {
+  const [isAddingFile, setIsAddingFile] = useState(false);
+  const [newPath, setNewPath] = useState("");
+  const ref = useClickOutside(() => setIsAddingFile(false));
+
+  const { sandpack, listen } = useSandpack();
   const {
-    sandpack: {
-      status,
-      updateFile,
-      deleteFile,
-      activeFile,
-      files,
-      openFile,
-      visibleFilesFromProps
-    },
-    listen
-  } = useSandpack();
+    status,
+    updateFile,
+    deleteFile,
+    activeFile,
+    files,
+    openFile,
+    visibleFilesFromProps,
+    addFile
+  } = sandpack;
 
   useEffect(
     function watchFSFilesChanges() {
@@ -62,7 +67,30 @@ export default function FileExplorer({
           visibleFiles={visibleFilesFromProps}
         />
       </div>
-      
+      <div className="fileExplorer__actions">
+        <div className="fileExplorer__add" ref={ref}>
+          {isAddingFile && (
+            <input
+              type="text"
+              value={newPath}
+              className="fileExplorer__input"
+              onInput={(e) => {
+                setNewPath(e.currentTarget.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  addFile(newPath, "", true);
+                  setNewPath("");
+                  setIsAddingFile(false);
+                }
+              }}
+            />
+          )}
+          <button className="fileExplorer__action" onClick={() => setIsAddingFile(!isAddingFile)}>
+            <Svg id="create" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

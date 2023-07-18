@@ -14,12 +14,12 @@ export default function CodeEditor({ ytext, provider, undoManager }: ICode) {
   const { updateCode, code } = useActiveCode();
   const { sandpack } = useSandpack();
 
-  useEffect(() => {
-    sandpack.files;
+  // useEffect(() => {
+  //   sandpack.files;
 
-    //ytext.insert(0, code);
-    //updateCode(ytext.toString(), true);
-  }, []);
+  //   //ytext.insert(0, code);
+  //   //updateCode(ytext.toString(), true);
+  // }, []);
 
   return (
     <SandpackCodeEditor
