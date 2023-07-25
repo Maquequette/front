@@ -1,0 +1,48 @@
+.file {
+  display: flex;
+  align-items: center;
+  &:hover {
+    .file__delete,
+    .file__add {
+      display: block;
+    }
+  }
+
+  &__btn {
+    appearance: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    border-radius: 0px;
+    width: 100%;
+    padding: 0px;
+    align-items: center;
+    color: var(--grey);
+    opacity: 0.8;
+  }
+
+  &:hover {
+    color: var(--light);
+    opacity: 1;
+  }
+
+  .sprites {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--light);
+  }
+
+  &__delete,
+  &__add {
+    display: none;
+    cursor: pointer;
+
+    .sprites {
+      width: 1rem;
+      height: 1rem;
+      fill: var(--light);
+    }
+  }
+}

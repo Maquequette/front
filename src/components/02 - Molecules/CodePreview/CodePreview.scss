@@ -1,0 +1,15 @@
+.preview {
+  &__dl,
+  &__github,
+  &__fullscreen {
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--dark);
+    border: none;
+    padding: 0.2rem;
+
+    .sprites {
+      fill: var(--light);
+    }
+  }
+}
