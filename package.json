@@ -22,7 +22,7 @@
     "axios": "^1.4.0",
     "clsx": "^2.0.0",
     "file-saver": "^2.0.5",
-    "framer-motion": "^10.12.23",
+    "framer-motion": "^10.13.1",
     "i18next": "^23.2.11",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.2.1",
