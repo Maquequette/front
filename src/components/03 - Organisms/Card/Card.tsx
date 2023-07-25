@@ -40,8 +40,6 @@ export default memo(function Card({
   isLiked,
   likesCount
 }: ICard) {
-  const { isConnected } = useContext(AuthContext);
-
   return (
     <div className="card">
       <div className="card__header">
