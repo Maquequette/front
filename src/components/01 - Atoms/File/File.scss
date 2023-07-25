@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   &:hover {
-    .file__delete {
+    .file__delete,
+    .file__add {
       display: block;
     }
   }
@@ -33,7 +34,8 @@
     fill: var(--light);
   }
 
-  &__delete {
+  &__delete,
+  &__add {
     display: none;
     cursor: pointer;
 

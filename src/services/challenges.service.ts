@@ -1,6 +1,6 @@
 import { axios } from "./useful";
 
-export const getChallenges = async ({
+export const getChallenges = ({
   pageParam = 1,
   itemsPerPage = 9,
   paginate = true,
@@ -42,7 +42,7 @@ export const getChallenges = async ({
   });
 };
 
-export const getChallengeTypes = async ({
+export const getChallengeTypes = ({
   pageParam = 1,
   itemsPerPage,
   paginate = true
@@ -56,7 +56,7 @@ export const getChallengeTypes = async ({
   });
 };
 
-export const getCategories = async ({
+export const getCategories = ({
   pageParam = 1,
   itemsPerPage,
   paginate = true
@@ -70,7 +70,7 @@ export const getCategories = async ({
   });
 };
 
-export const getDifficulties = async ({
+export const getDifficulties = ({
   pageParam,
   itemsPerPage,
   paginate = true
@@ -84,7 +84,7 @@ export const getDifficulties = async ({
   });
 };
 
-export const getTags = async ({
+export const getTags = ({
   pageParam = 1,
   itemsPerPage,
   paginate = true
@@ -98,7 +98,7 @@ export const getTags = async ({
   });
 };
 
-export const getTagFamilies = async ({
+export const getTagFamilies = ({
   pageParam = 1,
   itemsPerPage = 16,
   paginate = true,
@@ -123,16 +123,16 @@ export const getTagFamilies = async ({
   });
 };
 
-export const postChallenge = async (challenge: FormData) => {
+export const postChallenge = (challenge: FormData) => {
   return axios.post("/api/challenges", challenge, {
     headers: { "Content-Type": "'multipart/form-data" }
   });
 };
 
-export const likeChallenge = async (challengeId: number) => {
+export const likeChallenge = (challengeId: number) => {
   return axios.post(`/api/challenges/${challengeId}/like`);
 };
 
-export const unlikeChallenge = async (challengeId: number) => {
+export const unlikeChallenge = (challengeId: number) => {
   return axios.delete(`/api/challenges/${challengeId}/like`);
 };

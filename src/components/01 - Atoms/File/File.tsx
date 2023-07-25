@@ -12,19 +12,24 @@ export interface IFile {
   depth: number;
   isDirOpen?: boolean;
   isDir?: boolean;
+  isAddingFile?: boolean;
+  setIsAddingFile?: Function;
+  setNewPath?: Function;
 }
 
-export const File: React.FC<IFile> = ({
+export const File = ({
   selectFile,
   path,
   active,
   onClick,
   depth,
   isDirOpen,
-  isDir = false
-}) => {
+  isDir = false,
+  setNewPath,
+  setIsAddingFile
+}: IFile) => {
   const [isUpdating, setIsUpdating] = useState(false);
-  const [currentPath, setCurrentPath] = useState(path);
+  const [currentPath, setCurrentPath] = useState(path.replace("//", "/"));
   const ref = useClickOutside(() => setIsUpdating(false));
   const { sandpack } = useSandpack();
   const { deleteFile, updateFile, files, activeFile } = sandpack;
@@ -78,9 +83,18 @@ export const File: React.FC<IFile> = ({
         </div>
       )}
 
-      {!isDir && (
+      {!isDir ? (
         <div className="file__delete" onClick={() => deleteFile(path)}>
           <Svg id="cross" />
+        </div>
+      ) : (
+        <div
+          className="file__add"
+          onClick={() => {
+            setIsAddingFile && setIsAddingFile(true);
+            setNewPath && setNewPath(path.replace("//", "/"));
+          }}>
+          <Svg id="create" />
         </div>
       )}
     </div>

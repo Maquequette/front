@@ -65,6 +65,9 @@ export default function FileExplorer({
           prefixedPath="/"
           selectFile={openFile}
           visibleFiles={visibleFilesFromProps}
+          isAddingFile={isAddingFile}
+          setIsAddingFile={setIsAddingFile}
+          setNewPath={setNewPath}
         />
       </div>
       <div className="fileExplorer__actions">

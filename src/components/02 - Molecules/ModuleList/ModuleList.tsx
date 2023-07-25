@@ -11,7 +11,10 @@ export const ModuleList: React.FC<any> = ({
   files,
   autoHiddenFiles,
   visibleFiles,
-  initialCollapsedFolder
+  initialCollapsedFolder,
+  isAddingFile,
+  setIsAddingFile,
+  setNewPath
 }) => {
   const { directories, modules } = fromPropsToModules({
     visibleFiles,
@@ -33,6 +36,9 @@ export const ModuleList: React.FC<any> = ({
           prefixedPath={dir}
           selectFile={selectFile}
           visibleFiles={visibleFiles}
+          isAddingFile={isAddingFile}
+          setIsAddingFile={setIsAddingFile}
+          setNewPath={setNewPath}
         />
       ))}
 

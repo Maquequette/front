@@ -3,7 +3,7 @@ import { File } from "../File/File";
 import { ModuleList } from "@/components/02 - Molecules/ModuleList/ModuleList";
 import "./Directory.scss";
 
-export const Directory: React.FC<any> = ({
+export const Directory = ({
   prefixedPath,
   files,
   selectFile,
@@ -11,8 +11,11 @@ export const Directory: React.FC<any> = ({
   depth,
   autoHiddenFiles,
   visibleFiles,
-  initialCollapsedFolder
-}) => {
+  initialCollapsedFolder,
+  isAddingFile,
+  setIsAddingFile,
+  setNewPath
+}: any) => {
   const [open, setOpen] = useState(!initialCollapsedFolder?.includes(prefixedPath));
 
   const toggle = (): void => setOpen((prev) => !prev);
@@ -25,6 +28,9 @@ export const Directory: React.FC<any> = ({
         isDirOpen={open}
         onClick={toggle}
         path={prefixedPath + "/"}
+        isAddingFile={isAddingFile}
+        setIsAddingFile={setIsAddingFile}
+        setNewPath={setNewPath}
       />
 
       {open && (

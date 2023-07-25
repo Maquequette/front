@@ -12,6 +12,7 @@
 
   &__actions {
     display: flex;
+    padding: 1rem;
     justify-content: flex-end;
   }
 
@@ -20,6 +21,7 @@
     justify-content: space-between;
     gap: 1rem;
     display: flex;
+    justify-content: flex-end;
     flex-wrap: wrap;
   }
 
