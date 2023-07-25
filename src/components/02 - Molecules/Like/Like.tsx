@@ -40,7 +40,7 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber }:
             });
       }}>
       <Svg id="like" />
-      {showNumber && <p className="like__count">{count}</p>}
+      {showNumber || !isConnected() && <p className="like__count">{count}</p>}
     </div>
   );
 }
