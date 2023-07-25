@@ -6,11 +6,15 @@ import { Socket } from "socket.io-client";
 import { getDocument, peerExtension } from "@/utils/collab";
 import { generateName } from "@/utils/usernames";
 import { cursorExtension } from "@/utils/cursors";
+import { EditorSelection } from "@codemirror/state";
+
 import "./CodeEditor.scss";
 
 export interface ICodeEditor {
   socket: Socket;
 }
+
+let editorKey = 0;
 
 export default function CodeEditor({ socket }: ICodeEditor) {
   const { updateCode } = useActiveCode();
@@ -22,9 +26,9 @@ export default function CodeEditor({ socket }: ICodeEditor) {
 
   useEffect(() => {
     const fetchDoc = async () => {
-      const data = await getDocument(socket, documentName);
-      updateCode(data.doc.toString());
-      setVersion(data.version);
+      const { doc, version } = await getDocument(socket, documentName);
+      updateCode(doc.toString());
+      setVersion(version);
     };
 
     fetchDoc();
@@ -37,6 +41,12 @@ export default function CodeEditor({ socket }: ICodeEditor) {
       setIsConnected(false);
     });
 
+    socket.on("display", async (documentName) => {
+      const { doc, version } = await getDocument(socket, documentName);
+      updateCode(doc.toString());
+      setVersion(version);
+    });
+
     return () => {
       socket.off("connect");
       socket.off("disconnect");
@@ -47,8 +57,9 @@ export default function CodeEditor({ socket }: ICodeEditor) {
   }, []);
 
   return (
-    version && (
+    version != -1 && (
       <SandpackCodeEditor
+        key={editorKey++}
         showTabs
         showLineNumbers
         showInlineErrors
@@ -58,7 +69,7 @@ export default function CodeEditor({ socket }: ICodeEditor) {
         extensions={[
           abbreviationTracker(),
           search(),
-          //peerExtension(socket, documentName, version, username),
+          peerExtension(socket, documentName, version, username),
           cursorExtension(username)
         ]}
         className="editor__code"

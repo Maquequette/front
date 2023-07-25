@@ -94,41 +94,41 @@ export const peerExtension = (
   startVersion: number,
   id: string
 ) => {
-  console.log("oui");
   const plugin = ViewPlugin.fromClass(
     class {
       private pushing = false;
       private done = false;
 
       constructor(private view: EditorView) {
-        this.pull();
+        //this.pull();
       }
 
       update(update: ViewUpdate) {
-        if (update.docChanged || update.transactions[0]?.effects[0]) this.push();
+        //if (update.docChanged || update.transactions[0]?.effects[0]) this.push();
       }
 
       async push() {
-        const updates = sendableUpdates(this.view.state);
-        if (this.pushing || !updates.length) return;
-        this.pushing = true;
-        const version = getSyncedVersion(this.view.state);
-        await pushUpdates(socket, docName, version, updates);
-        this.pushing = false;
-        // Regardless of whether the push failed or new updates came in
-        // while it was running, try again if there's updates remaining
-        if (sendableUpdates(this.view.state).length) {
-          setTimeout(() => this.push(), 100);
-        }
+        // const updates = sendableUpdates(this.view.state);
+        // if (this.pushing || !updates.length) return;
+        // this.pushing = true;
+        // const version = getSyncedVersion(this.view.state);
+        // await pushUpdates(socket, docName, version, updates);
+        // this.pushing = false;
+        // // Regardless of whether the push failed or new updates came in
+        // // while it was running, try again if there's updates remaining
+        // if (sendableUpdates(this.view.state).length) {
+        //   setTimeout(() => this.push(), 100);
+        // }
       }
 
       async pull() {
-        while (!this.done) {
-          const version = getSyncedVersion(this.view.state);
-          const updates = await pullUpdates(socket, docName, version);
-          const newUpdates = receiveUpdates(this.view.state, updates);
-          this.view.dispatch(newUpdates);
-        }
+        console.log("fezfz");
+        // while (!this.done) {
+        //   const version = getSyncedVersion(this.view.state);
+        //   const updates = await pullUpdates(socket, docName, version);
+        //   const newUpdates = receiveUpdates(this.view.state, updates);
+        //   this.view.dispatch(newUpdates);
+        // }
       }
 
       destroy() {
