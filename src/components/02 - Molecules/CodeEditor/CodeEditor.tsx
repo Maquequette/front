@@ -22,6 +22,7 @@ export default function CodeEditor({ socket }: ICodeEditor) {
   const [state, setState] = useState();
 
   useEffect(() => {
+    console.log(code);
     const fetchDoc = async () => {
       const { doc, version } = await getDocument(socket, documentName);
       updateCode(doc.toString(), true);
@@ -50,28 +51,25 @@ export default function CodeEditor({ socket }: ICodeEditor) {
     };
   }, []);
 
-  return (
-    true &&
-    useMemo(
-      () => (
-        <SandpackCodeEditor
-          key={crypto.randomUUID()}
-          showTabs
-          showLineNumbers
-          showInlineErrors
-          wrapContent
-          closableTabs
-          extensionsKeymap={[...searchKeymap]}
-          extensions={[
-            abbreviationTracker(),
-            search()
-            //peerExtension(socket, documentName, version, username),
-            //cursorExtension(username)
-          ]}
-          className="editor__code"
-        />
-      ),
-      []
-    )
+  return useMemo(
+    () => (
+      <SandpackCodeEditor
+        key={crypto.randomUUID()}
+        showTabs
+        showLineNumbers
+        showInlineErrors
+        wrapContent
+        closableTabs
+        extensionsKeymap={[...searchKeymap]}
+        extensions={[
+          abbreviationTracker(),
+          search(),
+          peerExtension(socket, documentName, version, username),
+          cursorExtension(username)
+        ]}
+        className="editor__code"
+      />
+    ),
+    [version]
   );
 }
