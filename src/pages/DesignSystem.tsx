@@ -3,7 +3,7 @@ import Editor from "@/components/03 - Organisms/Editor/Editor";
 export default function DesignSystem() {
   return (
     <Container center={true}>
-      <Editor template="react" theme="dark" />
+      <Editor template="react" theme="dark" roomId="natho" />
     </Container>
   );
 }

@@ -9,12 +9,14 @@ import {
 } from "@codemirror/collab";
 import { Socket } from "socket.io-client";
 import { cursor, addCursor } from "./cursors";
+import { SandboxSetup } from "@codesandbox/sandpack-client";
+import { SandpackPredefinedTemplate } from "@codesandbox/sandpack-react/types";
 
 function pushUpdates(
   socket: Socket,
-  docName: string,
   version: number,
-  fullUpdates: readonly Update[]
+  fullUpdates: readonly Update[],
+  room: string
 ): Promise<boolean> {
   // Strip off transaction data
   const updates = fullUpdates.map((u) => ({
@@ -24,23 +26,24 @@ function pushUpdates(
   }));
 
   return new Promise(function (resolve) {
-    socket.emit("pushUpdates", docName, version, JSON.stringify(updates));
+    socket.emit("push:updates", version, JSON.stringify(updates), room);
 
-    socket.once("pushUpdateResponse", function (status: boolean) {
+    socket.once("push:updates:response", function (status: boolean) {
       resolve(status);
     });
   });
 }
 
-function pullUpdates(socket: Socket, docName: string, version: number) {
+function pullUpdates(socket: Socket, version: number, room: string) {
   return new Promise(function (resolve) {
-    socket.emit("pullUpdates", docName, version);
-    socket.once("pullUpdateResponse", function (updates: any) {
+    socket.emit("pull:updates", version, room);
+    socket.once("pull:updates:response", function (updates: any) {
       resolve(JSON.parse(updates));
     });
   })
     .then((updates: any) =>
       updates.map((u: any) => {
+        console.log(u);
         if (u.effects[0]) {
           const effects: StateEffect<any>[] = [];
 
@@ -74,26 +77,22 @@ function pullUpdates(socket: Socket, docName: string, version: number) {
 
 export function getDocument(
   socket: Socket,
-  docName: string
-): Promise<{ version: number; doc: Text }> {
+  room: string,
+  template: SandpackPredefinedTemplate
+): Promise<{ version: number; files: SandboxSetup }> {
   return new Promise(function (resolve) {
-    socket.emit("getDocument", docName);
+    socket.emit("get:document", room, template);
 
-    socket.once("getDocumentResponse", function (version: number, doc: string) {
+    socket.on("get:document:response", function (version: number, files: SandboxSetup) {
       resolve({
         version,
-        doc: Text.of(doc.split("\n"))
+        files
       });
     });
   });
 }
 
-export const peerExtension = (
-  socket: Socket,
-  docName: string,
-  startVersion: number,
-  id: string
-) => {
+export const peerExtension = (socket: Socket, room: string, startVersion: number, id: string) => {
   const plugin = ViewPlugin.fromClass(
     class {
       private pushing = false;
@@ -112,7 +111,7 @@ export const peerExtension = (
         if (this.pushing || !updates.length) return;
         this.pushing = true;
         const version = getSyncedVersion(this.view.state);
-        await pushUpdates(socket, docName, version, updates);
+        await pushUpdates(socket, version, updates, room);
         this.pushing = false;
         // Regardless of whether the push failed or new updates came in
         // while it was running, try again if there's updates remaining
@@ -124,7 +123,7 @@ export const peerExtension = (
       async pull() {
         while (!this.done) {
           const version = getSyncedVersion(this.view.state);
-          const updates = await pullUpdates(socket, docName, version);
+          const updates = await pullUpdates(socket, version, room);
           const newUpdates = receiveUpdates(this.view.state, updates);
           this.view.dispatch(newUpdates);
         }

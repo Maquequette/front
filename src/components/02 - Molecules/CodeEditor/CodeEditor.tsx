@@ -1,75 +1,70 @@
-import { SandpackCodeEditor, useActiveCode } from "@codesandbox/sandpack-react";
+import {
+  SandpackCodeEditor,
+  SandpackPredefinedTemplate,
+  useSandpack
+} from "@codesandbox/sandpack-react";
 import { abbreviationTracker } from "@emmetio/codemirror6-plugin";
 import { searchKeymap, search } from "@codemirror/search";
 import { useEffect, useMemo, useState } from "react";
 import { Socket } from "socket.io-client";
-import { getDocument, peerExtension } from "@/utils/collab";
+import { peerExtension } from "@/utils/collab";
 import { generateName } from "@/utils/usernames";
 import { cursorExtension } from "@/utils/cursors";
+import { getDocument } from "@/utils/collab";
 
 import "./CodeEditor.scss";
 
 export interface ICodeEditor {
   socket: Socket;
+  room: string;
+  template: SandpackPredefinedTemplate;
 }
 
-export default function CodeEditor({ socket }: ICodeEditor) {
-  const { code, updateCode } = useActiveCode();
-  const [isConnected, setIsConnected] = useState(false);
-  const [version, setVersion] = useState(-1);
-  const [documentName, setDocumentName] = useState("default-doc");
+export default function CodeEditor({ socket, room, template }: ICodeEditor) {
   const [username, setUsername] = useState(generateName());
-  const [state, setState] = useState();
+  const { sandpack } = useSandpack();
+  const [version, setVersion] = useState<number | null>(null);
 
   useEffect(() => {
-    console.log(code);
     const fetchDoc = async () => {
-      const { doc, version } = await getDocument(socket, documentName);
-      updateCode(doc.toString(), true);
+      const { files, version } = await getDocument(socket, room, template);
+      for (const [key, value] of Object.entries(files.files)) {
+        sandpack.updateFile(key, value.code);
+      }
       setVersion(version);
     };
+
     fetchDoc();
-    socket.on("connect", () => {
-      setIsConnected(true);
-    });
-    socket.on("disconnect", () => {
-      setIsConnected(false);
-    });
-    socket.on("display", async (documentName) => {
-      const { doc, version } = await getDocument(socket, documentName);
-      updateCode(doc.toString(), true);
-      setVersion(version);
-      setDocumentName(documentName);
-    });
+
     return () => {
       socket.off("connect");
       socket.off("disconnect");
-      socket.off("display");
-      socket.off("pullUpdateResponse");
-      socket.off("pushUpdateResponse");
-      socket.off("getDocumentResponse");
+      socket.off("pull:updates:response");
+      socket.off("push:updates:response");
+      socket.off("get:document:response");
     };
   }, []);
 
   return useMemo(
-    () => (
-      <SandpackCodeEditor
-        key={crypto.randomUUID()}
-        showTabs
-        showLineNumbers
-        showInlineErrors
-        wrapContent
-        closableTabs
-        extensionsKeymap={[...searchKeymap]}
-        extensions={[
-          abbreviationTracker(),
-          search(),
-          peerExtension(socket, documentName, version, username),
-          cursorExtension(username)
-        ]}
-        className="editor__code"
-      />
-    ),
+    () =>
+      version != null && (
+        <SandpackCodeEditor
+          key={crypto.randomUUID()}
+          showTabs
+          showLineNumbers
+          showInlineErrors
+          wrapContent
+          closableTabs
+          extensionsKeymap={[...searchKeymap]}
+          extensions={[
+            abbreviationTracker(),
+            search(),
+            peerExtension(socket, room, version, username),
+            cursorExtension(username)
+          ]}
+          className="editor__code"
+        />
+      ),
     [version]
   );
 }

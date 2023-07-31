@@ -1,13 +1,17 @@
 import {
   SandpackProvider,
   SandpackLayout,
-  SandpackPredefinedTemplate
+  SandpackPredefinedTemplate,
+  useSandpack,
+  useSandpackClient
 } from "@codesandbox/sandpack-react";
+import { loadSandpackClient } from "@codesandbox/sandpack-client";
+
 import { Mode } from "@/types/Mode";
 import CodeEditor from "@/components/02 - Molecules/CodeEditor/CodeEditor";
 import CodePreview from "@/components/02 - Molecules/CodePreview/CodePreview";
 import FileExplorer from "@/components/02 - Molecules/FileExplorer/FileExplorer";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Editor.scss";
 
 export interface ICode {
@@ -26,6 +30,8 @@ export default function Editor({ template, theme, roomId = crypto.randomUUID() }
   const [isFullScreen, setIsFullScreen] = useState(false);
   const ref: any = useRef();
 
+  console.log(roomId);
+
   const handleFullScreen = () => {
     if (ref.current) {
       if (isFullScreen) {
@@ -43,7 +49,7 @@ export default function Editor({ template, theme, roomId = crypto.randomUUID() }
         ref={ref}
         className={`editor__layout ${isFullScreen ? "editor__layout--fullscreen" : ""}`}>
         <FileExplorer />
-        <CodeEditor socket={socket} />
+        <CodeEditor socket={socket} room={roomId} template={template} />
         <CodePreview setFullScreen={handleFullScreen} />
       </SandpackLayout>
     </SandpackProvider>
