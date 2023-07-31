@@ -30,8 +30,6 @@ export default function Editor({ template, theme, roomId = crypto.randomUUID() }
   const [isFullScreen, setIsFullScreen] = useState(false);
   const ref: any = useRef();
 
-  console.log(roomId);
-
   const handleFullScreen = () => {
     if (ref.current) {
       if (isFullScreen) {
