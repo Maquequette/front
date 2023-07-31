@@ -29,6 +29,7 @@ function pushUpdates(
     socket.emit("push:updates", version, JSON.stringify(updates), room, activeFile);
 
     socket.once("push:updates:response", function (status: boolean) {
+      console.log(status);
       resolve(status);
     });
   });
@@ -116,6 +117,7 @@ export const peerExtension = (
         if (this.pushing || !updates.length) return;
         this.pushing = true;
         const version = getSyncedVersion(this.view.state);
+
         await pushUpdates(socket, version, updates, room, activeFile);
         this.pushing = false;
         // Regardless of whether the push failed or new updates came in

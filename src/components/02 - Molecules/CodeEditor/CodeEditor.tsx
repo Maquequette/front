@@ -28,9 +28,8 @@ export default function CodeEditor({ socket, room, template }: ICodeEditor) {
   useEffect(() => {
     const fetchDoc = async () => {
       const { files, version } = await getDocument(socket, room, template);
-      console.log(files);
       for (const [key, value] of Object.entries(files)) {
-        sandpack.updateFile(key, value);
+        sandpack.updateFile(key, value[0]);
       }
       setVersion(version);
     };
@@ -66,6 +65,6 @@ export default function CodeEditor({ socket, room, template }: ICodeEditor) {
           className="editor__code"
         />
       ),
-    [version]
+    [version, sandpack.activeFile]
   );
 }
