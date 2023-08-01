@@ -29,15 +29,14 @@ function pushUpdates(
     socket.emit("push:updates", version, JSON.stringify(updates), room, activeFile);
 
     socket.once("push:updates:response", function (status: boolean) {
-      console.log(status);
       resolve(status);
     });
   });
 }
 
-function pullUpdates(socket: Socket, version: number, room: string) {
+function pullUpdates(socket: Socket, version: number, room: string, activeFile: string) {
   return new Promise(function (resolve) {
-    socket.emit("pull:updates", version, room);
+    socket.emit("pull:updates", version, room, activeFile);
     socket.once("pull:updates:response", function (updates: any) {
       resolve(JSON.parse(updates));
     });
@@ -78,10 +77,11 @@ function pullUpdates(socket: Socket, version: number, room: string) {
 export function getDocument(
   socket: Socket,
   room: string,
-  template: SandpackPredefinedTemplate
+  template: SandpackPredefinedTemplate,
+  activeFile: string
 ): Promise<{ version: number; files: string }> {
   return new Promise(function (resolve) {
-    socket.emit("get:document", room, template);
+    socket.emit("get:document", room, template, activeFile);
 
     socket.on("get:document:response", function (version: number, files: any) {
       resolve({
@@ -130,7 +130,7 @@ export const peerExtension = (
       async pull() {
         while (!this.done) {
           const version = getSyncedVersion(this.view.state);
-          const updates = await pullUpdates(socket, version, room);
+          const updates = await pullUpdates(socket, version, room, activeFile);
           const newUpdates = receiveUpdates(this.view.state, updates);
           this.view.dispatch(newUpdates);
         }

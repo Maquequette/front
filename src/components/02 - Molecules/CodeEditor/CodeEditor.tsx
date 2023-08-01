@@ -11,7 +11,6 @@ import { peerExtension } from "@/utils/collab";
 import { generateName } from "@/utils/usernames";
 import { cursorExtension } from "@/utils/cursors";
 import { getDocument } from "@/utils/collab";
-
 import "./CodeEditor.scss";
 
 export interface ICodeEditor {
@@ -27,10 +26,13 @@ export default function CodeEditor({ socket, room, template }: ICodeEditor) {
 
   useEffect(() => {
     const fetchDoc = async () => {
-      const { files, version } = await getDocument(socket, room, template);
-      for (const [key, value] of Object.entries(files)) {
-        sandpack.updateFile(key, value[0]);
-      }
+      const { files, version } = await getDocument(socket, room, template, sandpack.activeFile);
+      Object.entries(files).forEach((entry: [any, any]) => {
+        const [key, value] = entry;
+
+        sandpack.updateFile(key, value.code[0], true);
+      });
+
       setVersion(version);
     };
 
@@ -43,7 +45,7 @@ export default function CodeEditor({ socket, room, template }: ICodeEditor) {
       socket.off("push:updates:response");
       socket.off("get:document:response");
     };
-  }, []);
+  }, [sandpack.activeFile]);
 
   return useMemo(
     () =>
