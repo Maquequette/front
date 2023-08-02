@@ -132,7 +132,6 @@ export const peerExtension = (
           const version = getSyncedVersion(this.view.state);
           const updates = await pullUpdates(socket, version, room, activeFile);
           const newUpdates = receiveUpdates(this.view.state, updates);
-          console.log(this.view.state);
 
           this.view.dispatch(newUpdates);
         }
