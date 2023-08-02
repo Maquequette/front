@@ -1,5 +1,5 @@
 import { EditorView, ViewPlugin, ViewUpdate } from "@codemirror/view";
-import { StateEffect, Text, ChangeSet } from "@codemirror/state";
+import { StateEffect, ChangeSet } from "@codemirror/state";
 import {
   Update,
   receiveUpdates,
@@ -83,7 +83,7 @@ export function getDocument(
   return new Promise(function (resolve) {
     socket.emit("get:document", room, template, activeFile);
 
-    socket.on("get:document:response", function (version: number, files: any) {
+    socket.once("get:document:response", function (version: number, files: any) {
       resolve({
         version,
         files
@@ -132,6 +132,8 @@ export const peerExtension = (
           const version = getSyncedVersion(this.view.state);
           const updates = await pullUpdates(socket, version, room, activeFile);
           const newUpdates = receiveUpdates(this.view.state, updates);
+          console.log(this.view.state);
+
           this.view.dispatch(newUpdates);
         }
       }

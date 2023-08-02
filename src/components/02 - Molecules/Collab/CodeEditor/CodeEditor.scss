@@ -1,0 +1,34 @@
+.editor {
+  &__code {
+    .cm-search {
+      background-color: var(--grey);
+      .cm-button {
+        all: unset;
+        padding: 0.5rem 1rem;
+        background-color: transparent;
+        border: 1px solid var(--dark);
+        text-transform: uppercase;
+        font-size: var(--font-size-sm);
+        font-family: var(--font-family-secondary);
+        cursor: pointer;
+
+        &:active,
+        &:focus-visible {
+          outline: none;
+          box-shadow: none;
+          background-color: var(--primary);
+        }
+      }
+
+      .cm-textfield {
+        font-size: var(--font-size-sm);
+        font-family: var(--font-family-secondary);
+      }
+
+      [type="checkbox"] {
+        caret-color: var(--primary);
+        accent-color: var(--primary);
+      }
+    }
+  }
+}

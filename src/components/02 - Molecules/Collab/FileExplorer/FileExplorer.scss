@@ -1,0 +1,35 @@
+.fileExplorer {
+  display: flex;
+  flex-direction: column;
+  flex: 0.2 1 0%;
+  min-width: 20rem;
+
+  &__list {
+    padding: 1rem;
+    overflow: auto;
+    height: 100%;
+  }
+
+  &__actions {
+    display: flex;
+    padding: 1rem;
+    justify-content: flex-end;
+  }
+
+  &__add {
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  &__action {
+    .sprites {
+      fill: var(--light);
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
