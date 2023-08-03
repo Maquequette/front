@@ -4,14 +4,13 @@
   "version": "0.0.0",
   "engines": {
     "node": "18.x",
-    "npm":"9.x"
+    "yarn":"1.x"
   },
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "heroku-prebuild": "ng build --prod"
+    "preview": "vite preview"
 
   },
   "dependencies": {
