@@ -29,7 +29,7 @@ export const forgotPassword = (data: { email: string }) => {
   return axios.post("/auth/forgot-password", data);
 };
 
-export const refreshToken = (data: { token: string }) => {
+export const refreshToken = (data: { refresh_token: string }) => {
   return axios.post("/auth/refresh", data);
 };
 

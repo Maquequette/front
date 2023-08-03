@@ -41,7 +41,7 @@ export default memo(function NavLayout() {
           <Outlet />
         </AnimatePresence>
       </Suspense>
-      {!isConnected() && (
+      {!isConnected && (
         <>
           <Dialog
             id="Auth"

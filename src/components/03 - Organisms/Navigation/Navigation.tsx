@@ -74,7 +74,7 @@ export default memo(function Navigation({ isOpen }: INavigation) {
             Lessons
           </Navlink>
         </motion.li>
-        {!isConnected() ? (
+        {!isConnected ? (
           <motion.li className="nav__item" variants={navItem}>
             <Navlink to="#login" theme="primary" id="connection">
               Log in /Sign in
@@ -88,7 +88,7 @@ export default memo(function Navigation({ isOpen }: INavigation) {
               </Navlink>
             </motion.li>
 
-            <motion.li className="nav__item" variants={navItem}>
+            {/* <motion.li className="nav__item" variants={navItem}>
               <Navlink
                 to="/notification"
                 theme="primary"
@@ -96,7 +96,7 @@ export default memo(function Navigation({ isOpen }: INavigation) {
                 badge={<Badge theme="primary">1</Badge>}>
                 Notifications
               </Navlink>
-            </motion.li>
+            </motion.li> */}
             <motion.li className="nav__item" variants={navItem}>
               <Dropdown
                 styles={{ border: "1px solid var(--primary)", borderRadius: "inherit" }}

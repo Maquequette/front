@@ -10,16 +10,6 @@ export const axios = ax.create({
   withCredentials: true
 });
 
-axios.interceptors.request.use(
-  (config) => {
-    if (!config.headers["Authorization"] && localStorage.getItem("access_token")) {
-      config.headers["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
 axios.interceptors.response.use(
   (response) => response,
 
@@ -29,9 +19,12 @@ axios.interceptors.response.use(
     if (error.response && error.response.status === 401 && !retry) {
       retry = true;
 
-      const newAccessToken = await refreshToken({ token: localStorage.getItem("access_token")! });
-      error.config.headers["Authorization"] = `Bearer ${newAccessToken.data.refresh_token}`;
-      localStorage.setItem("refresh_token", newAccessToken.data.refresh_token);
+      const newAccessToken = await refreshToken({
+        refresh_token: localStorage.getItem("refresh_token")!
+      });
+
+      //error.config.headers["Authorization"] = `Bearer ${newAccessToken.data.access_token}`;
+      localStorage.setItem("access_token", newAccessToken.data.access_token);
 
       return axios(originalRequest);
     }

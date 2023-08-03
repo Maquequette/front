@@ -14,7 +14,8 @@ export interface IAuthContext {
   setModalAuth: Dispatch<SetStateAction<boolean>>;
   user: IUser;
   setUser: Dispatch<SetStateAction<IUser>>;
-  isConnected: () => boolean;
+  isConnected: boolean;
+  setIsConnected: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IUser {
@@ -34,22 +35,11 @@ const AuthProvider = memo(function AuthProvider({ children }: { children: JSX.El
   const { enable, disable } = useDisableScroll();
   const [modalAuth, setModalAuth] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>(null!);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     modalAuth ? disable() : enable();
   }, [modalAuth]);
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    console.log(user);
-    if (user && user != "null") {
-      setUser(JSON.parse(user!));
-    }
-  }, []);
-
-  const isConnected = () => {
-    return user?.token !== undefined;
-  };
 
   return (
     <AuthContext.Provider
@@ -58,7 +48,8 @@ const AuthProvider = memo(function AuthProvider({ children }: { children: JSX.El
         setModalAuth,
         user,
         setUser,
-        isConnected
+        isConnected,
+        setIsConnected
       }}>
       {children}
     </AuthContext.Provider>

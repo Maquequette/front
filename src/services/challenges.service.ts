@@ -125,14 +125,25 @@ export const getTagFamilies = ({
 
 export const postChallenge = (challenge: FormData) => {
   return axios.post("/api/challenges", challenge, {
-    headers: { "Content-Type": "'multipart/form-data" }
+    headers: {
+      "Content-Type": "'multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
   });
 };
 
 export const likeChallenge = (challengeId: number) => {
-  return axios.post(`/api/challenges/${challengeId}/like`);
+  return axios.post(`/api/challenges/${challengeId}/like`, null, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
+  });
 };
 
 export const unlikeChallenge = (challengeId: number) => {
-  return axios.delete(`/api/challenges/${challengeId}/like`);
+  return axios.delete(`/api/challenges/${challengeId}/like`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
+  });
 };

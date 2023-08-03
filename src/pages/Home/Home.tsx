@@ -17,6 +17,7 @@ import Button from "@/components/01 - Atoms/Button/Button";
 import Card from "@/components/03 - Organisms/Card/Card";
 import { getChallenges } from "@/services/challenges.service";
 import "./Home.scss";
+import { Fragment } from "react";
 
 export default function Home(): JSX.Element {
   const { data: challenges } = useQuery(["challenges"], () =>
@@ -98,16 +99,18 @@ export default function Home(): JSX.Element {
             <Grid size="33rem">
               {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
-                  <Card
-                    badge={challenge.difficulty}
-                    tags={challenge.tags}
-                    id={challenge.id}
-                    path={`/challenges/${challenge.id}`}
-                    date={new Date(challenge.updatedAt ?? challenge.createdAt)}
-                    title={challenge.title}
-                    desc={challenge.description}
-                    author={`${challenge.author.firstName} ${challenge.author.lastName}`}
-                  />
+                  <Fragment key={challenge.id}>
+                    <Card
+                      badge={challenge.difficulty}
+                      tags={challenge.tags}
+                      id={challenge.id}
+                      path={`/challenges/${challenge.id}`}
+                      date={new Date(challenge.updatedAt ?? challenge.createdAt)}
+                      title={challenge.title}
+                      desc={challenge.description}
+                      author={`${challenge.author.firstName} ${challenge.author.lastName}`}
+                    />
+                  </Fragment>
                 );
               })}
             </Grid>
