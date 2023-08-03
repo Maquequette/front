@@ -37,11 +37,10 @@ export default memo(function Card({
   desc,
   path,
   badge,
-  isLiked,
-  likesCount
+  isLiked
 }: ICard) {
   return (
-    <div className="card">
+    <div className="card" key={id}>
       <div className="card__header">
         <div className="card__media">
           <Link to={path ?? ""} className={`card__img${!img && "--placeholder"}`}>

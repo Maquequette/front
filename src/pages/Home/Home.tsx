@@ -103,7 +103,6 @@ export default function Home(): JSX.Element {
                     tags={challenge.tags}
                     id={challenge.id}
                     path={`/challenges/${challenge.id}`}
-                    key={challenge.id}
                     date={new Date(challenge.updatedAt ?? challenge.createdAt)}
                     title={challenge.title}
                     desc={challenge.description}

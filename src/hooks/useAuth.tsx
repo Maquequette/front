@@ -22,19 +22,21 @@ export default function useAuth() {
     }
   });
 
-  const { data: userProfil } = useQuery(["profil"], {
+  useQuery(["profil"], {
     queryFn: profil,
     enabled: isConnected(),
-    onSuccess: () => {
-      setUser((prev) => ({ ...prev, ...userProfil?.data }));
-      localStorage.setItem("user", JSON.stringify(userProfil?.data));
+    onSuccess: (res) => {
+      setUser((prev) => ({ ...prev, ...res.data }));
+      localStorage.setItem("user", JSON.stringify(res.data));
     }
   });
 
   const { mutate: onLogin } = useMutation({
     mutationFn: login,
     onSuccess: (response) => {
-      setUser(response?.data);
+      setUser({ ...user, token: response.data.token });
+      localStorage.setItem("refresh_token", response.data.refresh_token);
+      localStorage.setItem("access_token", response.data.token);
       setModalAuth(false);
       navigate(1);
     }

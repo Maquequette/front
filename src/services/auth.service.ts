@@ -34,5 +34,5 @@ export const refreshToken = (data: { token: string }) => {
 };
 
 export const profil = () => {
-  return axios.get("/api/user/me");
+  return axios.get("/api/me");
 };
