@@ -8,11 +8,11 @@ export default memo(function RequiredLayout() {
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
-    if (!isConnected()) {
+    if (!isConnected) {
       setModalAuth(true);
       navigate(-1);
     }
-  }, [isConnected()]);
+  }, [isConnected]);
 
-  return <>{isConnected() && <Outlet />}</>;
+  return <>{isConnected && <Outlet />}</>;
 });

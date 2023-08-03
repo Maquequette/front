@@ -29,9 +29,9 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber }:
 
   return (
     <div
-      className={`like like--${isLiked}`}
+      className={`like like--${isLiked ?? "false"}`}
       onClick={() => {
-        isConnected()
+        isConnected
           ? handleLike()
           : pushToast({
               theme: "secondary",
@@ -40,7 +40,7 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber }:
             });
       }}>
       <Svg id="like" />
-      {showNumber || !isConnected() && <p className="like__count">{count}</p>}
+      {showNumber || (!isConnected && <p className="like__count">{count}</p>)}
     </div>
   );
 }

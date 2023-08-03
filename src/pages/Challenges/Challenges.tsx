@@ -128,7 +128,7 @@ export default function Challenges() {
           title="Challenges"
           nbResult={challenges?.pages[0].data["hydra:totalItems"]}
           actions={
-            isConnected() && (
+            isConnected && (
               <Button
                 theme="success"
                 handleClick={() => {
