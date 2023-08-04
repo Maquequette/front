@@ -105,6 +105,7 @@ export default function Home(): JSX.Element {
                     badge={challenge.difficulty}
                     tags={challenge.tags}
                     id={challenge.id}
+                    isLiked={challenge.isLiked}
                     path={`/challenges/${challenge.id}`}
                     date={new Date(challenge.updatedAt ?? challenge.createdAt)}
                     title={challenge.title}

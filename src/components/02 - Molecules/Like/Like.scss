@@ -16,6 +16,14 @@
     }
   }
 
+  &--true {
+    &:hover {
+      .sprites {
+        fill: none;
+      }
+    }
+  }
+
   &--false {
     .sprites {
       fill: none;
