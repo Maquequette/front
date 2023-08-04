@@ -191,12 +191,12 @@ export default function Challenges() {
                 {group?.data?.["hydra:member"].map((challenge: any) => {
                   return (
                     <Card
+                      path={`/challenges/${challenge.id}`}
                       likesCount={challenge.challengeLikesCount}
                       id={challenge.id}
                       isLiked={challenge.isLiked}
                       badge={challenge.difficulty}
                       tags={challenge.tags}
-                      path={`/challenges/${challenge.id}`}
                       key={challenge.id}
                       date={new Date(challenge.updatedAt ?? challenge.createdAt)}
                       title={challenge.title}
@@ -222,7 +222,11 @@ export default function Challenges() {
         Dismiss={() => {
           setIsCreateModalOpen(!isCreateModalOpen);
         }}>
-        <DefineChallenge />
+        <DefineChallenge
+          Dismiss={() => {
+            setIsCreateModalOpen(!isCreateModalOpen);
+          }}
+        />
       </Dialog>
     </PageTransition>
   );

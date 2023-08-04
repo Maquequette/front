@@ -3,10 +3,17 @@ import { Theme } from "@/types/Theme";
 import "./Paragraph.scss";
 
 export interface IParagraph {
-  children: ReactNode;
+  children: ReactNode | string;
   color?: Theme;
+  isHtml?: boolean;
 }
 
-export default memo(function Paragraph({ children, color }: IParagraph) {
-  return <p className={`paragraph  ${color && `txt--${color}`}`}>{children}</p>;
+export default memo(function Paragraph({ children, color, isHtml = false }: IParagraph) {
+  return isHtml ? (
+    <div
+      className={`paragraph  ${color && `txt--${color}`}`}
+      dangerouslySetInnerHTML={{ __html: children }}></div>
+  ) : (
+    <p className={`paragraph  ${color && `txt--${color}`}`}>{children}</p>
+  );
 });

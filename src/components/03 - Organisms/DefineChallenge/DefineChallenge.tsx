@@ -16,7 +16,7 @@ import Heading from "@/components/01 - Atoms/Heading/Heading";
 import "./DefineChallenge.scss";
 import Wysiwyg from "@/components/01 - Atoms/Wysiwyg/Wysiwyg";
 
-export default function DefineChallenge() {
+export default function DefineChallenge({ Dismiss }: any) {
   const [query, setQuery] = useState<any>({
     categories: undefined,
     tags: undefined,
@@ -56,6 +56,18 @@ export default function DefineChallenge() {
     });
 
     addChallenge(form);
+    setQuery({
+      categories: undefined,
+      tags: undefined,
+      type: undefined,
+      difficulty: undefined,
+      title: "",
+      files: null,
+      url: "",
+      description: "",
+      additional: null
+    });
+    Dismiss();
   }, [query]);
 
   return (
@@ -75,8 +87,6 @@ export default function DefineChallenge() {
                   <Label name="filter">Categories</Label>
                   <Multiselect
                     callback={(value: any) => {
-                      console.log("categories");
-                      console.log(value);
                       setQuery({ ...query, categories: value });
                     }}
                     theme={"primary"}
@@ -89,8 +99,6 @@ export default function DefineChallenge() {
                   <Label name="type">Type</Label>
                   <Multiselect
                     callback={(value: any) => {
-                      console.log("type");
-                      console.log(value);
                       setQuery({ ...query, type: value });
                     }}
                     theme={"primary"}
@@ -118,8 +126,6 @@ export default function DefineChallenge() {
                   <Label name="type">Tag</Label>
                   <Multiselect
                     callback={(value: any) => {
-                      console.log("tags");
-                      console.log(value);
                       setQuery({ ...query, tags: value });
                     }}
                     theme={"primary"}
@@ -139,8 +145,6 @@ export default function DefineChallenge() {
                   <Label name="level">Difficulties</Label>
                   <Multiselect
                     callback={(value: any) => {
-                      console.log("difficulty");
-                      console.log(value);
                       setQuery({ ...query, difficulty: value });
                     }}
                     theme={"primary"}

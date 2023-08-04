@@ -99,18 +99,17 @@ export default function Home(): JSX.Element {
             <Grid size="33rem">
               {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
-                  <Fragment key={challenge.id}>
-                    <Card
-                      badge={challenge.difficulty}
-                      tags={challenge.tags}
-                      id={challenge.id}
-                      path={`/challenges/${challenge.id}`}
-                      date={new Date(challenge.updatedAt ?? challenge.createdAt)}
-                      title={challenge.title}
-                      desc={challenge.description}
-                      author={`${challenge.author.firstName} ${challenge.author.lastName}`}
-                    />
-                  </Fragment>
+                  <Card
+                    key={challenge.id}
+                    badge={challenge.difficulty}
+                    tags={challenge.tags}
+                    id={challenge.id}
+                    path={`/challenges/${challenge.id}`}
+                    date={new Date(challenge.updatedAt ?? challenge.createdAt)}
+                    title={challenge.title}
+                    desc={challenge.description}
+                    author={`${challenge.author.firstName} ${challenge.author.lastName}`}
+                  />
                 );
               })}
             </Grid>

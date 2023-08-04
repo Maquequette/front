@@ -35,7 +35,6 @@ export default function useAuth() {
     queryFn: profil,
     enabled: isConnected,
     onSuccess: (res) => {
-      console.log("skour");
       setUser((prev) => ({ ...prev, ...res.data }));
       localStorage.setItem("user", JSON.stringify(res.data));
     }

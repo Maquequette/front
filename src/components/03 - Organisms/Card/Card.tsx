@@ -1,5 +1,6 @@
 import { memo, useContext } from "react";
 import { Link } from "react-router-dom";
+import DOMPurify from "dompurify";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Tags from "@/components/02 - Molecules/Tags/Tags";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
@@ -19,7 +20,7 @@ export interface ICard {
   price?: PaymentCurrencyAmount;
   date?: number | Date;
   id: number;
-
+  path?: string;
   desc?: string;
   badge?: any;
   isLiked?: boolean;
@@ -35,6 +36,7 @@ export default memo(function Card({
   price,
   date,
   desc,
+  path,
   badge,
   isLiked
 }: ICard) {
@@ -42,7 +44,7 @@ export default memo(function Card({
     <div className="card" key={id}>
       <div className="card__header">
         <div className="card__media">
-          <Link to={`/challenge/${id}`} className={`card__img${!img && "--placeholder"}`}>
+          <Link to={path ?? ""} className={`card__img${!img && "--placeholder"}`}>
             {img && (
               <>
                 <Image src={img} alt={title} height="175" width="100%" />
@@ -60,15 +62,17 @@ export default memo(function Card({
             </div>
           </div>
         </div>
-        <Link to={`/challenge/${id}`} className="card__title">
+        <Link to={path ?? ""} className="card__title">
           <Heading tag="h4" level="tertiary">
             {title}
           </Heading>
         </Link>
       </div>
       {tags && <Tags tags={tags} />}
-      <Link to={`/challenge/${id}`} className="card__body">
-        <Paragraph color="dark">{desc}</Paragraph>
+      <Link to={path ?? ""} className="card__body">
+        <Paragraph color="dark" isHtml={true}>
+          {DOMPurify.sanitize(desc ?? "")}
+        </Paragraph>
       </Link>
       <div className="card__footer">
         <p className="card__info">
