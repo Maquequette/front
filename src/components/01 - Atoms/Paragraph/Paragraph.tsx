@@ -8,8 +8,8 @@ export interface IParagraph {
   isHtml?: boolean;
 }
 
-export default memo(function Paragraph({ children, color, isHtml = false }: IParagraph) {
-  return isHtml ? (
+export default memo(function Paragraph({ children, color, isHtml }: IParagraph) {
+  return isHtml && isHtml != undefined ? (
     <div
       className={`paragraph  ${color && `txt--${color}`}`}
       dangerouslySetInnerHTML={{ __html: children }}></div>

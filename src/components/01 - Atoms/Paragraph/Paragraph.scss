@@ -1,6 +1,8 @@
 .paragraph {
-  font-size: var(--font-size-sm);
-  font-family: var(--font-family-primary);
-  line-height: 1.2;
-  text-align: justify;
+  & p {
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-primary);
+    line-height: 1.2;
+    text-align: justify;
+  }
 }
