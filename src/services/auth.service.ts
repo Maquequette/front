@@ -34,5 +34,9 @@ export const refreshToken = (data: { refresh_token: string }) => {
 };
 
 export const profil = () => {
-  return axios.get("/api/me");
+  return axios.get("/api/me", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
+  });
 };

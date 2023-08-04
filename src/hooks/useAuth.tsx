@@ -15,7 +15,7 @@ export default function useAuth() {
     const user = localStorage.getItem("user");
     if (user && user != "null") {
       setUser(JSON.parse(user));
-      setIsConnected(true)
+      setIsConnected(true);
     }
   }, []);
 
@@ -35,6 +35,7 @@ export default function useAuth() {
     queryFn: profil,
     enabled: isConnected,
     onSuccess: (res) => {
+      console.log("skour");
       setUser((prev) => ({ ...prev, ...res.data }));
       localStorage.setItem("user", JSON.stringify(res.data));
     }

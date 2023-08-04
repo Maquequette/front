@@ -4,6 +4,7 @@
 .filters {
   position: relative;
   isolation: isolate;
+  z-index: 1;
 
   .container {
     display: flex;
