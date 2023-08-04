@@ -112,8 +112,9 @@ const Multiselect = ({
               }}
               onClick={(e) => {
                 e.stopPropagation();
-                if (!searchWriting || (searchWriting && !searchQuery && !selected))
+                if (!searchWriting || (searchWriting && !searchQuery && !selected)) {
                   setIsActive(!isActive);
+                }
               }}
             />
           ) : selected.length === 0 ? (

@@ -10,7 +10,6 @@ export interface ISearch {
 
 export default memo(function Search({ placeholder, className }: ISearch) {
   const [value, setValue] = useState("");
-  // const { data } = useSearch(value);
 
   return (
     <div className={`search ${className ?? ""}`}>

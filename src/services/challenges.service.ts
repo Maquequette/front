@@ -36,8 +36,17 @@ export const getChallenges = ({
     query.append("type.category.id[]", item.id);
   });
 
+  const headers: any = {
+    Accept: "application/ld+json"
+  };
+
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    headers["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`;
+  }
+
   return axios.get(`/api/challenges`, {
-    headers: { Accept: "application/ld+json" },
+    headers,
     params: query
   });
 };
