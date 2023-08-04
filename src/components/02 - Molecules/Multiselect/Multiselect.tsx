@@ -89,11 +89,7 @@ const Multiselect = ({
 
   return (
     <div className={`multiselect ${isActive ? "active" : ""}`} ref={ref}>
-      <div
-        className="multiselect__input"
-        onClick={(e) => {
-          if (!searchWriting || (searchWriting && !searchQuery)) setIsActive(!isActive);
-        }}>
+      <div className="multiselect__input">
         <div className="multiselect__input__selected">
           {!multiple ? (
             <input
@@ -114,7 +110,11 @@ const Multiselect = ({
                   setSelected(defaultSelection);
                 }
               }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (!searchWriting || (searchWriting && !searchQuery && !selected))
+                  setIsActive(!isActive);
+              }}
             />
           ) : selected.length === 0 ? (
             defaultText ?? "Choose"

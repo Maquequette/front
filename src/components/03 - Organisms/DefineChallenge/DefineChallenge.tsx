@@ -54,9 +54,6 @@ export default function DefineChallenge({ Dismiss }: any) {
       }
     });
 
-    console.log([...form.entries()]);
-    console.log(query.resources);
-
     addChallenge(form);
     setQuery({
       categories: undefined,
