@@ -192,6 +192,7 @@ export default function Challenges() {
                 {group?.data?.["hydra:member"].map((challenge: any) => {
                   return (
                     <Card
+                      img={challenge?.resources[0]?.value}
                       path={`/challenges/${challenge.id}`}
                       likesCount={challenge.challengeLikesCount}
                       id={challenge.id}
