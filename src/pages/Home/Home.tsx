@@ -100,6 +100,7 @@ export default function Home(): JSX.Element {
               {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
                   <Card
+                    img={challenge?.resources[0]?.value}
                     key={challenge.id}
                     badge={challenge.difficulty}
                     tags={challenge.tags}
