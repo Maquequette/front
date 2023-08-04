@@ -144,6 +144,7 @@ export default function Challenges() {
             }}
             theme={"primary"}
             multiple={false}
+            searchable={false}
             options={[
               {
                 label: "Created At",

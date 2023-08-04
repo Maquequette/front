@@ -83,16 +83,15 @@ const Multiselect = ({
 
   const ref = useClickOutside(closeDropdown);
 
-  // useEffect(() => {
-  //   callback(selected);
-  // }, [selected]);
+  useEffect(() => {
+    callback(selected);
+  }, [selected]);
 
   return (
     <div className={`multiselect ${isActive ? "active" : ""}`} ref={ref}>
       <div
         className="multiselect__input"
         onClick={(e) => {
-          e.stopPropagation();
           if (!searchWriting || (searchWriting && !searchQuery)) setIsActive(!isActive);
         }}>
         <div className="multiselect__input__selected">
