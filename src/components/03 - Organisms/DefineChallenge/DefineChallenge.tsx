@@ -44,7 +44,17 @@ export default function DefineChallenge() {
 
   const handleSubmit = useCallback(() => {
     const form = new FormData();
-    Object.entries(query).map(([key, val]: any) => form.append(key, val));
+
+    Object.entries(query).map(([key, val]: any) => {
+      if (typeof val === "object" && key !== "files") {
+        Array.from(val).forEach((element: any) => {
+          form.append(key, element.id);
+        });
+      } else {
+        form.append(key, val);
+      }
+    });
+
     addChallenge(form);
   }, [query]);
 
@@ -65,6 +75,8 @@ export default function DefineChallenge() {
                   <Label name="filter">Categories</Label>
                   <Multiselect
                     callback={(value: any) => {
+                      console.log("categories");
+                      console.log(value);
                       setQuery({ ...query, categories: value });
                     }}
                     theme={"primary"}
@@ -77,6 +89,8 @@ export default function DefineChallenge() {
                   <Label name="type">Type</Label>
                   <Multiselect
                     callback={(value: any) => {
+                      console.log("type");
+                      console.log(value);
                       setQuery({ ...query, type: value });
                     }}
                     theme={"primary"}
@@ -104,6 +118,8 @@ export default function DefineChallenge() {
                   <Label name="type">Tag</Label>
                   <Multiselect
                     callback={(value: any) => {
+                      console.log("tags");
+                      console.log(value);
                       setQuery({ ...query, tags: value });
                     }}
                     theme={"primary"}
@@ -123,6 +139,8 @@ export default function DefineChallenge() {
                   <Label name="level">Difficulties</Label>
                   <Multiselect
                     callback={(value: any) => {
+                      console.log("difficulty");
+                      console.log(value);
                       setQuery({ ...query, difficulty: value });
                     }}
                     theme={"primary"}
