@@ -3,7 +3,7 @@ import { Theme } from "@/types/Theme";
 import "./Paragraph.scss";
 
 export interface IParagraph {
-  children: ReactNode | string;
+  children: ReactNode | string | any;
   color?: Theme;
   isHtml?: boolean;
 }

@@ -66,6 +66,7 @@
         background-color: var(--grey);
         border-radius: 0.5rem;
         white-space: nowrap;
+        z-index: 2;
 
         > .sprites {
           width: 1rem;

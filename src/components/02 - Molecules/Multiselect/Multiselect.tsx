@@ -61,6 +61,7 @@ const Multiselect = ({
       const index = selected.findIndex((opt) => {
         return opt.label === option.label;
       });
+
       if (index === -1) {
         setSelected([...selected, option]);
       } else {
@@ -82,15 +83,16 @@ const Multiselect = ({
 
   const ref = useClickOutside(closeDropdown);
 
-  useEffect(() => {
-    callback(selected);
-  }, [selected]);
+  // useEffect(() => {
+  //   callback(selected);
+  // }, [selected]);
 
   return (
     <div className={`multiselect ${isActive ? "active" : ""}`} ref={ref}>
       <div
         className="multiselect__input"
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           if (!searchWriting || (searchWriting && !searchQuery)) setIsActive(!isActive);
         }}>
         <div className="multiselect__input__selected">
@@ -99,11 +101,21 @@ const Multiselect = ({
               type={searchWriting ? "search" : "text"}
               className="multiselect__input__text"
               readOnly={!searchWriting}
-              value={searchWriting ? searchQuery : selected[0]?.label ?? defaultText ?? "Choose"}
+              value={
+                selected
+                  ? selected[0]?.label
+                  : searchWriting && searchQuery
+                  ? searchQuery
+                  : defaultText ?? "Choose"
+              }
               placeholder="Search something..."
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setSearchQuery(e.target.value);
+                if (e.target.value === "") {
+                  setSelected(defaultSelection);
+                }
               }}
+              onClick={(e) => e.stopPropagation()}
             />
           ) : selected.length === 0 ? (
             defaultText ?? "Choose"

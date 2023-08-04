@@ -18,19 +18,16 @@ import Wysiwyg from "@/components/01 - Atoms/Wysiwyg/Wysiwyg";
 
 export default function DefineChallenge({ Dismiss }: any) {
   const [query, setQuery] = useState<any>({
-    categories: undefined,
     tags: undefined,
     type: undefined,
     difficulty: undefined,
     title: "",
-    files: null,
+    ressources: undefined,
     url: "",
     description: "",
     additional: null
   });
-  const { data: categories } = useQuery(["categories__all"], () =>
-    getCategories({ paginate: false })
-  );
+
   const { data: difficulties } = useQuery(["difficulties__all"], () =>
     getDifficulties({ paginate: false })
   );
@@ -46,28 +43,34 @@ export default function DefineChallenge({ Dismiss }: any) {
     const form = new FormData();
 
     Object.entries(query).map(([key, val]: any) => {
-      if (typeof val === "object" && key !== "files") {
+      if (key.includes("[]")) {
         Array.from(val).forEach((element: any) => {
           form.append(key, element.id);
+        });
+      } else if (key === "ressources") {
+        Array.from(val).forEach((element: any, index) => {
+          form.append(`${key}[${index}]`, element);
         });
       } else {
         form.append(key, val);
       }
     });
 
-    addChallenge(form);
-    setQuery({
-      categories: undefined,
-      tags: undefined,
-      type: undefined,
-      difficulty: undefined,
-      title: "",
-      files: null,
-      url: "",
-      description: "",
-      additional: null
-    });
-    Dismiss();
+    console.log([...form.entries()]);
+
+    // addChallenge(form);
+    // setQuery({
+    //   categories: undefined,
+    //   tags: undefined,
+    //   type: undefined,
+    //   difficulty: undefined,
+    //   title: "",
+    //   files: null,
+    //   url: "",
+    //   description: "",
+    //   additional: null
+    // });
+    // Dismiss();
   }, [query]);
 
   return (
@@ -83,21 +86,10 @@ export default function DefineChallenge({ Dismiss }: any) {
             stepSubmit: () => query.categories && query.difficulty && query.type,
             formContent: (
               <div className="defineChallenge__form">
-                <div>
-                  <Label name="filter">Categories</Label>
-                  <Multiselect
-                    callback={(value: any) => {
-                      setQuery({ ...query, categories: value });
-                    }}
-                    theme={"primary"}
-                    searchable={true}
-                    defaultText="Categories"
-                    options={categories?.data ?? []}
-                  />
-                </div>
-                <div>
+                <div className="defineChallenge__full">
                   <Label name="type">Type</Label>
                   <Multiselect
+                    multiple={false}
                     callback={(value: any) => {
                       setQuery({ ...query, type: value });
                     }}
@@ -126,7 +118,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                   <Label name="type">Tag</Label>
                   <Multiselect
                     callback={(value: any) => {
-                      setQuery({ ...query, tags: value });
+                      setQuery({ ...query, "tags[]": value });
                     }}
                     theme={"primary"}
                     searchable={true}
@@ -161,7 +153,7 @@ export default function DefineChallenge({ Dismiss }: any) {
           },
           {
             btnText: "You close to make something awesome",
-            stepSubmit: () => query.description && query.files,
+            stepSubmit: () => query.description && query.ressources,
             formContent: (
               <div className="defineChallenge__form">
                 <div className="defineChallenge__full">
@@ -187,58 +179,58 @@ export default function DefineChallenge({ Dismiss }: any) {
                     limite={5}
                     multiple={true}
                     handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const files = e.currentTarget.files?.[0];
+                      const files = e.currentTarget.files;
                       if (files) {
-                        setQuery({ ...query, files });
+                        setQuery({ ...query, ressources: files });
                       }
-                    }}
-                  />
-                </div>
-              </div>
-            )
-          },
-          {
-            btnText: "Finito",
-            stepSubmit: () => true,
-            formContent: (
-              <div className="defineChallenge__form">
-                <div className="defineChallenge__full">
-                  <Label name="picture" required={true}>
-                    Additionnal Ressource
-                  </Label>
-                  <Input
-                    accept=".png, .jpg, .jpeg"
-                    type="file"
-                    name="picture"
-                    required={true}
-                    preview={true}
-                    limite={5}
-                    multiple={true}
-                    handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const additional = e.currentTarget.files?.[0];
-                      if (additional) {
-                        setQuery({ ...query, additional });
-                      }
-                    }}
-                  />
-                </div>
-                <div className="defineChallenge__full">
-                  <Label name="picture" required={true}>
-                    Additionnal Ressource
-                  </Label>
-                  <Input
-                    type="url"
-                    name="figma"
-                    required={true}
-                    handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const url = e.target.value;
-                      setQuery({ ...query, url });
                     }}
                   />
                 </div>
               </div>
             )
           }
+          // {
+          //   btnText: "Finito",
+          //   stepSubmit: () => true,
+          //   formContent: (
+          //     <div className="defineChallenge__form">
+          //       <div className="defineChallenge__full">
+          //         <Label name="picture" required={true}>
+          //           Additionnal Ressource
+          //         </Label>
+          //         <Input
+          //           accept=".png, .jpg, .jpeg"
+          //           type="file"
+          //           name="picture"
+          //           required={true}
+          //           preview={true}
+          //           limite={5}
+          //           multiple={true}
+          //           handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          //             const additional = e.currentTarget.files?.[0];
+          //             if (additional) {
+          //               setQuery({ ...query, additional });
+          //             }
+          //           }}
+          //         />
+          //       </div>
+          //       <div className="defineChallenge__full">
+          //         <Label name="picture" required={true}>
+          //           Additionnal Ressource
+          //         </Label>
+          //         <Input
+          //           type="url"
+          //           name="figma"
+          //           required={true}
+          //           handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          //             const url = e.target.value;
+          //             setQuery({ ...query, url });
+          //           }}
+          //         />
+          //       </div>
+          //     </div>
+          //   )
+          // }
         ]}
       />
     </div>
