@@ -21,7 +21,7 @@ export default function DefineChallenge({ Dismiss }: any) {
     type: undefined,
     difficulty: undefined,
     title: "",
-    ressources: undefined,
+    resources: undefined,
     description: ""
   });
 
@@ -44,10 +44,10 @@ export default function DefineChallenge({ Dismiss }: any) {
         Array.from(val).forEach((element: any) => {
           form.append(key, element.id);
         });
-      } else if (key === "ressources") {
+      } else if (key === "resources") {
         Array.from(val).forEach((element: any, index) => {
           form.append(`${key}[${index}][value]`, element);
-          form.append(`${key}[${index}][type]`, element.type);
+          form.append(`${key}[${index}][type]`, "image");
         });
       } else {
         form.append(key, val);
@@ -55,7 +55,7 @@ export default function DefineChallenge({ Dismiss }: any) {
     });
 
     console.log([...form.entries()]);
-    console.log(query.ressources);
+    console.log(query.resources);
 
     addChallenge(form);
     setQuery({
@@ -153,7 +153,7 @@ export default function DefineChallenge({ Dismiss }: any) {
           },
           {
             btnText: "You close to make something awesome",
-            stepSubmit: () => query.description && query.ressources,
+            stepSubmit: () => query.description && query.resources,
             formContent: (
               <div className="defineChallenge__form">
                 <div className="defineChallenge__full">
@@ -181,7 +181,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                     handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const files = e.currentTarget.files;
                       if (files) {
-                        setQuery({ ...query, ressources: files });
+                        setQuery({ ...query, resources: files });
                       }
                     }}
                   />
