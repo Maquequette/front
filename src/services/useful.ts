@@ -23,8 +23,6 @@ axios.interceptors.response.use(
         refresh_token: localStorage.getItem("refresh_token")!
       });
 
-      console.log(newAccessToken);
-
       error.config.headers["Authorization"] = `Bearer ${newAccessToken.data.access_token}`;
       localStorage.setItem("access_token", newAccessToken.data.token);
       localStorage.setItem("refresh_token", newAccessToken.data.refresh_token);
