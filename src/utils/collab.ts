@@ -37,12 +37,12 @@ function pushUpdates(
 function pullUpdates(socket: Socket, version: number, room: string, activeFile: string) {
   return new Promise(function (resolve) {
     socket.emit("pull:updates", version, room, activeFile);
-    socket.once("pull:updates:response", function (updates: any) {
-      resolve(JSON.parse(updates));
+    socket.once("pull:updates:response", function (updates: any, files) {
+      resolve({ updates: JSON.parse(updates), files });
     });
   })
-    .then((updates: any) =>
-      updates.map((u: any) => {
+    .then((res: any) => {
+      const updates = res.updates.map((u: any) => {
         if (u.effects[0]) {
           const effects: StateEffect<any>[] = [];
 
@@ -69,8 +69,10 @@ function pullUpdates(socket: Socket, version: number, room: string, activeFile: 
           changes: ChangeSet.fromJSON(u.changes),
           clientID: u.clientID
         };
-      })
-    )
+      });
+
+      return { updates, files: res.files };
+    })
     .catch((err) => console.log(err));
 }
 
@@ -97,7 +99,8 @@ export const peerExtension = (
   room: string,
   startVersion: number,
   id: string,
-  activeFile: string
+  activeFile: string,
+  callback: Function
 ) => {
   const plugin = ViewPlugin.fromClass(
     class {
@@ -130,9 +133,9 @@ export const peerExtension = (
       async pull() {
         while (!this.done) {
           const version = getSyncedVersion(this.view.state);
-          const updates = await pullUpdates(socket, version, room, activeFile);
+          const { updates, files }: any = await pullUpdates(socket, version, room, activeFile);
           const newUpdates = receiveUpdates(this.view.state, updates);
-
+          callback(files);
           this.view.dispatch(newUpdates);
         }
       }
