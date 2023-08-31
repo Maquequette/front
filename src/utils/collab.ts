@@ -81,7 +81,7 @@ export function getDocument(
   room: string,
   template: SandpackPredefinedTemplate,
   activeFile: string
-): Promise<{ version: number; files: string }> {
+): Promise<{ version: number; files: any }> {
   return new Promise(function (resolve) {
     socket.emit("get:document", room, template, activeFile);
 
