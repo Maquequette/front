@@ -6,7 +6,7 @@ import {
 import { Mode } from "@/types/Mode";
 import CodeEditor from "@/components/02 - Molecules/Collab/CodeEditor/CodeEditor";
 import CodePreview from "@/components/02 - Molecules/CodePreview/CodePreview";
-import FileExplorer from "@/components/02 - Molecules/Collab/FileExplorer/FileExplorer";
+import FileExplorer from "@/components/02 - Molecules/FileExplorer/FileExplorer";
 import { useRef, useState } from "react";
 import "./Editor.scss";
 
@@ -42,7 +42,7 @@ export default function Editor({ template, theme, roomId = crypto.randomUUID() }
       <SandpackLayout
         ref={ref}
         className={`editor__layout ${isFullScreen ? "editor__layout--fullscreen" : ""}`}>
-        <FileExplorer socket={socket} />
+        <FileExplorer />
         <CodeEditor socket={socket} room={roomId} template={template} />
         <CodePreview setFullScreen={handleFullScreen} />
       </SandpackLayout>

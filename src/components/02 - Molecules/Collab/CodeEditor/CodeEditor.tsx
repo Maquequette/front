@@ -48,8 +48,7 @@ export default function CodeEditor({ socket, room, template }: ICodeEditor) {
   const handleUpdate = (files: any) => {
     Object.entries(files).forEach((entry: [any, any]) => {
       const [key, value] = entry;
-
-      sandpack.updateFile(key, Text.of(value.code[0].split("\n")), true);
+      sandpack.updateFile(key, Text.of(value.code[0].split("\n")).toString(), true);
     });
   };
 
