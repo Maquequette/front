@@ -46,8 +46,7 @@ export default function CodePreview({ setFullScreen }: ICodePreview) {
           if (content) {
             const path = file.name.split("/");
             path.shift();
-            path.unshift("");
-            sandpack.updateFile(path.join("/"), content, true);
+            sandpack.updateFile("/".concat(path.join("/")), content, true);
           }
         });
     });
