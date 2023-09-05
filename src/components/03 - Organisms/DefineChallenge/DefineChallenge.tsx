@@ -119,6 +119,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                     theme={"primary"}
                     searchable={true}
                     defaultText="Tag"
+                    multiple={false}
                     options={
                       tagFamilies?.data.map((family: any) => {
                         return {
