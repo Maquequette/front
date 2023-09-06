@@ -12,7 +12,7 @@
     "@codemirror/collab": "^6.1.0",
     "@codemirror/search": "^6.5.2",
     "@codemirror/state": "^6.2.1",
-    "@codemirror/view": "^6.17.1",
+    "@codemirror/view": "^6.18.0",
     "@codesandbox/sandpack-client": "^2.6.9",
     "@codesandbox/sandpack-react": "^2.6.9",
     "@emmetio/codemirror6-plugin": "^0.3.0",
