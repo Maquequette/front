@@ -135,7 +135,6 @@ export const peerExtension = (
           const version = getSyncedVersion(this.view.state);
           const { updates, files }: any = await pullUpdates(socket, version, room, activeFile);
           const newUpdates = receiveUpdates(this.view.state, updates);
-          callback(files);
           this.view.dispatch(newUpdates);
         }
       }
