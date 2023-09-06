@@ -1,19 +1,21 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import "./ResetPassword.scss";
 
 export default memo(function ResetPassword() {
+  const { t } = useTranslation();
   return (
     <div className="pswdForgotten">
       <div>
         <Heading tag="h1" level="secondary">
-          Forgot your password ? No worries !
+          {t("Forgot your password ? No worries !")}
         </Heading>
 
         <p className="login__subtitle">
-          remember everything ?
+          {t("Remember everything ?")}
           <button type="button" style={{ padding: "0 0.5rem" }} onClick={() => {}}>
-            Log in here
+            {t("Log in here")}
           </button>
         </p>
       </div>

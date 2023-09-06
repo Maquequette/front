@@ -1,6 +1,7 @@
 import { useState, memo } from "react";
-import Svg from "../Svg/Svg";
 import { useSearch } from "@/hooks/useSearch";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
+
 import "./Search.scss";
 
 export interface ISearch {

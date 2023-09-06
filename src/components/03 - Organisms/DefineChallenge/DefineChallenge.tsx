@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
@@ -24,6 +25,7 @@ export default function DefineChallenge({ Dismiss }: any) {
     resources: undefined,
     description: ""
   });
+  const { t } = useTranslation();
 
   const { data: difficulties } = useQuery(["difficulties__all"], () =>
     getDifficulties({ paginate: false })
@@ -72,18 +74,18 @@ export default function DefineChallenge({ Dismiss }: any) {
   return (
     <div className="defineChallenge">
       <Heading level="tertiary" tag="h4">
-        Create a challenge
+        {t("Create a challenge")}
       </Heading>
       <MultiStepsForm
         handleSubmit={handleSubmit}
         steps={[
           {
-            btnText: "Continue !",
+            btnText: t("Continue"),
             stepSubmit: () => query.difficulty && query.type && query.title != "",
             formContent: (
               <div className="defineChallenge__form">
                 <div className="defineChallenge__full">
-                  <Label name="type">Type</Label>
+                  <Label name="type">{t("Type")}</Label>
                   <Multiselect
                     multiple={false}
                     callback={(value: any) => {
@@ -97,7 +99,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                 </div>
                 <div className="defineChallenge__full">
                   <Label name="title" required={true}>
-                    Title
+                    {t("Title")}
                   </Label>
                   <Input
                     type="text"
@@ -111,7 +113,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                   />
                 </div>
                 <div>
-                  <Label name="type">Tag</Label>
+                  <Label name="type">{t("Tag")}</Label>
                   <Multiselect
                     callback={(value: any) => {
                       setQuery({ ...query, "tags[]": value });
@@ -131,7 +133,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                   />
                 </div>
                 <div>
-                  <Label name="level">Difficulties</Label>
+                  <Label name="level">{t("Difficulties")}</Label>
                   <Multiselect
                     multiple={false}
                     callback={(value: any) => {
@@ -150,13 +152,13 @@ export default function DefineChallenge({ Dismiss }: any) {
             )
           },
           {
-            btnText: "You close to make something awesome",
+            btnText: t("You close to make something awesome"),
             stepSubmit: () => query.description && query.resources,
             formContent: (
               <div className="defineChallenge__form">
                 <div className="defineChallenge__full">
                   <Label name="firstName" required={true}>
-                    Description
+                    {t("Description")}
                   </Label>
                   <Wysiwyg
                     callback={(value: any) => {
@@ -166,7 +168,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                 </div>
                 <div className="defineChallenge__full">
                   <Label name="picture" required={true}>
-                    Picture
+                    {t("Picture")}
                   </Label>
                   <Input
                     accept=".png, .jpg, .jpeg"

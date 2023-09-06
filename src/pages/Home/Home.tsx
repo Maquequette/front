@@ -1,5 +1,6 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";
 import Hero from "@/components/04 - Templates/Hero/Hero";
 import Container from "@/components/01 - Atoms/Container/Container";
@@ -20,6 +21,7 @@ import "./Home.scss";
 import { Fragment } from "react";
 
 export default function Home(): JSX.Element {
+  const { t } = useTranslation();
   const { data: challenges } = useQuery(["challenges"], () =>
     getChallenges({ pageParam: 1, itemsPerPage: 3 })
   );
@@ -31,10 +33,11 @@ export default function Home(): JSX.Element {
           styles={{ zIndex: 1, position: "relative" }}
           title={
             <Heading tag="h1" level="primary">
-              <Learn>LEARN</Learn>
-              <Block>FRONT-END / WEB DESIGN</Block>
+              <Learn>{t("LEARN")}</Learn>
+              <Block>{t("FRONT-END / WEB DESIGN")}</Block>
               <Stripe theme="secondary">
-                THE COOL WAY <Svg id="waves" />
+                {t("THE COOL WAY")}
+                <Svg id="waves" />
               </Stripe>
             </Heading>
           }
@@ -42,13 +45,13 @@ export default function Home(): JSX.Element {
         />
         <Folder down="dark" theme="dark">
           <Heading tag="h2" level="primary" color="light">
-            HOW TO BEGIN PRACTICING ??
+            {t("HOW TO BEGIN PRACTICING ??")}
           </Heading>
           <Grid size="22.5rem">
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
-                CODE THE SKETCH
+                {t("CODE THE SKETCH")}
               </Heading>
               <Paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -58,7 +61,7 @@ export default function Home(): JSX.Element {
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
-                CODE THE SKETCH
+                {t("CODE THE SKETCH")}
               </Heading>
               <Paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -68,7 +71,7 @@ export default function Home(): JSX.Element {
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
-                CODE THE SKETCH
+                {t("CODE THE SKETCH")}
               </Heading>
               <Paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -78,7 +81,7 @@ export default function Home(): JSX.Element {
             <Collapsible theme="primary">
               <Svg id="coding" />
               <Heading tag="h4" level="secondary">
-                CODE THE SKETCH
+                {t("CODE THE SKETCH")}
               </Heading>
               <Paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -89,12 +92,12 @@ export default function Home(): JSX.Element {
           <div className="d-flex justify-end">
             <Button theme="success">
               <Svg id="arrow" />
-              TRY IT NOW !
+              {t("TRY IT NOW !")}
             </Button>
           </div>
           <Folder theme="primary" down="light">
             <Heading tag="h2" level="primary" color="dark">
-              AND WE PROVIDE LESSONS TOO !!
+              {t("AND WE PROVIDE LESSONS TOO !!")}
             </Heading>
             <Grid size="33rem">
               {challenges?.data?.["hydra:member"].map((challenge: any) => {
@@ -118,7 +121,7 @@ export default function Home(): JSX.Element {
             <div className="d-flex justify-end">
               <Button theme="dark">
                 <Svg id="arrow" />
-                TRY IT NOW !
+                {t("TRY IT NOW !")}
               </Button>
             </div>
           </Folder>

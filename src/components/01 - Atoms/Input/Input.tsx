@@ -1,4 +1,5 @@
 import { ChangeEventHandler, CSSProperties, HTMLInputTypeAttribute, useState, memo } from "react";
+import { useTranslation } from "react-i18next";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import useToasts from "@/hooks/useToasts";
 import "./Input.scss";
@@ -43,7 +44,7 @@ export default memo(function Input({
   const [readable, setReadable] = useState<boolean>(false);
   const [files, setFiles] = useState<Array<File>>([]);
   const { pushToast } = useToasts();
-
+  const { t } = useTranslation();
   return (
     <>
       <label className="input__container" style={styles}>
@@ -80,7 +81,7 @@ export default memo(function Input({
             }
           }}
         />
-        {type === "file" && <p className="input__btn">Upload file</p>}
+        {type === "file" && <p className="input__btn">{t("Upload file")}</p>}
 
         {type === "password" && (
           <button

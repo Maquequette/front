@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useContext, useEffect, memo } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Navlink from "@/components/01 - Atoms/Navlink/Navlink";
 import Tools from "@/components/03 - Organisms/Tools/Tools";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Dropdown from "@/components/01 - Atoms/Dropdown/Dropdown";
-import Badge from "@/components/01 - Atoms/Badge/Badge";
 import { AuthContext } from "@/contexts/AuthContext";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useAuth from "@/hooks/useAuth";
@@ -19,6 +19,7 @@ export interface INavigation {
 export default memo(function Navigation({ isOpen }: INavigation) {
   const isDesktop = useMediaQuery("(min-width: 64em)");
   const location = useLocation();
+  const { t } = useTranslation();
 
   const navItem = {
     closed: { opacity: 0, x: "-100rem", transition: { duration: isDesktop ? 0 : 0.2 } },
@@ -61,30 +62,30 @@ export default memo(function Navigation({ isOpen }: INavigation) {
         transition={{ staggerChildren: isDesktop ? 0 : 0.1 }}>
         <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/" theme="primary" icon={<Svg id="home" />}>
-            Home
+            {t("Home")}
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/challenges" theme="primary">
-            Challenges
+            {t("Challenges")}
           </Navlink>
         </motion.li>
         <motion.li className="nav__item" variants={navItem}>
           <Navlink to="/lessons" theme="primary">
-            Lessons
+            {t("Lessons")}
           </Navlink>
         </motion.li>
         {!isConnected ? (
           <motion.li className="nav__item" variants={navItem}>
             <Navlink to="#login" theme="primary" id="connection">
-              Log in /Sign in
+              {t("Log in / Sign in")}
             </Navlink>
           </motion.li>
         ) : (
           <>
             <motion.li className="nav__item" variants={navItem}>
               <Navlink to="/classroom" theme="primary">
-                Classroom
+                {t("Classroom")}
               </Navlink>
             </motion.li>
 
@@ -105,21 +106,21 @@ export default memo(function Navigation({ isOpen }: INavigation) {
                   {
                     component: (
                       <Navlink to="/profil" theme="primary">
-                        Profile
+                        {t("Profile")}
                       </Navlink>
                     )
                   },
                   {
                     component: (
                       <Navlink to="/profil/settings" theme="primary">
-                        Settings
+                        {t("Settings")}
                       </Navlink>
                     )
                   },
                   {
                     component: (
                       <Navlink to="/logout" theme="primary">
-                        Log Out
+                        {t("Log Out")}
                       </Navlink>
                     )
                   }
