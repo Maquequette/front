@@ -1,7 +1,7 @@
 import { useCallback, useState, memo } from "react";
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
-
+import { useTranslation } from "react-i18next";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm";
 import Label from "@/components/01 - Atoms/Label/Label";
@@ -11,7 +11,6 @@ import Multiselect from "@/components/02 - Molecules/Multiselect/Multiselect";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
 import useAuth from "@/hooks/useAuth";
 import "./Register.scss";
-import { IOptions } from "@/components/01 - Atoms/Options/Options";
 
 export default memo(function Register() {
   const [email, setEmail] = useState<string>("");
@@ -20,6 +19,7 @@ export default memo(function Register() {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [profilType, setProfilType] = useState<string>("");
+  const { t } = useTranslation();
 
   const { onRegister } = useAuth();
 
@@ -37,14 +37,14 @@ export default memo(function Register() {
     <div className="register">
       <div>
         <Heading tag="h1" level="secondary">
-          Create an account
+          {t("Create an account")}
         </Heading>
 
         <p className="register__subtitle">
-          Already have account ?
+          {t("Already have account ?")}
           <NavLink to={"#login"} style={{ padding: "0 0.5rem" }}>
             {" "}
-            Log in here{" "}
+            {}{" "}
           </NavLink>
         </p>
       </div>
@@ -53,13 +53,13 @@ export default memo(function Register() {
         handleSubmit={submitRegister}
         steps={[
           {
-            btnText: "Continue !",
+            btnText: t("Continue !"),
             stepSubmit: () => password === confirmPassword,
             formContent: (
               <div className="register__form">
                 <div>
                   <Label name="email" required={true}>
-                    email
+                    {t("Email")}
                   </Label>
                   <Input
                     type="email"
@@ -78,27 +78,28 @@ export default memo(function Register() {
                     required={true}
                     tooltip={
                       <Tooltip>
-                        Your password must contain : <br />
+                        {t("Your password must contain :")}
+                        <br />
                         <span
                           className={clsx(
                             /[A-Z]/.test(password) && "tooltip__popup__span--success"
                           )}>
-                          ** At least one capital letter{" "}
+                          **{t("At least one capital letter")}
                         </span>
                         <br />
                         <span
                           className={clsx(/\d/.test(password) && "tooltip__popup__span--success")}>
-                          ** At least one number{" "}
+                          **{t("At least one number")}
                         </span>
                         <br />
                         <span
                           className={clsx(password.length >= 8 && "tooltip__popup__span--success")}>
-                          ** At least 8 characters{" "}
+                          **{t("At least 8 characters")}
                         </span>
                         <br />
                       </Tooltip>
                     }>
-                    Password
+                    {t("Password")}
                   </Label>
                   <Input
                     type="password"
@@ -114,7 +115,7 @@ export default memo(function Register() {
                 </div>
                 <div>
                   <Label name="confirmPassword" required={true}>
-                    Confirm password
+                    {t("Confirm password")}
                   </Label>
                   <Input
                     type="password"
@@ -128,10 +129,10 @@ export default memo(function Register() {
                   />
                   <div style={{ padding: "1rem 1.5rem" }}>
                     <p className="register__form__subtitle">
-                      By creating an account, you accept the
+                      {t("By creating an account, you accept the")}
                     </p>
                     <NavLink to="/cgu" className="register__form__cgu">
-                      general condition of use
+                      {t("general condition of use")}
                     </NavLink>
                   </div>
                 </div>
@@ -139,14 +140,14 @@ export default memo(function Register() {
             )
           },
           {
-            btnText: "Register !",
+            btnText: t("Register !"),
             stepSubmit: () => true,
             formContent: (
               <div className="register__form">
                 <div className="register__form__inline">
                   <div>
                     <Label name="firstName" required={true}>
-                      First Name
+                      {t("First Name")}
                     </Label>
                     <Input
                       type="text"
@@ -161,7 +162,7 @@ export default memo(function Register() {
                   </div>
                   <div>
                     <Label name="lastName" required={true}>
-                      Last Name
+                      {t("Last Name")}
                     </Label>
                     <Input
                       type="text"
@@ -176,7 +177,7 @@ export default memo(function Register() {
                   </div>
                 </div>
                 <div>
-                  <Label name="profileType">What type of profile are you ?</Label>
+                  <Label name="profileType">{t("What type of profile are you ?")}</Label>
                   <Multiselect
                     callback={(value: any) => {
                       const selectedId = value.map((item: any) => {
@@ -185,9 +186,9 @@ export default memo(function Register() {
                       setProfilType(value);
                     }}
                     options={[
-                      { label: "Student", id: "student" },
-                      { label: "Developer", id: "developer" },
-                      { label: "Web Designer", id: "webdesigner" }
+                      { label: t("Student"), id: "student" },
+                      { label: t("Developer"), id: "developer" },
+                      { label: t("Web Designer"), id: "webdesigner" }
                     ]}
                     theme={"primary"}
                   />

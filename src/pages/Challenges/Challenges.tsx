@@ -1,6 +1,7 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useInView } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Search from "@/components/01 - Atoms/Search/Search";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
@@ -39,6 +40,7 @@ export default function Challenges() {
   const loadRef = useRef(null);
   const isInView = useInView(loadRef);
   const { mainColor } = useContext(ThemesContext);
+  const { t } = useTranslation();
   const { data: categories } = useQuery(["categories"], () => getCategories({ paginate: false }));
   const { data: difficulties } = useQuery(["difficulties"], () =>
     getDifficulties({ paginate: false })
@@ -125,7 +127,7 @@ export default function Challenges() {
       </Filters>
       <Container center>
         <Sorts
-          title="Challenges"
+          title={t("Challenges")}
           nbResult={challenges?.pages[0].data["hydra:totalItems"]}
           actions={
             isConnected && (
@@ -134,7 +136,8 @@ export default function Challenges() {
                 handleClick={() => {
                   setIsCreateModalOpen(!isCreateModalOpen);
                 }}>
-                Create challenge <Svg id="create" />
+                {t("Create a challenge")}
+                <Svg id="create" />
               </Button>
             )
           }>
@@ -147,36 +150,36 @@ export default function Challenges() {
             searchable={false}
             options={[
               {
-                label: "Created At",
+                label: t("Created At"),
                 children: [
                   {
                     id: 1,
-                    label: "Latest",
+                    label: t("Latest"),
                     orderBy: "createdAt",
                     order: "desc",
                     default: true
                   },
                   {
                     id: 2,
-                    label: "Oldest",
+                    label: t("Oldest"),
                     order: "asc",
                     orderBy: "createdAt"
                   }
                 ]
               },
               {
-                label: "Level",
+                label: t("Level"),
                 children: [
                   {
                     id: 1,
-                    label: "Most difficult",
+                    label: t("Most difficult"),
                     orderBy: "difficulty.sortLevel",
                     order: "desc",
                     default: true
                   },
                   {
                     id: 2,
-                    label: "Less difficult",
+                    label: t("Less difficult"),
                     order: "asc",
                     orderBy: "difficulty.sortLevel"
                   }
@@ -219,7 +222,7 @@ export default function Challenges() {
         </div>
       </Container>
       <Dialog
-        id="Create a challenge"
+        id="create_challenge"
         visible={isCreateModalOpen}
         Dismiss={() => {
           setIsCreateModalOpen(!isCreateModalOpen);

@@ -1,13 +1,5 @@
-import {
-  memo,
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-  useState,
-  Ref,
-  useEffect,
-  useCallback
-} from "react";
+import { memo, useMemo, useState, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import Options from "@/components/01 - Atoms/Options/Options";
@@ -42,13 +34,13 @@ const Multiselect = ({
   defaultText = null!,
   callback
 }: IMultiselect) => {
+  const { t } = useTranslation();
   const defaultSelection = useMemo(() => {
     const defaultOption = options.find((option) => option.default);
     return defaultOption ? [defaultOption] : [];
   }, []);
 
   const [selected, setSelected] = useState<Array<ISelectOption>>(defaultSelection);
-
   const [isActive, setIsActive] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -101,7 +93,7 @@ const Multiselect = ({
                   ? selected[0]?.label
                   : searchWriting && searchQuery
                   ? searchQuery
-                  : defaultText ?? "Choose"
+                  : defaultText ?? t("Choose")
               }
               placeholder="Search something..."
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,7 +110,7 @@ const Multiselect = ({
               }}
             />
           ) : selected.length === 0 ? (
-            defaultText ?? "Choose"
+            defaultText ?? t("Choose")
           ) : (
             selected.map((element: ISelectOption) => {
               return (
