@@ -84,19 +84,19 @@ export default function Challenges() {
                 setQuery({ ...query, categories: value });
               }}
               theme={"primary"}
-              searchable={true}
               defaultText="Categories"
               options={categories?.data ?? []}
             />
+
             <Label name="search">Search</Label>
             <Search placeholder={"Type something here..."} />
+
             <Label name="type">Filter by</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, tags: value });
               }}
               theme={"primary"}
-              searchable={true}
               defaultText="Tag"
               options={
                 tagFamilies?.data.map((family: any) => {
@@ -107,12 +107,14 @@ export default function Challenges() {
                 }) ?? []
               }
             />
+
             <Label name="type">Level</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, difficulties: value });
               }}
               theme={"primary"}
+              multiple={false}
               searchable={true}
               defaultText="Level"
               options={difficulties?.data ?? []}
@@ -145,9 +147,9 @@ export default function Challenges() {
             callback={(value: any) => {
               setQuery({ ...query, order: value[0]?.order, orderBy: value[0]?.orderBy });
             }}
+            styles={{ minWidth: '20rem' }}
             theme={"primary"}
-            multiple={false}
-            searchable={false}
+            defaultText="sort"
             options={[
               {
                 label: t("Created At"),
@@ -156,8 +158,7 @@ export default function Challenges() {
                     id: 1,
                     label: t("Latest"),
                     orderBy: "createdAt",
-                    order: "desc",
-                    default: true
+                    order: "desc"
                   },
                   {
                     id: 2,
@@ -171,14 +172,13 @@ export default function Challenges() {
                 label: t("Level"),
                 children: [
                   {
-                    id: 1,
+                    id: 3,
                     label: t("Most difficult"),
                     orderBy: "difficulty.sortLevel",
-                    order: "desc",
-                    default: true
+                    order: "desc"
                   },
                   {
-                    id: 2,
+                    id: 4,
                     label: t("Less difficult"),
                     order: "asc",
                     orderBy: "difficulty.sortLevel"
