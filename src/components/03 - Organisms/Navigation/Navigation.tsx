@@ -118,7 +118,11 @@ export default memo(function Navigation({ isOpen }: INavigation) {
                   },
                   {
                     component: (
-                      <Navlink to="/logout" theme="primary">
+                      <Navlink to="/logout" theme="primary" onclick={() => {
+                        onLogout({
+                          refresh_token: localStorage.getItem("refresh_token")!
+                        })
+                      }}>
                         Log Out
                       </Navlink>
                     )
