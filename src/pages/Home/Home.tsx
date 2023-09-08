@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
           styles={{ zIndex: 1, position: "relative" }}
           title={
             <Heading tag="h1" level="primary">
-              <Learn>{t("LEARN")}</Learn>
+              <Learn hasGlass={true}>{t("LEARN")}</Learn>
               <Block>{t("FRONT-END / WEB DESIGN")}</Block>
               <Stripe theme="secondary">
                 {t("THE COOL WAY")}

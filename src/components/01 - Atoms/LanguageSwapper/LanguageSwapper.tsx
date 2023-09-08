@@ -11,6 +11,7 @@ export default memo(function LanguageSwapper() {
     changeLanguage(lang);
   }, []);
 
+  console.log(i18n.language);
   return (
     <div className="language">
       <Svg id="worldwide" />

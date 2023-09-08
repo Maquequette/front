@@ -5,7 +5,7 @@
   "Upload file": "Charger un fichier",
   "Search & More": "Rechercher & Plus",
   "Choose": "Choisissez",
-  "Create a challenge": "Créer un challange",
+  "Create a challenge": "Créer un challenge",
   "Continue": "Continuer",
   "Type": "Type",
   "Title": "Titre",
@@ -60,11 +60,13 @@
   "Level": "Niveau",
   "Most difficult": "Le plus difficile",
   "Less difficult": "le moins difficile",
-  "LEARN": "APPRENDRE",
+  "LEARN": "APPRENDRE LE",
   "FRONT-END / WEB DESIGN": "FRONT-END / WEB DESIGN",
   "THE COOL WAY": "DE MANIERE COOL",
   "HOW TO BEGIN PRACTICING ??": "COMMENT COMMENCER À PRATIQUER ??",
   "CODE THE SKETCH": "CODER LES MAQUETTES",
   "TRY IT NOW !": "ESSAYEZ MAINTENANT !",
-  "AND WE PROVIDE LESSONS TOO !!": "ET NOUS DONNONS AUSSI DES COURS !"
+  "AND WE PROVIDE LESSONS TOO !!": "ET NOUS DONNONS AUSSI DES COURS !",
+  "Liked Challenges": "Challenges que vous avez aimés",
+  "Challenges you made": "Challenges que vous avez fait"
 }

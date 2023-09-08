@@ -9,11 +9,11 @@ export interface IParagraph {
 }
 
 export default memo(function Paragraph({ children, color, isHtml }: IParagraph) {
-  return isHtml && isHtml != undefined ? (
+  return isHtml ? (
     <div
-      className={`paragraph  ${color && `txt--${color}`}`}
+      className={`paragraph  ${color ? `txt--${color}` : ""}`}
       dangerouslySetInnerHTML={{ __html: children }}></div>
   ) : (
-    <p className={`paragraph  ${color && `txt--${color}`}`}>{children}</p>
+    <p className={`paragraph  ${color ? `txt--${color}` : ""}`}>{children}</p>
   );
 });
