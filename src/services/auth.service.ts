@@ -21,8 +21,8 @@ export const register = (data: IRegister) => {
   return axios.post("/auth/register", data);
 };
 
-export const logout = () => {
-  return axios.post("/auth/logout");
+export const logout = (data: { refresh_token: string }) => {
+  return axios.post("/auth/logout", data);
 };
 
 export const forgotPassword = (data: { email: string }) => {

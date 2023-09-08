@@ -1,4 +1,4 @@
-import { ReactNode, memo } from "react";
+import { HtmlHTMLAttributes, MouseEventHandler, ReactNode, memo } from "react";
 import { NavLink as BaseNavLink } from "react-router-dom";
 import { Theme } from "@/types/Theme";
 import "./Navlink.scss";
@@ -11,6 +11,7 @@ export interface INavlink {
   id?: string;
   icon?: JSX.Element;
   badge?: JSX.Element;
+  onclick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 export default memo(function Navlink({
@@ -20,16 +21,19 @@ export default memo(function Navlink({
   classes = "",
   id,
   icon,
-  badge
+  badge,
+  onclick = () => { }
 }: INavlink) {
   return (
     <BaseNavLink
       to={to}
       id={id}
       className={({ isActive }) =>
-        (isActive && "active") +
+        (isActive ? "active" : "") +
         ` link link--${theme} ${icon ? "link--icon" : ""} ${badge ? "link--badge" : ""} ${classes}`
-      }>
+      }
+      onClick={onclick}
+    >
       {icon}
       {badge}
       <div className="link__txt">{children}</div>
