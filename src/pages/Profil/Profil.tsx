@@ -10,6 +10,8 @@ import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Grid from "@/components/02 - Molecules/Grid/Grid";
 import Card from "@/components/03 - Organisms/Card/Card";
 import "./Profil.scss";
+import { TabsProvider } from "@/contexts/TabsContext";
+import Tabs from "@/components/03 - Organisms/Tabs/Tabs";
 
 export default function Profil() {
   const { user, setUser } = useContext(AuthContext);
@@ -17,7 +19,6 @@ export default function Profil() {
   const [editedInfo, setEditedInfo] = useState(-1);
   const [newInfo, setNewInfo] = useState("");
   const ref = useClickOutside(() => setEditedInfo(-1));
-  const [query, setQuery] = useState({});
 
   const userInfo = useMemo(() => {
     return [
@@ -51,36 +52,6 @@ export default function Profil() {
   const handleSubmit = (key: string) => {
     setUser({ ...user, [key]: newInfo });
   };
-
-  const {
-    data: likedChallenges,
-    fetchNextPage: fetchLikesChallengesNextPage,
-    hasNextPage: likedChallengeshasNextPage,
-    isFetchingNextPage: isFetchingLikedChallengesNextPage
-  } = useInfiniteQuery({
-    queryKey: ["liked_challenges", query],
-    keepPreviousData: true,
-    queryFn: ({ pageParam = 1 }) => getLikedChallenges({ pageParam, ...query }),
-    getNextPageParam: (lastPage, pages) => {
-      const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
-      return urlParams.get("page") ?? null;
-    }
-  });
-
-  const {
-    data: createdChallenges,
-    fetchNextPage: fetchCreatedChallengesNextPage,
-    hasNextPage: createdChallengeshasNextPage,
-    isFetchingNextPage: isFetchingCreatedChallengesNextPage
-  } = useInfiniteQuery({
-    queryKey: ["created_challenges", query],
-    keepPreviousData: true,
-    queryFn: ({ pageParam = 1 }) => getCreatedChallenge({ pageParam, ...query }),
-    getNextPageParam: (lastPage, pages) => {
-      const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
-      return urlParams.get("page") ?? null;
-    }
-  });
 
   return (
     <div className="profil">
@@ -123,42 +94,112 @@ export default function Profil() {
             })}
           </div>
           <div className="profil__content">
-            <div className="profil__challenges">
-              <Heading tag="h3" level="secondary">
-                {t("Liked Challenges")}
-              </Heading>
-              <Grid size="25rem">
-                {likedChallenges?.pages?.map((group, i) => {
-                  return group?.data?.["hydra:member"].map((challenge: any) => {
-                    return (
-                      <Card
-                        key={challenge.id}
-                        img={challenge?.resources?.[0]?.value}
-                        path={`/challenges/${challenge.id}`}
-                        likesCount={challenge.challengeLikesCount}
-                        id={challenge.id}
-                        isLiked={challenge.isLiked}
-                        badge={challenge.difficulty}
-                        tags={challenge.tags}
-                        date={new Date(challenge.updatedAt ?? challenge.createdAt)}
-                        title={challenge.title}
-                        desc={challenge.description}
-                        author={`${challenge.author.firstName} ${challenge.author.lastName}`}
-                      />
-                    );
-                  });
-                })}
-              </Grid>
-            </div>
-            <div className="profil__challenges">
-              <Heading tag="h3" level="secondary">
-                {t("Challenges you made")}
-              </Heading>
-              {/* <Grid size="20rem"></Grid> */}
-            </div>
+            <TabsProvider>
+              <Tabs
+                tabs={[
+                  {
+                    tabTitle: t("Liked Challenges"),
+                    tabContent: <LikedChallenges />,
+                    anchor: "#login"
+                  },
+                  {
+                    tabTitle: t("Challenges you made"),
+                    tabContent: <CreatedChallenges />,
+                    anchor: "#register"
+                  }
+                ]}
+                anchorNavigation={false}
+              />
+            </TabsProvider>
           </div>
         </div>
       </Container>
     </div>
+  );
+}
+
+export function LikedChallenges() {
+  const [query, setQuery] = useState({});
+
+  const {
+    data: likedChallenges,
+    fetchNextPage: fetchLikesChallengesNextPage,
+    hasNextPage: likedChallengeshasNextPage,
+    isFetchingNextPage: isFetchingLikedChallengesNextPage
+  } = useInfiniteQuery({
+    queryKey: ["liked_challenges", query],
+    keepPreviousData: true,
+    queryFn: ({ pageParam = 1 }) => getLikedChallenges({ pageParam, ...query }),
+    getNextPageParam: (lastPage, pages) => {
+      const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
+      return urlParams.get("page") ?? null;
+    }
+  });
+  return (
+    <Grid size="25rem">
+      {likedChallenges?.pages?.map((group, i) => {
+        return group?.data?.["hydra:member"].map((challenge: any) => {
+          return (
+            <Card
+              key={challenge.id}
+              img={challenge?.resources?.[0]?.value}
+              path={`/challenges/${challenge.id}`}
+              likesCount={challenge.challengeLikesCount}
+              id={challenge.id}
+              isLiked={challenge.isLiked}
+              badge={challenge.difficulty}
+              tags={challenge.tags}
+              date={new Date(challenge.updatedAt ?? challenge.createdAt)}
+              title={challenge.title}
+              desc={challenge.description}
+              author={`${challenge.author.firstName} ${challenge.author.lastName}`}
+            />
+          );
+        });
+      })}
+    </Grid>
+  );
+}
+
+export function CreatedChallenges() {
+  const [query, setQuery] = useState({});
+  const {
+    data: createdChallenges,
+    fetchNextPage: fetchCreatedChallengesNextPage,
+    hasNextPage: createdChallengeshasNextPage,
+    isFetchingNextPage: isFetchingCreatedChallengesNextPage
+  } = useInfiniteQuery({
+    queryKey: ["created_challenges", query],
+    keepPreviousData: true,
+    queryFn: ({ pageParam = 1 }) => getCreatedChallenge({ pageParam, ...query }),
+    getNextPageParam: (lastPage, pages) => {
+      const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
+      return urlParams.get("page") ?? null;
+    }
+  });
+
+  return (
+    <Grid size="20rem">
+      {createdChallenges?.pages?.map((group, i) => {
+        return group?.data?.["hydra:member"].map((challenge: any) => {
+          return (
+            <Card
+              key={challenge.id}
+              img={challenge?.resources?.[0]?.value}
+              path={`/challenges/${challenge.id}`}
+              likesCount={challenge.challengeLikesCount}
+              id={challenge.id}
+              isLiked={challenge.isLiked}
+              badge={challenge.difficulty}
+              tags={challenge.tags}
+              date={new Date(challenge.updatedAt ?? challenge.createdAt)}
+              title={challenge.title}
+              desc={challenge.description}
+              author={`${challenge.author.firstName} ${challenge.author.lastName}`}
+            />
+          );
+        });
+      })}
+    </Grid>
   );
 }
