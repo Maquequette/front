@@ -1,8 +1,9 @@
 import { useContext, useMemo, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import useClickOutside from "@/hooks/useClickOutside";
+import { getLikedChallenges, getCreatedChallenge } from "@/services/challenges.service";
 import Container from "@/components/01 - Atoms/Container/Container";
 import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
@@ -16,6 +17,7 @@ export default function Profil() {
   const [editedInfo, setEditedInfo] = useState(-1);
   const [newInfo, setNewInfo] = useState("");
   const ref = useClickOutside(() => setEditedInfo(-1));
+  const [query, setQuery] = useState({});
 
   const userInfo = useMemo(() => {
     return [
@@ -50,14 +52,44 @@ export default function Profil() {
     setUser({ ...user, [key]: newInfo });
   };
 
+  const {
+    data: likedChallenges,
+    fetchNextPage: fetchLikesChallengesNextPage,
+    hasNextPage: likedChallengeshasNextPage,
+    isFetchingNextPage: isFetchingLikedChallengesNextPage
+  } = useInfiniteQuery({
+    queryKey: ["liked_challenges", query],
+    keepPreviousData: true,
+    queryFn: ({ pageParam = 1 }) => getLikedChallenges({ pageParam, ...query }),
+    getNextPageParam: (lastPage, pages) => {
+      const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
+      return urlParams.get("page") ?? null;
+    }
+  });
+
+  const {
+    data: createdChallenges,
+    fetchNextPage: fetchCreatedChallengesNextPage,
+    hasNextPage: createdChallengeshasNextPage,
+    isFetchingNextPage: isFetchingCreatedChallengesNextPage
+  } = useInfiniteQuery({
+    queryKey: ["created_challenges", query],
+    keepPreviousData: true,
+    queryFn: ({ pageParam = 1 }) => getCreatedChallenge({ pageParam, ...query }),
+    getNextPageParam: (lastPage, pages) => {
+      const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
+      return urlParams.get("page") ?? null;
+    }
+  });
+
   return (
     <div className="profil">
-      <Container isLarge={false} center={true}>
-        <Heading tag="h1" level="primary">
-          {t("Page Profil")}
-        </Heading>
+      <Container isLarge={true} center={true}>
         <div className="profil__container">
           <div className="profil__card" ref={ref}>
+            <Heading tag="h1" level="primary">
+              {t("Profil Page")}
+            </Heading>
             {userInfo.map((info, index) => {
               const isEdited = index === editedInfo;
               return (
@@ -72,6 +104,7 @@ export default function Profil() {
                   </Paragraph>
                   {isEdited && (
                     <input
+                      className="profil__input"
                       type="text"
                       value={newInfo}
                       onInput={(e: any) => {
@@ -91,13 +124,34 @@ export default function Profil() {
           </div>
           <div className="profil__content">
             <div className="profil__challenges">
-              <Heading tag="h3" level="tertiary">
+              <Heading tag="h3" level="secondary">
                 {t("Liked Challenges")}
               </Heading>
-              {/* <Grid size="20rem"></Grid> */}
+              <Grid size="25rem">
+                {likedChallenges?.pages?.map((group, i) => {
+                  return group?.data?.["hydra:member"].map((challenge: any) => {
+                    return (
+                      <Card
+                        key={challenge.id}
+                        img={challenge?.resources?.[0]?.value}
+                        path={`/challenges/${challenge.id}`}
+                        likesCount={challenge.challengeLikesCount}
+                        id={challenge.id}
+                        isLiked={challenge.isLiked}
+                        badge={challenge.difficulty}
+                        tags={challenge.tags}
+                        date={new Date(challenge.updatedAt ?? challenge.createdAt)}
+                        title={challenge.title}
+                        desc={challenge.description}
+                        author={`${challenge.author.firstName} ${challenge.author.lastName}`}
+                      />
+                    );
+                  });
+                })}
+              </Grid>
             </div>
             <div className="profil__challenges">
-              <Heading tag="h3" level="tertiary">
+              <Heading tag="h3" level="secondary">
                 {t("Challenges you made")}
               </Heading>
               {/* <Grid size="20rem"></Grid> */}
