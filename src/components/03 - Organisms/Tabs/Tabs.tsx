@@ -34,7 +34,7 @@ export default memo(function Tabs({ tabs, id = "", anchorNavigation = false }: I
       <div className="tabs__choice">
         {tabs.map((tab, i) => (
           <button
-            className={`tabs__choice__item w-${tabs.length} ${currentTab == i ? "active" : ""}`}
+            className={`tabs__choice__item ${currentTab == i ? "active" : ""}`}
             type="button"
             key={`tabBtn-${i}-${id}`}
             onClick={() =>
