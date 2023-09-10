@@ -147,7 +147,7 @@ export default function Challenges() {
             callback={(value: any) => {
               setQuery({ ...query, order: value[0]?.order, orderBy: value[0]?.orderBy });
             }}
-            styles={{ minWidth: '20rem' }}
+            styles={{ minWidth: "20rem" }}
             theme={"primary"}
             defaultText="sort"
             options={[
@@ -190,28 +190,24 @@ export default function Challenges() {
         </Sorts>
         <Grid size="33rem">
           {challenges?.pages?.map((group, i) => {
-            return (
-              <Fragment key={i}>
-                {group?.data?.["hydra:member"].map((challenge: any) => {
-                  return (
-                    <Card
-                      img={challenge?.resources[0]?.value}
-                      path={`/challenges/${challenge.id}`}
-                      likesCount={challenge.challengeLikesCount}
-                      id={challenge.id}
-                      isLiked={challenge.isLiked}
-                      badge={challenge.difficulty}
-                      tags={challenge.tags}
-                      key={challenge.id}
-                      date={new Date(challenge.updatedAt ?? challenge.createdAt)}
-                      title={challenge.title}
-                      desc={challenge.description}
-                      author={`${challenge.author.firstName} ${challenge.author.lastName}`}
-                    />
-                  );
-                })}
-              </Fragment>
-            );
+            return group?.data?.["hydra:member"].map((challenge: any) => {
+              return (
+                <Card
+                  img={challenge?.resources?.[0]?.value}
+                  path={`/challenges/${challenge.id}`}
+                  likesCount={challenge.challengeLikesCount}
+                  id={challenge.id}
+                  isLiked={challenge.isLiked}
+                  badge={challenge.difficulty}
+                  tags={challenge.tags}
+                  key={challenge.id}
+                  date={new Date(challenge.updatedAt ?? challenge.createdAt)}
+                  title={challenge.title}
+                  desc={challenge.description}
+                  author={`${challenge.author.firstName} ${challenge.author.lastName}`}
+                />
+              );
+            });
           })}
         </Grid>
         <div
