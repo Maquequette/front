@@ -40,3 +40,11 @@ export const profil = () => {
     }
   });
 };
+
+export const updateProfil = (user: any) => {
+  return axios.patch(`api/me/${user.id}`, user, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
+  });
+};

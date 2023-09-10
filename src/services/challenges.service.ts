@@ -160,7 +160,7 @@ export const unlikeChallenge = (challengeId: number) => {
 export const getLikedChallenges = ({
   pageParam = 1,
   itemsPerPage = 9,
-  paginate = true,
+  paginate = false,
   order = "desc",
   orderBy = "createdAt",
   tags,
@@ -205,7 +205,7 @@ export const getLikedChallenges = ({
 export const getCreatedChallenge = ({
   pageParam = 1,
   itemsPerPage = 9,
-  paginate = true,
+  paginate = false,
   order = "desc",
   orderBy = "createdAt",
   tags,
