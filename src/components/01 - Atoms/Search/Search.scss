@@ -71,6 +71,11 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 
+    &__container {
+      color: var(--dark);
+      text-decoration: none;
+    }
+
     &:first-child {
       margin-top: 4rem;
     }
