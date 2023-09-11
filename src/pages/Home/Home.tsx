@@ -101,7 +101,7 @@ export default function Home(): JSX.Element {
             </Heading>
             <Grid size="33rem">
               {!isLoading && <DotLoader theme="secondary" />}
-              {/* {challenges?.data?.["hydra:member"].map((challenge: any) => {
+              {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
                   <Card
                     img={challenge?.resources[0]?.value}
@@ -117,7 +117,7 @@ export default function Home(): JSX.Element {
                     author={`${challenge.author.firstName} ${challenge.author.lastName}`}
                   />
                 );
-              })} */}
+              })}
             </Grid>
             <div className="d-flex justify-end">
               <Button theme="dark">
