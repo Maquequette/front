@@ -17,12 +17,12 @@ import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import Button from "@/components/01 - Atoms/Button/Button";
 import Card from "@/components/03 - Organisms/Card/Card";
 import { getChallenges } from "@/services/challenges.service";
+import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
 import "./Home.scss";
-import { Fragment } from "react";
 
 export default function Home(): JSX.Element {
   const { t } = useTranslation();
-  const { data: challenges } = useQuery(["challenges"], () =>
+  const { data: challenges, isLoading } = useQuery(["challenges"], () =>
     getChallenges({ pageParam: 1, itemsPerPage: 3 })
   );
 
@@ -100,7 +100,8 @@ export default function Home(): JSX.Element {
               {t("AND WE PROVIDE LESSONS TOO !!")}
             </Heading>
             <Grid size="33rem">
-              {challenges?.data?.["hydra:member"].map((challenge: any) => {
+              {!isLoading && <DotLoader theme="secondary" />}
+              {/* {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
                   <Card
                     img={challenge?.resources[0]?.value}
@@ -116,7 +117,7 @@ export default function Home(): JSX.Element {
                     author={`${challenge.author.firstName} ${challenge.author.lastName}`}
                   />
                 );
-              })}
+              })} */}
             </Grid>
             <div className="d-flex justify-end">
               <Button theme="dark">

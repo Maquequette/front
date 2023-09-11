@@ -53,7 +53,8 @@ export default function Challenges() {
     data: challenges,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage
+    isFetchingNextPage,
+    isLoading
   } = useInfiniteQuery({
     queryKey: ["challenges", query],
     keepPreviousData: true,
@@ -214,7 +215,7 @@ export default function Challenges() {
           className="loader--container"
           ref={loadRef}
           style={{ marginTop: "3rem", display: "flex", justifyContent: "center" }}>
-          {isFetchingNextPage && <DotLoader theme="primary" />}
+          {isFetchingNextPage || (isLoading && <DotLoader theme="primary" />)}
         </div>
       </Container>
       <Dialog
