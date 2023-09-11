@@ -1,6 +1,8 @@
 import { useState, memo } from "react";
-import { useSearch } from "@/hooks/useSearch";
+import { useQuery } from "@tanstack/react-query";
+import { searchChallenges } from "@/services/challenges.service";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
+import { Link } from "react-router-dom";
 
 import "./Search.scss";
 
@@ -11,9 +13,12 @@ export interface ISearch {
 
 export default memo(function Search({ placeholder, className }: ISearch) {
   const [value, setValue] = useState("");
+  const { data } = useQuery(["search", value], () => searchChallenges(value), {
+    enabled: value.length > 0
+  });
 
   return (
-    <div className={`search ${className ?? ""}`}>
+    <div className={`search ${className ?? ""} ${data?.data ? "active" : ""}`}>
       <div className="search__input">
         <Svg id="glass" />
         <input
@@ -25,13 +30,19 @@ export default memo(function Search({ placeholder, className }: ISearch) {
           onChange={(e) => setValue(e.target.value)}
         />
       </div>
-      {/* {data?.data && (
-        <div className="search__options">
+      <div className="search__options">
+        <div className="search__options__container">
           {data?.data.map((suggestion: any) => {
-            return <div className="option">{suggestion}</div>;
+            return (
+              <div className="search__option">
+                <Link to={`/challenges/${suggestion.id}`} className="search__option__container">
+                  {suggestion.title}
+                </Link>
+              </div>
+            );
           })}
         </div>
-      )} */}
+      </div>
     </div>
   );
 });

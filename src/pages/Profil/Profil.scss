@@ -6,11 +6,6 @@
     row-gap: 1rem;
   }
 
-  .block {
-    font-family: var(--font-family-secondary);
-    font-size: var(--font-size-xl);
-  }
-
   &__info {
     padding: 1.6rem;
     display: flex;
@@ -57,5 +52,32 @@
     overflow-y: auto;
     min-height: 30rem;
     padding: 1.5rem;
+  }
+}
+
+[data-theme="dark"] {
+  .profil {
+    color: var(--light);
+
+    .heading {
+      color: var(--light);
+    }
+
+    &__info {
+      box-shadow: 5px 5px 0px var(--light);
+      border: 1px solid var(--light);
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--light);
+      }
+    }
+
+    .tabs {
+      &__choice {
+        &__item:not(.active) {
+          color: var(--light);
+        }
+      }
+    }
   }
 }

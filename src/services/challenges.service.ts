@@ -246,3 +246,9 @@ export const getCreatedChallenge = ({
     params: query
   });
 };
+
+export const searchChallenges = (params: any) => {
+  const query = new URLSearchParams(params);
+  query.append("search", params);
+  return axios.get("/api/challenges", { params: query });
+};
