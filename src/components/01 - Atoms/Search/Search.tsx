@@ -31,15 +31,17 @@ export default memo(function Search({ placeholder, className }: ISearch) {
         />
       </div>
       <div className="search__options">
-        {data?.data.map((suggestion: any) => {
-          return (
-            <div className="search__option">
-              <Link to={`/challenges/${suggestion.id}`} className="search__option__container">
-                {suggestion.title}
-              </Link>
-            </div>
-          );
-        })}
+        <div className="search__options__container">
+          {data?.data.map((suggestion: any) => {
+            return (
+              <div className="search__option">
+                <Link to={`/challenges/${suggestion.id}`} className="search__option__container">
+                  {suggestion.title}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
