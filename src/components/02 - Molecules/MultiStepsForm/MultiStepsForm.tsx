@@ -7,6 +7,7 @@ import "./MultiStepsForm.scss";
 export interface IMultiStepsForm {
   steps: Array<IOneStepForm>;
   handleSubmit?: Function;
+  onStepChange?: Function;
   id?: String;
 }
 
@@ -18,7 +19,8 @@ export interface IOneStepForm {
 
 export default memo(function MultiStepsForm({
   steps,
-  handleSubmit = () => {},
+  handleSubmit = () => { },
+  onStepChange = () => { },
   id
 }: IMultiStepsForm) {
   const [lastStep, setLastStep] = useState<number>(0);
@@ -28,13 +30,14 @@ export default memo(function MultiStepsForm({
     e.preventDefault();
 
     if (steps[currentStep]?.stepSubmit()) {
-      currentStep < steps.length - 1 ? changeStep(1) : handleSubmit();
+      currentStep < steps.length - 1 ? changeStep(1) : handleSubmit()
     }
   };
 
   const changeStep = (i: number) => {
     setLastStep(currentStep);
     setCurrentStep(currentStep + i);
+    onStepChange(currentStep + i);
   };
 
   return (
@@ -46,9 +49,8 @@ export default memo(function MultiStepsForm({
             width={`calc( (100% - 4rem)/${steps.length} - 1rem * ${steps.length - 1})`}
             height="10px"
             xmlns="http://www.w3.org/2000/svg"
-            className={`fill--darkGrey ${
-              currentStep >= i ? "active" : currentStep < lastStep ? "reverse" : ""
-            }`}>
+            className={`fill--darkGrey ${currentStep >= i ? "active" : currentStep < lastStep ? "reverse" : ""
+              }`}>
             <g id={`${i}`}>
               <rect
                 x="0"

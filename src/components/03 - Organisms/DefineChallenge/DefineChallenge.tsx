@@ -15,17 +15,20 @@ import {
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import "./DefineChallenge.scss";
 import Wysiwyg from "@/components/01 - Atoms/Wysiwyg/Wysiwyg";
+import FileInput from "@/components/01 - Atoms/FileInput/FileInput";
 
 export default function DefineChallenge({ Dismiss }: any) {
+  const { t } = useTranslation();
+
   const [query, setQuery] = useState<any>({
-    "tags[]": undefined,
-    type: undefined,
+    "tags[]": [],
+    type: 1,
     difficulty: undefined,
     title: "",
-    resources: undefined,
-    description: ""
+    resources: [],
+    description: "",
+    figmaURL: ""
   });
-  const { t } = useTranslation();
 
   const { data: difficulties } = useQuery(["difficulties__all"], () =>
     getDifficulties({ paginate: false })
@@ -36,21 +39,43 @@ export default function DefineChallenge({ Dismiss }: any) {
 
   const { data: type } = useQuery(["type__all"], () => getChallengeTypes({ paginate: false }));
 
+  const subTitles: Array<string> = ["1. DEFINE", "2. DESCRIBE", "3. COMPLETE"];
+  const [currentSubTitle, setCurrentSubTitle] = useState<string>(subTitles[0]);
+
   const { mutate: addChallenge } = useMutation(postChallenge);
+
+  const picturesToResources = (files: FileList) => {
+    const fileArray: Array<any> = [];
+    Array.from(files).forEach((element: any, index) => {
+      fileArray.push({
+        'value': element,
+        'type': "image"
+      });
+    });
+    return fileArray.concat(query.resources);
+  }
 
   const handleSubmit = useCallback(() => {
     const form = new FormData();
 
     Object.entries(query).map(([key, val]: any) => {
+
       if (key.includes("[]")) {
         Array.from(val).forEach((element: any) => {
           form.append(key, element.id);
         });
+
       } else if (key === "resources") {
         Array.from(val).forEach((element: any, index) => {
-          form.append(`${key}[${index}][value]`, element);
-          form.append(`${key}[${index}][type]`, "image");
-        });
+          form.append(`${key}[${index}][value]`, element.value);
+          form.append(`${key}[${index}][type]`, element.type);
+        })
+
+      } else if (key === "figmaURL" && val) {
+        form.append(`${key}[${query.resources.length}][value]`, val);
+        form.append(`${key}[${query.resources.length}][type]`, "url");
+        form.append(`${key}[${query.resources.length}][label]`, "figmaURL");
+
       } else {
         form.append(key, val);
       }
@@ -58,9 +83,9 @@ export default function DefineChallenge({ Dismiss }: any) {
 
     addChallenge(form);
     setQuery({
-      categories: undefined,
+      categories: 1,
       tags: undefined,
-      type: undefined,
+      type: 1,
       difficulty: undefined,
       title: "",
       files: null,
@@ -73,18 +98,26 @@ export default function DefineChallenge({ Dismiss }: any) {
 
   return (
     <div className="defineChallenge">
-      <Heading level="tertiary" tag="h4">
-        {t("Create a challenge")}
-      </Heading>
+      <div>
+        <Heading tag="h1" level="secondary">
+          {t("Create a challenge")}
+        </Heading>
+        <p className="login__subtitle">
+          {t(currentSubTitle)}
+        </p>
+      </div>
+
       <MultiStepsForm
         handleSubmit={handleSubmit}
+        onStepChange={(currentStep: number) => setCurrentSubTitle(subTitles[currentStep])}
         steps={[
           {
             btnText: t("Continue"),
             stepSubmit: () => query.difficulty && query.type && query.title != "",
             formContent: (
               <div className="defineChallenge__form">
-                <div className="defineChallenge__full">
+
+                {/* <div className="defineChallenge__full">
                   <Label name="type">{t("Type")}</Label>
                   <Multiselect
                     multiple={false}
@@ -96,7 +129,8 @@ export default function DefineChallenge({ Dismiss }: any) {
                     defaultText="Type"
                     options={type?.data ?? []}
                   />
-                </div>
+                </div> */}
+
                 <div className="defineChallenge__full">
                   <Label name="title" required={true}>
                     {t("Title")}
@@ -112,16 +146,16 @@ export default function DefineChallenge({ Dismiss }: any) {
                     }}
                   />
                 </div>
-                <div>
-                  <Label name="type">{t("Tag")}</Label>
+
+                <div className="defineChallenge__full">
+                  <Label name="type">{t("Tags")}</Label>
                   <Multiselect
                     callback={(value: any) => {
                       setQuery({ ...query, "tags[]": value });
                     }}
                     theme={"primary"}
                     searchable={true}
-                    defaultText="Tag"
-                    multiple={false}
+                    defaultText="Select Tags"
                     options={
                       tagFamilies?.data.map((family: any) => {
                         return {
@@ -132,8 +166,15 @@ export default function DefineChallenge({ Dismiss }: any) {
                     }
                   />
                 </div>
-                <div>
-                  <Label name="level">{t("Difficulties")}</Label>
+
+                <div className="defineChallenge__full" style={{ marginTop: "1rem" }}>
+                  <Tags tags={query["tags[]"]} />
+                </div>
+
+                <div className="defineChallenge__full">
+                  <Label name="level" required={true}>
+                    {t("Difficulties")}
+                  </Label>
                   <Multiselect
                     multiple={false}
                     callback={(value: any) => {
@@ -145,19 +186,17 @@ export default function DefineChallenge({ Dismiss }: any) {
                     options={difficulties?.data ?? []}
                   />
                 </div>
-                <div className="defineChallenge__full">
-                  <Tags tags={query["tags[]"]} />
-                </div>
               </div>
             )
           },
           {
-            btnText: t("You close to make something awesome"),
+            btnText: t("Continue"),
             stepSubmit: () => query.description && query.resources,
             formContent: (
               <div className="defineChallenge__form">
+
                 <div className="defineChallenge__full">
-                  <Label name="firstName" required={true}>
+                  <Label name="Description" required={true}>
                     {t("Description")}
                   </Label>
                   <Wysiwyg
@@ -166,23 +205,82 @@ export default function DefineChallenge({ Dismiss }: any) {
                     }}
                   />
                 </div>
+
                 <div className="defineChallenge__full">
                   <Label name="picture" required={true}>
                     {t("Picture")}
                   </Label>
-                  <Input
+                  <FileInput
                     accept=".png, .jpg, .jpeg"
-                    type="file"
                     name="picture"
+                    placeholder={t("Upload")}
                     required={true}
                     preview={true}
-                    limite={5}
                     multiple={true}
+                    limite={5}
+                    icon="img"
+                    instruction={t("2 MO maximum size \nupload up to 5 files : png/jpg")}
                     handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const files = e.currentTarget.files;
                       if (files) {
-                        setQuery({ ...query, resources: files });
+                        setQuery({ ...query, resources: picturesToResources(files) });
                       }
+                    }}
+                  />
+                </div>
+              </div>
+            )
+          },
+          {
+            btnText: t("Create !"),
+            stepSubmit: () => query.description && query.resources,
+            formContent: (
+              <div className="defineChallenge__form">
+                <div className="defineChallenge__full">
+                  <Label name="zipfile">
+                    {t("Additional Resources")}
+                  </Label>
+                  <FileInput
+                    accept=".zip, .rar, .7zip"
+                    name="zipfile"
+                    placeholder={t("Upload")}
+                    required={false}
+                    preview={false}
+                    multiple={false}
+                    icon="folder"
+                    instruction={t("2 MO maximum size \nupload unique zip folder : zip/rar")}
+                    handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const file = e.currentTarget.files;
+                      if (file) {
+                        setQuery({
+                          ...query, resources: [...query.resources, {
+                            'value': file[0],
+                            'type': "file"
+                          }]
+                        });
+                      }
+                    }}
+                  />
+                </div>
+
+                <p className="login__subtitle" style={{ paddingTop: "2rem" }}>
+                  {t("THE MORE THE BETTER...")}
+                </p>
+
+                <div className="defineChallenge__full">
+                  <Label name="figma">
+                    {t("Figma url")}
+                  </Label>
+                  <Input
+                    type="url"
+                    name="figma"
+                    placeholder="figma.com/file/example..."
+                    required={false}
+                    value={query.figmaURL ?? ""}
+                    handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setQuery({
+                        ...query, figmaURL: e.target.value
+                      });
                     }}
                   />
                 </div>

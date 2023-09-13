@@ -13,6 +13,7 @@ export default function Wysiwyg({ callback }: IWysiwyg) {
       apiKey={import.meta.env.VITE_TINY}
       init={{
         max_height: 400,
+        height: 200,
         menubar: false,
         plugins: [
           "advlist autolink lists link image charmap print preview anchor",
@@ -24,7 +25,7 @@ export default function Wysiwyg({ callback }: IWysiwyg) {
           "bold italic backcolor | alignleft aligncenter " +
           "alignright alignjustify | bullist numlist outdent indent | " +
           "removeformat | help",
-        content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:1.4rem }"
+        content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }"
       }}
     />
   );
