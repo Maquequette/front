@@ -4,6 +4,7 @@ import Svg from "@/components/01 - Atoms/Svg/Svg";
 import useToasts from "@/hooks/useToasts";
 import "./Input.scss";
 import Button from "../Button/Button";
+import DOMPurify from "dompurify";
 
 export interface IInput {
   type: HTMLInputTypeAttribute;
@@ -128,7 +129,7 @@ export default memo(function Input({
           {files.map((file, index) => {
             return (
               <div className="preview" key={index}>
-                <img src={URL.createObjectURL(file)} alt="" />
+                <img src={DOMPurify.sanitize(URL.createObjectURL(file))} alt="" />
               </div>
             );
           })}
