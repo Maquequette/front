@@ -105,11 +105,13 @@
       img {
         object-fit: cover;
         height: 100%;
-        max-width: 10rem;
+        width: 100%;
+        position: absolute;
       }
     }
 
     &__img {
+      position: relative;
       grid-row: 1/3;
     }
   }
