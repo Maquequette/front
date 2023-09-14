@@ -14,7 +14,7 @@ export default function Cgu() {
             Conditions Générales d'Utilisation
           </Heading>
           <Heading level="secondary" tag="h2">
-            Dernière mise à jour : [Date de la dernière mise à jour]
+            Dernière mise à jour : Jeudi 14 Septembre 2023 à 00h00
           </Heading>
           <Paragraph>
             Les présentes Conditions Générales d'Utilisation ("CGU") régissent l'utilisation du site
