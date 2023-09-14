@@ -5,6 +5,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { likeChallenge, unlikeChallenge } from "@/services/challenges.service";
 import "./Like.scss";
 import useToasts from "@/hooks/useToasts";
+import { t } from "i18next";
 
 export interface ILike {
   id: number;
@@ -35,8 +36,8 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber }:
           ? handleLike()
           : pushToast({
               theme: "secondary",
-              title: "Vous devez être connecter",
-              desc: "vous devez etre connecter pour liker un challenge"
+              title: t("You must be logged in"),
+              desc: t("You must be logged in to like a challenge")
             });
       }}>
       <Svg id="like" />

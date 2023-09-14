@@ -46,3 +46,17 @@
     text-align: end;
   }
 }
+
+[data-theme="dark"] {
+  .footer {
+    &__body {
+      border-top: 1px solid var(--light);
+    }
+
+    &__reseau {
+      .sprites {
+        fill: var(--light);
+      }
+    }
+  }
+}
