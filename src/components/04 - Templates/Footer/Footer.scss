@@ -43,7 +43,11 @@
   }
 
   &__link {
-    text-align: end;
+    a {
+      text-align: end;
+      color: var(--secondary);
+      text-decoration: none;
+    }
   }
 }
 
