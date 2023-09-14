@@ -7,7 +7,7 @@ import Container from "@/components/01 - Atoms/Container/Container";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Stripe from "@/components/01 - Atoms/Stripe/Stripe";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
-import gwen from "../../assets/images/gwen.json";
+import Kate from "../../assets/images/Kate.json";
 import Learn from "@/components/01 - Atoms/Learn/Learn";
 import Block from "@/components/01 - Atoms/Block/Block";
 import Folder from "@/components/01 - Atoms/Folder/Folder";
@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
               </Stripe>
             </Heading>
           }
-          illustation={<Player src={gwen} autoplay keepLastFrame />}
+          illustation={<Player src={Kate} autoplay keepLastFrame />}
         />
         <Folder down="dark" theme="dark">
           <Heading tag="h2" level="primary" color="light">
