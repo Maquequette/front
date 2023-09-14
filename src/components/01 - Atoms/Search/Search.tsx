@@ -47,12 +47,10 @@ export default memo(function Search({ placeholder, className }: ISearch) {
                       height="50"
                     />
                   </div>
-                  <div className="search__option__content">
-                    <Heading tag="h4" level="quaternary">
-                      {suggestion.title}
-                    </Heading>
-                    <Paragraph>{suggestion.description}</Paragraph>
-                  </div>
+                  <Heading tag="h4" level="quaternary">
+                    {suggestion.title}
+                  </Heading>
+                  <Paragraph>{suggestion.description}</Paragraph>
                 </Link>
               </div>
             );
