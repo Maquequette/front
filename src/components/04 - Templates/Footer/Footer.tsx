@@ -12,7 +12,7 @@ export default memo(function Footer() {
     <footer className="footer">
       <Container center={true} isLarge={true} classes="footer__header">
         <div className="footer__logo">
-          <Logo name="aquequette" />
+          <Logo />
         </div>
         <div className="footer__reseau">
           <Svg id="twitter" />
@@ -23,7 +23,7 @@ export default memo(function Footer() {
       <div className="footer__body">
         <Container center={true} isLarge={true}>
           <div className="footer__copyright">
-            <Paragraph color="secondary">© MAQUEQUETTE - {new Date().getFullYear()}</Paragraph>
+            <Paragraph color="secondary">© Mac & Kate - {new Date().getFullYear()}</Paragraph>
           </div>
           <ul className="footer__sitemap">
             <li className="footer__link">{t("TERMS")}</li>

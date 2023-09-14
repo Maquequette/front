@@ -5,6 +5,7 @@
   top: 0;
   z-index: 9999;
   isolation: isolate;
+  transition: all 0.3s;
 
   &::after {
     content: "";
@@ -49,5 +50,10 @@
     @media (min-width: #{map-get($breakpoints, "lg")}) {
       display: none;
     }
+  }
+
+  &--scrolled {
+    transition: all 0.2s;
+    background-color: var(--grey);
   }
 }

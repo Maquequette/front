@@ -10,7 +10,21 @@ import "./Header.scss";
 export default memo(function Header() {
   const { enable, disable } = useDisableScroll();
   const [isOpen, setIsOpen] = useState(false);
+  const [hasScroll, setHasScroll] = useState(false);
+
   const location = useLocation();
+
+  useEffect(() => {
+    const onScroll = (e: any) => {
+      if (e.target.documentElement.scrollTop > 50) {
+        setHasScroll(true);
+      } else {
+        setHasScroll(false);
+      }
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const toggleMenu = useCallback(() => {
     setIsOpen((p) => {
@@ -24,7 +38,8 @@ export default memo(function Header() {
   }, [location]);
 
   return (
-    <header className={`header ${isOpen ? "header--open" : ""}`}>
+    <header
+      className={`header ${isOpen ? "header--open" : ""} ${hasScroll ? "header--scrolled" : ""}`}>
       <Container center={true} isLarge={true} classes="header__container">
         <div className="header__logo">
           <Logo />
