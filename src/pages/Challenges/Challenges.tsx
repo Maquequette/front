@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -68,7 +68,7 @@ export default function Challenges() {
   const { isConnected } = useContext(AuthContext);
 
   useEffect(() => {
-    if (isInView && hasNextPage) {
+    if (isInView && hasNextPage && !isLoading) {
       fetchNextPage();
     }
   }, [isInView, hasNextPage]);
@@ -79,7 +79,7 @@ export default function Challenges() {
         theme={mainColor}
         headContent={
           <>
-            <Label name="filter">Categories</Label>
+            <Label name="filter">{t("Categories")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, categories: value });
@@ -89,10 +89,10 @@ export default function Challenges() {
               options={categories?.data ?? []}
             />
 
-            <Label name="search">Search</Label>
-            <Search placeholder={"Type something here..."} />
+            <Label name="search">{t("Search")}</Label>
+            <Search placeholder={t("Type something here...")} />
 
-            <Label name="type">Filter by</Label>
+            <Label name="type">{t("Filter by")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, tags: value });
@@ -109,7 +109,7 @@ export default function Challenges() {
               }
             />
 
-            <Label name="type">Level</Label>
+            <Label name="type">{t("Level")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, difficulties: value });
@@ -117,14 +117,14 @@ export default function Challenges() {
               theme={"primary"}
               multiple={false}
               searchable={true}
-              defaultText="Level"
+              defaultText={t("Level")}
               options={difficulties?.data ?? []}
             />
           </>
         }>
         <Tags tags={query?.tags} />
         <div className="filters__indications">
-          <p>About our challenges categories</p>
+          <p>{t("About our challenges categories")}</p>
           <Tooltip theme="primary">test</Tooltip>
         </div>
       </Filters>
@@ -150,7 +150,7 @@ export default function Challenges() {
             }}
             styles={{ minWidth: "20rem" }}
             theme={"primary"}
-            defaultText="sort"
+            defaultText={t("sort")}
             options={[
               {
                 label: t("Created At"),
