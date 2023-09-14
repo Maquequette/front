@@ -34,13 +34,13 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber }:
         isConnected
           ? handleLike()
           : pushToast({
-              theme: "secondary",
-              title: "Vous devez être connecter",
-              desc: "vous devez etre connecter pour liker un challenge"
-            });
+            theme: "secondary",
+            title: "Vous devez être connecter",
+            desc: "vous devez etre connecter pour liker un challenge"
+          });
       }}>
       <Svg id="like" />
-      {showNumber || (!isConnected && <p className="like__count">{count}</p>)}
+      {showNumber && <p className="like__count">{count}</p>}
     </div>
   );
 }

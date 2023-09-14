@@ -1,0 +1,48 @@
+.details {
+    &__grid {
+        display: grid;
+        width: 100%;
+        padding-top: 2rem;
+        grid-template-columns: 75% 25%;
+        grid-template-rows: repeat(2, 1fr);
+        column-gap: 1rem;
+
+        &__tags {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            place-self: center;
+        }
+
+        &__level {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--grey);
+            border-radius: 2rem;
+            
+            span {
+                font-family: var(--font-family-secondary);
+                color: var(--dark);
+                font-size: var(--font-size-md);
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    &__sort__date {
+        font-family: var(--font-family-secondary);
+            color: var(--dark);
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+    }
+}
+
+.comment__count {
+    font-family: var(--font-family-secondary);
+    font-size: 1.6rem;
+}
+

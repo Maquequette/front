@@ -1,0 +1,30 @@
+@import "@/assets/utilities";
+@import "@/assets/variables";
+
+.profileBtn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--light);
+    border-radius: 1.5rem;
+    gap: 1rem;
+
+    span {
+        font-family: var(--font-family-secondary);
+        color: var(--dark);
+        font-size: var(--font-size-md);
+    }
+    
+    &__picture {
+        width: 5rem;
+        aspect-ratio: 1;
+        background-color: var(--secondary);
+        border-radius: 9999px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+        }
+    }
+}
