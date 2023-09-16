@@ -109,3 +109,9 @@
     }
   }
 }
+
+[data-theme="dark"] {
+  .card {
+    border-color: var(--light);
+  }
+}
