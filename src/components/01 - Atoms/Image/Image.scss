@@ -24,6 +24,16 @@
       content: "";
     }
   }
+
+  .dialog__content {
+    max-width: none;
+    min-height: auto;
+    width: auto;
+
+    img {
+      width: 70vw;
+    }
+  }
 }
 
 @keyframes shimmer {
