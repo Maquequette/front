@@ -100,7 +100,7 @@ export default function Home(): JSX.Element {
               {t("AND WE PROVIDE LESSONS TOO !!")}
             </Heading>
             <Grid size="33rem">
-              {!isLoading && <DotLoader theme="secondary" />}
+              {isLoading && <DotLoader theme="secondary" />}
               {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
                   <Card
