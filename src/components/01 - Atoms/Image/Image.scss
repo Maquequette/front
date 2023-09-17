@@ -1,10 +1,18 @@
+@import "@/assets/variables";
+
 .img {
   display: block;
   position: relative;
   overflow: hidden;
+  height: 100%;
+  width: 100%;
 
   &.loading {
-    background-color: var(--dark);
+    @each $name, $color in $colors {
+      &--#{$name} {
+        background-color: var(--#{$name});
+      }
+    }
 
     &::after {
       position: absolute;
@@ -25,11 +33,13 @@
     }
   }
 
-  .dialog__content {
-    max-width: none;
-    min-height: auto;
-    width: auto;
-    width: 70vw;
+  &__container {
+    .dialog__content {
+      max-width: none;
+      min-height: auto;
+      width: auto;
+      width: 70vw;
+    }
   }
 }
 
