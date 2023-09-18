@@ -1,6 +1,6 @@
-# 🚀 Maquequette - Front
+# 🚀 Mac&Kate - Front
 
-**Maquequette** est une plateforme d'apprentissage de développement front-end et de webdesign.
+**Mac&Kate** est une plateforme d'apprentissage de développement front-end et de webdesign.
 Nous disposons ou allons disposez des features suivantes: [features](#-features)
 
 
