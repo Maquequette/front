@@ -15,7 +15,7 @@ const Lessons = lazy(() => import("@/pages/Lessons/Lessons"));
 const Classroom = lazy(() => import("@/pages/ClassRoom/ClassRoom"));
 const Profil = lazy(() => import("@/pages/Profil/Profil"));
 const NoMatch = lazy(() => import("@/pages/NoMatch/NoMatch"));
-const Detail = lazy(() => import("@/pages/Challenge/Details"));
+const Details = lazy(() => import("@/pages/Challenge/Details"));
 const Cgu = lazy(() => import("@/pages/Cgu/Cgu"));
 
 {
