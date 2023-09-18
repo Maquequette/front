@@ -42,6 +42,39 @@
         color: transparent;
       }
     }
+
+    &--url {
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+
+      &:focus-within {
+        outline: 2px solid var(--secondary);
+      }
+
+      .url__protocol {
+        padding: 1rem 2rem 1rem 0;
+        border-right: 1px solid var(--dark);
+      }
+
+      input {
+        flex: 1;
+        padding: 1rem 0 1rem 2rem;
+        border: none;
+        color: var(--dark);
+        font-size: var(--font-size-md);
+        font-family: var(--font-family-secondary);
+
+        &::placeholder {
+          color: var(--dark);
+          opacity: 0.75;
+        }
+
+        &:focus, &:focus-visible {
+          outline: 0px solid var(--secondary);
+        }
+      }
+    }
   }
 
   &__btn {
@@ -78,8 +111,8 @@
     gap: 2rem;
 
     .preview {
-      border: 1px dotted var(--primary);
-      padding: 2rem;
+      border: 2px dashed var(--primary);
+      padding: 1rem;
 
       .sprites {
         width: 100%;

@@ -11,6 +11,7 @@ export interface IButton {
   disabled?: boolean;
   styles?: CSSProperties;
   btnStyles?: CSSProperties;
+  HTMLTag?: string;
 }
 
 export default memo(function Button({
@@ -20,18 +21,28 @@ export default memo(function Button({
   theme,
   disabled,
   styles,
-  btnStyles
+  btnStyles,
+  HTMLTag = "button"
 }: IButton) {
   return (
     <div className={`btn btn--${theme}`} style={styles}>
-      <button
-        disabled={disabled ?? false}
-        type={type ?? "button"}
-        onClick={handleClick ?? undefined}
-        className={`btn__input btn__input--${theme}`}
-        style={btnStyles}>
-        {children}
-      </button>
+      {HTMLTag === "button" ?
+        <button
+          disabled={disabled ?? false}
+          type={type ?? "button"}
+          onClick={handleClick ?? undefined}
+          className={`btn__input btn__input--${theme}`}
+          style={btnStyles}>
+          {children}
+        </button>
+        :
+        <p
+          onClick={handleClick ?? undefined}
+          className={`btn__input btn__input--${theme}`}
+          style={btnStyles}>
+          {children}
+        </p>
+      }
     </div>
   );
 });
