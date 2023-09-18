@@ -26,10 +26,6 @@ Nous disposons ou allons disposez des features suivantes: [features](#-features)
 - Multilangue
 - Dark mode
 
-### 📦 `Classroom`
-
-- Vous pouvez partager et voir le code de votre classe en temps réel
-
 ### 🗃️ `Challenges`
 
 - Affiche une liste de challenges
