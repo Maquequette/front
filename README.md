@@ -24,6 +24,7 @@ Nous disposons ou allons disposez des features suivantes: [features](#-features)
 ## 🧱 `Features`
 
 - Multilangue
+- Dark mode
 
 ### 📦 `Classroom`
 
@@ -47,6 +48,10 @@ Nous disposons ou allons disposez des features suivantes: [features](#-features)
 - Lottie
 - Framer motion
 - i18n
+- DomPurify
+- Tinymce
+- Socket.io
+- Axios
 
 #
 
@@ -61,7 +66,7 @@ npm install
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+npm run start:dev
 ```
 
 ### Compile and Minify for Production
