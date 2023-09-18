@@ -10,7 +10,7 @@ export default function DesignSystem() {
         alt="oui"
         height="500"
         width="1000"
-        src="https://www.programme-tv.net/imgre/fit/~1~tel~2023~05~16~60c36afc-95a1-4915-a905-9a34e1379499.jpeg/1200x600/crop-from/top/quality/80/focus-point/587,365/star-wars-dans-quel-ordre-chronologique-regarder-les-films-et-series-sur-disney.jpg"
+        src="https://res.cloudinary.com/dz209s6jk/image/upload/v1668186598/Challenges/txrtsxgbdjxjwamhysxx.jpg"
       />
     </Container>
   );

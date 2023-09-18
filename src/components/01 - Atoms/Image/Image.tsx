@@ -1,5 +1,6 @@
 import { useState, memo, useMemo } from "react";
 import Dialog from "@/components/04 - Templates/Dialog/Dialog";
+import ZoomImage from "../ZoomImage/ZoomImage";
 import "./Image.scss";
 
 export interface IImage {
@@ -33,12 +34,7 @@ export default memo(function Image({ alt, src, height, width }: IImage) {
         loading="lazy"
       />
       <Dialog visible={isOpen} id="modal__img" Dismiss={() => setIsOpen(false)}>
-        <img
-          src={src}
-          alt={alt}
-          className={`img ${!isImageLoaded ? "loading" : ""}`}
-          loading="lazy"
-        />
+        <ZoomImage image={src} />
       </Dialog>
     </div>
   );
