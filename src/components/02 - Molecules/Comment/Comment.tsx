@@ -6,11 +6,12 @@ import { dateToFormat } from "@/services/date";
 import ProfileButton from '@/components/01 - Atoms/ProfileButton/ProfileButton';
 import Button from '@/components/01 - Atoms/Button/Button';
 import Svg from '@/components/01 - Atoms/Svg/Svg';
-import Parser from 'html-react-parser';
 import Wysiwyg from '@/components/01 - Atoms/Wysiwyg/Wysiwyg';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { ThemesContext } from '@/contexts/ThemesContext';
 import { getCommentsFrom, postComment } from '@/services/comments.service';
+import DOMPurify from 'dompurify';
+import Paragraph from '@/components/01 - Atoms/Paragraph/Paragraph';
 
 export interface IComment {
     comment: any
@@ -57,7 +58,9 @@ export default function Comment({ comment }: IComment) {
             </div>
             <div className="comment__body">
                 <div className="comment__body__principal">
-                    {Parser(comment.content)}
+                    <Paragraph color="dark" isHtml={true}>
+                        {DOMPurify.sanitize(comment.content)}
+                    </Paragraph>
 
                     {editReply &&
                         <div className="comment__body__reply">

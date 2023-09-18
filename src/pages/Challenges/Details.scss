@@ -33,6 +33,95 @@
         }
     }
 
+    &__recap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+
+        &__resume {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+            position: relative;
+
+            &__description {
+                flex: 1;
+                text-align: center;
+
+                .paragraph {
+                    margin-bottom: 3rem;
+                }
+            }
+
+            &__img {
+                flex: 1;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+
+                .img {
+                    display: flex;
+                    flex: 1;
+                }
+
+                img {
+                    flex: 1;
+                    aspect-ratio: 1;
+                    border-radius: 1rem;
+                    object-fit: contain;
+                }
+
+                img.squarepic {
+                    object-fit: cover;
+                }
+            }
+
+            .btn {
+                position: absolute;
+                left: 2rem;
+                bottom: -1.5rem;
+            }
+        }
+
+        &__instruction {
+            flex: 1;
+
+            h2 {
+                text-align: center;
+            }
+
+            p {
+                font-family: var(--font-family-secondary);
+                font-size: 1.4rem;
+
+            }
+        }
+
+        &__resume, &__instruction {
+            background-color: var(--light);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+    }
+
+    &__solution {
+        background-color: var(--light);
+        padding: 2rem;
+        border-radius: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     &__sort__date {
         font-family: var(--font-family-secondary);
             color: var(--dark);

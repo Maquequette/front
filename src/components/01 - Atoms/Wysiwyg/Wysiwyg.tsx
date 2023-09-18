@@ -30,7 +30,7 @@ export default function Wysiwyg({ callback, value, children, maxHeight = 400, pl
           plugins: [
             "advlist", "autolink", "lists", "link", "image", "charmap", "preview", "anchor",
             "searchreplace", "visualblocks", "code", "fullscreen", "codesample",
-            "insertdatetime", "media", "table", "paste", "help", "wordcount"
+            "insertdatetime", "media", "table", "help", "wordcount"
           ],
           toolbar:
             "undo redo | formatselect | " +

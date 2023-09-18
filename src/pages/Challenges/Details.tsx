@@ -27,6 +27,14 @@ import Grid from "@/components/02 - Molecules/Grid/Grid";
 import { useParams } from "react-router-dom";
 import { useInView } from "framer-motion";
 import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
+import DOMPurify from "dompurify";
+import Image from "@/components/01 - Atoms/Image/Image";
+import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
+import Tabs from "@/components/03 - Organisms/Tabs/Tabs";
+import SolutionUpload from "@/components/03 - Organisms/Solution/SolutionUpload";
+import SolutionCode from "@/components/03 - Organisms/Solution/SolutionCode";
+import { TabsProvider } from "@/contexts/TabsContext";
+import Label from "@/components/01 - Atoms/Label/Label";
 
 export default function ChallengeDetails() {
 
@@ -38,6 +46,17 @@ export default function ChallengeDetails() {
 
     const { data: challenge } = useQuery(["challenge"], () => getChallenge({ id: parseInt(id!) }));
     const [comment, setComment] = useState<any>(null);
+    const [displaySolution, setDisplaySolution] = useState<boolean>(false);
+    const [pictures, setPictures] = useState<Array<any>>([]);
+    const [files, setFiles] = useState<Array<any>>([]);
+    const [links, setLinks] = useState<Array<any>>([]);
+
+    useEffect(() => {
+        console.log(challenge);
+        setPictures(challenge?.data.resources.filter((resource: any) => resource.type === 'image'));
+        setFiles(challenge?.data.resources.filter((resource: any) => resource.type === 'file'));
+        setLinks(challenge?.data.resources.filter((resource: any) => resource.type === 'url'));
+    }, [challenge]);
 
     const loadRef = useRef(null);
     const isInView = useInView(loadRef);
@@ -125,6 +144,77 @@ export default function ChallengeDetails() {
                     }>
                     <span className="details__sort__date">{t("Published on ") + dateToFormat(new Date(challenge?.data.createdAt))}</span>
                 </Sorts>
+
+                <div className="details__recap">
+                    <div className="details__recap__resume">
+                        <div className="details__recap__resume__description">
+                            <Heading tag={"h2"} level={"secondary"} styles={{ marginBottom: "1.5rem" }}>
+                                {t("Description")}
+                            </Heading>
+                            <Paragraph color="dark" isHtml={true}>
+                                {DOMPurify.sanitize(challenge?.data?.description ?? "")}
+                            </Paragraph>
+                        </div>
+                        <div className="details__recap__resume__img" style={{ flexDirection: `${pictures?.length <= 2 ? 'column' : 'row'}` }}>
+                            {pictures?.map((resource: any, i: number) => {
+                                return (
+                                    <div style={{ width: `calc((100% - 1rem)/ ${pictures?.length >= 3 ? 2 : 1})` }}>
+                                        <Image src={resource.value} alt={resource.label ?? challenge?.data.title} height={pictures?.length == 2 ? "175" : "auto"} width="100%" key={i} classes="squarepic" />
+                                    </div>
+
+                                );
+                            })}
+                        </div>
+                        <Button type="submit" theme={"primary"} handleClick={() => { setDisplaySolution(!displaySolution) }}>
+                            <Svg
+                                id="arrow"
+                                styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }}
+                            />
+                            {t("start challenge !")}
+                        </Button>
+                    </div>
+                    <div className="details__recap__instruction">
+                        <Heading tag={"h2"} level={"secondary"} styles={{ marginBottom: "1.5rem" }} >
+                            {t("Instructions")}
+                        </Heading>
+                        <p>
+                            {t("instruction_front_reproduction")}
+                        </p>
+                        {files?.length > 0 &&
+                            <>
+                                <Label name="zipfile">
+                                    {t("Additional Resources")}
+                                </Label>
+                            </>
+                        }
+                    </div>
+                </div>
+
+                {displaySolution &&
+                    <div className="details__solution">
+                        <Heading tag={"h3"} level={"secondary"}>
+                            {t("Take up the challenge !")}
+                        </Heading>
+                        <TabsProvider>
+                            <Tabs
+                                tabs={[
+                                    {
+                                        tabTitle: "Upload files",
+                                        tabContent: <SolutionUpload></SolutionUpload>,
+                                        anchor: "#upload"
+                                    },
+                                    {
+                                        tabTitle: "Code online",
+                                        tabContent: <SolutionCode></SolutionCode>,
+                                        anchor: "#code"
+                                    }
+                                ]}
+                                anchorNavigation={false}
+                            />
+                        </TabsProvider>
+                    </div>
+                }
+
                 <Sorts
                     title={t("Challenge's comments")}
                     nbResult={challenge?.data.commentsCount}
@@ -180,26 +270,20 @@ export default function ChallengeDetails() {
                         ]}
                     />
                 </Sorts>
-                {isConnected &&
-                    <Wysiwyg
-                        callback={(value: any) => {
-                            setComment(value);
-                        }}
-                        value={comment}
-                        maxHeight={800}
-                        placeholder={t("Add a comment...")}
-                        color={mainColor}>
-                        <Button type="submit" theme={"primary"} handleClick={handleComment}>
-                            <Svg id="back" styles={{ width: "2rem", height: "2rem", rotate: "180deg", fill: "#171717" }} />
-                            {t("Comment")}
-                        </Button>
-                    </Wysiwyg>
-                }
 
-                <div className="details__recap">
-                    <div style={{ backgroundColor: 'red' }}>lorem</div>
-                    <div style={{ backgroundColor: 'blue' }}>ipsum</div>
-                </div>
+                <Wysiwyg
+                    callback={(value: any) => {
+                        setComment(value);
+                    }}
+                    value={comment}
+                    maxHeight={800}
+                    placeholder={t("Add a comment...")}
+                    color={mainColor}>
+                    <Button type="submit" theme={"primary"} handleClick={handleComment}>
+                        <Svg id="back" styles={{ width: "2rem", height: "2rem", rotate: "180deg", fill: "#171717" }} />
+                        {t("Comment")}
+                    </Button>
+                </Wysiwyg>
 
                 <Grid size="100%" styles={{ marginTop: '2rem', gap: '2rem' }}>
                     {comments?.pages?.map((group, i) => {
