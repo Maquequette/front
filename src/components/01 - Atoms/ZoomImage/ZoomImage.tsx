@@ -10,9 +10,9 @@ const ZoomImage = ({ image }: { image: string }) => {
   const [draggind, setDragging] = useState(false);
 
   const touch = useRef({ x: 0, y: 0 });
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<any>(null);
   const containerRef = useRef(null);
-  const observer = useRef(null);
+  const observer = useRef<any>(null);
   const background = useMemo(() => new Image(), [image]);
 
   const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
@@ -47,7 +47,7 @@ const ZoomImage = ({ image }: { image: string }) => {
   const draw = () => {
     if (canvasRef.current) {
       const { width, height } = canvasRef.current;
-      const context = canvasRef.current.getContext("2d");
+      const context: any = canvasRef.current.getContext("2d");
 
       // Set canvas dimensions
       canvasRef.current.width = width;
