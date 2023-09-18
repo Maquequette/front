@@ -7,7 +7,7 @@ import Container from "@/components/01 - Atoms/Container/Container";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Stripe from "@/components/01 - Atoms/Stripe/Stripe";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
-import gwen from "../../assets/images/gwen.json";
+import Kate from "../../assets/images/Kate.json";
 import Learn from "@/components/01 - Atoms/Learn/Learn";
 import Block from "@/components/01 - Atoms/Block/Block";
 import Folder from "@/components/01 - Atoms/Folder/Folder";
@@ -17,12 +17,12 @@ import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import Button from "@/components/01 - Atoms/Button/Button";
 import Card from "@/components/03 - Organisms/Card/Card";
 import { getChallenges } from "@/services/challenges.service";
+import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
 import "./Home.scss";
-import { Fragment } from "react";
 
 export default function Home(): JSX.Element {
   const { t } = useTranslation();
-  const { data: challenges } = useQuery(["challenges"], () =>
+  const { data: challenges, isLoading } = useQuery(["challenges"], () =>
     getChallenges({ pageParam: 1, itemsPerPage: 3 })
   );
 
@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
           styles={{ zIndex: 1, position: "relative" }}
           title={
             <Heading tag="h1" level="primary">
-              <Learn>{t("LEARN")}</Learn>
+              <Learn hasGlass={true}>{t("LEARN")}</Learn>
               <Block>{t("FRONT-END / WEB DESIGN")}</Block>
               <Stripe theme="secondary">
                 {t("THE COOL WAY")}
@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
               </Stripe>
             </Heading>
           }
-          illustation={<Player src={gwen} autoplay keepLastFrame />}
+          illustation={<Player src={Kate} autoplay keepLastFrame />}
         />
         <Folder down="dark" theme="dark">
           <Heading tag="h2" level="primary" color="light">
@@ -100,6 +100,7 @@ export default function Home(): JSX.Element {
               {t("AND WE PROVIDE LESSONS TOO !!")}
             </Heading>
             <Grid size="33rem">
+              {isLoading && <DotLoader theme="secondary" />}
               {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
                   <Card

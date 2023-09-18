@@ -30,6 +30,7 @@ axios.interceptors.response.use(
       return axios(originalRequest);
     }
     retry = false;
+    localStorage.clear();
     return Promise.reject(error);
   }
 );

@@ -96,6 +96,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
   }
 
   &__info {
@@ -106,5 +107,11 @@
     .date {
       display: inline-block;
     }
+  }
+}
+
+[data-theme="dark"] {
+  .card {
+    border-color: var(--light);
   }
 }

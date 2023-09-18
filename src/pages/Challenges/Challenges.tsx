@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -53,7 +53,8 @@ export default function Challenges() {
     data: challenges,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage
+    isFetchingNextPage,
+    isLoading
   } = useInfiniteQuery({
     queryKey: ["challenges", query],
     keepPreviousData: true,
@@ -67,7 +68,7 @@ export default function Challenges() {
   const { isConnected } = useContext(AuthContext);
 
   useEffect(() => {
-    if (isInView && hasNextPage) {
+    if (isInView && hasNextPage && !isLoading) {
       fetchNextPage();
     }
   }, [isInView, hasNextPage]);
@@ -78,7 +79,7 @@ export default function Challenges() {
         theme={mainColor}
         headContent={
           <>
-            <Label name="filter">Categories</Label>
+            <Label name="filter">{t("Categories")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, categories: value });
@@ -88,10 +89,10 @@ export default function Challenges() {
               options={categories?.data ?? []}
             />
 
-            <Label name="search">Search</Label>
-            <Search placeholder={"Type something here..."} />
+            <Label name="search">{t("Search")}</Label>
+            <Search placeholder={t("Type something here...")} />
 
-            <Label name="type">Filter by</Label>
+            <Label name="type">{t("Filter by")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, tags: value });
@@ -108,7 +109,7 @@ export default function Challenges() {
               }
             />
 
-            <Label name="type">Level</Label>
+            <Label name="type">{t("Level")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, difficulties: value });
@@ -116,14 +117,14 @@ export default function Challenges() {
               theme={"primary"}
               multiple={false}
               searchable={true}
-              defaultText="Level"
+              defaultText={t("Level")}
               options={difficulties?.data ?? []}
             />
           </>
         }>
         <Tags tags={query?.tags} />
         <div className="filters__indications">
-          <p>About our challenges categories</p>
+          <p>{t("About our challenges categories")}</p>
           <Tooltip theme="primary">test</Tooltip>
         </div>
       </Filters>
@@ -147,7 +148,7 @@ export default function Challenges() {
             callback={(value: any) => {
               setQuery({ ...query, order: value[0]?.order, orderBy: value[0]?.orderBy });
             }}
-            styles={{ minWidth: '20rem' }}
+            styles={{ minWidth: "20rem" }}
             theme={"primary"}
             defaultText={t("sort")}
             multiple={false}
@@ -191,35 +192,31 @@ export default function Challenges() {
         </Sorts>
         <Grid size="33rem">
           {challenges?.pages?.map((group, i) => {
-            return (
-              <Fragment key={i}>
-                {group?.data?.["hydra:member"].map((challenge: any) => {
-                  return (
-                    <Card
-                      img={challenge?.resources[0]?.value}
-                      path={`/challenges/${challenge.id}`}
-                      likesCount={challenge.challengeLikesCount}
-                      id={challenge.id}
-                      isLiked={challenge.isLiked}
-                      badge={challenge.difficulty}
-                      tags={challenge.tags}
-                      key={challenge.id}
-                      date={new Date(challenge.updatedAt ?? challenge.createdAt)}
-                      title={challenge.title}
-                      desc={challenge.description}
-                      author={`${challenge.author.firstName} ${challenge.author.lastName}`}
-                    />
-                  );
-                })}
-              </Fragment>
-            );
+            return group?.data?.["hydra:member"].map((challenge: any) => {
+              return (
+                <Card
+                  img={challenge?.resources?.[0]?.value}
+                  path={`/challenges/${challenge.id}`}
+                  likesCount={challenge.challengeLikesCount}
+                  id={challenge.id}
+                  isLiked={challenge.isLiked}
+                  badge={challenge.difficulty}
+                  tags={challenge.tags}
+                  key={challenge.id}
+                  date={new Date(challenge.updatedAt ?? challenge.createdAt)}
+                  title={challenge.title}
+                  desc={challenge.description}
+                  author={`${challenge.author.firstName} ${challenge.author.lastName}`}
+                />
+              );
+            });
           })}
         </Grid>
         <div
           className="loader--container"
           ref={loadRef}
           style={{ marginTop: "3rem", display: "flex", justifyContent: "center" }}>
-          {isFetchingNextPage && <DotLoader theme="primary" />}
+          {isFetchingNextPage || (isLoading && <DotLoader theme="primary" />)}
         </div>
       </Container>
       <Dialog

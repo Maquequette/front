@@ -44,13 +44,9 @@ export default memo(function Card({
     <div className="card" key={id}>
       <div className="card__header">
         <div className="card__media">
-          <Link to={path ?? ""} className={`card__img${!img ? "--placeholder" : ""}`}>
-            {img && (
-              <>
-                <Image src={img} alt={title} height="175" width="100%" />
-              </>
-            )}
-          </Link>
+          <div className={`card__img${!img ? "--placeholder" : ""}`}>
+            {img && <Image src={img} alt={title} height="175" width="100%" />}
+          </div>
           <div className="card__icons">
             {badge && (
               <Badge color={badge.color} content={badge.sortLevel}>
