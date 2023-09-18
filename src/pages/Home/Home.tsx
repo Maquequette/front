@@ -19,6 +19,7 @@ import Card from "@/components/03 - Organisms/Card/Card";
 import { getChallenges } from "@/services/challenges.service";
 import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
 import "./Home.scss";
+import Pricing from "@/components/01 - Atoms/Pricing/Pricing";
 
 export default function Home(): JSX.Element {
   const { t } = useTranslation();
@@ -49,43 +50,47 @@ export default function Home(): JSX.Element {
           </Heading>
           <Grid size="22.5rem">
             <Collapsible theme="primary">
-              <Svg id="coding" />
+              <Svg id="explore" />
               <Heading tag="h4" level="secondary">
-                {t("CODE THE SKETCH")}
+                {t("Explore")}
               </Heading>
               <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt.
+                {t(
+                  "Do you like to tinker, code and have fun with website mock-ups? Then you've come to the right place! Our site is a cave where you can put your web nerd talents to good use."
+                )}
               </Paragraph>
             </Collapsible>
             <Collapsible theme="primary">
-              <Svg id="coding" />
+              <Svg id="challenges" />
               <Heading tag="h4" level="secondary">
-                {t("CODE THE SKETCH")}
+                {t("Challenge yourself")}
               </Heading>
               <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt.
+                {t(
+                  "Our site offers you the perfect opportunity to challenge yourself. Put your skills to the test by taking on stimulating web integration challenges."
+                )}
               </Paragraph>
             </Collapsible>
             <Collapsible theme="primary">
-              <Svg id="coding" />
+              <Svg id="commu" />
               <Heading tag="h4" level="secondary">
-                {t("CODE THE SKETCH")}
+                {t("Join the community")}
               </Heading>
               <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt.
+                {t(
+                  "Join a community of enthusiasts, where you can share, comment, ask questions, like other people's creations, and become a better developer"
+                )}
               </Paragraph>
             </Collapsible>
             <Collapsible theme="primary">
-              <Svg id="coding" />
+              <Svg id="share" />
               <Heading tag="h4" level="secondary">
-                {t("CODE THE SKETCH")}
+                {t("Share")}
               </Heading>
               <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt.
+                {t(
+                  "If you're a designer, get involved and submit your creations. Showcase your talent, inspire the community and encourage developers to bring your creative visions to life."
+                )}
               </Paragraph>
             </Collapsible>
           </Grid>
@@ -127,6 +132,10 @@ export default function Home(): JSX.Element {
             </div>
           </Folder>
         </Folder>
+        <section style={{ marginTop: "10rem" }}>
+          
+          <Pricing />
+        </section>
       </Container>
     </PageTransition>
   );

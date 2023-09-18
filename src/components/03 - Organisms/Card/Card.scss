@@ -1,3 +1,5 @@
+@import "@/assets/variables";
+
 .card {
   display: flex;
   flex-direction: column;
@@ -46,12 +48,17 @@
       position: absolute;
       display: block;
       width: 100%;
-      background-color: var(--secondary);
       border-radius: 1rem;
       overflow: hidden;
       height: 100%;
       top: 0;
       left: 0;
+
+      @each $name, $color in $colors {
+        &--#{$name} {
+          background-color: var(--#{$name});
+        }
+      }
 
       img {
         display: block;
