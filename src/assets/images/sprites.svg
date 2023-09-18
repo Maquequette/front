@@ -425,4 +425,21 @@ m218 -210 c122 -26 259 -114 334 -215 83 -111 121 -224 121 -363 0 -165 -53
 <g>
 </g>
 </svg>
+<svg id="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <rect id="_3._Icons_Icons_simple_icon_aprv_white_background" data-name="3. Icons / Icons simple / icon_aprv_white background" width="28" height="28" fill="none"/>
+  <g id="_3._Icons_Icons_simple_icon_aprv_white" data-name="3. Icons / Icons simple / icon_aprv_white">
+    <rect id="Rectangle_16" data-name="Rectangle 16" width="28" height="28" opacity="0"/>
+    <path id="Combined_Shape" data-name="Combined Shape" d="M5.364,12.677l-.05.05L0,7.414,1.414,6l3.95,3.95L15.314,0l1.415,1.414L5.414,12.728Z" transform="translate(5.636 7.636)"/>
+  </g>
+</svg>
+<svg id="notCheck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <rect id="_3._Icons_Icons_simple_icon_diss_white_background" data-name="3. Icons / Icons simple / icon_diss_white background" width="28" height="28" fill="none"/>
+  <g id="_3._Icons_Icons_simple_icon_diss_white" data-name="3. Icons / Icons simple / icon_diss_white">
+    <rect id="Rectangle_16" data-name="Rectangle 16" width="28" height="28" opacity="0"/>
+    <g id="Group" transform="translate(14 2.686) rotate(45)">
+      <path id="Combined_Shape" data-name="Combined Shape" d="M7,16V9H0V7H7V0H9V7h7V9H9v7Z" transform="translate(0 0)" />
+    </g>
+  </g>
+</svg>
+
 </svg>

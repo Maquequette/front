@@ -19,6 +19,7 @@ import Card from "@/components/03 - Organisms/Card/Card";
 import { getChallenges } from "@/services/challenges.service";
 import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
 import "./Home.scss";
+import Pricing from "@/components/01 - Atoms/Pricing/Pricing";
 
 export default function Home(): JSX.Element {
   const { t } = useTranslation();
@@ -131,6 +132,10 @@ export default function Home(): JSX.Element {
             </div>
           </Folder>
         </Folder>
+        <section style={{ marginTop: "10rem" }}>
+          
+          <Pricing />
+        </section>
       </Container>
     </PageTransition>
   );
