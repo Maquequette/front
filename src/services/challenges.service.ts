@@ -155,7 +155,7 @@ export const postChallenge = (challenge: FormData) => {
   });
 };
 
-export const likeChallenge = (challengeId: number) => {
+export const likeChallenge: Function = (challengeId: number) => {
   return axios.post(`/api/challenges/${challengeId}/like`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("access_token")}`

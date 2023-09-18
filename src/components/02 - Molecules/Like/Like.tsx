@@ -5,19 +5,32 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { likeChallenge, unlikeChallenge } from "@/services/challenges.service";
 import "./Like.scss";
 import useToasts from "@/hooks/useToasts";
+import { likeComment, unlikeComment } from "@/services/comments.service";
 
 export interface ILike {
   id: number;
   isAlreadyLiked?: boolean;
   likesCount?: number;
   showNumber: boolean;
+  type?: string;
 }
 
-export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber }: ILike) {
+export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber, type = "Challenge" }: ILike) {
+
+  const likeType: { [key: string]: any } = {
+    'Challenge': likeChallenge,
+    'Comment': likeComment
+  };
+
+  const unlikeType: { [key: string]: any } = {
+    'Challenge': unlikeChallenge,
+    'Comment': unlikeComment
+  }
+
   const [isLiked, setIsLiked] = useState(isAlreadyLiked);
   const [count, setCount] = useState(likesCount);
-  const { mutate: like } = useMutation(likeChallenge);
-  const { mutate: unlike } = useMutation(unlikeChallenge);
+  const { mutate: like } = useMutation(likeType[type]);
+  const { mutate: unlike } = useMutation(unlikeType[type]);
   const { isConnected } = useContext(AuthContext);
   const { pushToast } = useToasts();
 

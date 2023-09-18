@@ -149,7 +149,8 @@ export default function Challenges() {
             }}
             styles={{ minWidth: '20rem' }}
             theme={"primary"}
-            defaultText="sort"
+            defaultText={t("sort")}
+            multiple={false}
             options={[
               {
                 label: t("Created At"),
