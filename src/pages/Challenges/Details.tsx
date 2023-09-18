@@ -196,6 +196,11 @@ export default function ChallengeDetails() {
                     </Wysiwyg>
                 }
 
+                <div className="details__recap">
+                    <div style={{ backgroundColor: 'red' }}>lorem</div>
+                    <div style={{ backgroundColor: 'blue' }}>ipsum</div>
+                </div>
+
                 <Grid size="100%" styles={{ marginTop: '2rem', gap: '2rem' }}>
                     {comments?.pages?.map((group, i) => {
                         return (
