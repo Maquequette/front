@@ -37,8 +37,13 @@
     .dialog__content {
       max-width: none;
       min-height: auto;
-      width: auto;
       width: 70vw;
+      max-height: 70vh;
+      overflow: hidden;
+
+      img {
+        object-fit: contain;
+      }
     }
   }
 }
