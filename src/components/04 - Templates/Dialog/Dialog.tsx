@@ -1,5 +1,6 @@
-import { CSSProperties, ReactNode, memo } from "react";
+import { CSSProperties, ReactNode, memo, useEffect } from "react";
 import { motion } from "framer-motion";
+import useDisableScroll from "@/hooks/useDisableScroll";
 import "./Dialog.scss";
 
 export interface IDialog {
@@ -11,10 +12,15 @@ export interface IDialog {
 }
 
 export default memo(function Dialog({ id, children, visible = false, Dismiss, styles }: IDialog) {
+  const { disable, enable } = useDisableScroll();
   const backdropCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     Dismiss();
   };
+
+  useEffect(() => {
+    visible ? disable() : enable();
+  }, [visible]);
 
   return (
     <div

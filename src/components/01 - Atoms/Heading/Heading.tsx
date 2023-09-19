@@ -16,7 +16,7 @@ export interface IHeading {
 export default memo(function Heading({ tag, children, level, color, styles }: IHeading) {
   const Tag = tag;
   return (
-    <Tag style={styles} className={`heading heading--${level} ${color && `txt--${color}`}`}>
+    <Tag style={styles} className={`heading heading--${level} ${color ? `txt--${color}` : ""}`}>
       {children}
     </Tag>
   );

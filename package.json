@@ -11,12 +11,12 @@
 
   },
   "dependencies": {
-    "@codemirror/collab": "^6.1.0",
+    "@codemirror/collab": "^6.1.1",
     "@codemirror/search": "^6.5.3",
     "@codemirror/state": "^6.2.1",
-    "@codemirror/view": "^6.18.1",
+    "@codemirror/view": "^6.19.0",
     "@codesandbox/sandpack-client": "^2.7.1",
-    "@codesandbox/sandpack-react": "^2.7.0",
+    "@codesandbox/sandpack-react": "^2.7.1",
     "@emmetio/codemirror6-plugin": "^0.3.0",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@tanstack/react-query": "^4.35.3",

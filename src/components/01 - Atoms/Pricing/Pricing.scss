@@ -1,0 +1,98 @@
+@import "@/assets/variables";
+
+.pricing {
+  .heading {
+    width: 70%;
+    min-width: 20rem;
+    margin-bottom: 10rem;
+  }
+
+  &__content {
+    position: relative;
+    margin-top: 6rem;
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
+      margin-top: 3rem;
+    }
+
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
+      display: grid;
+      grid-template-columns: max-content 1fr 1fr;
+      &::before {
+        content: "";
+        display: block;
+      }
+    }
+
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
+      &::after {
+        content: "";
+        top: 0;
+        position: absolute;
+        grid-row: 2;
+        height: 100%;
+        width: 100%;
+        border: 1px solid var(--dark);
+        border-radius: 1rem 0 0 1rem;
+        box-shadow: 5px 5px 0 0;
+        z-index: -1;
+      }
+    }
+
+    .heading {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 3rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        grid-column: 3/-1;
+        left: 0;
+        top: -3rem;
+        height: calc(100% + 3rem);
+        width: 100%;
+        border: 1px solid var(--dark);
+        border-radius: 1rem 1rem 0 0;
+        z-index: -1;
+        box-shadow: 5px 5px 0 0;
+
+        @media (min-width: #{map-get($breakpoints, "lg")}) {
+          background-color: var(--primary);
+        }
+      }
+    }
+  }
+
+  .paragraph {
+    font-size: var(--font-size-lg);
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+
+    .sprites {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--dark);
+    box-shadow: 5px 5px 0 0;
+    transition: all 0.2s;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    @media (min-width: #{map-get($breakpoints, "lg")}) {
+      border-right: 1px solid var(--dark);
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { memo, useContext } from "react";
+import { memo, useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
@@ -40,17 +40,20 @@ export default memo(function Card({
   badge,
   isLiked
 }: ICard) {
+  const color = useMemo(() => {
+    return ["primary", "secondary", "warn", "danger", "success", "accent"];
+  }, []);
+
   return (
     <div className="card" key={id}>
       <div className="card__header">
         <div className="card__media">
-          <Link to={path ?? ""} className={`card__img${!img ? "--placeholder" : ""}`}>
-            {img && (
-              <>
-                <Image src={img} alt={title} height="175" width="100%" />
-              </>
-            )}
-          </Link>
+          <div
+            className={`card__img${
+              !img ? `--placeholder card__img--${color.sort(() => 0.5 - Math.random())[0]}` : ""
+            }`}>
+            {img && <Image src={img} alt={title} height="175" width="100%" />}
+          </div>
           <div className="card__icons">
             {badge && (
               <Badge color={badge.color} content={badge.sortLevel}>
