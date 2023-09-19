@@ -2,15 +2,17 @@ import { useState, memo, useMemo } from "react";
 import Dialog from "@/components/04 - Templates/Dialog/Dialog";
 import ZoomImage from "../ZoomImage/ZoomImage";
 import "./Image.scss";
+import clsx from "clsx";
 
 export interface IImage {
   alt: string;
   src: string;
   height: string;
   width: string;
+  classes?: string;
 }
 
-export default memo(function Image({ alt, src, height, width }: IImage) {
+export default memo(function Image({ alt, src, height, width, classes }: IImage) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const color = useMemo(() => {
