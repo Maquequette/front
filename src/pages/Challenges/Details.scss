@@ -1,0 +1,144 @@
+.details {
+    &__grid {
+        display: grid;
+        width: 100%;
+        padding-top: 2rem;
+        grid-template-columns: 75% 25%;
+        grid-template-rows: repeat(2, 1fr);
+        column-gap: 1rem;
+
+        &__tags {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            place-self: center;
+        }
+
+        &__level {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: var(--grey);
+            border-radius: 2rem;
+            
+            span {
+                font-family: var(--font-family-secondary);
+                color: var(--dark);
+                font-size: var(--font-size-md);
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    &__recap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+
+        &__resume {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+            position: relative;
+
+            &__description {
+                flex: 1;
+                text-align: center;
+
+                .paragraph {
+                    margin-bottom: 3rem;
+                }
+            }
+
+            &__img {
+                flex: 1;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+
+                .img {
+                    display: flex;
+                    flex: 1;
+                }
+
+                img {
+                    flex: 1;
+                    aspect-ratio: 1;
+                    border-radius: 1rem;
+                    object-fit: contain;
+                }
+
+                img.squarepic {
+                    object-fit: cover;
+                }
+            }
+
+            .btn {
+                position: absolute;
+                left: 2rem;
+                bottom: -1.5rem;
+            }
+        }
+
+        &__instruction {
+            flex: 1;
+
+            h2 {
+                text-align: center;
+            }
+
+            p {
+                font-family: var(--font-family-secondary);
+                font-size: 1.4rem;
+
+            }
+
+            &__file {
+                margin-top: 1.5rem;
+                border-top: 2px solid var(--primary);
+            }
+        }
+
+        &__resume, &__instruction {
+            background-color: var(--light);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+    }
+
+    &__solution {
+        background-color: var(--light);
+        padding: 2rem;
+        border-radius: 1.5rem;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    &__sort__date {
+        font-family: var(--font-family-secondary);
+            color: var(--dark);
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+    }
+}
+
+.comment__count {
+    font-family: var(--font-family-secondary);
+    font-size: 1.6rem;
+}
+
