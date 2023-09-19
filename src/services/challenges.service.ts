@@ -132,6 +132,20 @@ export const getTagFamilies = ({
   });
 };
 
+export const getChallenge = ({ id }: { id: number }) => {
+
+  const headers: any = {
+    Accept: "application/ld+json"
+  };
+
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    headers["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`;
+  }
+
+  return axios.get(`/api/challenges/${id}`, { headers });
+};
+
 export const postChallenge = (challenge: FormData) => {
   return axios.post("/api/challenges", challenge, {
     headers: {
@@ -141,7 +155,7 @@ export const postChallenge = (challenge: FormData) => {
   });
 };
 
-export const likeChallenge = (challengeId: number) => {
+export const likeChallenge: Function = (challengeId: number) => {
   return axios.post(`/api/challenges/${challengeId}/like`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("access_token")}`
