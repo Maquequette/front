@@ -190,7 +190,7 @@ export default function Challenges() {
             ]}
           />
         </Sorts>
-        <Grid size="33rem">
+        <Grid size="25%">
           {challenges?.pages?.map((group, i) => {
             return group?.data?.["hydra:member"].map((challenge: any) => {
               return (

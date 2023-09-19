@@ -37,6 +37,7 @@ import { TabsProvider } from "@/contexts/TabsContext";
 import Label from "@/components/01 - Atoms/Label/Label";
 import useToasts from "@/hooks/useToasts";
 import { postSolution } from "@/services/solutions.service";
+import ChallengeSolutions from "./ChallengeSolutions";
 
 export default function ChallengeDetails() {
 
@@ -50,6 +51,7 @@ export default function ChallengeDetails() {
     const { data: challenge } = useQuery(["challenge"], () => getChallenge({ id: parseInt(id!) }));
     const [comment, setComment] = useState<any>(null);
     const [displaySolution, setDisplaySolution] = useState<boolean>(false);
+    const [displaySolutions, setDisplaySolutions] = useState<boolean>(false);
     const [pictures, setPictures] = useState<Array<any>>([]);
     const [files, setFiles] = useState<Array<any>>([]);
     const [links, setLinks] = useState<Array<any>>([]);
@@ -63,7 +65,6 @@ export default function ChallengeDetails() {
     });
 
     useEffect(() => {
-        console.log(challenge);
         setPictures(challenge?.data.resources.filter((resource: any) => resource.type === 'image'));
         setFiles(challenge?.data.resources.filter((resource: any) => resource.type === 'file'));
         setLinks(challenge?.data.resources.filter((resource: any) => resource.type === 'url'));
@@ -135,6 +136,7 @@ export default function ChallengeDetails() {
             resources: [],
             url: ""
         });
+        setDisplaySolution(!displaySolution);
 
     }, [querySolution]);
 
@@ -160,271 +162,279 @@ export default function ChallengeDetails() {
                         </div>
                     </div>
 
-                    <Button type="button" theme={"primary"} styles={{ placeSelf: 'center' }}>
-                        <Svg
-                            id="arrow"
-                            styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }}
-                        />
-                        {t("Check solutions")}
+                    <Button type="button" theme={"primary"} styles={{ placeSelf: 'center' }} handleClick={() => setDisplaySolutions(!displaySolutions)}>
+                        <Svg id="arrow" styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }} />
+                        {!displaySolutions ? t("Check solutions") : t("Challenge details")}
                     </Button>
                 </div>
             </Filters>
-            <Container center>
-                <Sorts
-                    title={t("Challenge")}
-                    displayResult={false}
-                    actions={
-                        true && (
-                            <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '1rem' }}>
-                                <Like showNumber={true} id={challenge?.data.id} isAlreadyLiked={challenge?.data.isLiked} likesCount={challenge?.data.likesCount} />
-                                <BulletPoint />
+            {!displaySolutions ?
+                <Container center>
+                    <Sorts
+                        title={t("Challenge")}
+                        displayResult={false}
+                        actions={
+                            true && (
                                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '1rem' }}>
-                                    <Svg id="comment" styles={{ width: "2rem", height: "2rem" }} />
-                                    <p className="comment__count">{challenge?.data.commentsCount}</p>
-                                </div>
-                            </div>
-                        )
-                    }>
-                    <span className="details__sort__date">{t("Published on ") + dateToFormat(new Date(challenge?.data.createdAt))}</span>
-                </Sorts>
-
-                <div className="details__recap">
-                    <div className="details__recap__resume">
-                        <div className="details__recap__resume__description">
-                            <Heading tag={"h2"} level={"secondary"} styles={{ marginBottom: "1.5rem" }}>
-                                {t("Description")}
-                            </Heading>
-                            <Paragraph color="dark" isHtml={true}>
-                                {DOMPurify.sanitize(challenge?.data?.description ?? "")}
-                            </Paragraph>
-                        </div>
-                        <div className="details__recap__resume__img" style={{ flexDirection: `${pictures?.length <= 2 ? 'column' : 'row'}` }}>
-                            {pictures?.map((resource: any, i: number) => {
-                                return (
-                                    <div style={{ width: `calc((100% - 1rem)/ ${pictures?.length >= 3 ? 2 : 1})` }}>
-                                        <Image src={resource.value} alt={resource.label ?? challenge?.data.title} height={pictures?.length == 2 ? "175" : "auto"} width="100%" key={i} classes="squarepic" />
+                                    <Like showNumber={true} id={challenge?.data.id} isAlreadyLiked={challenge?.data.isLiked} likesCount={challenge?.data.likesCount} />
+                                    <BulletPoint />
+                                    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '1rem' }}>
+                                        <Svg id="comment" styles={{ width: "2rem", height: "2rem" }} />
+                                        <p className="comment__count">{challenge?.data.commentsCount}</p>
                                     </div>
+                                </div>
+                            )
+                        }>
+                        <span className="details__sort__date">{t("Published on ") + dateToFormat(new Date(challenge?.data.createdAt))}</span>
+                    </Sorts>
 
-                                );
-                            })}
-                        </div>
-                        <Button type="submit" theme={"primary"} handleClick={() => { setDisplaySolution(!displaySolution) }}>
-                            <Svg
-                                id="arrow"
-                                styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }}
-                            />
-                            {t("start challenge !")}
-                        </Button>
-                    </div>
-                    <div className="details__recap__instruction">
-                        <Heading tag={"h2"} level={"secondary"} styles={{ marginBottom: "1.5rem" }} >
-                            {t("Instructions")}
-                        </Heading>
-                        <p>
-                            {t("instruction_front_reproduction")}
-                        </p>
-                        {files?.length > 0 &&
-                            <div className="details__recap__instruction__file">
-                                <Label name="zipfile">
-                                    {t("Additional Resources")}
-                                </Label>
-                                <a href={files[0].value} className="btn__input" download>
-                                    <Svg id="folder" styles={{ strokeWidth: '0' }} />
-                                    {t("download")}
-                                </a>
+                    <div className="details__recap">
+                        <div className="details__recap__resume">
+                            <div className="details__recap__resume__description">
+                                <Heading tag={"h2"} level={"secondary"} styles={{ marginBottom: "1.5rem" }}>
+                                    {t("Description")}
+                                </Heading>
+                                <Paragraph color="dark" isHtml={true}>
+                                    {DOMPurify.sanitize(challenge?.data?.description ?? "")}
+                                </Paragraph>
                             </div>
-                        }
-
-                        {links?.length > 0 &&
-                            <div className="details__recap__instruction__file">
-                                <Label name="urls">
-                                    {t("Complementary informations")}
-                                </Label>
-                                <a href={links[0].value} className="btn__input">
-                                    <Svg id="arrow" styles={{ strokeWidth: '0' }} />
-                                    {t("go to") + ' ' + links[0].label}
-                                </a>
-                            </div>
-                        }
-
-                    </div>
-                </div>
-
-                {displaySolution &&
-                    <div className="details__solution">
-                        <button
-                            type="button"
-                            className="multiForm__content__buttons__back"
-                            style={{ position: 'absolute', left: '2rem', top: '2rem' }}
-                            onClick={() => {
-                                setDisplaySolution(!displaySolution);
-                            }}>
-                            <Svg id="cross" styles={{ width: "2rem", height: "2rem" }} />
-                        </button>
-                        <Heading tag={"h3"} level={"secondary"} styles={{ paddingTop: '1rem' }}>
-                            {t("Take up the challenge !")}
-                        </Heading>
-                        <Paragraph color="dark" isHtml={true} styles={{ margin: '3rem 0' }}>
-                            {t("paragraph_start_solution")}
-                        </Paragraph>
-                        <TabsProvider>
-                            <Tabs
-                                tabs={[
-                                    {
-                                        tabTitle: "Upload files",
-                                        tabContent:
-                                            <SolutionUpload
-                                                handleFile={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                                    const file = e.currentTarget.files;
-                                                    if (file) {
-                                                        setQuerySolution({
-                                                            ...querySolution, resources: [{
-                                                                'value': file[0],
-                                                                'type': "file"
-                                                            }]
-                                                        });
-                                                    }
-                                                }}
-                                                url={querySolution.url}
-                                                handleUrl={(e: any) => {
-                                                    setQuerySolution({ ...querySolution, url: e });
-                                                }}
-                                                recap={querySolution.recap}
-                                                handleRecap={(e: any) => {
-                                                    setQuerySolution({ ...querySolution, recap: e });
-                                                }}
-                                            />
-                                        ,
-                                        anchor: "#upload"
-                                    },
-                                    {
-                                        tabTitle: "Code online",
-                                        tabContent: <SolutionCode></SolutionCode>,
-                                        anchor: "#code"
-                                    }
-                                ]}
-                                anchorNavigation={false}
-                            />
-                        </TabsProvider>
-                        <Button
-                            type="submit"
-                            theme={"primary"}
-                            styles={{ position: 'absolute', bottom: '-1rem', right: '4rem' }}
-                            handleClick={() => {
-                                isConnected
-                                    ? handleSolution()
-                                    : pushToast({
-                                        theme: "secondary",
-                                        title: t("You must be logged in"),
-                                        desc: t("You must be logged in to submit a solution")
-                                    });
-                            }}
-                        >
-                            <Svg id="arrow" styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }} />
-                            {t("submit solution !")}
-                        </Button>
-                    </div>
-                }
-
-                <Sorts
-                    title={t("Challenge's comments")}
-                    nbResult={challenge?.data.commentsCount}
-                    actions={
-                        true && (
-                            <Heading tag={"h3"} level={"secondary"}>
-                                <Block withSquare={true} styles={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.5rem', paddingRight: '1rem', borderRadius: '1rem' }}>
-                                    {t("Comments")}
-                                </Block>
-                            </Heading>
-                        )
-                    }
-                    styles={{ marginBottom: "1rem", zIndex: "5", position: "relative" }}>
-                    <Multiselect
-                        callback={(value: any) => {
-                            setCommentsQuery({ ...commentsQuery, order: value[0]?.order, orderBy: value[0]?.orderBy });
-                        }}
-                        styles={{ minWidth: '20rem' }}
-                        theme={"primary"}
-                        multiple={false}
-                        searchable={false}
-                        defaultText="sort"
-                        options={[
-                            {
-                                label: t("Created At"),
-                                children: [
-                                    {
-                                        id: 1,
-                                        label: t("Latest"),
-                                        orderBy: "createdAt",
-                                        order: "desc"
-                                    },
-                                    {
-                                        id: 2,
-                                        label: t("Oldest"),
-                                        order: "asc",
-                                        orderBy: "createdAt"
-                                    }
-                                ]
-                            },
-                            {
-                                label: t("Popularity"),
-                                children: [
-                                    {
-                                        id: 3,
-                                        label: t("Trending"),
-                                        orderBy: "likesCount",
-                                        order: "desc"
-                                    }
-                                ]
-                            },
-
-                        ]}
-                    />
-                </Sorts>
-
-                <Wysiwyg
-                    callback={(value: any) => {
-                        setComment(value);
-                    }}
-                    value={comment}
-                    maxHeight={800}
-                    placeholder={t("Add a comment...")}
-                    color={mainColor}>
-                    <Button type="submit" theme={"primary"} handleClick={() => {
-                        isConnected
-                            ? handleComment()
-                            : pushToast({
-                                theme: "secondary",
-                                title: t("You must be logged in"),
-                                desc: t("You must be logged in to publish a comment")
-                            });
-                    }}>
-                        <Svg id="back" styles={{ width: "2rem", height: "2rem", rotate: "180deg", fill: "#171717" }} />
-                        {t("Comment")}
-                    </Button>
-                </Wysiwyg>
-
-                <Grid size="100%" styles={{ marginTop: '2rem', gap: '2rem' }}>
-                    {comments?.pages?.map((group, i) => {
-                        return (
-                            <Fragment key={i}>
-                                {group?.data?.["hydra:member"].map((comment: any) => {
+                            <div className="details__recap__resume__img" style={{ flexDirection: `${pictures?.length <= 2 ? 'column' : 'row'}` }}>
+                                {pictures?.map((resource: any, i: number) => {
                                     return (
-                                        <Comment comment={comment} key={comment?.id} />
+                                        <div style={{ width: `calc((100% - 1rem)/ ${pictures?.length >= 3 ? 2 : 1})` }} key={i}>
+                                            <Image src={resource.value} alt={resource.label ?? challenge?.data.title} height={pictures?.length == 2 ? "175" : "auto"} width="100%" key={i} classes="squarepic" />
+                                        </div>
+
                                     );
                                 })}
-                            </Fragment>
-                        );
-                    })}
-                </Grid>
+                            </div>
+                            <Button type="submit" theme={"primary"} handleClick={() => { setDisplaySolution(!displaySolution) }}>
+                                <Svg
+                                    id="arrow"
+                                    styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }}
+                                />
+                                {t("start challenge !")}
+                            </Button>
+                        </div>
+                        <div className="details__recap__instruction">
+                            <Heading tag={"h2"} level={"secondary"} styles={{ marginBottom: "1.5rem" }} >
+                                {t("Instructions")}
+                            </Heading>
+                            <p>
+                                {t("instruction_front_reproduction")}
+                            </p>
+                            {files?.length > 0 &&
+                                <div className="details__recap__instruction__file">
+                                    <Label name="zipfile">
+                                        {t("Additional Resources")}
+                                    </Label>
+                                    <a href={files[0].value} className="btn__input" download>
+                                        <Svg id="folder" styles={{ strokeWidth: '0' }} />
+                                        {t("download")}
+                                    </a>
+                                </div>
+                            }
 
-                <div
-                    className="loader--container"
-                    ref={loadRef}
-                    style={{ marginTop: "3rem", display: "flex", justifyContent: "center" }}>
-                    {isFetchingNextPage && <DotLoader theme="primary" />}
-                </div>
-            </Container >
+                            {links?.length > 0 &&
+                                <div className="details__recap__instruction__file">
+                                    <Label name="urls">
+                                        {t("Complementary informations")}
+                                    </Label>
+                                    <a href={links[0].value} className="btn__input">
+                                        <Svg id="arrow" styles={{ strokeWidth: '0' }} />
+                                        {t("go to") + ' ' + links[0].label}
+                                    </a>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                    {displaySolution &&
+                        <div className="details__solution">
+                            <button
+                                type="button"
+                                className="multiForm__content__buttons__back"
+                                style={{ position: 'absolute', left: '2rem', top: '2rem' }}
+                                onClick={() => {
+                                    setDisplaySolution(!displaySolution);
+                                }}>
+                                <Svg id="cross" styles={{ width: "2rem", height: "2rem" }} />
+                            </button>
+                            <Heading tag={"h3"} level={"secondary"} styles={{ paddingTop: '1rem' }}>
+                                {t("Take up the challenge !")}
+                            </Heading>
+                            <Paragraph color="dark" isHtml={true} styles={{ margin: '3rem 0' }}>
+                                {t("paragraph_start_solution")}
+                            </Paragraph>
+                            <TabsProvider>
+                                <Tabs
+                                    tabs={[
+                                        {
+                                            tabTitle: "Upload files",
+                                            tabContent:
+                                                <SolutionUpload
+                                                    handleFile={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                        const file = e.currentTarget.files;
+                                                        if (file) {
+                                                            setQuerySolution({
+                                                                ...querySolution, resources: [{
+                                                                    'value': file[0],
+                                                                    'type': "file"
+                                                                }]
+                                                            });
+                                                        }
+                                                    }}
+                                                    url={querySolution.url}
+                                                    handleUrl={(e: any) => {
+                                                        setQuerySolution({ ...querySolution, url: e });
+                                                    }}
+                                                    recap={querySolution.recap}
+                                                    handleRecap={(e: any) => {
+                                                        setQuerySolution({ ...querySolution, recap: e });
+                                                    }}
+                                                />
+                                            ,
+                                            anchor: "#upload"
+                                        },
+                                        {
+                                            tabTitle: "Code online",
+                                            tabContent: <SolutionCode></SolutionCode>,
+                                            anchor: "#code"
+                                        }
+                                    ]}
+                                    anchorNavigation={false}
+                                />
+                            </TabsProvider>
+                            <Button
+                                type="submit"
+                                theme={"primary"}
+                                styles={{ position: 'absolute', bottom: '-1rem', right: '4rem' }}
+                                handleClick={() => {
+                                    isConnected
+                                        ? handleSolution()
+                                        : pushToast({
+                                            theme: "secondary",
+                                            title: t("You must be logged in"),
+                                            desc: t("You must be logged in to submit a solution")
+                                        });
+                                }}
+                            >
+                                <Svg id="arrow" styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }} />
+                                {t("submit solution !")}
+                            </Button>
+                        </div>
+                    }
+
+                    <Sorts
+                        title={t("Challenge's comments")}
+                        nbResult={challenge?.data.commentsCount}
+                        actions={
+                            true && (
+                                <Heading tag={"h3"} level={"secondary"}>
+                                    <Block withSquare={true} styles={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.5rem', paddingRight: '1rem', borderRadius: '1rem' }}>
+                                        {t("Comments")}
+                                    </Block>
+                                </Heading>
+                            )
+                        }
+                        styles={{ marginBottom: "1rem", zIndex: "5", position: "relative" }}>
+                        <Multiselect
+                            callback={(value: any) => {
+                                setCommentsQuery({ ...commentsQuery, order: value[0]?.order, orderBy: value[0]?.orderBy });
+                            }}
+                            styles={{ minWidth: '20rem' }}
+                            theme={"primary"}
+                            multiple={false}
+                            searchable={false}
+                            defaultText="sort"
+                            options={[
+                                {
+                                    label: t("Created At"),
+                                    children: [
+                                        {
+                                            id: 1,
+                                            label: t("Latest"),
+                                            orderBy: "createdAt",
+                                            order: "desc"
+                                        },
+                                        {
+                                            id: 2,
+                                            label: t("Oldest"),
+                                            order: "asc",
+                                            orderBy: "createdAt"
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: t("Popularity"),
+                                    children: [
+                                        {
+                                            id: 3,
+                                            label: t("Trending"),
+                                            orderBy: "likesCount",
+                                            order: "desc"
+                                        }
+                                    ]
+                                },
+
+                            ]}
+                        />
+                    </Sorts>
+
+                    <Wysiwyg
+                        callback={(value: any) => {
+                            setComment(value);
+                        }}
+                        value={comment}
+                        maxHeight={800}
+                        placeholder={t("Add a comment...")}
+                        color={mainColor}>
+                        <Button type="submit" theme={"primary"} handleClick={() => {
+                            isConnected
+                                ? handleComment()
+                                : pushToast({
+                                    theme: "secondary",
+                                    title: t("You must be logged in"),
+                                    desc: t("You must be logged in to publish a comment")
+                                });
+                        }}>
+                            <Svg id="back" styles={{ width: "2rem", height: "2rem", rotate: "180deg", fill: "#171717" }} />
+                            {t("Comment")}
+                        </Button>
+                    </Wysiwyg>
+
+                    <Grid size="100%" styles={{ marginTop: '2rem', gap: '2rem' }}>
+                        {comments?.pages?.map((group, i) => {
+                            return (
+                                <Fragment key={i}>
+                                    {group?.data?.["hydra:member"].map((comment: any) => {
+                                        return (
+                                            <Comment comment={comment} key={comment?.id} />
+                                        );
+                                    })}
+                                </Fragment>
+                            );
+                        })}
+                    </Grid>
+
+                    <div
+                        className="loader--container"
+                        ref={loadRef}
+                        style={{ marginTop: "3rem", display: "flex", justifyContent: "center" }}>
+                        {isFetchingNextPage && <DotLoader theme="primary" />}
+                    </div>
+                </Container >
+                :
+                <ChallengeSolutions
+                    id={parseInt(id!)}
+                    createSolution={() => {
+                        setDisplaySolutions(!displaySolutions);
+                        setDisplaySolution(true);
+                    }}
+                />
+            }
+
         </PageTransition >
     )
 }
