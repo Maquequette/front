@@ -1,5 +1,6 @@
-import { useState, memo } from "react";
+import { useState, memo, useMemo } from "react";
 import Dialog from "@/components/04 - Templates/Dialog/Dialog";
+import ZoomImage from "../ZoomImage/ZoomImage";
 import "./Image.scss";
 import clsx from "clsx";
 
@@ -14,9 +15,12 @@ export interface IImage {
 export default memo(function Image({ alt, src, height, width, classes }: IImage) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const color = useMemo(() => {
+    return ["primary", "secondary", "warn", "danger", "success", "accent"];
+  }, []);
 
   return (
-    <div className="img">
+    <div className="img__container">
       <img
         onClick={() => setIsOpen(true)}
         src={src}
@@ -26,16 +30,13 @@ export default memo(function Image({ alt, src, height, width, classes }: IImage)
         onLoad={() => {
           setIsImageLoaded(true);
         }}
-        className={clsx(classes, `img ${!isImageLoaded ? "loading" : ""}`)}
+        className={`img ${
+          !isImageLoaded ? `loading loading--${color.sort(() => 0.5 - Math.random())[0]}` : ""
+        }`}
         loading="lazy"
       />
       <Dialog visible={isOpen} id="modal__img" Dismiss={() => setIsOpen(false)}>
-        <img
-          src={src}
-          alt={alt}
-          className={`img ${!isImageLoaded ? "loading" : ""}`}
-          loading="lazy"
-        />
+        <ZoomImage image={src} />
       </Dialog>
     </div>
   );
