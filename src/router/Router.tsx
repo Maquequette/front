@@ -12,7 +12,7 @@ import { ThemesContext } from "@/contexts/ThemesContext";
 const Home = lazy(() => import("@/pages/Home/Home"));
 const Challenges = lazy(() => import("@/pages/Challenges/Challenges"));
 const Lessons = lazy(() => import("@/pages/Lessons/Lessons"));
-const Classroom = lazy(() => import("@/pages/ClassRoom/ClassRoom"));
+const Classroom = lazy(() => import("@/pages/Classroom/ClassRoom"));
 const Profil = lazy(() => import("@/pages/Profil/Profil"));
 const NoMatch = lazy(() => import("@/pages/NoMatch/NoMatch"));
 const Details = lazy(() => import("@/pages/Challenges/Details"));

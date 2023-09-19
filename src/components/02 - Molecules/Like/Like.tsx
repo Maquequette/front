@@ -36,6 +36,7 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber, t
   const { pushToast } = useToasts();
 
   const handleLike = useCallback(() => {
+    // @ts-ignore
     isLiked ? unlike(id) : like(id);
     setIsLiked(!isLiked);
     setCount((prev) => (!isLiked ? prev + 1 : prev - 1));
