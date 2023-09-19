@@ -1,8 +1,7 @@
 import { useState, memo, useMemo } from "react";
+import ImageZoom from "react-image-zooom";
 import Dialog from "@/components/04 - Templates/Dialog/Dialog";
-import ZoomImage from "../ZoomImage/ZoomImage";
 import "./Image.scss";
-import clsx from "clsx";
 
 export interface IImage {
   alt: string;
@@ -36,7 +35,7 @@ export default memo(function Image({ alt, src, height, width, classes }: IImage)
         loading="lazy"
       />
       <Dialog visible={isOpen} id="modal__img" Dismiss={() => setIsOpen(false)}>
-        <ZoomImage image={src} />
+        <ImageZoom src={src} alt={alt} zoom="100" />
       </Dialog>
     </div>
   );
