@@ -12,6 +12,8 @@ import { ThemesContext } from '@/contexts/ThemesContext';
 import { getCommentsFrom, postComment } from '@/services/comments.service';
 import DOMPurify from 'dompurify';
 import Paragraph from '@/components/01 - Atoms/Paragraph/Paragraph';
+import useToasts from '@/hooks/useToasts';
+import { AuthContext } from '@/contexts/AuthContext';
 
 export interface IComment {
     comment: any
@@ -20,6 +22,8 @@ export interface IComment {
 export default function Comment({ comment }: IComment) {
     const { t } = useTranslation();
     const { mainColor } = useContext(ThemesContext);
+    const { pushToast } = useToasts();
+    const { isConnected } = useContext(AuthContext);
     const [reply, setReply] = useState<any>(null);
 
     const [editReply, setEditReply] = useState<boolean>(false);
@@ -77,7 +81,15 @@ export default function Comment({ comment }: IComment) {
                     }
 
                     <div className="comment__body__btns">
-                        <Button type="submit" theme={"primary"} handleClick={handleReply}>
+                        <Button type="submit" theme={"primary"} handleClick={() => {
+                            isConnected
+                                ? handleReply()
+                                : pushToast({
+                                    theme: "secondary",
+                                    title: t("You must be logged in"),
+                                    desc: t("You must be logged in to reply")
+                                });
+                        }}>
                             <Svg id="back" styles={{ width: "2rem", height: "2rem", rotate: "180deg", fill: "#171717" }} />
                             {t("Reply")}
                         </Button>

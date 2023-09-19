@@ -103,6 +103,11 @@
                 font-size: 1.4rem;
 
             }
+
+            &__file {
+                margin-top: 1.5rem;
+                border-top: 2px solid var(--primary);
+            }
         }
 
         &__resume, &__instruction {
@@ -116,10 +121,12 @@
         background-color: var(--light);
         padding: 2rem;
         border-radius: 1.5rem;
+        margin-bottom: 2rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     &__sort__date {

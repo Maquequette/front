@@ -35,6 +35,8 @@ import SolutionUpload from "@/components/03 - Organisms/Solution/SolutionUpload"
 import SolutionCode from "@/components/03 - Organisms/Solution/SolutionCode";
 import { TabsProvider } from "@/contexts/TabsContext";
 import Label from "@/components/01 - Atoms/Label/Label";
+import useToasts from "@/hooks/useToasts";
+import { postSolution } from "@/services/solutions.service";
 
 export default function ChallengeDetails() {
 
@@ -42,6 +44,7 @@ export default function ChallengeDetails() {
     const { mainColor } = useContext(ThemesContext);
     let { id } = useParams();
 
+    const { pushToast } = useToasts();
     const { isConnected } = useContext(AuthContext);
 
     const { data: challenge } = useQuery(["challenge"], () => getChallenge({ id: parseInt(id!) }));
@@ -50,6 +53,14 @@ export default function ChallengeDetails() {
     const [pictures, setPictures] = useState<Array<any>>([]);
     const [files, setFiles] = useState<Array<any>>([]);
     const [links, setLinks] = useState<Array<any>>([]);
+
+    const [querySolution, setQuerySolution] = useState<any>({
+        challenge: parseInt(id!),
+        visible: true,
+        recap: "",
+        resources: [],
+        url: ""
+    });
 
     useEffect(() => {
         console.log(challenge);
@@ -94,6 +105,38 @@ export default function ChallengeDetails() {
         setComment("");
         refetch({ refetchPage: (page, index, allPages) => true });
     }, [comment]);
+
+    const handleSolution = useCallback(() => {
+        const form = new FormData();
+
+        Object.entries(querySolution).map(([key, val]: any) => {
+
+            if (key === "resources") {
+                Array.from(val).forEach((element: any, index) => {
+                    form.append(`${key}[${index}][value]`, element.value);
+                    form.append(`${key}[${index}][type]`, element.type);
+                })
+
+            } else if (key === "url" && val) {
+                form.append(`${key}[${querySolution.resources.length}][value]`, val);
+                form.append(`${key}[${querySolution.resources.length}][type]`, "url");
+                form.append(`${key}[${querySolution.resources.length}][label]`, "repository");
+
+            } else {
+                form.append(key, val);
+            }
+        });
+
+        postSolution(form);
+        setQuerySolution({
+            challenge: parseInt(id!),
+            visible: true,
+            recap: "",
+            resources: [],
+            url: ""
+        });
+
+    }, [querySolution]);
 
     return (
         <PageTransition>
@@ -181,26 +224,77 @@ export default function ChallengeDetails() {
                             {t("instruction_front_reproduction")}
                         </p>
                         {files?.length > 0 &&
-                            <>
+                            <div className="details__recap__instruction__file">
                                 <Label name="zipfile">
                                     {t("Additional Resources")}
                                 </Label>
-                            </>
+                                <a href={files[0].value} className="btn__input" download>
+                                    <Svg id="folder" styles={{ strokeWidth: '0' }} />
+                                    {t("download")}
+                                </a>
+                            </div>
                         }
+
+                        {links?.length > 0 &&
+                            <div className="details__recap__instruction__file">
+                                <Label name="urls">
+                                    {t("Complementary informations")}
+                                </Label>
+                                <a href={links[0].value} className="btn__input">
+                                    <Svg id="arrow" styles={{ strokeWidth: '0' }} />
+                                    {t("go to") + ' ' + links[0].label}
+                                </a>
+                            </div>
+                        }
+
                     </div>
                 </div>
 
                 {displaySolution &&
                     <div className="details__solution">
-                        <Heading tag={"h3"} level={"secondary"}>
+                        <button
+                            type="button"
+                            className="multiForm__content__buttons__back"
+                            style={{ position: 'absolute', left: '2rem', top: '2rem' }}
+                            onClick={() => {
+                                setDisplaySolution(!displaySolution);
+                            }}>
+                            <Svg id="cross" styles={{ width: "2rem", height: "2rem" }} />
+                        </button>
+                        <Heading tag={"h3"} level={"secondary"} styles={{ paddingTop: '1rem' }}>
                             {t("Take up the challenge !")}
                         </Heading>
+                        <Paragraph color="dark" isHtml={true} styles={{ margin: '3rem 0' }}>
+                            {t("paragraph_start_solution")}
+                        </Paragraph>
                         <TabsProvider>
                             <Tabs
                                 tabs={[
                                     {
                                         tabTitle: "Upload files",
-                                        tabContent: <SolutionUpload></SolutionUpload>,
+                                        tabContent:
+                                            <SolutionUpload
+                                                handleFile={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                                    const file = e.currentTarget.files;
+                                                    if (file) {
+                                                        setQuerySolution({
+                                                            ...querySolution, resources: [{
+                                                                'value': file[0],
+                                                                'type': "file"
+                                                            }]
+                                                        });
+                                                    }
+                                                }}
+                                                url={querySolution.url}
+                                                handleUrl={(e: any) => {
+                                                    setQuerySolution({ ...querySolution, url: e });
+                                                }}
+                                                recap={querySolution.recap}
+                                                handleRecap={(e: any) => {
+                                                    setQuerySolution({ ...querySolution, recap: e });
+                                                }}
+                                            />
+                                        ,
                                         anchor: "#upload"
                                     },
                                     {
@@ -212,6 +306,23 @@ export default function ChallengeDetails() {
                                 anchorNavigation={false}
                             />
                         </TabsProvider>
+                        <Button
+                            type="submit"
+                            theme={"primary"}
+                            styles={{ position: 'absolute', bottom: '-1rem', right: '4rem' }}
+                            handleClick={() => {
+                                isConnected
+                                    ? handleSolution()
+                                    : pushToast({
+                                        theme: "secondary",
+                                        title: t("You must be logged in"),
+                                        desc: t("You must be logged in to submit a solution")
+                                    });
+                            }}
+                        >
+                            <Svg id="arrow" styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }} />
+                            {t("submit solution !")}
+                        </Button>
                     </div>
                 }
 
@@ -279,7 +390,15 @@ export default function ChallengeDetails() {
                     maxHeight={800}
                     placeholder={t("Add a comment...")}
                     color={mainColor}>
-                    <Button type="submit" theme={"primary"} handleClick={handleComment}>
+                    <Button type="submit" theme={"primary"} handleClick={() => {
+                        isConnected
+                            ? handleComment()
+                            : pushToast({
+                                theme: "secondary",
+                                title: t("You must be logged in"),
+                                desc: t("You must be logged in to publish a comment")
+                            });
+                    }}>
                         <Svg id="back" styles={{ width: "2rem", height: "2rem", rotate: "180deg", fill: "#171717" }} />
                         {t("Comment")}
                     </Button>

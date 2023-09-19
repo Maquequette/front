@@ -7,7 +7,16 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import "./SolutionUpload.scss";
 
-export default memo(function SolutionUpload() {
+export interface ISolutionUpload {
+    handleFile: Function,
+    url: string,
+    handleUrl: Function,
+    recap: string,
+    handleRecap: Function
+}
+
+
+export default memo(function SolutionUpload({ handleFile, url, handleUrl, recap, handleRecap }: ISolutionUpload) {
     const { t } = useTranslation();
 
     return (
@@ -27,49 +36,38 @@ export default memo(function SolutionUpload() {
                         icon="folder"
                         instruction={t("2 MO maximum size \nupload unique zip folder : zip/rar")}
                         handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            //const file = e.currentTarget.files;
-                            // if (file) {
-                            //     setQuery({
-                            //         ...query, resources: [...query.resources, {
-                            //             'value': file[0],
-                            //             'type': "file"
-                            //         }]
-                            //     });
-                            // }
+                            handleFile(e);
                         }}
                     />
                 </div>
                 <div className="defineSolution__full">
-                    <Label name="figma">
-                        {t("Figma url")}
+                    <Label name="github">
+                        {t("Repository url")}
                     </Label>
                     <Input
                         type="url"
-                        name="figma"
-                        placeholder="figma.com/file/example..."
+                        name="github"
+                        placeholder="https://github.com/Example..."
                         required={false}
-                        value={""}
+                        value={url}
                         handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            // setQuery({
-                            //     ...query, figmaURL: e.target.value
-                            // });
+                            handleUrl(e.target.value);
                         }}
                     />
                 </div>
-                <div className="defineSolution__full">
+                <div className="defineSolution__full" style={{ gridColumn: 'span 2' }}>
                     <Label name="Description" required={false}>
                         {t("Description")}
                     </Label>
                     <Wysiwyg
                         callback={(value: any) => {
-                            //setQuery({ ...query, description: value });
+                            handleRecap(value);
                         }}
-                        value={""}
+                        value={recap}
                         placeholder={t("My solution brief that I want to share with everyone...")}
                     />
                 </div>
             </Grid>
         </div>
-
     );
 })
