@@ -4,9 +4,10 @@ import {
   SandpackPredefinedTemplate
 } from "@codesandbox/sandpack-react";
 import { Mode } from "@/types/Mode";
+import SoloCodeEditor from "@/components/02 - Molecules/CodeEditor/CodeEditor";
 import CodeEditor from "@/components/02 - Molecules/Collab/CodeEditor/CodeEditor";
 import CodePreview from "@/components/02 - Molecules/CodePreview/CodePreview";
-import FileExplorer from "@/components/02 - Molecules/Collab/FileExplorer/FileExplorer";
+import FileExplorer from "@/components/02 - Molecules/FileExplorer/FileExplorer";
 import { useRef, useState } from "react";
 import "./Editor.scss";
 
@@ -14,6 +15,7 @@ export interface ICode {
   template: SandpackPredefinedTemplate;
   theme: Mode;
   roomId?: string;
+  solo?: boolean;
 }
 
 import { io } from "socket.io-client";
@@ -22,7 +24,7 @@ const socket = io("http://localhost:8000", {
   path: "/api"
 });
 
-export default function Editor({ template, theme, roomId = crypto.randomUUID() }: ICode) {
+export default function Editor({ template, theme, roomId = crypto.randomUUID(), solo = false }: ICode) {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const ref: any = useRef();
 
@@ -42,8 +44,11 @@ export default function Editor({ template, theme, roomId = crypto.randomUUID() }
       <SandpackLayout
         ref={ref}
         className={`editor__layout ${isFullScreen ? "editor__layout--fullscreen" : ""}`}>
-        <FileExplorer socket={socket} />
-        <CodeEditor socket={socket} room={roomId} template={template} />
+        <FileExplorer />
+        {solo ?
+          <SoloCodeEditor></SoloCodeEditor>
+          : <CodeEditor socket={socket} room={roomId} template={template} />
+        }
         <CodePreview setFullScreen={handleFullScreen} />
       </SandpackLayout>
     </SandpackProvider>

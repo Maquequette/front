@@ -11,3 +11,11 @@
   position: relative;
   z-index: 1;
 }
+
+.square {
+  background-color: var(--secondary);
+  border-radius: 0.5rem;
+  min-width: 4rem;
+  aspect-ratio: 1;
+  height: 100%;
+}

@@ -1,12 +1,13 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";
 import Hero from "@/components/04 - Templates/Hero/Hero";
 import Container from "@/components/01 - Atoms/Container/Container";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Stripe from "@/components/01 - Atoms/Stripe/Stripe";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
-import gwen from "../../assets/images/gwen.json";
+import Kate from "../../assets/images/Kate.json";
 import Learn from "@/components/01 - Atoms/Learn/Learn";
 import Block from "@/components/01 - Atoms/Block/Block";
 import Folder from "@/components/01 - Atoms/Folder/Folder";
@@ -16,11 +17,13 @@ import Paragraph from "@/components/01 - Atoms/Paragraph/Paragraph";
 import Button from "@/components/01 - Atoms/Button/Button";
 import Card from "@/components/03 - Organisms/Card/Card";
 import { getChallenges } from "@/services/challenges.service";
+import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
 import "./Home.scss";
-import { Fragment } from "react";
+import Pricing from "@/components/01 - Atoms/Pricing/Pricing";
 
 export default function Home(): JSX.Element {
-  const { data: challenges } = useQuery(["challenges"], () =>
+  const { t } = useTranslation();
+  const { data: challenges, isLoading } = useQuery(["challenges"], () =>
     getChallenges({ pageParam: 1, itemsPerPage: 3 })
   );
 
@@ -31,72 +34,78 @@ export default function Home(): JSX.Element {
           styles={{ zIndex: 1, position: "relative" }}
           title={
             <Heading tag="h1" level="primary">
-              <Learn>LEARN</Learn>
-              <Block>FRONT-END / WEB DESIGN</Block>
+              <Learn hasGlass={true}>{t("LEARN")}</Learn>
+              <Block>{t("FRONT-END / WEB DESIGN")}</Block>
               <Stripe theme="secondary">
-                THE COOL WAY <Svg id="waves" />
+                {t("THE COOL WAY")}
+                <Svg id="waves" />
               </Stripe>
             </Heading>
           }
-          illustation={<Player src={gwen} autoplay keepLastFrame />}
+          illustation={<Player src={Kate} autoplay keepLastFrame />}
         />
         <Folder down="dark" theme="dark">
           <Heading tag="h2" level="primary" color="light">
-            HOW TO BEGIN PRACTICING ??
+            {t("HOW TO BEGIN PRACTICING ??")}
           </Heading>
           <Grid size="22.5rem">
             <Collapsible theme="primary">
-              <Svg id="coding" />
+              <Svg id="explore" />
               <Heading tag="h4" level="secondary">
-                CODE THE SKETCH
+                {t("Explore")}
               </Heading>
               <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt.
+                {t(
+                  "Do you like to tinker, code and have fun with website mock-ups? Then you've come to the right place! Our site is a cave where you can put your web nerd talents to good use."
+                )}
               </Paragraph>
             </Collapsible>
             <Collapsible theme="primary">
-              <Svg id="coding" />
+              <Svg id="challenges" />
               <Heading tag="h4" level="secondary">
-                CODE THE SKETCH
+                {t("Challenge yourself")}
               </Heading>
               <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt.
+                {t(
+                  "Our site offers you the perfect opportunity to challenge yourself. Put your skills to the test by taking on stimulating web integration challenges."
+                )}
               </Paragraph>
             </Collapsible>
             <Collapsible theme="primary">
-              <Svg id="coding" />
+              <Svg id="commu" />
               <Heading tag="h4" level="secondary">
-                CODE THE SKETCH
+                {t("Join the community")}
               </Heading>
               <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt.
+                {t(
+                  "Join a community of enthusiasts, where you can share, comment, ask questions, like other people's creations, and become a better developer"
+                )}
               </Paragraph>
             </Collapsible>
             <Collapsible theme="primary">
-              <Svg id="coding" />
+              <Svg id="share" />
               <Heading tag="h4" level="secondary">
-                CODE THE SKETCH
+                {t("Share")}
               </Heading>
               <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt.
+                {t(
+                  "If you're a designer, get involved and submit your creations. Showcase your talent, inspire the community and encourage developers to bring your creative visions to life."
+                )}
               </Paragraph>
             </Collapsible>
           </Grid>
           <div className="d-flex justify-end">
             <Button theme="success">
               <Svg id="arrow" />
-              TRY IT NOW !
+              {t("TRY IT NOW !")}
             </Button>
           </div>
           <Folder theme="primary" down="light">
             <Heading tag="h2" level="primary" color="dark">
-              AND WE PROVIDE LESSONS TOO !!
+              {t("AND WE PROVIDE LESSONS TOO !!")}
             </Heading>
             <Grid size="33rem">
+              {isLoading && <DotLoader theme="secondary" />}
               {challenges?.data?.["hydra:member"].map((challenge: any) => {
                 return (
                   <Card
@@ -118,11 +127,15 @@ export default function Home(): JSX.Element {
             <div className="d-flex justify-end">
               <Button theme="dark">
                 <Svg id="arrow" />
-                TRY IT NOW !
+                {t("TRY IT NOW !")}
               </Button>
             </div>
           </Folder>
         </Folder>
+        <section style={{ marginTop: "10rem" }}>
+          
+          <Pricing />
+        </section>
       </Container>
     </PageTransition>
   );

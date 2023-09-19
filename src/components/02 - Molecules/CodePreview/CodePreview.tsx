@@ -5,9 +5,12 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Dialog from "@/components/04 - Templates/Dialog/Dialog";
-import "./CodePreview.scss";
 import { useMutation } from "@tanstack/react-query";
 import { getAccessToken } from "@/services/git.service";
+import Button from "@/components/01 - Atoms/Button/Button";
+import Heading from "@/components/01 - Atoms/Heading/Heading";
+import Input from "@/components/01 - Atoms/Input/Input";
+import "./CodePreview.scss";
 
 export interface ICodePreview {
   setFullScreen: Function;
@@ -16,7 +19,7 @@ export interface ICodePreview {
 export default function CodePreview({ setFullScreen }: ICodePreview) {
   const { sandpack } = useSandpack();
   const location = useLocation();
-  const [isGithub, setIsGithub] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate: getGitHubToken } = useMutation(getAccessToken);
 
   const downloadProjectAsZip = useCallback(() => {
@@ -28,9 +31,26 @@ export default function CodePreview({ setFullScreen }: ICodePreview) {
     });
 
     project.generateAsync({ type: "blob" }).then((content) => {
-      saveAs(content, "maquequette.zip");
+      saveAs(content, "Mac&Kate.zip");
     });
   }, []);
+
+  const uploadProjectFiles = (files: any) => {
+    JSZip.loadAsync(files[0]).then(function (documents) {
+      documents
+        .filter((filePath, file) => {
+          return !filePath.match(/^__MACOSX\//);
+        })
+        .forEach(async (file) => {
+          const content = await file.async("string");
+          if (content) {
+            const path = file.name.split("/");
+            path.shift();
+            sandpack.updateFile("/".concat(path.join("/")), content, true);
+          }
+        });
+    });
+  };
 
   useEffect(() => {
     const code_param: string | null = new URLSearchParams(location.search).get("code");
@@ -49,7 +69,7 @@ export default function CodePreview({ setFullScreen }: ICodePreview) {
         showRestartButton={true}
         actionsChildren={
           <>
-            <button className="preview__dl" onClick={() => downloadProjectAsZip()}>
+            <button className="preview__dl" onClick={() => setIsModalOpen(!isModalOpen)}>
               <Svg id="upload" />
             </button>
             <Link
@@ -62,12 +82,35 @@ export default function CodePreview({ setFullScreen }: ICodePreview) {
             <button className="preview__fullscreen" onClick={() => setFullScreen(true)}>
               <Svg id="fullscreen" />
             </button>
+            <Dialog id="folder" visible={isModalOpen} Dismiss={() => setIsModalOpen(false)}>
+              <div className="preview__dialog">
+                <Heading tag="h3" level="tertiary">
+                  Upload or Download source code
+                </Heading>
+                <div className="preview__dialog__body">
+                  <Button theme="primary" handleClick={() => downloadProjectAsZip()}>
+                    <Svg id="upload" />
+                    Download files
+                  </Button>
+                  <Input
+                    name="code_upload"
+                    accept=".zip"
+                    type="file"
+                    required={true}
+                    preview={true}
+                    limite={5}
+                    multiple={false}
+                    handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      const files = e.currentTarget.files;
+                      uploadProjectFiles(files);
+                    }}
+                  />
+                </div>
+              </div>
+            </Dialog>
           </>
         }
       />
-      <Dialog id="github" visible={isGithub} Dismiss={() => setIsGithub(false)}>
-        <p>pp</p>
-      </Dialog>
     </>
   );
 }

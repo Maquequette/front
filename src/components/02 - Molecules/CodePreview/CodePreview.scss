@@ -12,4 +12,16 @@
       fill: var(--light);
     }
   }
+
+  &__dialog {
+    padding: 2rem;
+
+    &__body {
+      margin-top: 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      column-gap: 2rem;
+    }
+  }
 }

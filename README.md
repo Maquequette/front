@@ -1,6 +1,6 @@
-# 🚀 Maquequette - Front
+# 🚀 Mac&Kate - Front
 
-**Maquequette** est une plateforme d'apprentissage de développement front-end et de webdesign.
+**Mac&Kate** est une plateforme d'apprentissage de développement front-end et de webdesign.
 Nous disposons ou allons disposez des features suivantes: [features](#-features)
 
 
@@ -24,10 +24,7 @@ Nous disposons ou allons disposez des features suivantes: [features](#-features)
 ## 🧱 `Features`
 
 - Multilangue
-
-### 📦 `Classroom`
-
-- Vous pouvez partager et voir le code de votre classe en temps réel
+- Dark mode
 
 ### 🗃️ `Challenges`
 
@@ -47,6 +44,10 @@ Nous disposons ou allons disposez des features suivantes: [features](#-features)
 - Lottie
 - Framer motion
 - i18n
+- DomPurify
+- Tinymce
+- Socket.io
+- Axios
 
 #
 
@@ -61,7 +62,7 @@ npm install
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+npm run start:dev
 ```
 
 ### Compile and Minify for Production

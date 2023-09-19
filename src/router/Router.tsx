@@ -13,8 +13,10 @@ const Home = lazy(() => import("@/pages/Home/Home"));
 const Challenges = lazy(() => import("@/pages/Challenges/Challenges"));
 const Lessons = lazy(() => import("@/pages/Lessons/Lessons"));
 const Classroom = lazy(() => import("@/pages/ClassRoom/ClassRoom"));
+const Profil = lazy(() => import("@/pages/Profil/Profil"));
 const NoMatch = lazy(() => import("@/pages/NoMatch/NoMatch"));
-const Detail = lazy(() => import("@/pages/Detail/Detail"));
+const Details = lazy(() => import("@/pages/Challenges/Details"));
+const Cgu = lazy(() => import("@/pages/Cgu/Cgu"));
 
 {
   /* DEV PATH @todelete */
@@ -30,16 +32,22 @@ export default function Router(): JSX.Element {
         <Route path="/" element={<Home />} />
         <Route path="/challenges" handle={{ crumb: "challenges" }}>
           <Route index element={<Challenges />} />
-          <Route path=":id" element={<Detail />} />
+          <Route path=":id" element={<Details />} />
         </Route>
         <Route path="/lessons">
           <Route index element={<Lessons />} handle={{ crumb: "lessons" }} />
           <Route path=":id" element={<Lessons />} handle={{ crumb: "lessons" }} />
         </Route>
+        <Route path="/cgu">
+          <Route index element={<Cgu />} handle={{ crumb: "Cgu" }} />
+        </Route>
         <Route element={<RequiredLayout />}>
           <Route path="/classroom">
             <Route index element={<Classroom />} handle={{ crumb: "classroom" }} />
             <Route path=":id" element={<Classroom />} handle={{ crumb: "classroom" }} />
+          </Route>
+          <Route path="/profil">
+            <Route index element={<Profil />} handle={{ crumb: "profil" }} />
           </Route>
         </Route>
         <Route path="*" element={<NoMatch />} />

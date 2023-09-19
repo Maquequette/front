@@ -1,5 +1,6 @@
 import { FormEvent, useCallback, memo, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Input from "@/components/01 - Atoms/Input/Input";
@@ -15,6 +16,7 @@ export default memo(function Login() {
   const [password, setPassword] = useState<string>("");
   const [stayConnected, setStayConnected] = useState<boolean>(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const { t } = useTranslation();
 
   const { onLogin } = useAuth();
 
@@ -30,7 +32,7 @@ export default memo(function Login() {
     if (!email) {
       setErrors({
         ...errors,
-        email: "you have to fill an email adresse to get a new password"
+        email: t("You have to fill an email adresse to get a new password")
       });
     } else {
       //onForgotPassword({ email })
@@ -41,14 +43,14 @@ export default memo(function Login() {
     <div className="login">
       <div>
         <Heading tag="h1" level="secondary">
-          Log In to your account
+          {t("Log In to your account")}
         </Heading>
 
         <p className="login__subtitle">
-          Don't have account ?
+          {t("Don't have account ?")}
           <NavLink to={"#register"} style={{ padding: "0 0.5rem" }}>
             {" "}
-            Register here{" "}
+            {t("Register here")}{" "}
           </NavLink>
         </p>
       </div>
@@ -56,7 +58,7 @@ export default memo(function Login() {
       <form className="login__form" onSubmit={(e) => submitLogin(e)}>
         <div>
           <Label name="email" required={true} error={errors.email && <Error>{errors.email}</Error>}>
-            email
+            {t("Email")}
           </Label>
           <Input
             type="email"
@@ -72,7 +74,7 @@ export default memo(function Login() {
 
         <div>
           <Label name="password" required={true}>
-            Password
+            {t("Password")}
           </Label>
           <Input
             type="password"
@@ -99,14 +101,14 @@ export default memo(function Login() {
           />
 
           <Label name="stayConnected" classes="label--checkbox" styles={{ padding: "1rem" }}>
-            Stay connected ?
+            {t("Stay connected ?")}
           </Label>
         </div>
 
         <div className="login__form__btns">
           <p className="login__form__btns__subtitle">
             <button type="button" onClick={forgotPassword}>
-              Forgot your password ?
+              {t("Forgot your password ?")}
             </button>
           </p>
 
@@ -118,7 +120,7 @@ export default memo(function Login() {
               id="arrow"
               styles={{ width: "4.5rem", height: "3.3rem", strokeWidth: "initial" }}
             />
-            Connect !
+            {t("Connect !")}
           </Button>
         </div>
       </form>

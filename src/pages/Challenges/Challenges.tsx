@@ -1,6 +1,7 @@
-import { Fragment, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useInView } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Label from "@/components/01 - Atoms/Label/Label";
 import Search from "@/components/01 - Atoms/Search/Search";
 import Tooltip from "@/components/01 - Atoms/Tooltip/Tooltip";
@@ -39,6 +40,7 @@ export default function Challenges() {
   const loadRef = useRef(null);
   const isInView = useInView(loadRef);
   const { mainColor } = useContext(ThemesContext);
+  const { t } = useTranslation();
   const { data: categories } = useQuery(["categories"], () => getCategories({ paginate: false }));
   const { data: difficulties } = useQuery(["difficulties"], () =>
     getDifficulties({ paginate: false })
@@ -51,7 +53,8 @@ export default function Challenges() {
     data: challenges,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage
+    isFetchingNextPage,
+    isLoading
   } = useInfiniteQuery({
     queryKey: ["challenges", query],
     keepPreviousData: true,
@@ -65,7 +68,7 @@ export default function Challenges() {
   const { isConnected } = useContext(AuthContext);
 
   useEffect(() => {
-    if (isInView && hasNextPage) {
+    if (isInView && hasNextPage && !isLoading) {
       fetchNextPage();
     }
   }, [isInView, hasNextPage]);
@@ -76,25 +79,25 @@ export default function Challenges() {
         theme={mainColor}
         headContent={
           <>
-            <Label name="filter">Categories</Label>
+            <Label name="filter">{t("Categories")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, categories: value });
               }}
               theme={"primary"}
-              searchable={true}
               defaultText="Categories"
               options={categories?.data ?? []}
             />
-            <Label name="search">Search</Label>
-            <Search placeholder={"Type something here..."} />
-            <Label name="type">Filter by</Label>
+
+            <Label name="search">{t("Search")}</Label>
+            <Search placeholder={t("Type something here...")} />
+
+            <Label name="type">{t("Filter by")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, tags: value });
               }}
               theme={"primary"}
-              searchable={true}
               defaultText="Tag"
               options={
                 tagFamilies?.data.map((family: any) => {
@@ -105,27 +108,29 @@ export default function Challenges() {
                 }) ?? []
               }
             />
-            <Label name="type">Level</Label>
+
+            <Label name="type">{t("Level")}</Label>
             <Multiselect
               callback={(value: any) => {
                 setQuery({ ...query, difficulties: value });
               }}
               theme={"primary"}
+              multiple={false}
               searchable={true}
-              defaultText="Level"
+              defaultText={t("Level")}
               options={difficulties?.data ?? []}
             />
           </>
         }>
         <Tags tags={query?.tags} />
         <div className="filters__indications">
-          <p>About our challenges categories</p>
+          <p>{t("About our challenges categories")}</p>
           <Tooltip theme="primary">test</Tooltip>
         </div>
       </Filters>
       <Container center>
         <Sorts
-          title="Challenges"
+          title={t("Challenges")}
           nbResult={challenges?.pages[0].data["hydra:totalItems"]}
           actions={
             isConnected && (
@@ -134,7 +139,8 @@ export default function Challenges() {
                 handleClick={() => {
                   setIsCreateModalOpen(!isCreateModalOpen);
                 }}>
-                Create challenge <Svg id="create" />
+                {t("Create a challenge")}
+                <Svg id="create" />
               </Button>
             )
           }>
@@ -142,41 +148,40 @@ export default function Challenges() {
             callback={(value: any) => {
               setQuery({ ...query, order: value[0]?.order, orderBy: value[0]?.orderBy });
             }}
+            styles={{ minWidth: "20rem" }}
             theme={"primary"}
+            defaultText={t("sort")}
             multiple={false}
-            searchable={false}
             options={[
               {
-                label: "Created At",
+                label: t("Created At"),
                 children: [
                   {
                     id: 1,
-                    label: "Latest",
+                    label: t("Latest"),
                     orderBy: "createdAt",
-                    order: "desc",
-                    default: true
+                    order: "desc"
                   },
                   {
                     id: 2,
-                    label: "Oldest",
+                    label: t("Oldest"),
                     order: "asc",
                     orderBy: "createdAt"
                   }
                 ]
               },
               {
-                label: "Level",
+                label: t("Level"),
                 children: [
                   {
-                    id: 1,
-                    label: "Most difficult",
+                    id: 3,
+                    label: t("Most difficult"),
                     orderBy: "difficulty.sortLevel",
-                    order: "desc",
-                    default: true
+                    order: "desc"
                   },
                   {
-                    id: 2,
-                    label: "Less difficult",
+                    id: 4,
+                    label: t("Less difficult"),
                     order: "asc",
                     orderBy: "difficulty.sortLevel"
                   }
@@ -185,41 +190,37 @@ export default function Challenges() {
             ]}
           />
         </Sorts>
-        <Grid size="33rem">
+        <Grid size="25%">
           {challenges?.pages?.map((group, i) => {
-            return (
-              <Fragment key={i}>
-                {group?.data?.["hydra:member"].map((challenge: any) => {
-                  return (
-                    <Card
-                      img={challenge?.resources[0]?.value}
-                      path={`/challenges/${challenge.id}`}
-                      likesCount={challenge.challengeLikesCount}
-                      id={challenge.id}
-                      isLiked={challenge.isLiked}
-                      badge={challenge.difficulty}
-                      tags={challenge.tags}
-                      key={challenge.id}
-                      date={new Date(challenge.updatedAt ?? challenge.createdAt)}
-                      title={challenge.title}
-                      desc={challenge.description}
-                      author={`${challenge.author.firstName} ${challenge.author.lastName}`}
-                    />
-                  );
-                })}
-              </Fragment>
-            );
+            return group?.data?.["hydra:member"].map((challenge: any) => {
+              return (
+                <Card
+                  img={challenge?.resources?.[0]?.value}
+                  path={`/challenges/${challenge.id}`}
+                  likesCount={challenge.challengeLikesCount}
+                  id={challenge.id}
+                  isLiked={challenge.isLiked}
+                  badge={challenge.difficulty}
+                  tags={challenge.tags}
+                  key={challenge.id}
+                  date={new Date(challenge.updatedAt ?? challenge.createdAt)}
+                  title={challenge.title}
+                  desc={challenge.description}
+                  author={`${challenge.author.firstName} ${challenge.author.lastName}`}
+                />
+              );
+            });
           })}
         </Grid>
         <div
           className="loader--container"
           ref={loadRef}
           style={{ marginTop: "3rem", display: "flex", justifyContent: "center" }}>
-          {isFetchingNextPage && <DotLoader theme="primary" />}
+          {isFetchingNextPage || (isLoading && <DotLoader theme="primary" />)}
         </div>
       </Container>
       <Dialog
-        id="Create a challenge"
+        id="create_challenge"
         visible={isCreateModalOpen}
         Dismiss={() => {
           setIsCreateModalOpen(!isCreateModalOpen);

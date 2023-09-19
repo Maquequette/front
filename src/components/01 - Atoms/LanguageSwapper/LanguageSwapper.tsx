@@ -1,7 +1,7 @@
 import { useCallback, memo } from "react";
-import Svg from "../Svg/Svg";
 import { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
+import Svg from "../Svg/Svg";
 import "./LanguageSwapper.scss";
 
 export default memo(function LanguageSwapper() {
@@ -11,6 +11,7 @@ export default memo(function LanguageSwapper() {
     changeLanguage(lang);
   }, []);
 
+  console.log(i18n.language);
   return (
     <div className="language">
       <Svg id="worldwide" />

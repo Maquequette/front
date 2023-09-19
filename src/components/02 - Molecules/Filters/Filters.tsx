@@ -1,4 +1,5 @@
 import { ReactNode, useCallback, memo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import Burger from "../Burger/Burger";
 import Button from "@/components/01 - Atoms/Button/Button";
@@ -17,6 +18,7 @@ export interface IColoredLine {
 export default memo(function Filters({ children, theme, headContent }: IColoredLine) {
   const { enable, disable } = useDisableScroll();
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const toggleFilter = useCallback(() => {
     setIsOpen((p) => {
@@ -31,7 +33,7 @@ export default memo(function Filters({ children, theme, headContent }: IColoredL
         <div className="filters__header">
           <div className="filters__actions">
             <Button theme={"dark"} handleClick={toggleFilter}>
-              search & more
+              {t("Search & More")}
               <Svg id="glass" styles={{ width: "2.5rem", height: "2.5rem" }} />
             </Button>
           </div>

@@ -132,6 +132,20 @@ export const getTagFamilies = ({
   });
 };
 
+export const getChallenge = ({ id }: { id: number }) => {
+
+  const headers: any = {
+    Accept: "application/ld+json"
+  };
+
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    headers["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`;
+  }
+
+  return axios.get(`/api/challenges/${id}`, { headers });
+};
+
 export const postChallenge = (challenge: FormData) => {
   return axios.post("/api/challenges", challenge, {
     headers: {
@@ -141,7 +155,7 @@ export const postChallenge = (challenge: FormData) => {
   });
 };
 
-export const likeChallenge = (challengeId: number) => {
+export const likeChallenge: Function = (challengeId: number) => {
   return axios.post(`/api/challenges/${challengeId}/like`, null, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("access_token")}`
@@ -155,4 +169,100 @@ export const unlikeChallenge = (challengeId: number) => {
       Authorization: `Bearer ${localStorage.getItem("access_token")}`
     }
   });
+};
+
+export const getLikedChallenges = ({
+  pageParam = 1,
+  itemsPerPage = 9,
+  paginate = false,
+  order = "desc",
+  orderBy = "createdAt",
+  tags,
+  difficulties,
+  categories
+}: {
+  pageParam?: number;
+  itemsPerPage?: number;
+  paginate?: boolean;
+  order?: "asc" | "desc";
+  orderBy?: string;
+  difficulties?: Array<any>;
+  tags?: Array<any>;
+  categories?: Array<any>;
+}) => {
+  const query = new URLSearchParams();
+  query.append(`order[${orderBy}]`, order.toUpperCase());
+  query.append("page", pageParam.toString());
+  query.append("itemsPerPage", itemsPerPage.toString());
+  query.append("paginate", paginate.toString());
+  difficulties?.map((item) => {
+    query.append("difficulty.id[]", item.id);
+  });
+
+  tags?.map((item) => {
+    query.append("tags.id[]", item.id);
+  });
+
+  categories?.map((item) => {
+    query.append("type.category.id[]", item.id);
+  });
+
+  return axios.get(`/api/challenges/liked`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      Accept: "application/ld+json"
+    },
+    params: query
+  });
+};
+
+export const getCreatedChallenge = ({
+  pageParam = 1,
+  itemsPerPage = 9,
+  paginate = false,
+  order = "desc",
+  orderBy = "createdAt",
+  tags,
+  difficulties,
+  categories
+}: {
+  pageParam?: number;
+  itemsPerPage?: number;
+  paginate?: boolean;
+  order?: "asc" | "desc";
+  orderBy?: string;
+  difficulties?: Array<any>;
+  tags?: Array<any>;
+  categories?: Array<any>;
+}) => {
+  const query = new URLSearchParams();
+  query.append(`order[${orderBy}]`, order.toUpperCase());
+  query.append("page", pageParam.toString());
+  query.append("itemsPerPage", itemsPerPage.toString());
+  query.append("paginate", paginate.toString());
+  difficulties?.map((item) => {
+    query.append("difficulty.id[]", item.id);
+  });
+
+  tags?.map((item) => {
+    query.append("tags.id[]", item.id);
+  });
+
+  categories?.map((item) => {
+    query.append("type.category.id[]", item.id);
+  });
+
+  return axios.get(`/api/challenges/created`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      Accept: "application/ld+json"
+    },
+    params: query
+  });
+};
+
+export const searchChallenges = (params: any) => {
+  const query = new URLSearchParams(params);
+  query.append("search", params);
+  return axios.get("/api/challenges", { params: query });
 };

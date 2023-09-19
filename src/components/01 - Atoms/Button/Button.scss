@@ -27,6 +27,7 @@
 
   &__input {
     max-height: 4.5rem;
+    color: var(--dark);
 
     &,
     &:link,
@@ -92,4 +93,8 @@
       }
     }
   }
+}
+
+p.btn__input > .sprites {
+  stroke-width: 0;
 }

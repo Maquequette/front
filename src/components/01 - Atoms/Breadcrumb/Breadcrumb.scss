@@ -19,3 +19,11 @@
     }
   }
 }
+
+[data-theme="dark"] {
+  .breadcrumb {
+    &__item {
+      color: var(--light);
+    }
+  }
+}

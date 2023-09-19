@@ -11,6 +11,8 @@ import { peerExtension } from "@/utils/collab";
 import { generateName } from "@/utils/usernames";
 import { cursorExtension } from "@/utils/cursors";
 import { getDocument } from "@/utils/collab";
+import { Text } from "@codemirror/state";
+
 import "./CodeEditor.scss";
 
 export interface ICodeEditor {
@@ -46,7 +48,7 @@ export default function CodeEditor({ socket, room, template }: ICodeEditor) {
   const handleUpdate = (files: any) => {
     Object.entries(files).forEach((entry: [any, any]) => {
       const [key, value] = entry;
-      sandpack.updateFile(key, value.code[0], true);
+      sandpack.updateFile(key, Text.of(value.code[0].split("\n")).toString(), true);
     });
   };
 

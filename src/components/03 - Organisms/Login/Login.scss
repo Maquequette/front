@@ -15,7 +15,7 @@
   &__subtitle {
     padding-bottom: 0.5rem;
     color: var(--dark);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-smd);
     font-family: var(--font-family-secondary);
     opacity: 0.6;
 
@@ -23,7 +23,7 @@
     a {
       @extend .btn-none;
       color: var(--dark);
-      font-size: var(--font-size-sm);
+      font-size: var(--font-size-smd);
       font-family: var(--font-family-secondary);
       cursor: pointer;
       text-decoration: none;
@@ -51,6 +51,7 @@
       &__subtitle {
         @extend .login__subtitle;
         padding: 0;
+        flex: 1;
       }
     }
   }

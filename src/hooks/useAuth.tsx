@@ -57,6 +57,7 @@ export default function useAuth() {
     onSuccess: () => {
       setUser(null!);
       localStorage.clear();
+      setIsConnected(false);
       navigate("/");
     }
   });

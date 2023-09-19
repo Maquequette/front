@@ -21,8 +21,8 @@ export const register = (data: IRegister) => {
   return axios.post("/auth/register", data);
 };
 
-export const logout = () => {
-  return axios.post("/auth/logout");
+export const logout = (data: { refresh_token: string }) => {
+  return axios.post("/auth/logout", data);
 };
 
 export const forgotPassword = (data: { email: string }) => {
@@ -35,6 +35,14 @@ export const refreshToken = (data: { refresh_token: string }) => {
 
 export const profil = () => {
   return axios.get("/api/me", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
+  });
+};
+
+export const updateProfil = (user: any) => {
+  return axios.patch(`api/me/${user.id}`, user, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("access_token")}`
     }

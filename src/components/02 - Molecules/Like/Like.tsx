@@ -5,19 +5,33 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { likeChallenge, unlikeChallenge } from "@/services/challenges.service";
 import "./Like.scss";
 import useToasts from "@/hooks/useToasts";
+import { likeComment, unlikeComment } from "@/services/comments.service";
+import { t } from "i18next";
 
 export interface ILike {
   id: number;
   isAlreadyLiked?: boolean;
   likesCount?: number;
   showNumber: boolean;
+  type?: string;
 }
 
-export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber }: ILike) {
+export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber, type = "Challenge" }: ILike) {
+
+  const likeType: { [key: string]: any } = {
+    'Challenge': likeChallenge,
+    'Comment': likeComment
+  };
+
+  const unlikeType: { [key: string]: any } = {
+    'Challenge': unlikeChallenge,
+    'Comment': unlikeComment
+  }
+
   const [isLiked, setIsLiked] = useState(isAlreadyLiked);
   const [count, setCount] = useState(likesCount);
-  const { mutate: like } = useMutation(likeChallenge);
-  const { mutate: unlike } = useMutation(unlikeChallenge);
+  const { mutate: like } = useMutation(likeType[type]);
+  const { mutate: unlike } = useMutation(unlikeType[type]);
   const { isConnected } = useContext(AuthContext);
   const { pushToast } = useToasts();
 
@@ -34,13 +48,13 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber }:
         isConnected
           ? handleLike()
           : pushToast({
-              theme: "secondary",
-              title: "Vous devez être connecter",
-              desc: "vous devez etre connecter pour liker un challenge"
-            });
+            theme: "secondary",
+            title: t("You must be logged in"),
+            desc: t("You must be logged in to like a challenge")
+          });
       }}>
       <Svg id="like" />
-      {showNumber || (!isConnected && <p className="like__count">{count}</p>)}
+      {showNumber && <p className="like__count">{count}</p>}
     </div>
   );
 }

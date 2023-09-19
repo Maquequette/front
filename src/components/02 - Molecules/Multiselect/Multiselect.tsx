@@ -1,12 +1,11 @@
+import { useTranslation } from "react-i18next";
 import {
   memo,
-  forwardRef,
-  useImperativeHandle,
   useMemo,
   useState,
-  Ref,
   useEffect,
-  useCallback
+  useCallback,
+  CSSProperties
 } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
@@ -23,6 +22,7 @@ export interface IMultiselect {
   searchable?: boolean;
   defaultText?: string;
   callback: Function;
+  styles?: CSSProperties;
 }
 
 export interface ISelectOption {
@@ -40,15 +40,18 @@ const Multiselect = ({
   multiple = true,
   searchable = false,
   defaultText = null!,
-  callback
+  callback,
+  styles
 }: IMultiselect) => {
+  const { t } = useTranslation();
+
   const defaultSelection = useMemo(() => {
     const defaultOption = options.find((option) => option.default);
     return defaultOption ? [defaultOption] : [];
   }, []);
 
+  //console.log(defaultText, defaultSelection);
   const [selected, setSelected] = useState<Array<ISelectOption>>(defaultSelection);
-
   const [isActive, setIsActive] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -87,9 +90,30 @@ const Multiselect = ({
     callback(selected);
   }, [selected]);
 
+
+  // if (defaultText === "sort" || defaultText === "Tag") {
+  //   console.log(defaultText, selected);
+  //   for (const [key, option] of Object.entries(options)) {
+  //     console.log(key, option);
+  //     console.log(selected.includes(option));
+  //   }
+  // }
+
   return (
     <div className={`multiselect ${isActive ? "active" : ""}`} ref={ref}>
-      <div className="multiselect__input">
+      <div
+        className="multiselect__input"
+        style={styles}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (searchable) {
+            if (!searchWriting || (searchWriting && !searchQuery && !selected)) {
+              setIsActive(!isActive);
+            }
+          } else {
+            setIsActive(!isActive);
+          }
+        }}>
         <div className="multiselect__input__selected">
           {!multiple ? (
             <input
@@ -97,11 +121,11 @@ const Multiselect = ({
               className="multiselect__input__text"
               readOnly={!searchWriting}
               value={
-                selected
+                selected.length > 0
                   ? selected[0]?.label
                   : searchWriting && searchQuery
-                  ? searchQuery
-                  : defaultText ?? "Choose"
+                    ? searchQuery
+                    : !isActive ? defaultText ?? t("Choose") : ""
               }
               placeholder="Search something..."
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,15 +134,9 @@ const Multiselect = ({
                   setSelected(defaultSelection);
                 }
               }}
-              onClick={(e) => {
-                e.stopPropagation();
-                if (!searchWriting || (searchWriting && !searchQuery && !selected)) {
-                  setIsActive(!isActive);
-                }
-              }}
             />
           ) : selected.length === 0 ? (
-            defaultText ?? "Choose"
+            defaultText ?? t("Choose")
           ) : (
             selected.map((element: ISelectOption) => {
               return (
@@ -137,7 +155,12 @@ const Multiselect = ({
           )}
         </div>
 
-        <div className="multiselect__input__sprite">
+        <div
+          className="multiselect__input__sprite"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsActive(!isActive);
+          }}>
           <Svg id="dropdown" />
         </div>
       </div>
