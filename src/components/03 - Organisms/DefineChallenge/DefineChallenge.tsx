@@ -1,4 +1,4 @@
-import { SetStateAction, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm";
@@ -203,7 +203,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                     callback={(value: any) => {
                       setQuery({ ...query, description: value });
                     }}
-                    value={query.description} />
+                  />
                 </div>
 
                 <div className="defineChallenge__full">

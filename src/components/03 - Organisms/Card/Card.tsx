@@ -61,7 +61,7 @@ export default memo(function Card({
               </Badge>
             )}
             <div className="card__socials">
-              <Like showNumber={false} id={id} isAlreadyLiked={isLiked}></Like>
+              <Like showNumber={true} id={id} isAlreadyLiked={isLiked}></Like>
             </div>
           </div>
         </div>
