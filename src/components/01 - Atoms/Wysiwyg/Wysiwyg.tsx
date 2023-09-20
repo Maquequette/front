@@ -1,11 +1,11 @@
 import { Editor } from "@tinymce/tinymce-react";
 import "./Wysiwyg.scss";
-import { ReactNode } from "react";
-import { Theme } from "@/types/Theme";
+import { type ReactNode } from "react";
+import { type Theme } from "@/types/Theme";
 import clsx from "clsx";
 
 export interface IWysiwyg {
-  callback: Function;
+  callback: (desc: string) => void;
   value: string;
   children?: ReactNode;
   maxHeight?: number;
@@ -13,9 +13,16 @@ export interface IWysiwyg {
   color?: Theme;
 }
 
-export default function Wysiwyg({ callback, value, children, maxHeight = 400, placeholder, color = "light" }: IWysiwyg) {
+export default function Wysiwyg({
+  callback,
+  value,
+  children,
+  maxHeight = 400,
+  placeholder,
+  color = "light"
+}: IWysiwyg) {
   return (
-    <div className={clsx('wysiwyg', `wysiwyg--${color}`)}>
+    <div className={clsx("wysiwyg", `wysiwyg--${color}`)}>
       <Editor
         onEditorChange={(description: any) => {
           callback(description);
@@ -26,11 +33,26 @@ export default function Wysiwyg({ callback, value, children, maxHeight = 400, pl
           max_height: maxHeight,
           height: 200,
           menubar: false,
-          placeholder: placeholder,
+          placeholder,
           plugins: [
-            "advlist", "autolink", "lists", "link", "image", "charmap", "preview", "anchor",
-            "searchreplace", "visualblocks", "code", "fullscreen", "codesample",
-            "insertdatetime", "media", "table", "help", "wordcount"
+            "advlist",
+            "autolink",
+            "lists",
+            "link",
+            "image",
+            "charmap",
+            "preview",
+            "anchor",
+            "searchreplace",
+            "visualblocks",
+            "code",
+            "fullscreen",
+            "codesample",
+            "insertdatetime",
+            "media",
+            "table",
+            "help",
+            "wordcount"
           ],
           toolbar:
             "undo redo | formatselect | " +
@@ -40,9 +62,7 @@ export default function Wysiwyg({ callback, value, children, maxHeight = 400, pl
           content_style: "body { font-family:Roboto,Arial,sans-serif; font-size:16px }"
         }}
       />
-      <div className="wysiwyg__absolute">
-        {children}
-      </div>
+      <div className="wysiwyg__absolute">{children}</div>
     </div>
   );
 }

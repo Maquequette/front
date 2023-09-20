@@ -1,8 +1,7 @@
 import { useCallback, useContext, useState, memo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Toast from "@/components/01 - Atoms/Toast/Toast";
+import Toast, { type IToast } from "@/components/01 - Atoms/Toast/Toast";
 import { ToastContext } from "@/contexts/ToastContext";
-import { IToast } from "@/components/01 - Atoms/Toast/Toast";
 import "./ToastsContainer.scss";
 
 export default memo(function ToastsContainer() {
@@ -12,9 +11,12 @@ export default memo(function ToastsContainer() {
   pushToastRef.current = ({ duration, title, desc, theme }: IToast) => {
     const id = crypto.randomUUID();
 
-    const timer = setTimeout(() => {
-      setToasts((v) => v.filter((t) => t.id !== id));
-    }, (duration ?? 5) * 1000);
+    const timer = setTimeout(
+      () => {
+        setToasts((v) => v.filter((t) => t.id !== id));
+      },
+      (duration ?? 5) * 1000
+    );
 
     const toast = { title, id, timer, desc, theme, duration };
     setToasts((v) => [...v, toast]);

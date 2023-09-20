@@ -1,6 +1,5 @@
 import { memo } from "react";
-import Tag from "@/components/01 - Atoms/Tag/Tag";
-import { ITag } from "@/components/01 - Atoms/Tag/Tag";
+import Tag, { type ITag } from "@/components/01 - Atoms/Tag/Tag";
 import "./Tags.scss";
 
 export interface ITags {

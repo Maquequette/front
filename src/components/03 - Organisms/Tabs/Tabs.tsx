@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect, memo } from "react";
+import { type ReactNode, useContext, useEffect, memo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { TabsContext } from "@/contexts/TabsContext";
@@ -6,14 +6,14 @@ import "./Tabs.scss";
 
 export interface ITabs {
   tabs: Array<ITabsParameters>;
-  id?: String;
-  anchorNavigation?: Boolean;
+  id?: string;
+  anchorNavigation?: boolean;
 }
 
 export interface ITabsParameters {
-  tabTitle: String;
+  tabTitle: string;
   tabContent: ReactNode;
-  anchor?: String;
+  anchor?: string;
 }
 
 export default memo(function Tabs({ tabs, id = "", anchorNavigation = false }: ITabs) {
@@ -34,7 +34,7 @@ export default memo(function Tabs({ tabs, id = "", anchorNavigation = false }: I
       <div className="tabs__choice">
         {tabs.map((tab, i) => (
           <button
-            className={`tabs__choice__item ${currentTab == i ? "active" : ""}`}
+            className={`tabs__choice__item ${currentTab === i ? "active" : ""}`}
             type="button"
             key={`tabBtn-${i}-${id}`}
             onClick={() =>

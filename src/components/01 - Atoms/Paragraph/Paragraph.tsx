@@ -1,5 +1,5 @@
-import { CSSProperties, ReactNode, memo } from "react";
-import { Theme } from "@/types/Theme";
+import { type CSSProperties, type ReactNode, memo } from "react";
+import { type Theme } from "@/types/Theme";
 import "./Paragraph.scss";
 
 export interface IParagraph {
@@ -16,6 +16,8 @@ export default memo(function Paragraph({ children, color, isHtml, styles }: IPar
       className={`paragraph  ${color ? `txt--${color}` : ""}`}
       dangerouslySetInnerHTML={{ __html: children }}></div>
   ) : (
-    <p className={`paragraph  ${color ? `txt--${color}` : ""}`} style={styles}>{children}</p>
+    <p className={`paragraph  ${color ? `txt--${color}` : ""}`} style={styles}>
+      {children}
+    </p>
   );
 });

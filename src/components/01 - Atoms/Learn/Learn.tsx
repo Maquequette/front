@@ -1,4 +1,4 @@
-import { ReactNode, memo } from "react";
+import { type ReactNode, memo } from "react";
 import { motion } from "framer-motion";
 import Sprites from "../../../assets/images/sprites.svg";
 import "./Learn.scss";

@@ -13,7 +13,7 @@ import { memo, useContext, useState } from "react";
 
 export interface IChallengeSolutions {
   id: number;
-  createSolution: Function;
+  createSolution: () => void;
 }
 
 export default memo(function ChallengeSolutions({ id, createSolution }: IChallengeSolutions) {
@@ -34,7 +34,7 @@ export default memo(function ChallengeSolutions({ id, createSolution }: IChallen
   } = useInfiniteQuery({
     queryKey: ["solutions", query],
     keepPreviousData: true,
-    queryFn: ({ pageParam = 1 }) => getSolutionsFrom({ pageParam, ...query }),
+    queryFn: async ({ pageParam = 1 }) => await getSolutionsFrom({ pageParam, ...query }),
     getNextPageParam: (lastPage, pages) => {
       const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
       return urlParams.get("page") ?? null;
@@ -55,9 +55,7 @@ export default memo(function ChallengeSolutions({ id, createSolution }: IChallen
           )
         }>
         <Multiselect
-          callback={(value: any) => {
-            //setQuery({ ...query, order: value[0]?.order, orderBy: value[0]?.orderBy });
-          }}
+          callback={(value: any) => {}}
           styles={{ minWidth: "20rem" }}
           theme={"primary"}
           defaultText={t("sort")}

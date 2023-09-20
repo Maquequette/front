@@ -1,5 +1,6 @@
-import { Theme } from "@/types/Theme";
-import { RefObject, forwardRef, memo } from "react";
+/* eslint-disable react/display-name */
+import { type Theme } from "@/types/Theme";
+import { type RefObject, forwardRef, memo } from "react";
 import "./DotLoader.scss";
 
 const DotLoader = forwardRef(({ theme }: { theme: Theme }, ref) => {

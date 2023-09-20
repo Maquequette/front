@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ThemesContext } from "@/contexts/ThemesContext";
 import "./Logo.scss";
 
-export default memo(function Logo({ classes, name }: { classes?: String; name?: String }) {
+export default memo(function Logo({ classes, name }: { classes?: string; name?: string }) {
   const { theme } = useContext(ThemesContext);
 
   return (

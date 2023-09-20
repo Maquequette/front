@@ -1,4 +1,4 @@
-import { memo, useContext, useMemo } from "react";
+import { memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
@@ -9,7 +9,7 @@ import Date from "@/components/01 - Atoms/Date/Date";
 import Badge from "@/components/01 - Atoms/Badge/Badge";
 import Image from "@/components/01 - Atoms/Image/Image";
 import Like from "@/components/02 - Molecules/Like/Like";
-import { ITag } from "@/components/01 - Atoms/Tag/Tag";
+import { type ITag } from "@/components/01 - Atoms/Tag/Tag";
 import "./Card.scss";
 
 export interface ICard {

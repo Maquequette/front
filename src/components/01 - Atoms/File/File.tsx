@@ -13,8 +13,8 @@ export interface IFile {
   isDirOpen?: boolean;
   isDir?: boolean;
   isAddingFile?: boolean;
-  setIsAddingFile?: Function;
-  setNewPath?: Function;
+  setIsAddingFile?: (isAdding: boolean) => void;
+  setNewPath?: (nPath: string) => void;
 }
 
 export const File = ({

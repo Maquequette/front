@@ -41,12 +41,17 @@ export default function Challenges() {
   const isInView = useInView(loadRef);
   const { mainColor } = useContext(ThemesContext);
   const { t } = useTranslation();
-  const { data: categories } = useQuery(["categories"], () => getCategories({ paginate: false }));
-  const { data: difficulties } = useQuery(["difficulties"], () =>
-    getDifficulties({ paginate: false })
+  const { data: categories } = useQuery(
+    ["categories"],
+    async () => await getCategories({ paginate: false })
   );
-  const { data: tagFamilies } = useQuery(["tagFamilies", query?.categories], () =>
-    getTagFamilies({ paginate: false, categories: query?.categories })
+  const { data: difficulties } = useQuery(
+    ["difficulties"],
+    async () => await getDifficulties({ paginate: false })
+  );
+  const { data: tagFamilies } = useQuery(
+    ["tagFamilies", query?.categories],
+    async () => await getTagFamilies({ paginate: false, categories: query?.categories })
   );
 
   const {
@@ -58,7 +63,7 @@ export default function Challenges() {
   } = useInfiniteQuery({
     queryKey: ["challenges", query],
     keepPreviousData: true,
-    queryFn: ({ pageParam = 1 }) => getChallenges({ pageParam, ...query }),
+    queryFn: async ({ pageParam = 1 }) => await getChallenges({ pageParam, ...query }),
     getNextPageParam: (lastPage, pages) => {
       const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
       return urlParams.get("page") ?? null;

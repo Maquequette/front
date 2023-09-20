@@ -13,7 +13,7 @@ import Input from "@/components/01 - Atoms/Input/Input";
 import "./CodePreview.scss";
 
 export interface ICodePreview {
-  setFullScreen: Function;
+  setFullScreen: (full: boolean) => void;
 }
 
 export default function CodePreview({ setFullScreen }: ICodePreview) {
@@ -24,15 +24,17 @@ export default function CodePreview({ setFullScreen }: ICodePreview) {
 
   const downloadProjectAsZip = useCallback(() => {
     const zip = new JSZip();
-    const project = zip.folder("project")!;
+    const project = zip.folder("project") ?? false;
 
-    Object.entries(sandpack.files).forEach(([filename, content]) => {
-      project.file(filename, content.code);
-    });
+    if (project) {
+      Object.entries(sandpack.files).forEach(([filename, content]) => {
+        project.file(filename, content.code);
+      });
 
-    project.generateAsync({ type: "blob" }).then((content) => {
-      saveAs(content, "Mac&Kate.zip");
-    });
+      project.generateAsync({ type: "blob" }).then((content) => {
+        saveAs(content, "Mac&Kate.zip");
+      });
+    }
   }, []);
 
   const uploadProjectFiles = (files: any) => {
@@ -41,7 +43,7 @@ export default function CodePreview({ setFullScreen }: ICodePreview) {
         .filter((filePath, file) => {
           return !filePath.match(/^__MACOSX\//);
         })
-        .forEach(async (file) => {
+        .forEach(async (file: any) => {
           const content = await file.async("string");
           if (content) {
             const path = file.name.split("/");
@@ -53,9 +55,9 @@ export default function CodePreview({ setFullScreen }: ICodePreview) {
   };
 
   useEffect(() => {
-    const code_param: string | null = new URLSearchParams(location.search).get("code");
-    if (location.hash === "#github" && code_param) {
-      getGitHubToken(code_param);
+    const codeParam: string | null = new URLSearchParams(location.search).get("code");
+    if (location.hash === "#github" && codeParam) {
+      getGitHubToken(codeParam);
     }
   }, [location]);
 

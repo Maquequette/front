@@ -1,10 +1,11 @@
-import { createContext, MutableRefObject, useRef, memo } from "react";
+import { createContext, type MutableRefObject, useRef, memo } from "react";
 import ToastsContainer from "@/components/02 - Molecules/ToastsContainer/ToastsContainer";
 
 export interface IToastContext {
-  pushToastRef: MutableRefObject<Function>;
+  pushToastRef: MutableRefObject<any>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const ToastContext = createContext<IToastContext>(null!);
 
 const ToastProvider = memo(function ToastProvider({ children }: { children: JSX.Element }) {
