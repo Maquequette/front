@@ -1,8 +1,6 @@
 import { memo } from "react";
-import Editor from "../Editor/Editor";
+import Editor from "@/components/03 - Organisms/Editor/Editor";
 
 export default memo(function SolutionCode() {
-    return (
-        <Editor template={"static"} theme={"dark"} solo={true}></Editor>
-    );
-})
+  return <Editor hasSelect={true} theme={"dark"} solo={true} />;
+});

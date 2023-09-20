@@ -6,7 +6,7 @@ import Date from "@/components/01 - Atoms/Date/Date";
 import { BulletPoint } from "@/components/01 - Atoms/BulletPoint/BulletPoint";
 import Like from "@/components/02 - Molecules/Like/Like";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
-import './CardSolution.scss'
+import "./CardSolution.scss";
 
 export interface ICardSolution {
     author: any;
@@ -45,5 +45,15 @@ export default memo(function CardSolution({ id, recap, author, date, onclick, is
                 </Paragraph>
             </div>
         </div>
-    );
+      </div>
+      <div className="cardSolution__profile">
+        <ProfileButton id={author.id} username={`${author.firstName} ${author.lastName}`} />
+      </div>
+      <div className="cardSolution__content">
+        <Paragraph color="dark" isHtml={true} styles={{ paddingBottom: "1rem" }}>
+          {DOMPurify.sanitize(recap ?? "")}
+        </Paragraph>
+      </div>
+    </div>
+  );
 });

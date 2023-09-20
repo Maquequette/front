@@ -1,4 +1,4 @@
-import { ChangeEventHandler, CSSProperties, useState, memo } from "react";
+import { type ChangeEventHandler, type CSSProperties, useState, memo } from "react";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import useToasts from "@/hooks/useToasts";
 import "../Input/Input.scss";
@@ -36,7 +36,7 @@ export default memo(function FileInput({
   icon,
   instruction
 }: IFileInput) {
-  const [files, setFiles] = useState<Array<File>>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const { pushToast } = useToasts();
   return (
     <>
@@ -77,13 +77,18 @@ export default memo(function FileInput({
             {icon && <Svg id={icon} />}
             {placeholder}
           </Button>
-          {instruction &&
-            <p style={{ fontFamily: "'Space Grotesk',sans-serif", color: "#8a8a8a", fontSize: "1.2rem", whiteSpace: "pre" }}>
+          {instruction && (
+            <p
+              style={{
+                fontFamily: "'Space Grotesk',sans-serif",
+                color: "#8a8a8a",
+                fontSize: "1.2rem",
+                whiteSpace: "pre"
+              }}>
               {instruction}
             </p>
-          }
+          )}
         </div>
-
       </label>
       {files && preview && (
         <div className="input__preview">
@@ -96,9 +101,9 @@ export default memo(function FileInput({
           })}
           {limite &&
             files.length - limite > 0 &&
-            Array.from({ length: limite - files.length }).map((el) => {
+            Array.from({ length: limite - files.length }).map((el, index) => {
               return (
-                <div className="preview">
+                <div className="preview" key={index}>
                   <Svg id="img" />
                 </div>
               );

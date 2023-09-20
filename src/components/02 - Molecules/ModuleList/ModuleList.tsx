@@ -3,7 +3,7 @@ import { Directory } from "@/components/01 - Atoms/Directory/Directory";
 import { fromPropsToModules } from "@/utils/utils";
 import "./ModuleList.scss";
 
-export const ModuleList: React.FC<any> = ({
+export default function ModuleList({
   depth = 0,
   activeFile,
   selectFile,
@@ -15,7 +15,7 @@ export const ModuleList: React.FC<any> = ({
   isAddingFile,
   setIsAddingFile,
   setNewPath
-}) => {
+}: any) {
   const { directories, modules } = fromPropsToModules({
     visibleFiles,
     autoHiddenFiles,
@@ -53,4 +53,4 @@ export const ModuleList: React.FC<any> = ({
       ))}
     </div>
   );
-};
+}

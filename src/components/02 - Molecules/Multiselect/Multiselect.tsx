@@ -1,18 +1,11 @@
 import { useTranslation } from "react-i18next";
-import {
-  memo,
-  useMemo,
-  useState,
-  useEffect,
-  useCallback,
-  CSSProperties
-} from "react";
+import { memo, useMemo, useState, useEffect, useCallback, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import Options from "@/components/01 - Atoms/Options/Options";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import useClickOutside from "@/hooks/useClickOutside";
-import { Theme } from "@/types/Theme";
+import { type Theme } from "@/types/Theme";
 import "./Multiselect.scss";
 
 export interface IMultiselect {
@@ -21,7 +14,7 @@ export interface IMultiselect {
   multiple?: boolean;
   searchable?: boolean;
   defaultText?: string;
-  callback: Function;
+  callback: (value: any) => void;
   styles?: CSSProperties;
 }
 
@@ -39,7 +32,7 @@ const Multiselect = ({
   theme,
   multiple = true,
   searchable = false,
-  defaultText = null!,
+  defaultText = undefined,
   callback,
   styles
 }: IMultiselect) => {
@@ -50,7 +43,6 @@ const Multiselect = ({
     return defaultOption ? [defaultOption] : [];
   }, []);
 
-  //console.log(defaultText, defaultSelection);
   const [selected, setSelected] = useState<Array<ISelectOption>>(defaultSelection);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -90,15 +82,6 @@ const Multiselect = ({
     callback(selected);
   }, [selected]);
 
-
-  // if (defaultText === "sort" || defaultText === "Tag") {
-  //   console.log(defaultText, selected);
-  //   for (const [key, option] of Object.entries(options)) {
-  //     console.log(key, option);
-  //     console.log(selected.includes(option));
-  //   }
-  // }
-
   return (
     <div className={`multiselect ${isActive ? "active" : ""}`} ref={ref}>
       <div
@@ -124,8 +107,10 @@ const Multiselect = ({
                 selected.length > 0
                   ? selected[0]?.label
                   : searchWriting && searchQuery
-                    ? searchQuery
-                    : !isActive ? defaultText ?? t("Choose") : ""
+                  ? searchQuery
+                  : !isActive
+                  ? defaultText ?? t("Choose")
+                  : ""
               }
               placeholder="Search something..."
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -196,7 +181,7 @@ const Multiselect = ({
                       key={index}
                       theme={theme}
                       label={element.label}
-                      value={element.id!}
+                      value={element.id}
                       classes={clsx(selected.includes(element) && !multiple ? "active" : "")}
                       handleClick={() => {
                         multiple ? handleMultiselect(element) : handleSelect(element);
@@ -214,7 +199,7 @@ const Multiselect = ({
                             key={index}
                             theme={theme}
                             label={option.label}
-                            value={option.id!}
+                            value={option.id}
                             classes={clsx(selected.includes(option) && !multiple ? "active" : "")}
                             handleClick={() => {
                               multiple ? handleMultiselect(option) : handleSelect(option);

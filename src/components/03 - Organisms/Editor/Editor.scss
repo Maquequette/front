@@ -1,4 +1,17 @@
 .editor {
+  isolation: isolate;
+
+  &__template {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4rem;
+
+    .multiselect {
+      width: auto;
+      z-index: 9;
+    }
+  }
+
   &__layout {
     &--fullscreen {
       --sp-layout-height: 100%;

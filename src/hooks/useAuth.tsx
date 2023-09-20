@@ -13,6 +13,7 @@ export default function useAuth() {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
+    // eslint-disable-next-line eqeqeq
     if (user && user != "null") {
       setUser(JSON.parse(user));
       setIsConnected(true);
@@ -55,6 +56,7 @@ export default function useAuth() {
   const { mutate: onLogout } = useMutation({
     mutationFn: logout,
     onSuccess: () => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       setUser(null!);
       localStorage.clear();
       setIsConnected(false);
@@ -77,6 +79,5 @@ export default function useAuth() {
     onRegister,
     onLogin,
     onLogout
-    //onForgotPassword
   };
 }

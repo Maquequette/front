@@ -1,6 +1,6 @@
-import { MouseEventHandler, CSSProperties, ReactNode, memo } from "react";
-import { BtnTypes } from "@/types/BtnTypes";
-import { Theme } from "@/types/Theme";
+import { type MouseEventHandler, type CSSProperties, type ReactNode, memo } from "react";
+import { type BtnTypes } from "@/types/BtnTypes";
+import { type Theme } from "@/types/Theme";
 import "./Button.scss";
 
 export interface IButton {
@@ -26,7 +26,7 @@ export default memo(function Button({
 }: IButton) {
   return (
     <div className={`btn btn--${theme}`} style={styles}>
-      {HTMLTag === "button" ?
+      {HTMLTag === "button" ? (
         <button
           disabled={disabled ?? false}
           type={type ?? "button"}
@@ -35,14 +35,14 @@ export default memo(function Button({
           style={btnStyles}>
           {children}
         </button>
-        :
+      ) : (
         <p
           onClick={handleClick ?? undefined}
           className={`btn__input btn__input--${theme}`}
           style={btnStyles}>
           {children}
         </p>
-      }
+      )}
     </div>
   );
 });

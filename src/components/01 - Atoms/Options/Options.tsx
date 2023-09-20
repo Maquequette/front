@@ -1,14 +1,14 @@
-import { MouseEventHandler, ReactNode, useState, memo } from "react";
+import { type MouseEventHandler, type ReactNode, useState, memo } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import Checkbox from "../Checkbox/Checkbox";
 import Svg from "../Svg/Svg";
-import { Theme } from "@/types/Theme";
+import { type Theme } from "@/types/Theme";
 import "./Options.scss";
 
 export interface IOptions {
   handleClick: MouseEventHandler;
-  value: string | number;
+  value: string | number | undefined;
   label: string;
   theme: Theme;
   hasCheckbox: boolean;

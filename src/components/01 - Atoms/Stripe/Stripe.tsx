@@ -1,5 +1,5 @@
-import { ReactNode, memo } from "react";
-import { Theme } from "@/types/Theme";
+import { type ReactNode, memo } from "react";
+import { type Theme } from "@/types/Theme";
 import "./Stipe.scss";
 
 export interface IStripe {

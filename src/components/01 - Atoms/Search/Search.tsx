@@ -16,7 +16,7 @@ export interface ISearch {
 
 export default memo(function Search({ placeholder, className }: ISearch) {
   const [value, setValue] = useState("");
-  const { data } = useQuery(["search", value], () => searchChallenges(value), {
+  const { data } = useQuery(["search", value], async () => await searchChallenges(value), {
     enabled: value.length > 0
   });
 
@@ -37,7 +37,7 @@ export default memo(function Search({ placeholder, className }: ISearch) {
         <div className="search__options__container">
           {data?.data.map((suggestion: any) => {
             return (
-              <div className="search__option">
+              <div className="search__option" key={suggestion.id}>
                 <Link to={`/challenges/${suggestion.id}`} className="search__option__container">
                   <div className="search__option__img">
                     <Image

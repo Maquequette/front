@@ -5,13 +5,7 @@ import Image from "@/components/01 - Atoms/Image/Image";
 export default function DesignSystem() {
   return (
     <Container center={true}>
-      {/* <Editor template="react" theme="dark" roomId="natho" /> */}
-      <Image
-        alt="oui"
-        height="500"
-        width="1000"
-        src="https://res.cloudinary.com/dz209s6jk/image/upload/v1668186598/Challenges/txrtsxgbdjxjwamhysxx.jpg"
-      />
+      <Editor theme="dark" solo={true} hasSelect={true} />
     </Container>
   );
 }

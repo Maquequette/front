@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useEffect, memo } from "react";
+import { type Dispatch, type SetStateAction, useContext, useEffect, memo } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -119,11 +119,15 @@ export default memo(function Navigation({ isOpen }: INavigation) {
                   },
                   {
                     component: (
-                      <Navlink to="/logout" theme="primary" onclick={() => {
-                        onLogout({
-                          refresh_token: localStorage.getItem("refresh_token")!
-                        })
-                      }}>
+                      <Navlink
+                        to="/logout"
+                        theme="primary"
+                        onclick={() => {
+                          onLogout({
+                            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                            refresh_token: localStorage.getItem("refresh_token")!
+                          });
+                        }}>
                         Log Out
                       </Navlink>
                     )

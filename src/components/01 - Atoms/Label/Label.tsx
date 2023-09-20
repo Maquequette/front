@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, memo } from "react";
+import { type CSSProperties, type ReactNode, memo } from "react";
 import "./Label.scss";
 
 export interface ILabel {

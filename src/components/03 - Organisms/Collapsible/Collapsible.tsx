@@ -1,6 +1,6 @@
-import { ReactNode, useCallback, useState, memo } from "react";
+import { type ReactNode, useCallback, useState, memo } from "react";
 import { motion } from "framer-motion";
-import { Theme } from "@/types/Theme";
+import { type Theme } from "@/types/Theme";
 import "./Collapsible.scss";
 
 export interface ICollapsible {

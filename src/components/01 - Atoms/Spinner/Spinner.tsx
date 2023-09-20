@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Theme } from "@/types/Theme";
+import { type Theme } from "@/types/Theme";
 import "./Spinner.scss";
 
 export default memo(function Loading({ theme }: { theme: Theme }) {
