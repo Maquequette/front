@@ -43,7 +43,6 @@ const Multiselect = ({
     return defaultOption ? [defaultOption] : [];
   }, []);
 
-  // console.log(defaultText, defaultSelection);
   const [selected, setSelected] = useState<Array<ISelectOption>>(defaultSelection);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -82,14 +81,6 @@ const Multiselect = ({
   useEffect(() => {
     callback(selected);
   }, [selected]);
-
-  // if (defaultText === "sort" || defaultText === "Tag") {
-  //   console.log(defaultText, selected);
-  //   for (const [key, option] of Object.entries(options)) {
-  //     console.log(key, option);
-  //     console.log(selected.includes(option));
-  //   }
-  // }
 
   return (
     <div className={`multiselect ${isActive ? "active" : ""}`} ref={ref}>
