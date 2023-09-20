@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, memo, useEffect } from "react";
+import { type CSSProperties, type ReactNode, memo, useEffect } from "react";
 import { motion } from "framer-motion";
 import useDisableScroll from "@/hooks/useDisableScroll";
 import "./Dialog.scss";
@@ -7,7 +7,7 @@ export interface IDialog {
   id: string;
   children: ReactNode;
   visible: boolean;
-  Dismiss: Function;
+  Dismiss: () => void;
   styles?: CSSProperties;
 }
 

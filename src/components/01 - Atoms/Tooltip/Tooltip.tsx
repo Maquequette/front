@@ -1,4 +1,4 @@
-import { ReactNode, useState, memo, CSSProperties } from "react";
+import { type ReactNode, useState, memo } from "react";
 import clsx from "clsx";
 import useClickOutside from "@/hooks/useClickOutside";
 import "./Tooltip.scss";

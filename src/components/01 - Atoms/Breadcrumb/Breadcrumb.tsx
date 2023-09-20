@@ -1,4 +1,4 @@
-import { CSSProperties, Key, useMemo, memo } from "react";
+import { type CSSProperties, type Key, useMemo, memo } from "react";
 import { NavLink, useMatches } from "react-router-dom";
 import "./Breadcrumb.scss";
 

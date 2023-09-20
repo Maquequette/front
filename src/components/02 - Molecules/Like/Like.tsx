@@ -16,17 +16,22 @@ export interface ILike {
   type?: string;
 }
 
-export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber, type = "Challenge" }: ILike) {
-
-  const likeType: { [key: string]: any } = {
-    'Challenge': likeChallenge,
-    'Comment': likeComment
+export default function Like({
+  id,
+  isAlreadyLiked,
+  likesCount = 0,
+  showNumber,
+  type = "Challenge"
+}: ILike) {
+  const likeType: Record<string, any> = {
+    Challenge: likeChallenge,
+    Comment: likeComment
   };
 
-  const unlikeType: { [key: string]: any } = {
-    'Challenge': unlikeChallenge,
-    'Comment': unlikeComment
-  }
+  const unlikeType: Record<string, any> = {
+    Challenge: unlikeChallenge,
+    Comment: unlikeComment
+  };
 
   const [isLiked, setIsLiked] = useState(isAlreadyLiked);
   const [count, setCount] = useState(likesCount);
@@ -36,7 +41,6 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber, t
   const { pushToast } = useToasts();
 
   const handleLike = useCallback(() => {
-    // @ts-ignore
     isLiked ? unlike(id) : like(id);
     setIsLiked(!isLiked);
     setCount((prev) => (!isLiked ? prev + 1 : prev - 1));
@@ -49,10 +53,10 @@ export default function Like({ id, isAlreadyLiked, likesCount = 0, showNumber, t
         isConnected
           ? handleLike()
           : pushToast({
-            theme: "secondary",
-            title: t("You must be logged in"),
-            desc: t("You must be logged in to like a challenge")
-          });
+              theme: "secondary",
+              title: t("You must be logged in"),
+              desc: t("You must be logged in to like a challenge")
+            });
       }}>
       <Svg id="like" />
       {showNumber && <p className="like__count">{count}</p>}

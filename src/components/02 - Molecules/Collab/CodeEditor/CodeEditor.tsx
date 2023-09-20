@@ -1,18 +1,16 @@
 import {
   SandpackCodeEditor,
-  SandpackPredefinedTemplate,
+  type SandpackPredefinedTemplate,
   useSandpack
 } from "@codesandbox/sandpack-react";
 import { abbreviationTracker } from "@emmetio/codemirror6-plugin";
 import { searchKeymap, search } from "@codemirror/search";
 import { useEffect, useMemo, useState } from "react";
-import { Socket } from "socket.io-client";
-import { peerExtension } from "@/utils/collab";
+import { type Socket } from "socket.io-client";
+import { peerExtension, getDocument } from "@/utils/collab";
 import { generateName } from "@/utils/usernames";
 import { cursorExtension } from "@/utils/cursors";
-import { getDocument } from "@/utils/collab";
 import { Text } from "@codemirror/state";
-
 import "./CodeEditor.scss";
 
 export interface ICodeEditor {
@@ -25,7 +23,6 @@ export default function CodeEditor({ socket, room, template }: ICodeEditor) {
   const [username, setUsername] = useState(generateName());
   const { sandpack } = useSandpack();
   const [version, setVersion] = useState<number | null>(null);
-  const [currentFile, setCurrentFile] = useState();
 
   useEffect(() => {
     const fetchDoc = async () => {

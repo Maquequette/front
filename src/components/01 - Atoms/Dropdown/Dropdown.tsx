@@ -1,8 +1,8 @@
-import { CSSProperties, memo } from "react";
+import { type CSSProperties, memo } from "react";
 import "./Dropdown.scss";
 
 export interface IDropdown {
-  options: Array<IDropdownOption>;
+  options: IDropdownOption[];
   component: JSX.Element;
   styles: CSSProperties;
 }
@@ -10,7 +10,7 @@ export interface IDropdown {
 export interface IDropdownOption {
   isActive?: boolean;
   component: JSX.Element;
-  handleClick?: Function;
+  handleClick?: (opt: any) => void;
   value?: any;
 }
 

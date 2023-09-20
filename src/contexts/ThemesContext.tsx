@@ -1,6 +1,13 @@
-import { createContext, Dispatch, MouseEventHandler, useCallback, useState, memo } from "react";
-import { Mode } from "@/types/Mode";
-import { Theme } from "@/types/Theme";
+import {
+  createContext,
+  type Dispatch,
+  type MouseEventHandler,
+  useCallback,
+  useState,
+  memo
+} from "react";
+import { type Mode } from "@/types/Mode";
+import { type Theme } from "@/types/Theme";
 
 export interface IMode {
   theme: Mode;
@@ -10,6 +17,7 @@ export interface IMode {
   setMainColor: Dispatch<React.SetStateAction<Theme>>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const ThemesContext = createContext<IMode>(null!);
 
 const ThemesProvider = memo(function ThemesProvider({ children }: { children: JSX.Element }) {

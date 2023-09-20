@@ -1,8 +1,7 @@
 import {
   createContext,
-  Dispatch,
-  SetStateAction,
-  useCallback,
+  type Dispatch,
+  type SetStateAction,
   useEffect,
   useState,
   memo
@@ -19,7 +18,7 @@ export interface IAuthContext {
 }
 
 export interface IUser {
-  id: Number;
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -29,11 +28,13 @@ export interface IUser {
   token: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const AuthContext = createContext<IAuthContext>(null!);
 
 const AuthProvider = memo(function AuthProvider({ children }: { children: JSX.Element }) {
   const { enable, disable } = useDisableScroll();
   const [modalAuth, setModalAuth] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const [user, setUser] = useState<IUser>(null!);
   const [isConnected, setIsConnected] = useState(false);
 

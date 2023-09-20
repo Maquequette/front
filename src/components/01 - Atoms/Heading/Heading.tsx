@@ -1,8 +1,7 @@
-import { CSSProperties, memo } from "react";
-import { HeadingTags } from "@/types/HeadingTags";
-import { ReactNode } from "react";
-import { Levels } from "@/types/Levels";
-import { Theme } from "@/types/Theme";
+import { type CSSProperties, memo, type ReactNode } from "react";
+import { type HeadingTags } from "@/types/HeadingTags";
+import { type Levels } from "@/types/Levels";
+import { type Theme } from "@/types/Theme";
 import "./Heading.scss";
 
 export interface IHeading {

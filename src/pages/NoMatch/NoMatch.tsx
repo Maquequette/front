@@ -1,6 +1,5 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import PageTransition from "@/components/04 - Templates/PageTransition/PageTransition";
-
 import Mac from "@/assets/images/Mac.json";
 import "./NoMatch.scss";
 

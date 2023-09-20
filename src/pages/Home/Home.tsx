@@ -18,13 +18,14 @@ import Button from "@/components/01 - Atoms/Button/Button";
 import Card from "@/components/03 - Organisms/Card/Card";
 import { getChallenges } from "@/services/challenges.service";
 import DotLoader from "@/components/01 - Atoms/DotLoader/DotLoader";
-import "./Home.scss";
 import Pricing from "@/components/01 - Atoms/Pricing/Pricing";
+import "./Home.scss";
 
 export default function Home(): JSX.Element {
   const { t } = useTranslation();
-  const { data: challenges, isLoading } = useQuery(["challenges"], () =>
-    getChallenges({ pageParam: 1, itemsPerPage: 3 })
+  const { data: challenges, isLoading } = useQuery(
+    ["challenges"],
+    async () => await getChallenges({ pageParam: 1, itemsPerPage: 3 })
   );
 
   return (
@@ -133,7 +134,6 @@ export default function Home(): JSX.Element {
           </Folder>
         </Folder>
         <section style={{ marginTop: "10rem" }}>
-          
           <Pricing />
         </section>
       </Container>

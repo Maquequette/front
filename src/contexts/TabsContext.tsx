@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction, memo } from "react";
+import { createContext, type Dispatch, type SetStateAction, memo } from "react";
 import useTabs from "@/hooks/useTabs";
 
 export interface ITabsContext {
@@ -6,9 +6,10 @@ export interface ITabsContext {
   setLastTab: Dispatch<SetStateAction<number>>;
   currentTab: number;
   setCurrentTab: Dispatch<SetStateAction<number>>;
-  updateTabs: Function;
+  updateTabs: (i: number) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const TabsContext = createContext<ITabsContext>(null!);
 
 const TabsProvider = memo(function TabsProvider({ children }: { children: JSX.Element }) {

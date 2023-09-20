@@ -1,4 +1,4 @@
-import { SetStateAction, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import MultiStepsForm from "@/components/02 - Molecules/MultiStepsForm/MultiStepsForm";
@@ -13,9 +13,9 @@ import {
   postChallenge
 } from "@/services/challenges.service";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
-import "./DefineChallenge.scss";
 import Wysiwyg from "@/components/01 - Atoms/Wysiwyg/Wysiwyg";
 import FileInput from "@/components/01 - Atoms/FileInput/FileInput";
+import "./DefineChallenge.scss";
 
 export default function DefineChallenge({ Dismiss }: any) {
   const { t } = useTranslation();
@@ -30,14 +30,19 @@ export default function DefineChallenge({ Dismiss }: any) {
     figmaURL: ""
   });
 
-  const { data: difficulties } = useQuery(["difficulties__all"], () =>
-    getDifficulties({ paginate: false })
+  const { data: difficulties } = useQuery(
+    ["difficulties__all"],
+    async () => await getDifficulties({ paginate: false })
   );
-  const { data: tagFamilies } = useQuery(["tagFamilies__all"], () =>
-    getTagFamilies({ paginate: false })
+  const { data: tagFamilies } = useQuery(
+    ["tagFamilies__all"],
+    async () => await getTagFamilies({ paginate: false })
   );
 
-  const { data: type } = useQuery(["type__all"], () => getChallengeTypes({ paginate: false }));
+  const { data: type } = useQuery(
+    ["type__all"],
+    async () => await getChallengeTypes({ paginate: false })
+  );
 
   const subTitles: Array<string> = ["1. DEFINE", "2. DESCRIBE", "3. COMPLETE"];
   const [currentSubTitle, setCurrentSubTitle] = useState<string>(subTitles[0]);
@@ -48,34 +53,31 @@ export default function DefineChallenge({ Dismiss }: any) {
     const fileArray: Array<any> = [];
     Array.from(files).forEach((element: any, index) => {
       fileArray.push({
-        'value': element,
-        'type': "image"
+        value: element,
+        type: "image"
       });
     });
     return fileArray.concat(query.resources);
-  }
+  };
 
   const handleSubmit = useCallback(() => {
     const form = new FormData();
 
+    // eslint-disable-next-line array-callback-return
     Object.entries(query).map(([key, val]: any) => {
-
       if (key.includes("[]")) {
         Array.from(val).forEach((element: any) => {
           form.append(key, element.id);
         });
-
       } else if (key === "resources") {
         Array.from(val).forEach((element: any, index) => {
           form.append(`${key}[${index}][value]`, element.value);
           form.append(`${key}[${index}][type]`, element.type);
-        })
-
+        });
       } else if (key === "figmaURL" && val) {
         form.append(`${key}[${query.resources.length}][value]`, val);
         form.append(`${key}[${query.resources.length}][type]`, "url");
         form.append(`${key}[${query.resources.length}][label]`, "figmaURL");
-
       } else {
         form.append(key, val);
       }
@@ -102,9 +104,7 @@ export default function DefineChallenge({ Dismiss }: any) {
         <Heading tag="h1" level="secondary">
           {t("Create a challenge")}
         </Heading>
-        <p className="login__subtitle">
-          {t(currentSubTitle)}
-        </p>
+        <p className="login__subtitle">{t(currentSubTitle)}</p>
       </div>
 
       <MultiStepsForm
@@ -113,10 +113,9 @@ export default function DefineChallenge({ Dismiss }: any) {
         steps={[
           {
             btnText: t("Continue"),
-            stepSubmit: () => query.difficulty && query.type && query.title != "",
+            stepSubmit: () => query.difficulty && query.type && query.title !== "",
             formContent: (
               <div className="defineChallenge__form">
-
                 {/* <div className="defineChallenge__full">
                   <Label name="type">{t("Type")}</Label>
                   <Multiselect
@@ -155,7 +154,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                     }}
                     theme={"primary"}
                     searchable={true}
-                    defaultText="Select Tags"
+                    defaultText={t("Select Tags")}
                     options={
                       tagFamilies?.data.map((family: any) => {
                         return {
@@ -182,7 +181,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                     }}
                     theme={"primary"}
                     searchable={true}
-                    defaultText="Level"
+                    defaultText={t("Level")}
                     options={difficulties?.data ?? []}
                   />
                 </div>
@@ -194,7 +193,6 @@ export default function DefineChallenge({ Dismiss }: any) {
             stepSubmit: () => query.description && query.resources,
             formContent: (
               <div className="defineChallenge__form">
-
                 <div className="defineChallenge__full">
                   <Label name="Description" required={true}>
                     {t("Description")}
@@ -203,7 +201,8 @@ export default function DefineChallenge({ Dismiss }: any) {
                     callback={(value: any) => {
                       setQuery({ ...query, description: value });
                     }}
-                    value={query.description} />
+                    value={query.description}
+                  />
                 </div>
 
                 <div className="defineChallenge__full">
@@ -237,9 +236,7 @@ export default function DefineChallenge({ Dismiss }: any) {
             formContent: (
               <div className="defineChallenge__form">
                 <div className="defineChallenge__full">
-                  <Label name="zipfile">
-                    {t("Additional Resources")}
-                  </Label>
+                  <Label name="zipfile">{t("Additional Resources")}</Label>
                   <FileInput
                     accept=".zip, .rar, .7zip"
                     name="zipfile"
@@ -253,10 +250,14 @@ export default function DefineChallenge({ Dismiss }: any) {
                       const file = e.currentTarget.files;
                       if (file) {
                         setQuery({
-                          ...query, resources: [...query.resources, {
-                            'value': file[0],
-                            'type': "file"
-                          }]
+                          ...query,
+                          resources: [
+                            ...query.resources,
+                            {
+                              value: file[0],
+                              type: "file"
+                            }
+                          ]
                         });
                       }
                     }}
@@ -268,9 +269,7 @@ export default function DefineChallenge({ Dismiss }: any) {
                 </p>
 
                 <div className="defineChallenge__full">
-                  <Label name="figma">
-                    {t("Figma url")}
-                  </Label>
+                  <Label name="figma">{t("Figma url")}</Label>
                   <Input
                     type="url"
                     name="figma"
@@ -279,7 +278,8 @@ export default function DefineChallenge({ Dismiss }: any) {
                     value={query.figmaURL ?? ""}
                     handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setQuery({
-                        ...query, figmaURL: e.target.value
+                        ...query,
+                        figmaURL: e.target.value
                       });
                     }}
                   />

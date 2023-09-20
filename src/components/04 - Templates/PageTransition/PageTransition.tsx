@@ -1,4 +1,4 @@
-import { ReactNode, memo } from "react";
+import { type ReactNode, memo } from "react";
 import { easeIn, motion } from "framer-motion";
 import "./PageTransition.scss";
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
-import { SandpackFileExplorerProp, useSandpack } from "@codesandbox/sandpack-react";
-import { ModuleList } from "@/components/02 - Molecules/ModuleList/ModuleList";
+import { type SandpackFileExplorerProp, useSandpack } from "@codesandbox/sandpack-react";
+import ModuleList from "@/components/02 - Molecules/ModuleList/ModuleList";
 import useClickOutside from "@/hooks/useClickOutside";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import "./FileExplorer.scss";

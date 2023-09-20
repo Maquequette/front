@@ -71,6 +71,7 @@ export default function Profil() {
               const isEdited = index === editedInfo;
               return (
                 <div
+                  key={index}
                   className="profil__info"
                   onDoubleClick={() => {
                     handleEditing(index);
@@ -135,7 +136,7 @@ export function LikedChallenges() {
   } = useInfiniteQuery({
     queryKey: ["liked_challenges", query],
     keepPreviousData: true,
-    queryFn: ({ pageParam = 1 }) => getLikedChallenges({ pageParam, ...query }),
+    queryFn: async ({ pageParam = 1 }) => await getLikedChallenges({ pageParam, ...query }),
     getNextPageParam: (lastPage, pages) => {
       const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
       return urlParams.get("page") ?? null;
@@ -177,7 +178,7 @@ export function CreatedChallenges() {
   } = useInfiniteQuery({
     queryKey: ["created_challenges", query],
     keepPreviousData: true,
-    queryFn: ({ pageParam = 1 }) => getCreatedChallenge({ pageParam, ...query }),
+    queryFn: async ({ pageParam = 1 }) => await getCreatedChallenge({ pageParam, ...query }),
     getNextPageParam: (lastPage, pages) => {
       const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
       return urlParams.get("page") ?? null;
