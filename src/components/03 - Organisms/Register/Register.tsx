@@ -18,7 +18,6 @@ export default memo(function Register() {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
-  const [profilType, setProfilType] = useState<string>("");
   const { t } = useTranslation();
 
   const { onRegister } = useAuth();
@@ -44,7 +43,7 @@ export default memo(function Register() {
           {t("Already have account ?")}
           <NavLink to={"#login"} style={{ padding: "0 0.5rem" }}>
             {" "}
-            {}{" "}
+            { }{" "}
           </NavLink>
         </p>
       </div>
@@ -180,10 +179,7 @@ export default memo(function Register() {
                   <Label name="profileType">{t("What type of profile are you ?")}</Label>
                   <Multiselect
                     callback={(value: any) => {
-                      const selectedId = value.map((item: any) => {
-                        return item.id;
-                      });
-                      setProfilType(value);
+
                     }}
                     options={[
                       { label: t("Student"), id: "student" },

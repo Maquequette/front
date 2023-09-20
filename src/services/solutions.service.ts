@@ -59,3 +59,19 @@ export const getSolutionsFrom = ({
     params: query
   });
 };
+
+export const likeSolution: Function = (solutionId: number) => {
+  return axios.post(`/api/solutions/${solutionId}/like`, null, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
+  });
+};
+
+export const unlikeSolution = (solutionId: number) => {
+  return axios.delete(`/api/solutions/${solutionId}/like`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`
+    }
+  });
+};

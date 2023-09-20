@@ -30,6 +30,7 @@ export default memo(function Dialog({ id, children, visible = false, Dismiss, st
       <motion.div
         animate={visible ? "visible" : "hidden"}
         className="dialog__content"
+        style={styles}
         transition={{
           type: "spring",
           damping: 12
