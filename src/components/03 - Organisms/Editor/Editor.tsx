@@ -22,87 +22,87 @@ function connectSocket() {
 const SANDBOX_TEMPLATES = [
   {
     id: "static",
-    label: "static"
+    label: "Static"
   },
   {
     id: "angular",
-    label: "angular"
+    label: "Angular"
   },
   {
     id: "react",
-    label: "react"
+    label: "React"
   },
   {
     id: "react-ts",
-    label: "react-ts"
+    label: "React Typescript"
   },
   {
     id: "solid",
-    label: "solid"
+    label: "Solid"
   },
   {
     id: "svelte",
-    label: "svelte"
+    label: "Svelte"
   },
   {
     id: "test-ts",
-    label: "test-ts"
+    label: "Test Typescript"
   },
   {
     id: "vanilla-ts",
-    label: "vanilla-ts"
+    label: "Vanilla Typescript"
   },
   {
     id: "vanilla",
-    label: "vanilla"
+    label: "Vanilla"
   },
   {
     id: "vue",
-    label: "vue"
+    label: "Vue"
   },
   {
     id: "vue-ts",
-    label: "vue-ts"
+    label: "Vue Typescript"
   },
   {
     id: "node",
-    label: "node"
+    label: "Node"
   },
   {
     id: "nextjs",
-    label: "nextjs"
+    label: "Nextjs"
   },
   {
     id: "vite",
-    label: "vite"
+    label: "Vite"
   },
   {
     id: "vite-react",
-    label: "vite-react"
+    label: "Vite React"
   },
   {
     id: "vite-react-ts",
-    label: "vite-react-ts"
+    label: "Vite React Typescript"
   },
   {
     id: "vite-vue",
-    label: "vite-vue"
+    label: "Vite Vue"
   },
   {
     id: "vite-vue-ts",
-    label: "vite-vue-ts"
+    label: "Vite Vue Typescript"
   },
   {
     id: "vite-svelte",
-    label: "vite-svelte"
+    label: "Vite Svelt"
   },
   {
     id: "vite-svelte-ts",
-    label: "vite-svelte-ts"
+    label: "Vite Svelte Typescript"
   },
   {
     id: "astro",
-    label: "astro"
+    label: "Astro"
   }
 ];
 
