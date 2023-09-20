@@ -20,17 +20,20 @@ axios.interceptors.response.use(
       retry = true;
 
       const newAccessToken = await refreshToken({
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         refresh_token: localStorage.getItem("refresh_token")!
       });
 
-      error.config.headers["Authorization"] = `Bearer ${newAccessToken.data.access_token}`;
+      error.config.headers.Authorization = `Bearer ${newAccessToken.data.access_token}`;
       localStorage.setItem("access_token", newAccessToken.data.token);
       localStorage.setItem("refresh_token", newAccessToken.data.refresh_token);
 
+      // eslint-disable-next-line @typescript-eslint/return-await
       return axios(originalRequest);
     }
     retry = false;
     localStorage.clear();
+    // eslint-disable-next-line @typescript-eslint/return-await
     return Promise.reject(error);
   }
 );

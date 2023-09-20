@@ -5,7 +5,7 @@ import Image from "@/components/01 - Atoms/Image/Image";
 export default function DesignSystem() {
   return (
     <Container center={true}>
-      <Editor template="react" theme="dark" roomId="natho" />
+      <Editor theme="dark" solo={true} hasSelect={true} />
     </Container>
   );
 }
