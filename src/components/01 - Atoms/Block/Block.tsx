@@ -1,6 +1,5 @@
-import { CSSProperties, ReactNode, memo } from "react";
+import { type CSSProperties, type ReactNode, memo } from "react";
 import "./Block.scss";
-import { Theme } from "@/types/Theme";
 
 export interface IBlock {
   children: ReactNode;

@@ -1,8 +1,8 @@
-import { ReactNode, useState, memo } from "react";
+import { type ReactNode, useState, memo } from "react";
 import clsx from "clsx";
 import useClickOutside from "@/hooks/useClickOutside";
 import "./Badge.scss";
-import { Theme } from "@/types/Theme";
+import { type Theme } from "@/types/Theme";
 
 export interface IBadge {
   content?: string;

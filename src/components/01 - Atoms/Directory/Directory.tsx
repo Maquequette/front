@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { File } from "../File/File";
-import { ModuleList } from "@/components/02 - Molecules/ModuleList/ModuleList";
+import ModuleList from "@/components/02 - Molecules/ModuleList/ModuleList";
 import "./Directory.scss";
 
 export const Directory = ({

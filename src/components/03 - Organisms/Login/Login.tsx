@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, memo, useState } from "react";
+import { type FormEvent, useCallback, memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Heading from "@/components/01 - Atoms/Heading/Heading";
@@ -15,7 +15,7 @@ export default memo(function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [stayConnected, setStayConnected] = useState<boolean>(false);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const { t } = useTranslation();
 
   const { onLogin } = useAuth();
@@ -35,7 +35,7 @@ export default memo(function Login() {
         email: t("You have to fill an email adresse to get a new password")
       });
     } else {
-      //onForgotPassword({ email })
+      // onForgotPassword({ email })
     }
   }, [errors]);
 

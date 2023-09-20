@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode, useState, memo } from "react";
+import { type FormEvent, type ReactNode, useState, memo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Button from "@/components/01 - Atoms/Button/Button";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
@@ -6,21 +6,21 @@ import "./MultiStepsForm.scss";
 
 export interface IMultiStepsForm {
   steps: Array<IOneStepForm>;
-  handleSubmit?: Function;
-  onStepChange?: Function;
-  id?: String;
+  handleSubmit?: () => void;
+  onStepChange?: (nb: number) => void;
+  id?: string;
 }
 
 export interface IOneStepForm {
   formContent: ReactNode;
-  btnText: String;
-  stepSubmit: Function;
+  btnText: string;
+  stepSubmit: () => boolean;
 }
 
 export default memo(function MultiStepsForm({
   steps,
-  handleSubmit = () => { },
-  onStepChange = () => { },
+  handleSubmit = () => {},
+  onStepChange = () => {},
   id
 }: IMultiStepsForm) {
   const [lastStep, setLastStep] = useState<number>(0);
@@ -30,7 +30,7 @@ export default memo(function MultiStepsForm({
     e.preventDefault();
 
     if (steps[currentStep]?.stepSubmit()) {
-      currentStep < steps.length - 1 ? changeStep(1) : handleSubmit()
+      currentStep < steps.length - 1 ? changeStep(1) : handleSubmit();
     }
   };
 
@@ -49,8 +49,9 @@ export default memo(function MultiStepsForm({
             width={`calc( (100% - 4rem)/${steps.length} - 1rem * ${steps.length - 1})`}
             height="10px"
             xmlns="http://www.w3.org/2000/svg"
-            className={`fill--darkGrey ${currentStep >= i ? "active" : currentStep < lastStep ? "reverse" : ""
-              }`}>
+            className={`fill--darkGrey ${
+              currentStep >= i ? "active" : currentStep < lastStep ? "reverse" : ""
+            }`}>
             <g id={`${i}`}>
               <rect
                 x="0"

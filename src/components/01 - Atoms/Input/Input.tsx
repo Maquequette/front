@@ -1,4 +1,10 @@
-import { ChangeEventHandler, CSSProperties, HTMLInputTypeAttribute, useState, memo } from "react";
+import {
+  type ChangeEventHandler,
+  type CSSProperties,
+  type HTMLInputTypeAttribute,
+  useState,
+  memo
+} from "react";
 import { useTranslation } from "react-i18next";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import useToasts from "@/hooks/useToasts";
@@ -44,18 +50,18 @@ export default memo(function Input({
   rightIcon
 }: IInput) {
   const [readable, setReadable] = useState<boolean>(false);
-  const [files, setFiles] = useState<Array<File>>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const { pushToast } = useToasts();
   const { t } = useTranslation();
   return (
     <>
       <label className="input__container" style={styles}>
-        {type !== "url" ?
+        {type !== "url" ? (
           <>
             {leftIcon && type !== "file" && <Svg id={leftIcon} />}
             <input
               className={`input__input input__input--${type}`}
-              type={type != "password" ? type : readable ? "text" : type}
+              type={type !== "password" ? type : readable ? "text" : type}
               name={name}
               id={name}
               placeholder={placeholder}
@@ -72,9 +78,9 @@ export default memo(function Input({
                 if (limite) {
                   if (nfiles.length > limite) {
                     pushToast({
-                      title: `Maximum files is ${limite}`,
+                      title: t(`Maximum files is ${limite}`),
                       theme: "danger",
-                      desc: "Retry"
+                      desc: t("Retry")
                     });
                   } else {
                     setFiles(nfiles);
@@ -86,15 +92,22 @@ export default memo(function Input({
               }}
             />
 
-            {type === "file" &&
+            {type === "file" && (
               <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
                 <Button theme="dark" HTMLTag="p">
                   <Svg id="img" />
                   Upload
                 </Button>
-                <p style={{ fontFamily: "'Space Grotesk',sans-serif", color: "#8a8a8a", fontSize: "1.2rem" }}>2 MO maximum size <br /> can upload up to {limite} files : png/jpg</p>
+                <p
+                  style={{
+                    fontFamily: "'Space Grotesk',sans-serif",
+                    color: "#8a8a8a",
+                    fontSize: "1.2rem"
+                  }}>
+                  2 MO maximum size <br /> can upload up to {limite} files : png/jpg
+                </p>
               </div>
-            }
+            )}
 
             {type === "password" && (
               <button
@@ -106,7 +119,7 @@ export default memo(function Input({
             )}
             {rightIcon && type !== "file" && <Svg id={rightIcon} />}
           </>
-          :
+        ) : (
           <div className={`input__input input__input--${type}`}>
             <span className="url__protocol">https://</span>
             <input
@@ -121,7 +134,7 @@ export default memo(function Input({
               onChange={(e) => handleOnChange && handleOnChange(e)}
             />
           </div>
-        }
+        )}
       </label>
 
       {files && preview && (
@@ -135,9 +148,9 @@ export default memo(function Input({
           })}
           {limite &&
             files.length - limite > 0 &&
-            Array.from({ length: limite - files.length }).map((el) => {
+            Array.from({ length: limite - files.length }).map((el, index) => {
               return (
-                <div className="preview">
+                <div className="preview" key={index}>
                   <Svg id="img" />
                 </div>
               );

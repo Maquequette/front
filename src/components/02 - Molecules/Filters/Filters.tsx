@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, memo, useState } from "react";
+import { type ReactNode, useCallback, memo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import Burger from "../Burger/Burger";
@@ -6,7 +6,7 @@ import Button from "@/components/01 - Atoms/Button/Button";
 import Svg from "@/components/01 - Atoms/Svg/Svg";
 import Container from "@/components/01 - Atoms/Container/Container";
 import useDisableScroll from "@/hooks/useDisableScroll";
-import { Theme } from "@/types/Theme";
+import { type Theme } from "@/types/Theme";
 import "./Filters.scss";
 
 export interface IColoredLine {

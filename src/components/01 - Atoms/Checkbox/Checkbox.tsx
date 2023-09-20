@@ -1,5 +1,5 @@
-import { CSSProperties, MouseEventHandler, memo } from "react";
-import { Theme } from "@/types/Theme";
+import { type CSSProperties, type MouseEventHandler, memo } from "react";
+import { type Theme } from "@/types/Theme";
 import "./Checkbox.scss";
 
 export interface ICheckbox {

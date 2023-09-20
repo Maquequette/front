@@ -1,6 +1,6 @@
-import { CSSProperties, ReactNode, memo } from "react";
-import Svg from "../Svg/Svg";
-import { Theme } from "@/types/Theme";
+import { type CSSProperties, type ReactNode, memo } from "react";
+import Svg from "@/components/01 - Atoms/Svg/Svg";
+import { type Theme } from "@/types/Theme";
 import "./Folder.scss";
 
 export interface IFolder {

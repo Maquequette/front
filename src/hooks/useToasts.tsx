@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 import { ToastContext } from "@/contexts/ToastContext";
-import { IToast } from "@/components/01 - Atoms/Toast/Toast";
+import { type IToast } from "@/components/01 - Atoms/Toast/Toast";
 
 export default function useToasts() {
   const { pushToastRef } = useContext(ToastContext);

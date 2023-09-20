@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import { Theme } from "@/types/Theme";
-import { StyleTypes } from "@/types/StyleTypes";
+import { type Theme } from "@/types/Theme";
+import { type StyleTypes } from "@/types/StyleTypes";
 import "./Price.scss";
 
 export interface IPrice {

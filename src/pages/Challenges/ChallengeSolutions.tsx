@@ -17,7 +17,7 @@ import { memo, useContext, useEffect, useRef, useState } from "react";
 
 export interface IChallengeSolutions {
   id: number;
-  createSolution: Function;
+  createSolution: () => void;
 }
 
 export default memo(function ChallengeSolutions({ id, createSolution }: IChallengeSolutions) {
@@ -42,16 +42,12 @@ export default memo(function ChallengeSolutions({ id, createSolution }: IChallen
   } = useInfiniteQuery({
     queryKey: ["solutions", query],
     keepPreviousData: true,
-    queryFn: ({ pageParam = 1 }) => getSolutionsFrom({ pageParam, ...query }),
+    queryFn: async ({ pageParam = 1 }) => await getSolutionsFrom({ pageParam, ...query }),
     getNextPageParam: (lastPage, pages) => {
       const urlParams = new URLSearchParams(lastPage.data["hydra:view"]?.["hydra:next"]);
       return urlParams.get("page") ?? null;
     }
   });
-
-  useEffect(() => {
-    console.log(solutions);
-  }, [solutions]);
 
   useEffect(() => {
     if (isInView && hasNextPage && !isLoading) {

@@ -1,4 +1,4 @@
-import { MouseEventHandler, memo } from "react";
+import { type MouseEventHandler, memo } from "react";
 import "./Burger.scss";
 
 export default memo(function Burger({

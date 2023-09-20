@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties, memo } from "react";
+import { type ReactNode, type CSSProperties, memo } from "react";
 import "./Container.scss";
 
 export interface IContainer {
