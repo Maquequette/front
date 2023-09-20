@@ -13,20 +13,23 @@ export interface ICardSolution {
     date: number | Date;
     id: number;
     recap: string;
-    path?: string;
+    onclick: Function;
     isLiked?: boolean;
     likesCount?: number;
     commentsCount?: number;
 }
 
-export default memo(function CardSolution({ id, recap, author, date, path, isLiked, commentsCount }: ICardSolution) {
+export default memo(function CardSolution({ id, recap, author, date, onclick, isLiked, commentsCount }: ICardSolution) {
 
     return (
-        <div className="cardSolution">
+        <div className="cardSolution" onClick={(event) => {
+            event.stopPropagation();
+            onclick();
+        }}>
             <div className="cardSolution__header">
                 <Date date={date} />
                 <BulletPoint />
-                <Like showNumber={true} id={id} isAlreadyLiked={isLiked} />
+                <Like showNumber={true} id={id} isAlreadyLiked={isLiked} type="Solution" />
                 <BulletPoint />
                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '1rem' }}>
                     <Svg id="comment" styles={{ width: "2rem", height: "2rem" }} />
