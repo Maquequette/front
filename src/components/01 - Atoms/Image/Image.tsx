@@ -1,5 +1,6 @@
 import { useState, memo, useMemo } from "react";
-import ImageZoom from "react-image-zooom";
+// @ts-ignore
+import ImageZoom from "react-image-zoom";
 import Dialog from "@/components/04 - Templates/Dialog/Dialog";
 import "./Image.scss";
 
@@ -29,9 +30,8 @@ export default memo(function Image({ alt, src, height, width, classes }: IImage)
         onLoad={() => {
           setIsImageLoaded(true);
         }}
-        className={`img ${
-          !isImageLoaded ? `loading loading--${color.sort(() => 0.5 - Math.random())[0]}` : ""
-        }`}
+        className={`img ${!isImageLoaded ? `loading loading--${color.sort(() => 0.5 - Math.random())[0]}` : ""
+          }`}
         loading="lazy"
       />
       <Dialog visible={isOpen} id="modal__img" Dismiss={() => setIsOpen(false)}>

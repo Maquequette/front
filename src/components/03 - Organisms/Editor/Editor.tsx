@@ -115,7 +115,7 @@ export interface ICode {
 }
 
 export default function Editor({
-  template,
+  template = "static",
   theme,
   roomId = crypto.randomUUID(),
   solo = false,
@@ -160,7 +160,7 @@ export default function Editor({
           {solo ? (
             <SoloCodeEditor />
           ) : (
-            <CodeEditor socket={socket} room={roomId} template={template} />
+            <CodeEditor socket={socket!} room={roomId} template={template} />
           )}
           <CodePreview setFullScreen={handleFullScreen} />
         </SandpackLayout>
