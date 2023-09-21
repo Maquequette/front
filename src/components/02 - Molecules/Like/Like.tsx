@@ -44,6 +44,7 @@ export default function Like({
   const { pushToast } = useToasts();
 
   const handleLike = useCallback(() => {
+    // @ts-ignore
     isLiked ? unlike(id) : like(id);
     setIsLiked(!isLiked);
     setCount((prev) => (!isLiked ? prev + 1 : prev - 1));
@@ -56,10 +57,10 @@ export default function Like({
         isConnected
           ? handleLike()
           : pushToast({
-              theme: "secondary",
-              title: t("You must be logged in"),
-              desc: t("You must be logged in to like a challenge")
-            });
+            theme: "secondary",
+            title: t("You must be logged in"),
+            desc: t("You must be logged in to like a challenge")
+          });
       }}>
       <Svg id="like" />
       {showNumber && <p className="like__count">{count}</p>}

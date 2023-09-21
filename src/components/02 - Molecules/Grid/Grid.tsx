@@ -9,6 +9,7 @@ export interface IGrid {
 
 export default memo(function Grid({ children, size, styles }: IGrid) {
   return (
+    // @ts-ignore
     <div className="grid" style={{ ...styles, "--size": size } satisfies CSSProperties}>
       {children}
     </div>
