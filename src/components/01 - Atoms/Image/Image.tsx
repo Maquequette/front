@@ -1,6 +1,6 @@
 import { useState, memo, useMemo } from "react";
 // @ts-ignore
-import ImageZoom from "react-image-zoom";
+import ImageZoom from "react-image-zooom";
 import Dialog from "@/components/04 - Templates/Dialog/Dialog";
 import "./Image.scss";
 
