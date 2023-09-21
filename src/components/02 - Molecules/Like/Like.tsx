@@ -7,6 +7,7 @@ import "./Like.scss";
 import useToasts from "@/hooks/useToasts";
 import { likeComment, unlikeComment } from "@/services/comments.service";
 import { t } from "i18next";
+import { likeSolution, unlikeSolution } from "@/services/solutions.service";
 
 export interface ILike {
   id: number;
@@ -25,12 +26,14 @@ export default function Like({
 }: ILike) {
   const likeType: Record<string, any> = {
     Challenge: likeChallenge,
-    Comment: likeComment
+    Comment: likeComment,
+    Solution: likeSolution
   };
 
   const unlikeType: Record<string, any> = {
     Challenge: unlikeChallenge,
-    Comment: unlikeComment
+    Comment: unlikeComment,
+    Solution: unlikeSolution
   };
 
   const [isLiked, setIsLiked] = useState(isAlreadyLiked);
