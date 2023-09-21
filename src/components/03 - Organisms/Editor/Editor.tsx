@@ -115,7 +115,7 @@ export interface ICode {
 }
 
 export default function Editor({
-  template = "static",
+  template = "vanilla",
   theme,
   roomId = crypto.randomUUID(),
   solo = false,
