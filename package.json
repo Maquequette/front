@@ -37,7 +37,7 @@
     "react-image-zooom": "^1.2.0",
     "react-router-dom": "^6.16.0",
     "socket.io-client": "^4.7.2",
-    "tinymce": "^6.7.0"
+    "tinymce": "^6.7.3"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.2",
